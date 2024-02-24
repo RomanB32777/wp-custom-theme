@@ -1,0 +1,103 @@
+// tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	h1 a,
+	h2 a,
+	h3 a,
+	h4 a,
+	h5 a,
+	h6 a {
+		-webkit-backface-visibility: hidden;
+		font-family: "Roboto", sans-serif;
+		font-weight: 700;
+	}
+
+	h1,
+	h1 a {
+		font-size: 3.157em;
+		line-height: 1.2em;
+	}
+
+	h2,
+	h2 a {
+		font-size: 2.369em;
+		line-height: 1.2em;
+	}
+
+	h3,
+	h3 a {
+		font-size: 1.777em;
+		line-height: 1.2em;
+	}
+
+	h4,
+	h4 a {
+		font-size: 1.333em;
+		line-height: 1.2em;
+	}
+
+	h5,
+	h5 a {
+		font-size: 1em;
+		line-height: 1.2em;
+	}
+
+	h6,
+	h6 a {
+		font-size: 0.75em;
+		line-height: 1.2em;
+	}
+
+	a {
+		text-decoration: underline;
+		transition-duration: 0.2s;
+	}
+}
+
+.theme-main-content {
+	.wp-block-table thead {
+		border-bottom: none;
+	}
+
+	a {
+		transition-duration: 200ms;
+	}
+
+	ul,
+	ol {
+		padding-left: 32px;
+
+		li {
+			position: relative;
+			padding-left: 20px;
+			margin-bottom: 10px;
+		}
+	}
+
+	ol {
+		list-style: decimal;
+	}
+
+	ul:not(.ez-toc-list) li::before {
+		position: absolute;
+		top: 3px;
+		left: -13px;
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		content: "";
+	}
+
+	.ez-toc-list ul li::before {
+		content: none;
+	}
+}
