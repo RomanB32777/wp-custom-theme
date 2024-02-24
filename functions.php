@@ -63,7 +63,7 @@ function style_loader_tag_filter_preload( $tag, $handle, $href ) {
 		return str_replace( "rel='stylesheet'", "rel='preload' as='font' crossorigin='anonymous'", $new_tag );
 	}
 
-	if ( 'wp_custom_main_style' === $handle ) {
+	if ( 'wp_custom_main_style' === $handle || 'wp-block-library' === $handle ) {
 		$noscript = '<noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
 		$new_tag  = str_replace( "rel='stylesheet'", "rel='preload' as='style'", $tag );
 
@@ -98,7 +98,7 @@ add_action( 'wp_enqueue_scripts', 'scripts_theme' );
 require_once __DIR__ . '/theme-functions/theme-customizer-settings.php';
 
 function change_logo_class( $html ) {
-	$html = str_replace( 'custom-logo-link', '[&>img]:h-8 [&>img]:w-auto', $html );
+	$html = str_replace( 'custom-logo-link', '[&>img]:max-w-32', $html );
 	
 	return $html;
 }
