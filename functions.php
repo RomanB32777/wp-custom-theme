@@ -63,7 +63,7 @@ function style_loader_tag_filter_preload( $tag, $handle, $href ) {
 		return str_replace( "rel='stylesheet'", "rel='preload' as='font' crossorigin='anonymous'", $new_tag );
 	}
 
-	if ( 'wp_custom_main_style' === $handle || 'wp-block-library' === $handle ) {
+	if ( 'wp-block-library' === $handle ) {
 		$noscript = '<noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
 		$new_tag  = str_replace( "rel='stylesheet'", "rel='preload' as='style'", $tag );
 
