@@ -45,23 +45,50 @@ function enqueue_time_versioned_style( $handle, $src = '', $deps = array(), $med
 }
 
 function fonts_theme() {
-	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap', array(), null );
+	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap', array(), null );
 }
 add_action( 'wp_enqueue_scripts', 'fonts_theme' );
-add_action( 'enqueue_block_editor_assets', 'fonts_theme' );
+
 
 function style_theme() {
-	// Enqueue style.css
 	wp_enqueue_style( 'theme-style', get_stylesheet_uri() );
 	enqueue_time_versioned_style( 'wp_custom_main_style', '/dist/styles.css' );
 }
 add_action( 'wp_enqueue_scripts', 'style_theme' );
 
+function style_loader_tag_filter_preload( $tag, $handle, $href ) {
+	if ( 'googlefonts' === $handle ) {      
+		$new_tag = str_replace( 'text/css', 'font/woff2', $tag );
+
+		return str_replace( "rel='stylesheet'", "rel='preload' as='font' crossorigin='anonymous'", $new_tag );
+	}
+
+	if ( 'wp_custom_main_style' === $handle ) {
+		$noscript = '<noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
+		$new_tag  = str_replace( "rel='stylesheet'", "rel='preload' as='style'", $tag );
+
+		return str_replace( "type='text/css'", "media='all' onload='this.onload=null;this.rel=" . '"stylesheet"' . "'", $new_tag ) . $noscript;
+	}
+
+	return $tag;
+}
+add_filter( 'style_loader_tag', 'style_loader_tag_filter_preload', 10, 4 );
+
 function scripts_theme() {
 	$theme_script_path = get_theme_file_uri( '/dist/main.js' );
 	
 	wp_enqueue_script( 'jquery' );  
-	wp_register_script( 'main', $theme_script_path, array( 'jquery' ), filemtime( $theme_script_path ), true );
+	wp_register_script(
+		'main',
+		$theme_script_path,
+		array( 'jquery' ),
+		filemtime( $theme_script_path ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'async',
+
+		) 
+	);
 	wp_localize_script( 'main', 'ajax_data', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	wp_enqueue_script( 'main' );
 }

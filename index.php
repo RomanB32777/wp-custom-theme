@@ -17,7 +17,7 @@
 		<!-- Author Info Start -->
 
 		<?php
-			$author_title = 'Author';
+			$author_title = 'লেখক';
 
 			get_template_part( '/theme-parts/author-info' );
 			get_author_info( get_the_author_meta( 'ID' ), $author_title, 40 );

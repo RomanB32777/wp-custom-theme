@@ -18,8 +18,9 @@ const createAndAppendMenuElement = (
 			"text-sm",
 			"text-dark",
 			"font-semibold",
-			"xl:font-bold",
+			"xl:!font-bold",
 			"invert",
+			"xl:!invert-0",
 		];
 		listEl.classList.add(...listElClasses);
 

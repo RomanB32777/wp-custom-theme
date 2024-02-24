@@ -10,11 +10,11 @@ function get_author_info( $user_id, $block_title, $description_size = 15, $is_sh
 	?>
 	<div class="author-info">
 		<?php if ( ! empty( $block_title ) ) { ?>
-			<h2 class="font-roboto mb-6 md:text-2xl">
+			<h5 class="font-roboto mb-6 md:text-2xl">
 				<?php echo esc_html__( $block_title, 'custom-organization-theme' ); ?>
-			</h2>
+			</h5>
 		<?php } ?>
-		<div class="rounded-lg py-3 flex flex-col gap-4 md:!py-6 lg:!flex-row lg:!gap-16">
+		<div class="rounded-lg flex flex-col gap-4 md:!py-6 lg:!flex-row lg:!gap-16">
 			<div class="flex gap-2 flex-col md:!flex-row md:!gap-10">
 				<div class="flex gap-3 flex-col items-start justify-center md:!items-center">
 					<a class="w-20 h-20 [&>img]:rounded-full [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:object-center" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">

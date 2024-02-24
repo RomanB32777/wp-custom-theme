@@ -4,17 +4,17 @@
 		<div class="divide-y divide-dark-grizzly [&>*]:py-6">
 			<div class="flex items-start flex-wrap gap-6 sm:!gap-10">
 				<div class="flex items-start gap-6">
-					<img width="75" height="75" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="support icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="support icon">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-3">Customer Support</h5>
-						<p class="font-roboto text-base opacity-75 mb-3">Avallable 24/7 to assist you</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">Customer Support</h5>
+						<p class="font-roboto text-base opacity-75">Avallable 24/7 to assist you</p>
 					</div>
 				</div>
 				<div class="flex items-start gap-6">
-					<img width="75" height="75" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="guide icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="guide icon">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-3">New Member Guide</h5>
-						<p class="font-roboto text-base opacity-75 mb-3">Check out FAQ and guides</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">New Member Guide</h5>
+						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3">Check out FAQ and guides</p>
 						<a
 							href="#"
 							class="font-bold no-underline duration-200"
@@ -24,10 +24,10 @@
 					</div>
 				</div>
 				<div class="flex items-start gap-6">
-					<img width="75" height="75" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon2.png" alt="brand icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon2.png" alt="brand icon">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-3">Brand Ambassador</h5>
-						<p class="font-roboto text-base opacity-75 mb-3">Play with celebrity</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">Brand Ambassador</h5>
+						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3">Play with celebrity</p>
 						<a
 							href="#"
 							class="font-bold no-underline duration-200"
