@@ -1,9 +1,14 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+$vendor_dir = __DIR__ . '/vendor';
+$env_file   = __DIR__ . '/.env';
 
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ );
-$dotenv->load();
+if ( is_dir( $vendor_dir ) && file_exists( $env_file ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+
+	$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ );
+	$dotenv->load();
+}
 
 add_theme_support( 'title-tag' );
 
