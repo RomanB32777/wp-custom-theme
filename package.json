@@ -10,6 +10,8 @@
 		"tsc": "tsc",
 		"lint": "eslint . --color",
 		"lint:fix": "eslint . --fix",
+		"lint:ts": "eslint \"src/**/*.{ts,tsx}\" --color",
+		"lint:ts:fix": "npm run lint:ts -- --fix",
 		"lint:sass": "stylelint \"src/**/*.s[ac]ss\"",
 		"lint:sass:fix": "npm run lint:sass -- --fix",
 		"lint:php": "./vendor/bin/phpcs",
