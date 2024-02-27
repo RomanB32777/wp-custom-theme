@@ -1,4 +1,4 @@
-import { baseBreakpoints } from "./constants";
+import { baseBreakpoints } from "../constants";
 
 const dropdownMenuItems = document.querySelectorAll<HTMLDivElement>(".dropdown");
 

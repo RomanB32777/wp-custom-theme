@@ -915,6 +915,11 @@ function theme_customizer_style_settings() {
 	$custom_css = '
 		body {
 			background-color: ' . esc_attr( $body_custom_color ) . ';
+		}
+
+		body,
+		#back-to-top,
+		#fixed-button {
 			color: ' . esc_attr( $body_custom_content_color ) . ';
 		}
 
@@ -968,7 +973,8 @@ function theme_customizer_style_settings() {
 		.button-login,
 		.author-read-link,
 		.comment-submit,
-		input[type=checkbox]:checked ~ .switcher {
+		input[type=checkbox]:checked ~ .switcher,
+		#back-to-top {
 			background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 		}
 
@@ -980,7 +986,8 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
-		.button-sign-up {
+		.button-sign-up,
+		#fixed-button {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
 		}
 

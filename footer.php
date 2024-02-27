@@ -111,6 +111,26 @@
 
 <!-- End footer-->
 
+<!-- Back to Top Start -->
+
+<button class="fixed right-4 sm:right-6 lg:right-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+	>
+	<path
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		stroke-width="2"
+		d="M7 11l5-5m0 0l5 5m-5-5v12"
+	/>
+	</svg>
+</button>
+
+<!-- Back to Top End -->
+
 <?php wp_footer(); ?>
 
 </body>

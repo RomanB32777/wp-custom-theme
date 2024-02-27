@@ -35,4 +35,10 @@
 	</div>
 </main>
 
+<!-- Float Button Start -->
+
+<?php get_template_part( '/theme-parts/fixed-button' ); ?>
+
+<!-- Float Button End -->
+
 <?php get_footer(); ?>
