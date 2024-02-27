@@ -61,17 +61,17 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 
 	?>
 
-	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_class . ' my-3 [&>ul]:ml-8', $comment ); ?> id="comment-<?php echo $comment_id; ?>">
+	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_class . ' my-3 [&>ul]:ml-8', $comment ); ?> id="comment-<?php echo esc_attr( $comment_id ); ?>">
 
 		<?php if ( 'div' != $args['style'] ) { ?>
-			<div id="div-comment-<?php echo $comment_id; ?>" class="comment-wrapper relative rounded-lg border p-4 sm:!py-8 sm:!px-6">
+			<div id="div-comment-<?php echo esc_attr( $comment_id ); ?>" class="comment-wrapper relative rounded-lg border p-4 sm:!py-8 sm:!px-6">
 		<?php } ?>
 
 		<div class="comment-content">
 			<div class="flex flex-col mb-6 sm:items-center sm:justify-between sm:!flex-row">
 				<div class="mb-2 flex items-center sm:mb-0">
 					<p class="comment-author font-roboto font-semibold text-lg">
-						<?php echo get_comment_author( $comment_id ); ?>
+						<?php echo esc_html( get_comment_author( $comment_id ) ); ?>
 					</p>
 					<div class="ml-4 flex gap-x-1">
 						<?php
@@ -87,14 +87,14 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 				</div>
 
 				<p class="font-roboto text-grizzly-light font-medium text-sm">
-					<?php echo get_comment_date( get_option( 'date_format' ), $comment_id ); ?>
+					<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
 				</p>
 			</div>
 			<div class="font-roboto text-base font-normal mb-6">
 				<?php comment_text( $comment_id ); ?>
 			</div>
 
-			<?php edit_comment_link( esc_html__( '(Edit)', 'baji-theme' ), '  ', '' ); ?>
+			<?php edit_comment_link( '(' . esc_html__( 'Edit', 'custom-theme' ) . ')', '  ', '' ); ?>
 			<?php 
 				comment_reply_link(
 					array_merge( 
@@ -108,7 +108,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 				); 
 			?>
 		</div>
-	<?php if ( 'div' != $args['style'] ) { ?>
+	<?php if ( 'div' !== $args['style'] ) { ?>
 		</div>
 		<?php 
 	}

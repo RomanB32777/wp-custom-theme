@@ -1,38 +1,44 @@
+<?php 
+	$guide_link = '#';
+	$brand_link = '#';
+?>
+
 <!-- Start footer-->
+
 <footer>
 	<div class="mx-auto max-w-7xl p-4 sm:!p-6 lg:!p-8">
 		<div class="divide-y divide-dark-grizzly [&>*]:py-6">
 			<div class="flex items-start flex-wrap gap-6 sm:!gap-10">
 				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="support icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="<?php esc_attr_e( 'support icon', 'custom-theme' ); ?>">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">Customer Support</h5>
-						<p class="font-roboto text-base opacity-75">Avallable 24/7 to assist you</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'Customer Support', 'custom-theme' ); ?></h5>
+						<p class="font-roboto text-base opacity-75"><?php esc_html_e( 'Avallable 24/7 to assist you', 'custom-theme' ); ?></p>
 					</div>
 				</div>
 				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="guide icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="<?php esc_attr_e( 'guide icon', 'custom-theme' ); ?>">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">New Member Guide</h5>
-						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3">Check out FAQ and guides</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'New Member Guide', 'custom-theme' ); ?></h5>
+						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3"><?php esc_html_e( 'Check out FAQ and guides', 'custom-theme' ); ?></p>
 						<a
-							href="#"
+							href="<?php echo esc_url( $guide_link ); ?>"
 							class="font-bold no-underline duration-200"
 						>
-							Explore Now
+							<?php esc_html_e( 'Explore Now', 'custom-theme' ); ?>
 						</a>
 					</div>
 				</div>
 				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon2.png" alt="brand icon">
+					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon2.png" alt="<?php esc_attr_e( 'brand icon', 'custom-theme' ); ?>">
 					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3">Brand Ambassador</h5>
-						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3">Play with celebrity</p>
+						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'Brand Ambassador', 'custom-theme' ); ?></h5>
+						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3"><?php esc_html_e( 'Play with celebrity', 'custom-theme' ); ?></p>
 						<a
-							href="#"
+							href="<?php echo esc_url( $brand_link ); ?>"
 							class="font-bold no-underline duration-200"
 						>
-							Have Fun Now
+							<?php esc_html_e( 'Have Fun Now', 'custom-theme' ); ?>
 						</a>
 					</div>
 				</div>
@@ -91,17 +97,18 @@
 			<div class="flex flex-col items-center justify-between gap-6 sm:!flex-row">
 				<?php get_template_part( 'theme-parts/logo' ); ?>
 				<p class="font-roboto text-sm text-center">
-					<?php echo esc_html( date( 'Y' ) ); ?> 
-					<?php esc_html_e( '&copy;', 'custom-organization-theme' ); ?> 
-					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | All Rights Reserved | <?php esc_html_e( 'Powered by', 'custom-organization-theme' ); ?>
-					<a class="no-underline duration-200" href="<?php echo esc_url( __( 'https://wordpress.org', 'custom-organization-theme' ) ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress', 'custom-organization-theme' ); ?>">
-						<?php esc_html_e( 'WordPress', 'custom-organization-theme' ); ?>
+					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
+					<?php esc_html_e( '&copy;' ); ?> 
+					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | All Rights Reserved | <?php esc_html_e( 'Powered by', 'custom-theme' ); ?>
+					<a class="no-underline duration-200" href="https://wordpress.org" target="_blank" title="WordPress">
+						WordPress
 					</a>
 				</p>
 			</div>
 		</div>
 	</div>
 </footer>
+
 <!-- End footer-->
 
 <?php wp_footer(); ?>

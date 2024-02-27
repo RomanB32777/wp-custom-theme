@@ -23,6 +23,19 @@ function register_custom_menus() {
 }
 add_action( 'init', 'register_custom_menus' );
 
+function true_load_theme_textdomain() {
+	load_theme_textdomain( 'custom-theme', get_template_directory() . '/languages' );
+}
+add_action( 'after_setup_theme', 'true_load_theme_textdomain' );
+
+function link_localize_theme( $locale ) {
+	if ( isset( $_GET['lang'] ) ) {
+		return esc_attr( $_GET['lang'] );
+	}
+	return $locale;
+}
+add_filter( 'locale', 'link_localize_theme' );
+
 function register_navwalker() {
 	require_once get_template_directory() . '/theme-functions/header-walker-nav-menu.php';
 	require_once get_template_directory() . '/theme-functions/footer-walker-nav-menu.php';
@@ -242,7 +255,7 @@ function ajax_send_comment() {
 		if ( ! empty( $data ) ) {
 			wp_die(
 				'<p>' . $comment->get_error_message() . '</p>',
-				__( 'Comment Submission Failure' ),
+				__( 'Comment Submission Failure', 'custom-theme' ),
 				array(
 					'response'  => $data,
 					'back_link' => true,
@@ -258,15 +271,13 @@ function ajax_send_comment() {
 
 	do_action( 'set_comment_cookies', $comment, $user, $cookies_consent );
 
-	$reply_text = 'Reply';
-
 	wp_list_comments(
 		array(
 			'avatar_size' => 0,
 			'style'       => 'ul',
 			'short_ping'  => true,
 			'callback'    => 'comment_custom',
-			'reply_text'  => esc_html__( $reply_text, 'custom-organization-theme' ),
+			'reply_text'  => esc_html__( 'Reply', 'custom-theme' ),
 		),
 		array( $comment )
 	);

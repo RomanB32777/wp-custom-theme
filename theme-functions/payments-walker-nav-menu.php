@@ -8,7 +8,6 @@ if ( ! class_exists( 'Payments_Walker_Nav_Menu' ) ) {
 	 * @extends Walker_Nav_Menu
 	 */
 	class Payments_Walker_Nav_Menu extends Walker_Nav_Menu {
-	
 
 		// add classes to ul sub-menus
 		function start_lvl( &$output, $depth = 0, $args = null ) {
@@ -50,7 +49,7 @@ if ( ! class_exists( 'Payments_Walker_Nav_Menu' ) ) {
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
 			$attributes .= ' target="_blank"';
 			$attributes .= ' rel="noopener noreferrer"';
-			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
+			$attributes .= ! empty( $item->url ) ? ' href="' . esc_url( $item->url ) . '"' : '';
 			$attributes .= ' class="menu-link ' . $link_class_names . '"';
 
 			$item_output = sprintf(

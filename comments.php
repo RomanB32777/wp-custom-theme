@@ -3,22 +3,12 @@ if ( post_password_required() ) {
 	return;
 }
 
-	$commenter            = wp_get_current_commenter();
-	$title_text           = 'প্রতিক্রিয়া';
-	$textarea_placeholder = 'লেখা শুরু করুন';
-	$name_placeholder     = 'আপনার নাম প্রবেশ করুন';
-	$email_placeholder    = 'তুমার ইমেইল প্রবেশ করাও';
-	$checkbox_label       = 'বর্তমান ব্যবহারকারীর নাম এবং ইমেল সংরক্ষণ করবেন?';
-	$submit_text          = 'মন্তব্য প্রকাশ করুন';
-	$cancel_text          = 'বাতিল করুন';
-	$reply_text           = 'উত্তর দিন';
+	$commenter = wp_get_current_commenter();
 ?>
 <div id="comments">
 	<!-- Start feedback block-->
 	<div class="relative my-4 md:!mb-8">
 		<?php
-			$title_reply = esc_html__( $title_text, 'custom-organization-theme' );
-
 			$comment_field = '
 				<div class="col-span-full">
 					<textarea
@@ -27,7 +17,7 @@ if ( post_password_required() ) {
 						name="comment-form-textarea"
 						rows="3"
 						required
-						placeholder="' . esc_attr__( $textarea_placeholder, 'custom-organization-theme' ) . '"
+						placeholder="' . esc_attr__( 'Start writing', 'custom-theme' ) . '"
 					></textarea>
 				</div>';
 
@@ -38,7 +28,7 @@ if ( post_password_required() ) {
 						<div
 							class="switcher w-11 h-6 bg-gray-200 rounded-full peer peer-focus:outline-none peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
 						></div>
-						<span class="font-roboto ms-3 text-sm font-medium">' . esc_html__( $checkbox_label, 'custom-organization-theme' ) . '</span>
+						<span class="font-roboto ms-3 text-sm font-medium">' . esc_html__( 'Save current username and email?', 'custom-theme' ) . '</span>
 					</label>
 				</div>';
 
@@ -50,7 +40,7 @@ if ( post_password_required() ) {
 						type="text"
 						name="comment-form-author"
 						required
-						placeholder="' . esc_attr__( $name_placeholder, 'custom-organization-theme' ) . '"
+						placeholder="' . esc_attr__( 'Enter your name', 'custom-theme' ) . '"
 						value="' . esc_attr( $commenter['comment_author'] ) . '"
 					/>
 				</div>';
@@ -64,7 +54,7 @@ if ( post_password_required() ) {
 						name="comment-form-email"
 						autocomplete="email"
 						required
-						placeholder="' . esc_attr__( $email_placeholder, 'custom-organization-theme' ) . '"
+						placeholder="' . esc_attr__( 'Enter your email', 'custom-theme' ) . '"
 						value="' . esc_attr( $commenter['comment_author_email'] ) . '"
 					/>
 				</div>';
@@ -129,14 +119,14 @@ if ( post_password_required() ) {
 				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="comment-submit font-roboto relative text-white text-base font-black w-full rounded-lg py-5 cursor-pointer disabled:opacity-75 %3$s" value="%4$s" />',
 				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title font-roboto mt-3 mb-6 font-bold md:text-2xl">',
 				'title_reply_after'    => '</h5>',
-				'title_reply'          => $title_reply,
+				'title_reply'          => esc_html__( 'Leave a feedback', 'custom-theme' ),
 				'title_reply_to'       => 'Leave a Reply to',
 				'comment_notes_before' => null,
 				'logged_in_as'         => null,
-				'label_submit'         => $submit_text,
+				'label_submit'         => esc_html__( 'Send', 'custom-theme' ),
 				'cancel_reply_before'  => '<span class="inline-block ml-2">',
 				'cancel_reply_after'   => '</span>',
-				'cancel_reply_link'    => $cancel_text,
+				'cancel_reply_link'    => esc_html__( 'Cancel', 'custom-theme' ),
 				'action'               => '',
 			);
 
@@ -159,7 +149,7 @@ if ( post_password_required() ) {
 						'style'       => 'ul',
 						'callback'    => 'comment_custom',
 						'short_ping'  => true,
-						'reply_text'  => esc_html__( $reply_text, 'custom-organization-theme' ),
+						'reply_text'  => esc_html__( 'Reply', 'custom-theme' ),
 					)
 				);
 			?>

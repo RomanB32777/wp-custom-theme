@@ -17,13 +17,13 @@
 		<!-- Author Info Start -->
 
 		<?php
-			$author_title = 'লেখক';
-
 			get_template_part( '/theme-parts/author-info' );
-			get_author_info( get_the_author_meta( 'ID' ), $author_title, 40 );
+			get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40 );
 		?>
 
 		<!-- Author Info End -->
+
+		<!-- Comments Start -->
 
 		<?php
 		if ( comments_open() || get_comments_number() ) :
@@ -31,6 +31,7 @@
 		endif;
 		?>
 
+		<!-- Comments End -->
 	</div>
 </main>
 

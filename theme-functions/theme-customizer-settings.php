@@ -52,7 +52,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'primary_color',
 			array(
-				'label'    => esc_html__( 'Primary color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Primary color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'primary_color',
 			)
@@ -75,7 +75,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'secondary_color',
 			array(
-				'label'    => esc_html__( 'Secondary color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Secondary color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'secondary_color',
 			)
@@ -98,7 +98,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'links_color',
 			array(
-				'label'    => esc_html__( 'Links color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Links color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'links_color',
 			)
@@ -121,7 +121,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'links_hover_color',
 			array(
-				'label'    => esc_html__( 'Links hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Links hover color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'links_hover_color',
 			)
@@ -144,7 +144,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'body_color',
 			array(
-				'label'    => esc_html__( 'Body color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Body color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'body_color',
 			)
@@ -165,7 +165,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'body_content_color',
 			array(
-				'label'    => esc_html__( 'Body content color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Body content color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'body_content_color',
 			)
@@ -180,14 +180,14 @@ function theme_customizer_setting( $wp_customize ) {
 		array(
 			'priority'   => 130,
 			'capability' => 'edit_theme_options',
-			'title'      => esc_html__( 'Header', 'custom-organization-theme' ),
+			'title'      => esc_html__( 'Header', 'custom-theme' ),
 		)
 	);
 
 	$wp_customize->add_section(
 		'theme_header_settings',
 		array(
-			'title' => esc_html__( 'Header colors', 'custom-organization-theme' ),
+			'title' => esc_html__( 'Header colors', 'custom-theme' ),
 			'panel' => 'theme_header_settings',
 		) 
 	);
@@ -195,7 +195,7 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_section(
 		'theme_mobile_header_settings',
 		array(
-			'title' => esc_html__( 'Mobile header colors', 'custom-organization-theme' ),
+			'title' => esc_html__( 'Mobile header colors', 'custom-theme' ),
 			'panel' => 'theme_header_settings',
 		) 
 	);
@@ -216,7 +216,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_color',
 			array(
-				'label'    => esc_html__( 'Header color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Header color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_color',
 			)
@@ -239,7 +239,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_menu_color',
 			array(
-				'label'    => esc_html__( 'Main menu link color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Main menu link color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_menu_color',
 			)
@@ -262,7 +262,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_color',
 			array(
-				'label'    => esc_html__( 'Header mobile color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Header mobile color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_color',
 			)
@@ -283,7 +283,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_menu_color',
 			array(
-				'label'    => esc_html__( 'Main menu mobile link color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Main menu mobile link color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_menu_color',
 			)
@@ -306,7 +306,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_hover_menu_color',
 			array(
-				'label'    => esc_html__( 'Main menu link hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Main menu link hover color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_hover_menu_color',
 			)
@@ -327,7 +327,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_hover_menu_color',
 			array(
-				'label'    => esc_html__( 'Main menu mobile link hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Main menu mobile link hover color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_hover_menu_color',
 			)
@@ -350,7 +350,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_hover_menu_background_color',
 			array(
-				'label'    => esc_html__( 'Main menu mobile link hover background color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Main menu mobile link hover background color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_hover_menu_background_color',
 			)
@@ -373,7 +373,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_sub_menu_background_color',
 			array(
-				'label'    => esc_html__( 'Submenu background color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu background color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_sub_menu_background_color',
 			)
@@ -394,7 +394,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_sub_menu_background_color',
 			array(
-				'label'    => esc_html__( 'Submenu mobile background color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu mobile background color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_sub_menu_background_color',
 			)
@@ -417,7 +417,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_sub_menu_color',
 			array(
-				'label'    => esc_html__( 'Submenu link color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu link color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_sub_menu_color',
 			)
@@ -438,7 +438,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_sub_menu_color',
 			array(
-				'label'    => esc_html__( 'Submenu mobile link color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu mobile link color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_sub_menu_color',
 			)
@@ -461,7 +461,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_hover_sub_menu_color',
 			array(
-				'label'    => esc_html__( 'Submenu link hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu link hover color', 'custom-theme' ),
 				'section'  => 'theme_header_settings',
 				'settings' => 'header_hover_sub_menu_color',
 			)
@@ -482,7 +482,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'header_mobile_hover_sub_menu_color',
 			array(
-				'label'    => esc_html__( 'Submenu mobile link hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Submenu mobile link hover color', 'custom-theme' ),
 				'section'  => 'theme_mobile_header_settings',
 				'settings' => 'header_mobile_hover_sub_menu_color',
 			)
@@ -494,7 +494,7 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_section(
 		'theme_footer_settings',
 		array(
-			'title'    => esc_html__( 'Footer', 'custom-organization-theme' ),
+			'title'    => esc_html__( 'Footer', 'custom-theme' ),
 			'priority' => 140,
 		) 
 	);
@@ -515,7 +515,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'footer_color',
 			array(
-				'label'    => esc_html__( 'Footer color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Footer color', 'custom-theme' ),
 				'section'  => 'theme_footer_settings',
 				'settings' => 'footer_color',
 			)
@@ -536,7 +536,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'footer_content_color',
 			array(
-				'label'    => esc_html__( 'Footer content color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Footer content color', 'custom-theme' ),
 				'section'  => 'theme_footer_settings',
 				'settings' => 'footer_content_color',
 			)
@@ -557,7 +557,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'footer_menu_color',
 			array(
-				'label'    => esc_html__( 'Footer menu link color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Footer menu link color', 'custom-theme' ),
 				'section'  => 'theme_footer_settings',
 				'settings' => 'footer_menu_color',
 			)
@@ -578,7 +578,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'footer_hover_menu_color',
 			array(
-				'label'    => esc_html__( 'Footer menu link hover color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Footer menu link hover color', 'custom-theme' ),
 				'section'  => 'theme_footer_settings',
 				'settings' => 'footer_hover_menu_color',
 			)
@@ -601,8 +601,8 @@ function theme_customizer_setting( $wp_customize ) {
 			array(
 				'type'        => 'textarea',
 				'section'     => 'theme_footer_settings',
-				'label'       => esc_html__( 'Footer Description', 'custom-organization-theme' ),
-				'description' => esc_html__( 'Add your description to the footer.', 'custom-organization-theme' ),
+				'label'       => esc_html__( 'Footer Description', 'custom-theme' ),
+				'description' => esc_html__( 'Add your description to the footer.', 'custom-theme' ),
 			) 
 		);
 
@@ -613,7 +613,7 @@ function theme_customizer_setting( $wp_customize ) {
 		array(
 			'priority'   => 150,
 			'capability' => 'edit_theme_options',
-			'title'      => esc_html__( 'Theme settings', 'custom-organization-theme' ),
+			'title'      => esc_html__( 'Theme settings', 'custom-theme' ),
 		)
 	);
 
@@ -622,7 +622,7 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_section(
 		'theme_settings_table_colors',
 		array(
-			'title' => esc_html__( 'Table colors', 'custom-organization-theme' ),
+			'title' => esc_html__( 'Table colors', 'custom-theme' ),
 			'panel' => 'theme_settings',
 		) 
 	);
@@ -643,7 +643,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'table_color',
 			array(
-				'label'    => esc_html__( 'Table background color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Table background color', 'custom-theme' ),
 				'section'  => 'theme_settings_table_colors',
 				'settings' => 'table_color',
 			)
@@ -664,7 +664,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'table_border_color',
 			array(
-				'label'    => esc_html__( 'Table border color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Table border color', 'custom-theme' ),
 				'section'  => 'theme_settings_table_colors',
 				'settings' => 'table_border_color',
 			)
@@ -686,7 +686,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'table_th_color',
 			array(
-				'label'    => esc_html__( 'Table header background color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Table header background color', 'custom-theme' ),
 				'section'  => 'theme_settings_table_colors',
 				'settings' => 'table_th_color',
 			)
@@ -707,7 +707,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'table_th_content_color',
 			array(
-				'label'    => esc_html__( 'Table header text color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Table header text color', 'custom-theme' ),
 				'section'  => 'theme_settings_table_colors',
 				'settings' => 'table_th_content_color',
 			)
@@ -728,7 +728,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'table_content_color',
 			array(
-				'label'    => esc_html__( 'Table body text color', 'custom-organization-theme' ),
+				'label'    => esc_html__( 'Table body text color', 'custom-theme' ),
 				'section'  => 'theme_settings_table_colors',
 				'settings' => 'table_content_color',
 			)

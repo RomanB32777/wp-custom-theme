@@ -179,9 +179,17 @@ function wp_handle_comment_ajax( $comment_data ) {
 
 	if ( get_option( 'require_name_email' ) && ! $user->exists() ) {
 		if ( '' === $comment_author_email || '' === $comment_author ) {
-			return new WP_Error( 'require_name_email', __( '<strong>Error:</strong> Please fill the required fields.' ), 200 );
+			return new WP_Error( 
+				'require_name_email',
+				'<strong>' . __( 'Error' ) . ':</strong> ' . __( 'Please fill the required fields.', 'custom-theme' ),
+				200 
+			);
 		} elseif ( ! is_email( $comment_author_email ) ) {
-			return new WP_Error( 'require_valid_email', __( '<strong>Error:</strong> Please enter a valid email address.' ), 200 );
+			return new WP_Error( 
+				'require_valid_email',
+				'<strong>' . __( 'Error' ) . ':</strong> ' . __( 'Please enter a valid email address.', 'custom-theme' ),
+				200 
+			);
 		}
 	}
 
@@ -209,7 +217,11 @@ function wp_handle_comment_ajax( $comment_data ) {
 	 */
 	$allow_empty_comment = apply_filters( 'allow_empty_comment', false, $commentdata );
 	if ( '' === $comment_content && ! $allow_empty_comment ) {
-		return new WP_Error( 'require_valid_comment', __( '<strong>Error:</strong> Please type your comment text.' ), 200 );
+		return new WP_Error(
+			'require_valid_comment', 
+			'<strong>' . __( 'Error' ) . ':</strong> ' . __( 'Please type your comment text.', 'custom-theme' ),
+			200 
+		);
 	}
 
 	$check_max_lengths = wp_check_comment_data_max_lengths( $commentdata );
@@ -223,7 +235,11 @@ function wp_handle_comment_ajax( $comment_data ) {
 	}
 
 	if ( ! $comment_id ) {
-		return new WP_Error( 'comment_save_error', __( '<strong>Error:</strong> The comment could not be saved. Please try again later.' ), 500 );
+		return new WP_Error(
+			'comment_save_error',
+			'<strong>' . __( 'Error' ) . ':</strong> ' . __( 'The comment could not be saved. Please try again later.', 'custom-theme' ),
+			500 
+		);
 	}
 
 	return get_comment( $comment_id );

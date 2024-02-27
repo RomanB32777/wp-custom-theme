@@ -13,10 +13,6 @@ dropdownMenuItems.forEach((item) => {
 		const currentWindowWidth = window.innerWidth;
 
 		if (currentWindowWidth < baseBreakpoints.xl) {
-			// link.classList.toggle("bg-white");
-			// link.classList.toggle("text-white");
-			// link.classList.toggle("text-dark");
-
 			dropdownArrow?.classList.toggle("rotate-180");
 
 			dropdownMenu?.classList.toggle("hidden");

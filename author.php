@@ -67,9 +67,9 @@
 					<!-- Posts not found Start -->
 
 					<div class="text-center">
-						<h2 class="font-roboto"><?php esc_html_e( 'Posts not found', 'custom-organization-theme' ); ?></h2>
+						<h2 class="font-roboto"><?php esc_html_e( 'Posts not found', 'custom-theme' ); ?></h2>
 						<p class="font-roboto">
-							<?php esc_html_e( 'No posts has been found. Please return to the homepage.', 'custom-organization-theme' ); ?>
+							<?php esc_html_e( 'No posts has been found. Please return to the homepage.', 'custom-theme' ); ?>
 						</p>
 					</div>
 

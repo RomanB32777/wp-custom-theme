@@ -1,17 +1,16 @@
 <?php
 
-function get_author_info( $user_id, $block_title, $description_size = 15, $is_show_email = true ) {
+function get_author_info( $user_id, $block_title = '', $description_size = 15, $is_show_email = true ) {
 
 	$author_posts_url = get_author_posts_url( $user_id );
 	$author_name      = get_the_author_meta( 'display_name', $user_id );
 	$author_email     = get_the_author_meta( 'user_email', $user_id );
-	$btn_text         = 'Read more';
 
 	?>
 	<div class="author-info">
 		<?php if ( ! empty( $block_title ) ) { ?>
 			<h5 class="font-roboto mb-6 md:text-2xl">
-				<?php echo esc_html__( $block_title, 'custom-organization-theme' ); ?>
+				<?php echo esc_html( $block_title ); ?>
 			</h5>
 		<?php } ?>
 		<div class="rounded-lg flex flex-col gap-4 md:!py-6 lg:!flex-row lg:!gap-16">
@@ -38,7 +37,7 @@ function get_author_info( $user_id, $block_title, $description_size = 15, $is_sh
 			<div class="flex items-center justify-center min-w-48">
 				<a class="author-read-link inline-block w-full text-center rounded-lg p-3 no-underline" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>">
 					<span class="font-roboto text-base xl:!text-sm font-bold text-white">
-						<?php esc_html_e( $btn_text, 'custom-organization-theme' ); ?>
+						<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
 					</span>
 				</a>
 			</div>
