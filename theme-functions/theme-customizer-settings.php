@@ -974,7 +974,8 @@ function theme_customizer_style_settings() {
 		.author-read-link,
 		.comment-submit,
 		input[type=checkbox]:checked ~ .switcher,
-		#back-to-top {
+		#back-to-top,
+		#fixed-button {
 			background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 		}
 
@@ -986,8 +987,7 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
-		.button-sign-up,
-		#fixed-button {
+		.button-sign-up {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
 		}
 
