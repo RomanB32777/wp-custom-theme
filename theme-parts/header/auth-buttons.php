@@ -1,6 +1,6 @@
 <?php 
-	$login_link   = '#';
-	$sign_up_link = '#';
+	$login_link   = 'https://baji-live999.com/main';
+	$sign_up_link = 'https://baji-live999.com/main';
 ?>
 
 <div class="flex gap-3">
