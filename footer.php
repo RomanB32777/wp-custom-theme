@@ -1,110 +1,75 @@
-<?php 
-	$guide_link = '#';
-	$brand_link = '#';
-?>
-
 <!-- Start footer-->
 
 <footer>
-	<div class="mx-auto max-w-7xl p-4 sm:!p-6 lg:!p-8">
-		<div class="divide-y divide-dark-grizzly [&>*]:py-6">
-			<div class="flex items-start flex-wrap gap-6 sm:!gap-10">
-				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="<?php esc_attr_e( 'support icon', 'custom-theme' ); ?>">
-					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'Customer Support', 'custom-theme' ); ?></h5>
-						<p class="font-roboto text-base opacity-75"><?php esc_html_e( 'Avallable 24/7 to assist you', 'custom-theme' ); ?></p>
-					</div>
-				</div>
-				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon1.png" alt="<?php esc_attr_e( 'guide icon', 'custom-theme' ); ?>">
-					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'New Member Guide', 'custom-theme' ); ?></h5>
-						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3"><?php esc_html_e( 'Check out FAQ and guides', 'custom-theme' ); ?></p>
-						<a
-							href="<?php echo esc_url( $guide_link ); ?>"
-							class="font-bold no-underline duration-200"
+	<div class="py-10 lg:!py-20 mx-auto max-w-7xl px-4 sm:!px-6 lg:!px-8">
+		<div class="flex flex-1 flex-col items-start lg:!flex-row">
+			<div class="flex justify-between items-center basis-full w-full md:!basis-2/6">
+				<?php get_template_part( 'theme-parts/logo' ); ?>
+				<div class="lg:hidden">
+					<button
+						class="hamburger-btn inline-flex items-center justify-center rounded-md -m-2.5 p-2.5"
+						type="button"
+					>
+						<span class="font-notoSans sr-only">Open main menu</span
+						><svg
+							class="h-8 w-8"
+							fill="none"
+							viewbox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							aria-hidden="true"
 						>
-							<?php esc_html_e( 'Explore Now', 'custom-theme' ); ?>
-						</a>
-					</div>
-				</div>
-				<div class="flex items-start gap-6">
-					<img class="w-14 sm:!w-20" width="80" height="80" src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/icon2.png" alt="<?php esc_attr_e( 'brand icon', 'custom-theme' ); ?>">
-					<div>
-						<h5 class="font-roboto text-lg font-semibold mb-1 sm:!mb-3"><?php esc_html_e( 'Brand Ambassador', 'custom-theme' ); ?></h5>
-						<p class="font-roboto text-base opacity-75 mb-1 sm:!mb-3"><?php esc_html_e( 'Play with celebrity', 'custom-theme' ); ?></p>
-						<a
-							href="<?php echo esc_url( $brand_link ); ?>"
-							class="font-bold no-underline duration-200"
-						>
-							<?php esc_html_e( 'Have Fun Now', 'custom-theme' ); ?>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="flex flex-col md:!flex-row gap-8">
-				<div class="w-full basis-full md:!basis-3/12">
-					<p class="font-roboto text-base font-semibold mb-3">Menu</p>
-					<?php
-						wp_nav_menu( 
-							array( 
-								'theme_location' => 'footer',
-								'depth'          => 1,
-								'container'      => null,
-								'menu_class'     => 'flex flex-col flex-1 gap-3 justify-between',
-								'walker'         => new Footer_Walker_Nav_Menu(),
-							) 
-						); 
-						?>
-				</div>
-
-				<div class="basis-full">
-					<p class="font-roboto text-base font-semibold mb-3">Payments</p>
-					<?php
-						wp_nav_menu( 
-							array( 
-								'theme_location' => 'payments',
-								'depth'          => 1,
-								'container'      => null,
-								'menu_class'     => 'flex flex-wrap gap-3 justify-between',
-								'walker'         => new Payments_Walker_Nav_Menu(),
-							) 
-						); 
-						?>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							></path>
+						</svg>
+					</button>
 				</div>
 			</div>
 			<?php if ( ! empty( get_theme_mod( 'footer_description' ) ) ) { ?>
-				<p class="font-roboto text-sm">
-					<?php
-					$allowed_html = array(
-						'a'      => array(
-							'href'   => true,
-							'title'  => true,
-							'target' => true,
-						),
-						'br'     => array(),
-						'em'     => array(),
-						'strong' => array(),
-						'span'   => array(),
-						'p'      => array(),
-					);
-					echo wp_kses( get_theme_mod( 'footer_description' ), $allowed_html );
-							
-					?>
-				</p>
+				<div class="my-6 basis-full lg:!mt-0 lg:!mb-6 xl:!mb-0">
+					<p class="font-notoSans text-sm">
+						<?php
+							$allowed_html = array(
+								'a'      => array(
+									'href'   => true,
+									'title'  => true,
+									'target' => true,
+								),
+								'br'     => array(),
+								'em'     => array(),
+								'strong' => array(),
+								'span'   => array(),
+								'p'      => array(),
+							);
+							echo wp_kses( get_theme_mod( 'footer_description' ), $allowed_html );
+				
+							?>
+					</p>
+				</div>
 			<?php } ?>
-			<div class="flex flex-col items-center justify-between gap-6 sm:!flex-row">
-				<?php get_template_part( 'theme-parts/logo' ); ?>
-				<p class="font-roboto text-sm text-center">
-					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
-					<?php esc_html_e( '&copy;' ); ?> 
-					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | All Rights Reserved | <?php esc_html_e( 'Powered by', 'custom-theme' ); ?>
-					<a class="no-underline duration-200" href="https://wordpress.org" target="_blank" title="WordPress">
-						WordPress
-					</a>
-				</p>
-			</div>
+		</div>
+		<div class="divide-y divide-dark-grizzly">
+			<?php
+				wp_nav_menu( 
+					array( 
+						'theme_location' => 'footer',
+						'depth'          => 1,
+						'container'      => null,
+						'menu_class'     => 'flex-1 flex-wrap gap-2 justify-around items-center my-6 hidden lg:!flex xl:!justify-between xl:!mt-11',
+						'walker'         => new Footer_Walker_Nav_Menu(),
+						// 'fallback_cb'       => 'theme_walker_nav_menu::fallback',
+					) 
+				); 
+				?>
+			<p class="font-notoSans text-sm text-center pt-6">
+				<?php echo esc_html( gmdate( 'Y' ) ); ?> 
+				<?php esc_html_e( '&copy;' ); ?> 
+				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>.
+				<?php esc_html_e( 'All Rights Reserved', 'custom-theme' ); ?>
+			</p>
 		</div>
 	</div>
 </footer>
@@ -113,7 +78,7 @@
 
 <!-- Back to Top Start -->
 
-<button class="fixed right-4 sm:right-6 lg:right-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
+<button class="fixed right-4 sm:right-6 lg:right-8 bottom-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

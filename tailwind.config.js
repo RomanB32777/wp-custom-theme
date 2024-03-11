@@ -19,6 +19,8 @@ const {
 	GRIZZLY_LIGHT_COLOR,
 	GRIZZLY_DARK_COLOR,
 	RED_COLOR,
+	YELLOW_COLOR,
+	YELLOW_LIGHT_COLOR,
 } = process.env;
 
 module.exports = {
@@ -59,9 +61,13 @@ module.exports = {
 				red: {
 					DEFAULT: RED_COLOR || "#d63031",
 				},
+				yellow: {
+					DEFAULT: YELLOW_COLOR || "#f9b15c",
+					light: YELLOW_LIGHT_COLOR || "#e3ae6f",
+				},
 			},
 			fontFamily: {
-				roboto: ['"Roboto"', "Arial", "sans-serif"],
+				notoSans: ['"NotoSans"', "Arial", "sans-serif"],
 			},
 			letterSpacing: {
 				wide: "0.75rem",

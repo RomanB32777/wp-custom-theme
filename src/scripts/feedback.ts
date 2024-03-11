@@ -2,8 +2,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 	const commentForm = document.querySelector<HTMLFormElement>("#comment_form");
 	const ratingInput = commentForm?.querySelector<HTMLInputElement>("#rating");
 
-	const classActive = "!text-secondary";
-	const classInactive = "md:!text-grizzly-light";
+	const classActive = "active";
 
 	let currentRating = rating;
 
@@ -13,7 +12,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 			const star = stars[i].querySelector(".star");
 
 			if (star) {
-				star.className = `star mb-2 ${classInactive}`;
+				star.className = "star mb-2";
 			}
 		}
 
@@ -33,8 +32,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 		const star = stars[i].querySelector(".star");
 
 		if (!star?.classList.contains(classActive)) {
-			star.classList.toggle(classInactive);
-			star.classList.toggle(classActive);
+			star.classList.add(classActive);
 		}
 	}
 
@@ -43,8 +41,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 		const star = stars[i].querySelector(".star");
 
 		if (star?.classList.contains(classActive)) {
-			star.classList.toggle(classInactive);
-			star.classList.toggle(classActive);
+			star.classList.remove(classActive);
 		}
 	}
 };
@@ -202,10 +199,65 @@ jQuery(function ($) {
 				button?.toggleClass("cursor-wait");
 				button?.prop("disabled", false);
 
+				const emptyCommentEl = $(".empty-comments");
+
+				if (emptyCommentEl) {
+					emptyCommentEl.toggleClass("hidden");
+				}
+
 				changeLoadButtonState(loadButton);
 			},
 		});
 
 		return false;
+	});
+
+	const loadButton = $(loadButtonSelector);
+	const commentList = $(commentListSelector);
+
+	loadButton?.on("click", function () {
+		const postId = $(this).attr("data-post-id");
+		const perPage = $(this).attr("data-comment-per-page") || 5;
+		const allCount = $(this).attr("data-comment-all-count") || 0;
+		const currentCount = $(this).attr(currentPageAttrName) || commentList.children().length;
+
+		if (!postId) {
+			return;
+		}
+
+		$.ajax({
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			url: ajax_data.ajax_url,
+			type: "post",
+			data: {
+				action: "load_comments",
+				"post-id": postId,
+				"per-page": perPage,
+				"current-count": currentCount,
+			},
+			beforeSend() {
+				changeLoadButtonState(loadButton);
+			},
+			success(response: string) {
+				if (response) {
+					commentList.append(response);
+				}
+			},
+			complete() {
+				const currentCommentCount = commentList.children().length;
+
+				if (currentCommentCount < allCount) {
+					loadButton.attr(currentPageAttrName, currentCommentCount);
+					loadButton.text(
+						`Show ${Math.min(allCount - currentCommentCount, perPage)} more feedbacks`
+					);
+				} else {
+					loadButton.parent().toggleClass("hidden");
+				}
+
+				changeLoadButtonState(loadButton);
+			},
+		});
 	});
 });

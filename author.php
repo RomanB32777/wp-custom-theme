@@ -12,9 +12,9 @@
 			</div>
 
 			<div class="basis-full">
-				<h1 class="font-roboto mb-4"><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h1>
+				<h1 class="font-notoSans mb-4"><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h1>
 				<?php if ( get_the_author_meta( 'description' ) ) { ?>
-					<p class="font-roboto text-base text-grizzly-light md:!text-xl">
+					<p class="font-notoSans text-base text-grizzly-light md:!text-xl">
 						<?php echo esc_html( get_the_author_meta( 'description' ) ); ?>
 					</p>
 				<?php } ?>
@@ -42,17 +42,17 @@
 						?>
 
 						<div class="post-item">
-							<div class="font-roboto text-xs text-grizzly-light">
+							<div class="font-notoSans text-xs text-grizzly-light">
 								<span>
 									<?php echo get_the_date(); ?>
 								</span>
 							</div>
-							<h5 class="font-roboto my-3">
+							<h5 class="font-notoSans my-3">
 								<a class="no-underline duration-200" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 									<?php the_title(); ?>
 								</a>
 							</h5>
-							<p class="font-roboto font-base text-grizzly-light">
+							<p class="font-notoSans font-base text-grizzly-light">
 								<?php echo esc_html( wp_trim_words( get_the_excerpt(), 48, ' ...' ) ); ?>
 							</p>
 						</div>
@@ -67,8 +67,8 @@
 					<!-- Posts not found Start -->
 
 					<div class="text-center">
-						<h2 class="font-roboto"><?php esc_html_e( 'Posts not found', 'custom-theme' ); ?></h2>
-						<p class="font-roboto">
+						<h2 class="font-notoSans"><?php esc_html_e( 'Posts not found', 'custom-theme' ); ?></h2>
+						<p class="font-notoSans">
 							<?php esc_html_e( 'No posts has been found. Please return to the homepage.', 'custom-theme' ); ?>
 						</p>
 					</div>

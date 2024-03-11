@@ -36,7 +36,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes (<li>)
 			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item -mx-3 pt-2 xl:!m-0 xl:!py-1' : 'sub-menu-item font-roboto relative flex items-center gap-x-6 p-2 text-sm font-semibold xl:!font-bold' ),
+				( $depth === 0 ? 'main-menu-item -mx-3 pt-2 xl:!m-0 xl:!py-1' : 'sub-menu-item font-notoSans relative flex items-center gap-x-6 p-2 text-sm font-semibold xl:!font-bold' ),
 				( $depth >= 2 ? 'sub-sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 				$dropdown_classes[] = 'dropdown group relative';
 			} elseif ( $depth === 0 ) {
 				// without child elements - simple item
-				$dropdown_classes[] = 'font-roboto font-semibold -mx-3 pt-2 text-base xl:!py-1 xl:!m-0 xl:!text-sm xl:!font-bold';
+				$dropdown_classes[] = 'font-notoSans font-semibold -mx-3 pt-2 text-base xl:!py-1 xl:!m-0 xl:!text-sm xl:!font-bold';
 			}
 			$dropdown_class_names = esc_attr( implode( ' ', $dropdown_classes ) );
 
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 xl:!p-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 xl:!px-0 xl:!py-0 xl:!inline xl:!rounded-none';
 
 			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
-				$link_class_names = 'main-menu-link dropdown-toggle font-roboto w-full flex justify-between items-center gap-x-1 text-base font-semibold duration-200 pl-3 py-2 rounded-lg pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!py-0 xl:!rounded-none xl:!w-auto';
+				$link_class_names = 'main-menu-link dropdown-toggle font-notoSans w-full flex justify-between items-center gap-x-1 text-base font-semibold duration-200 pl-3 py-2 rounded-lg pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!py-0 xl:!rounded-none xl:!w-auto';
 			}
 
 			// link attributes

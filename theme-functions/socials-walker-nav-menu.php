@@ -1,13 +1,14 @@
 <?php
 
 // Check if Class Exists.
-if ( ! class_exists( 'Payments_Walker_Nav_Menu' ) ) {
+if ( ! class_exists( 'Socials_Walker_Nav_Menu' ) ) {
 	/**
-	 * Payments_Walker_Nav_Menu class.
+	 * Socials_Walker_Nav_Menu class.
 	 *
 	 * @extends Walker_Nav_Menu
 	 */
-	class Payments_Walker_Nav_Menu extends Walker_Nav_Menu {
+	class Socials_Walker_Nav_Menu extends Walker_Nav_Menu {
+	
 
 		// add classes to ul sub-menus
 		function start_lvl( &$output, $depth = 0, $args = null ) {
@@ -31,7 +32,7 @@ if ( ! class_exists( 'Payments_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes
 			$custom_classes     = array(
-				'max-h-8 max-w-20 flex justify-center items-center duration-200 grayscale hover:grayscale-0',
+				'bg-white h-10 w-10 rounded-full flex justify-center items-center p-2',
 			);
 			$custom_class_names = esc_attr( implode( ' ', $custom_classes ) );
 
@@ -47,9 +48,9 @@ if ( ! class_exists( 'Payments_Walker_Nav_Menu' ) ) {
 
 			// link attributes
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
-			$attributes .= ' target="_blank"';
-			$attributes .= ' rel="noopener noreferrer"';
-			$attributes .= ! empty( $item->url ) ? ' href="' . esc_url( $item->url ) . '"' : '';
+			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
+			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
+			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
 			$attributes .= ' class="menu-link ' . $link_class_names . '"';
 
 			$item_output = sprintf(

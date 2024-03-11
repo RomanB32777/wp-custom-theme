@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<main class="pt-20">
 	<div class="theme-main-content [&>*]:my-7">
 		<?php 
 		if ( have_posts() ) :
@@ -12,33 +12,21 @@
 		?>
 	</div>
 
-	<div class="[&>*]:my-7">
+	<!-- Comments Start -->
 
-		<!-- Author Info Start -->
+	<?php
+	if ( comments_open() || get_comments_number() ) :
+		comments_template();
+	endif;
+	?>
 
-		<?php
-			get_template_part( '/theme-parts/author-info' );
-			get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40 );
-		?>
+	<!-- Comments End -->
 
-		<!-- Author Info End -->
+	<!-- Start subscribe block-->
 
-		<!-- Comments Start -->
+	<?php get_template_part( 'theme-parts/subscribe' ); ?>
 
-		<?php
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-		?>
-
-		<!-- Comments End -->
-	</div>
+	<!-- End subscribe block-->
 </main>
-
-<!-- Float Button Start -->
-
-<?php get_template_part( '/theme-parts/fixed-button' ); ?>
-
-<!-- Float Button End -->
 
 <?php get_footer(); ?>
