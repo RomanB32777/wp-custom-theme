@@ -1,7 +1,17 @@
 <?php 
-	$guide_link = '#';
-	$brand_link = '#';
-?>
+	$guide_text = ! empty( get_theme_mod( 'footer_guide_text' ) ) ? get_theme_mod( 'footer_guide_text' ) : __( 'Explore Now', 'custom-theme' );
+	$guide_link = get_theme_mod( 'footer_guide_url' ); 
+
+	$brand_text = ! empty( get_theme_mod( 'footer_brand_text' ) ) ? get_theme_mod( 'footer_brand_text' ) : __( 'Have Fun Now', 'custom-theme' );
+	$brand_link = get_theme_mod( 'footer_brand_url' ); 
+
+	$allowed_html = array(
+		'br'     => array(),
+		'em'     => array(),
+		'strong' => array(),
+		'span'   => array(),
+	);
+	?>
 
 <!-- Start footer-->
 
@@ -25,7 +35,7 @@
 							href="<?php echo esc_url( $guide_link ); ?>"
 							class="font-bold no-underline duration-200"
 						>
-							<?php esc_html_e( 'Explore Now', 'custom-theme' ); ?>
+							<?php echo wp_kses( $guide_text, $allowed_html ); ?>
 						</a>
 					</div>
 				</div>
@@ -38,7 +48,7 @@
 							href="<?php echo esc_url( $brand_link ); ?>"
 							class="font-bold no-underline duration-200"
 						>
-							<?php esc_html_e( 'Have Fun Now', 'custom-theme' ); ?>
+							<?php echo wp_kses( $brand_text, $allowed_html ); ?>
 						</a>
 					</div>
 				</div>

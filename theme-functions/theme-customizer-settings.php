@@ -268,6 +268,14 @@ function theme_customizer_setting( $wp_customize ) {
 		) 
 	);
 
+	$wp_customize->add_section(
+		'theme_header_auth_buttons',
+		array(
+			'title' => esc_html__( 'Header authorization buttons', 'custom-theme' ),
+			'panel' => 'theme_header_settings',
+		) 
+	);
+
 	/*  --- Header color ---  */
 
 	$wp_customize->add_setting(
@@ -557,6 +565,80 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
+	/*  --- Header authorization buttons ---  */
+
+	$wp_customize->add_setting(
+		'header_login_button_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 'Log In',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_login_button_text',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_header_auth_buttons',
+			'label'   => esc_html__( 'Header login button text', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'header_login_button_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_login_button_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_header_auth_buttons',
+			'label'   => esc_html__( 'Header login button link', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'header_sign_button_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 'Sign Up',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_sign_button_text',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_header_auth_buttons',
+			'label'   => esc_html__( 'Header sign button text', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'header_sign_button_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_sign_button_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_header_auth_buttons',
+			'label'   => esc_html__( 'Header sign button link', 'custom-theme' ),
+		) 
+	);
+
 	/*  --- Footer Settings ---  */
 
 	$wp_customize->add_section(
@@ -671,6 +753,81 @@ function theme_customizer_setting( $wp_customize ) {
 			'section'     => 'theme_footer_settings',
 			'label'       => esc_html__( 'Footer Description', 'custom-theme' ),
 			'description' => esc_html__( 'Add your description to the footer.', 'custom-theme' ),
+		) 
+	);
+
+	/*  --- Footer links ---  */
+
+	$wp_customize->add_setting(
+		'footer_guide_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 'Explore Now',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'footer_guide_text',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_footer_settings',
+			'label'   => esc_html__( 'Footer new member guide text', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'footer_guide_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'footer_guide_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_footer_settings',
+			'label'   => esc_html__( 'Footer new member guide link', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'footer_brand_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 'Have Fun Now',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'footer_brand_text',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_footer_settings',
+			'label'   => esc_html__( 'Footer brand ambassador text', 'custom-theme' ),
+		) 
+	);
+
+
+	$wp_customize->add_setting(
+		'footer_brand_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'footer_brand_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_footer_settings',
+			'label'   => esc_html__( 'Footer brand ambassador link', 'custom-theme' ),
 		) 
 	);
 
