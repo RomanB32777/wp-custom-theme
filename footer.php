@@ -45,7 +45,9 @@
 			</div>
 			<div class="flex flex-col md:!flex-row gap-8">
 				<div class="w-full basis-full md:!basis-3/12">
-					<p class="font-roboto text-base font-semibold mb-3">Menu</p>
+					<p class="font-roboto text-base font-semibold mb-3">
+						<?php esc_html_e( 'Menu', 'custom-theme' ); ?>
+					</p>
 					<?php
 						wp_nav_menu( 
 							array( 
@@ -60,7 +62,9 @@
 				</div>
 
 				<div class="basis-full">
-					<p class="font-roboto text-base font-semibold mb-3">Payments</p>
+					<p class="font-roboto text-base font-semibold mb-3">
+						<?php esc_html_e( 'Payments', 'custom-theme' ); ?>
+					</p>
 					<?php
 						wp_nav_menu( 
 							array( 
@@ -99,7 +103,7 @@
 				<p class="font-roboto text-sm text-center">
 					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
 					<?php esc_html_e( '&copy;' ); ?> 
-					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | All Rights Reserved | <?php esc_html_e( 'Powered by', 'custom-theme' ); ?>
+					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | <?php esc_html_e( 'All Rights Reserved', 'custom-theme' ); ?> | <?php esc_html_e( 'Powered by', 'custom-theme' ); ?>
 					<a class="no-underline duration-200" href="https://wordpress.org" target="_blank" title="WordPress">
 						WordPress
 					</a>
@@ -113,7 +117,7 @@
 
 <!-- Back to Top Start -->
 
-<button class="fixed right-4 sm:right-6 lg:right-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
+<button class="main-button fixed right-4 sm:right-6 lg:right-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

@@ -67,9 +67,13 @@ if (backToTopButton || fixedButton) {
 
 		const setBottomPositionForBackToTopButton = () => {
 			backToTopButton.style.bottom = "2rem";
+			document.body.style.paddingBottom = null;
 
 			if (fixedButton && window.innerWidth < baseBreakpoints.lg) {
-				backToTopButton.style.bottom = `${fixedButton.clientHeight + 20}px`;
+				const fixedButtonHeight = fixedButton.clientHeight;
+
+				document.body.style.paddingBottom = `${fixedButtonHeight}px`;
+				backToTopButton.style.bottom = `${fixedButtonHeight + 20}px`;
 			}
 		};
 

@@ -35,8 +35,8 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15, $
 				</div>
 			</div>
 			<div class="flex items-center justify-center min-w-48">
-				<a class="author-read-link inline-block w-full text-center rounded-lg p-3 no-underline" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>">
-					<span class="font-roboto text-base xl:!text-sm font-bold text-white">
+				<a class="main-button inline-block w-full text-center rounded-lg p-3 no-underline" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>">
+					<span class="font-roboto text-base xl:!text-sm font-bold">
 						<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
 					</span>
 				</a>

@@ -2,8 +2,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 	const commentForm = document.querySelector<HTMLFormElement>("#comment_form");
 	const ratingInput = commentForm?.querySelector<HTMLInputElement>("#rating");
 
-	const classActive = "!text-secondary";
-	const classInactive = "md:!text-grizzly-light";
+	const classActive = "active";
 
 	let currentRating = rating;
 
@@ -13,7 +12,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 			const star = stars[i].querySelector(".star");
 
 			if (star) {
-				star.className = `star mb-2 ${classInactive}`;
+				star.className = "star mb-2";
 			}
 		}
 
@@ -33,8 +32,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 		const star = stars[i].querySelector(".star");
 
 		if (!star?.classList.contains(classActive)) {
-			star.classList.toggle(classInactive);
-			star.classList.toggle(classActive);
+			star.classList.add(classActive);
 		}
 	}
 
@@ -43,8 +41,7 @@ const setRating = (stars: NodeListOf<Element>, rating: number) => {
 		const star = stars[i].querySelector(".star");
 
 		if (star?.classList.contains(classActive)) {
-			star.classList.toggle(classInactive);
-			star.classList.toggle(classActive);
+			star.classList.remove(classActive);
 		}
 	}
 };

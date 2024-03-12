@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme\n"
-"POT-Creation-Date: 2024-02-27 18:38+0300\n"
-"PO-Revision-Date: 2024-02-27 18:39+0300\n"
+"POT-Creation-Date: 2024-03-12 20:24+0300\n"
+"PO-Revision-Date: 2024-03-12 20:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bn\n"
@@ -51,6 +51,11 @@ msgstr "তুমার ইমেইল প্রবেশ করাও"
 msgid "Leave a feedback"
 msgstr "প্রতিক্রিয়া"
 
+#: comments.php:123
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
 #: comments.php:126
 msgid "Send"
 msgstr "মন্তব্য প্রকাশ করুন"
@@ -63,55 +68,67 @@ msgstr "বাতিল করুন"
 msgid "Reply"
 msgstr "উত্তর দিন"
 
-#: footer.php:13
-msgid "support icon"
-msgstr ""
-
-#: footer.php:15
-msgid "Customer Support"
-msgstr ""
-
-#: footer.php:16
-msgid "Avallable 24/7 to assist you"
-msgstr ""
-
-#: footer.php:20
-msgid "guide icon"
-msgstr ""
-
-#: footer.php:22
-msgid "New Member Guide"
-msgstr ""
-
-#: footer.php:23
-msgid "Check out FAQ and guides"
-msgstr ""
-
-#: footer.php:28
+#: footer.php:2
 msgid "Explore Now"
 msgstr ""
 
-#: footer.php:33
-msgid "brand icon"
-msgstr ""
-
-#: footer.php:35
-msgid "Brand Ambassador"
-msgstr ""
-
-#: footer.php:36
-msgid "Play with celebrity"
-msgstr ""
-
-#: footer.php:41
+#: footer.php:5
 msgid "Have Fun Now"
 msgstr ""
 
-#: footer.php:101
+#: footer.php:23
+msgid "support icon"
+msgstr ""
+
+#: footer.php:25
+msgid "Customer Support"
+msgstr ""
+
+#: footer.php:26
+msgid "Avallable 24/7 to assist you"
+msgstr ""
+
+#: footer.php:30
+msgid "guide icon"
+msgstr ""
+
+#: footer.php:32
+msgid "New Member Guide"
+msgstr ""
+
+#: footer.php:33
+msgid "Check out FAQ and guides"
+msgstr ""
+
+#: footer.php:43
+msgid "brand icon"
+msgstr ""
+
+#: footer.php:45
+msgid "Brand Ambassador"
+msgstr ""
+
+#: footer.php:46
+msgid "Play with celebrity"
+msgstr ""
+
+#: footer.php:59
+msgid "Menu"
+msgstr ""
+
+#: footer.php:76
+msgid "Payments"
+msgstr ""
+
+#: footer.php:115
 msgid "&copy;"
 msgstr ""
 
-#: footer.php:102
+#: footer.php:116
+msgid "All Rights Reserved"
+msgstr ""
+
+#: footer.php:116
 msgid "Powered by"
 msgstr ""
 
@@ -139,151 +156,196 @@ msgstr ""
 msgid "Author"
 msgstr "লেখক"
 
-#: theme-functions/custom-comment-items.php:97
+#: theme-functions/custom-comment-items.php:150
 msgid "Edit"
 msgstr "সম্পাদনা"
 
-#: theme-functions/theme-customizer-settings.php:55
+#: theme-functions/theme-customizer-settings.php:59
 msgid "Primary color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:78
+#: theme-functions/theme-customizer-settings.php:82
 msgid "Secondary color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:101
+#: theme-functions/theme-customizer-settings.php:105
 msgid "Links color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:124
+#: theme-functions/theme-customizer-settings.php:128
 msgid "Links hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:147
+#: theme-functions/theme-customizer-settings.php:151
+msgid "Buttons content color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:174
 msgid "Body color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:168
+#: theme-functions/theme-customizer-settings.php:195
 msgid "Body content color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:183
+#: theme-functions/theme-customizer-settings.php:216
+#: theme-functions/theme-customizer-settings.php:237
+msgid "Stars active color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:251
 msgid "Header"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:190
+#: theme-functions/theme-customizer-settings.php:258
 msgid "Header colors"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:198
+#: theme-functions/theme-customizer-settings.php:266
 msgid "Mobile header colors"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:219
+#: theme-functions/theme-customizer-settings.php:274
+msgid "Header authorization buttons"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:295
 msgid "Header color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:242
+#: theme-functions/theme-customizer-settings.php:318
 msgid "Main menu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:265
+#: theme-functions/theme-customizer-settings.php:341
 msgid "Header mobile color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:286
+#: theme-functions/theme-customizer-settings.php:362
 msgid "Main menu mobile link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:309
+#: theme-functions/theme-customizer-settings.php:385
 msgid "Main menu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:330
+#: theme-functions/theme-customizer-settings.php:406
 msgid "Main menu mobile link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:353
+#: theme-functions/theme-customizer-settings.php:429
 msgid "Main menu mobile link hover background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:376
+#: theme-functions/theme-customizer-settings.php:452
 msgid "Submenu background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:397
+#: theme-functions/theme-customizer-settings.php:473
 msgid "Submenu mobile background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:420
+#: theme-functions/theme-customizer-settings.php:496
 msgid "Submenu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:441
+#: theme-functions/theme-customizer-settings.php:517
 msgid "Submenu mobile link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:464
+#: theme-functions/theme-customizer-settings.php:540
 msgid "Submenu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:485
+#: theme-functions/theme-customizer-settings.php:561
 msgid "Submenu mobile link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:497
+#: theme-functions/theme-customizer-settings.php:584
+msgid "Header login button text"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:602
+msgid "Header login button link"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:620
+msgid "Header sign button text"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:638
+msgid "Header sign button link"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:647
 msgid "Footer"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:518
+#: theme-functions/theme-customizer-settings.php:668
 msgid "Footer color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:539
+#: theme-functions/theme-customizer-settings.php:689
 msgid "Footer content color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:560
+#: theme-functions/theme-customizer-settings.php:710
 msgid "Footer menu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:581
+#: theme-functions/theme-customizer-settings.php:731
 msgid "Footer menu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:604
+#: theme-functions/theme-customizer-settings.php:754
 msgid "Footer Description"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:605
+#: theme-functions/theme-customizer-settings.php:755
 msgid "Add your description to the footer."
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:616
+#: theme-functions/theme-customizer-settings.php:775
+msgid "Footer new member guide text"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:793
+msgid "Footer new member guide link"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:811
+msgid "Footer brand ambassador text"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:830
+msgid "Footer brand ambassador link"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:841
 msgid "Theme settings"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:625
+#: theme-functions/theme-customizer-settings.php:850
 msgid "Table colors"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:646
+#: theme-functions/theme-customizer-settings.php:871
 msgid "Table background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:667
+#: theme-functions/theme-customizer-settings.php:892
 msgid "Table border color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:689
+#: theme-functions/theme-customizer-settings.php:914
 msgid "Table header background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:710
+#: theme-functions/theme-customizer-settings.php:935
 msgid "Table header text color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:731
+#: theme-functions/theme-customizer-settings.php:956
 msgid "Table body text color"
 msgstr ""
 
@@ -330,10 +392,10 @@ msgstr ""
 msgid "Read more"
 msgstr "আরও পড়ুন"
 
-#: theme-parts/header/auth-buttons.php:14
-msgid "Log in"
+#: theme-parts/header/auth-buttons.php:2
+msgid "Log In"
 msgstr ""
 
-#: theme-parts/header/auth-buttons.php:26
+#: theme-parts/header/auth-buttons.php:5
 msgid "Sign Up"
 msgstr ""

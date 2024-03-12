@@ -19,12 +19,16 @@ const createAndAppendMenuElement = (
 			"text-dark",
 			"font-semibold",
 			"xl:!font-bold",
-			"invert",
-			"xl:!invert-0",
 		];
 		listEl.classList.add(...listElClasses);
 
-		const linkElClasses = ["sub-menu-link", "duration-200", "block", "no-underline"];
+		const linkElClasses = [
+			"sub-menu-link",
+			"mobile-exclude",
+			"duration-200",
+			"block",
+			"no-underline",
+		];
 		linkEl.classList.add(...linkElClasses);
 
 		listEl.setAttribute("id", `menu-item-lang-${locale}`);

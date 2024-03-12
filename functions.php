@@ -23,10 +23,10 @@ function register_custom_menus() {
 }
 add_action( 'init', 'register_custom_menus' );
 
-function true_load_theme_textdomain() {
+function theme_load_theme_textdomain() {
 	load_theme_textdomain( 'custom-theme', get_template_directory() . '/languages' );
 }
-add_action( 'after_setup_theme', 'true_load_theme_textdomain' );
+add_action( 'after_setup_theme', 'theme_load_theme_textdomain' );
 
 function link_localize_theme( $locale ) {
 	if ( isset( $_GET['lang'] ) ) {
@@ -124,11 +124,11 @@ add_filter( 'get_custom_logo', 'change_logo_class' );
 
 // comments
 function theme_comments_reply() {
-	if ( get_option( 'thread_comments' ) ) {
+	if ( comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'comment_form_before', 'theme_comments_reply' );
+add_action( 'wp_enqueue_scripts', 'theme_comments_reply' );
 
 add_filter( 'comment_form_default_fields', 'comment_remove_url_field', 25 );
 function comment_remove_url_field( $fields ) {

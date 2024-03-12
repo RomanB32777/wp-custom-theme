@@ -9,7 +9,7 @@
 			</div>
 			<div class="lang-switcher relative group py-1">
 				<a
-					class="main-menu-link dropdown-toggle flex items-center gap-x-1 text-sm font-bold duration-200"
+					class="main-menu-link dropdown-toggle mobile-exclude flex items-center gap-x-1 text-sm font-bold duration-200"
 					href="#"
 					aria-expanded="false"
 				>
@@ -27,7 +27,7 @@
 					</svg>
 				</a>
 				<ul
-					class="dropdown-menu dropdown-menu-lang absolute -left-2 top-full z-10 mt-0 w-max max-w-md overflow-hidden rounded-lg shadow-lg ring-1 p-2 invisible ring-gray-900/5 duration-200 opacity-0 group-hover:opacity-100 group-hover:visible"
+					class="dropdown-menu dropdown-menu-lang mobile-exclude absolute -left-2 top-full z-10 mt-0 w-max max-w-md overflow-hidden rounded-lg shadow-lg ring-1 p-2 invisible ring-gray-900/5 duration-200 opacity-0 group-hover:opacity-100 group-hover:visible"
 				></ul>
 			</div>
 			<button class="close-menu rounded-md text-white -m-2.5 p-2.5" type="button">

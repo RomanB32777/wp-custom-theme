@@ -19,6 +19,8 @@ const {
 	GRIZZLY_LIGHT_COLOR,
 	GRIZZLY_DARK_COLOR,
 	RED_COLOR,
+	YELLOW_COLOR,
+	YELLOW_LIGHT_COLOR,
 } = process.env;
 
 module.exports = {
@@ -58,6 +60,10 @@ module.exports = {
 				},
 				red: {
 					DEFAULT: RED_COLOR || "#d63031",
+				},
+				yellow: {
+					DEFAULT: YELLOW_COLOR || "#f9b002",
+					light: YELLOW_LIGHT_COLOR || "#e3ae6f",
 				},
 			},
 			fontFamily: {

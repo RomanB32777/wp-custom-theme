@@ -1,6 +1,39 @@
 <?php
 
+$allowed_html = array(
+	'a'      => array(
+		'href'       => true,
+		'title'      => true,
+		'target'     => true,
+		'class'      => true,
+		'rel'        => true,
+		'data-*'     => true,
+		'aria-label' => true, 
+	),
+	'br'     => array(),
+	'em'     => array(),
+	'strong' => array(),
+	'span'   => array(),
+	'p'      => array(),
+	'div'    => array(
+		'class' => true,
+	),
+	'svg'    => array(
+		'width'   => true,
+		'height'  => true,
+		'viewbox' => true,
+		'fill'    => true,
+		'xmlns'   => true,
+	),
+	'path'   => array(
+		'd'    => true,
+		'fill' => true,
+	),
+);
+
 function star_rating( $args = array() ) {
+	global $allowed_html;
+
 	$defaults = array(
 		'rating'       => 0,
 		'type'         => 'rating',
@@ -32,8 +65,8 @@ function star_rating( $args = array() ) {
 		</svg>
 	';
 
-	$empty_star_el = '<div class="text-grizzly-light">' . $star_el . '</div>';
-	$full_star_el  = '<div class="text-secondary">' . $star_el . '</div>';
+	$empty_star_el = '<div class="star">' . $star_el . '</div>';
+	$full_star_el  = '<div class="star active">' . $star_el . '</div>';
 
 	$output  = '<div class="flex gap-x-1">';
 	$output .= str_repeat( $full_star_el, $full_stars );
@@ -41,14 +74,17 @@ function star_rating( $args = array() ) {
 	$output .= '</div>';
 	 
 	if ( $parsed_args['echo'] ) {
-		echo $output;
+		echo wp_kses( $output, $allowed_html );
 	}
 	 
 	return $output;
 }
 
 function comment_custom_template( $comment, $comment_class = '', $depth = 1, $args = array() ) {
+	global $allowed_html;
+
 	$comment_id = $comment->comment_ID;
+	$post_id    = $comment->comment_post_ID;
 	$rating     = get_comment_meta( $comment_id, 'rating', true );
 
 	if ( 'div' === $args['style'] ) {
@@ -59,9 +95,10 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 		$add_below = 'div-comment';
 	}
 
+	$comment_classes = $comment_class . 'my-3 [&>ul]:ml-8';
 	?>
 
-	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_class . ' my-3 [&>ul]:ml-8', $comment ); ?> id="comment-<?php echo esc_attr( $comment_id ); ?>">
+	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_classes, $comment ); ?> id="comment-<?php echo esc_attr( $comment_id ); ?>">
 
 		<?php if ( 'div' != $args['style'] ) { ?>
 			<div id="div-comment-<?php echo esc_attr( $comment_id ); ?>" class="comment-wrapper relative rounded-lg border p-4 sm:!py-8 sm:!px-6">
@@ -90,23 +127,35 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 					<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
 				</p>
 			</div>
-			<div class="font-roboto text-base font-normal mb-6">
+			<div class="font-roboto text-base font-normal">
 				<?php comment_text( $comment_id ); ?>
 			</div>
 
-			<?php edit_comment_link( '(' . esc_html__( 'Edit', 'custom-theme' ) . ')', '  ', '' ); ?>
-			<?php 
-				comment_reply_link(
+			<?php
+				$is_can_edit_comment = current_user_can( 'edit_comment', $comment_id );
+				$reply_link          = get_comment_reply_link(
 					array_merge( 
 						$args, 
 						array( 
 							'add_below' => $add_below, 
 							'depth'     => $depth, 
 							'max_depth' => $args['max_depth'], 
-						) 
-					) 
-				); 
-			?>
+						)
+					),
+					$comment_id,
+					$post_id 
+				);
+
+			if ( $is_can_edit_comment || ! empty( $reply_link ) ) { 
+				$edit_link = '<a class="comment-edit-link" href="' . esc_url( get_edit_comment_link( $comment ) ) . '">(' . esc_html__( 'Edit', 'custom-theme' ) . ')</a>';
+	
+				?>
+					<div class="mt-6">  
+						<?php echo wp_kses( $edit_link, $allowed_html ); ?>
+						<?php echo wp_kses( $reply_link, $allowed_html ); ?>
+					</div>
+	
+			<?php } ?>
 		</div>
 	<?php if ( 'div' !== $args['style'] ) { ?>
 		</div>

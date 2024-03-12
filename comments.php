@@ -77,7 +77,7 @@ if ( post_password_required() ) {
 		for ( $i = 1; $i <= 5; $i++ ) {
 			$rating_field .= '
 						<div id="star-' . $i . '" data-value="' . $i . '" class="comment-star text-center cursor-pointer bg-white-opacity py-3 px-4 rounded-lg md:!p-0 md:bg-transparent">
-							<div class="star text-grizzly mb-2 md:!text-grizzly-light">
+							<div class="star mb-2">
 								<svg
 									width="24"
 									height="24"
@@ -116,15 +116,15 @@ if ( post_password_required() ) {
 					'rating'           => $rating_field,
 				),
 				'submit_field'         => $submit_field,
-				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="comment-submit font-roboto relative text-white text-base font-black w-full rounded-lg py-5 cursor-pointer disabled:opacity-75 %3$s" value="%4$s" />',
+				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="main-button comment-submit font-roboto relative text-base font-black w-full rounded-lg py-5 cursor-pointer disabled:opacity-75 %3$s" value="%4$s" />',
 				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title font-roboto mt-3 mb-6 font-bold md:text-2xl">',
 				'title_reply_after'    => '</h5>',
 				'title_reply'          => esc_html__( 'Leave a feedback', 'custom-theme' ),
-				'title_reply_to'       => 'Leave a Reply to',
+				'title_reply_to'       => esc_html__( 'Leave a Reply to %s', 'custom-theme' ),
 				'comment_notes_before' => null,
 				'logged_in_as'         => null,
 				'label_submit'         => esc_html__( 'Send', 'custom-theme' ),
-				'cancel_reply_before'  => '<span class="inline-block ml-2">',
+				'cancel_reply_before'  => '<span class="inline-block ml-1">',
 				'cancel_reply_after'   => '</span>',
 				'cancel_reply_link'    => esc_html__( 'Cancel', 'custom-theme' ),
 				'action'               => '',

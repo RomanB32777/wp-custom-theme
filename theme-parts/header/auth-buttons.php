@@ -6,7 +6,7 @@
 <div class="flex gap-3">
 	<a class="auth-btn no-underline" href="<?php echo esc_url( $login_link ); ?>">
 		<button
-			class="button-login rounded-lg p-3"
+			class="main-button button-login rounded-lg p-3"
 			type="button"
 			aria-expanded="false"
 		>
@@ -18,7 +18,7 @@
 
 	<a class="auth-btn no-underline" href="<?php echo esc_url( $sign_up_link ); ?>">
 		<button
-			class="button-sign-up rounded-lg p-3"
+			class="main-button button-sign-up rounded-lg p-3"
 			type="button"
 			aria-expanded="false"
 		>
