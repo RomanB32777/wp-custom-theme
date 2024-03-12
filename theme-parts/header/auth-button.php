@@ -1,6 +1,14 @@
 <?php 
-	$auth_link = '#';
-?>
+	$auth_text = ! empty( get_theme_mod( 'header_auth_button_text' ) ) ? get_theme_mod( 'header_auth_button_text' ) : __( 'Log in / Sign up', 'custom-theme' );
+	$auth_link = get_theme_mod( 'header_auth_button_url' ); 
+
+	$allowed_html = array(
+		'br'     => array(),
+		'em'     => array(),
+		'strong' => array(),
+		'span'   => array(),
+	);
+	?>
 
 <a class="auth-btn flex items-center no-underline" href="<?php echo esc_url( $auth_link ); ?>">
 	<button
@@ -33,7 +41,7 @@
 	</button>
 	<div class="relative ml-3">
 		<span class="main-menu-link mobile-exclude font-notoSans text-sm font-bold uppercase duration-200">
-			<?php esc_html_e( 'Log in / Sign up', 'custom-theme' ); ?>
+			<?php echo wp_kses( $auth_text, $allowed_html ); ?>
 		</span>
 	</div>
 </a>

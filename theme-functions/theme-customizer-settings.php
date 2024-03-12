@@ -234,14 +234,13 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'stars_inactive_color',
 			array(
-				'label'    => esc_html__( 'Stars active color', 'custom-theme' ),
+				'label'    => esc_html__( 'Stars inactive color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'stars_inactive_color',
 			)
 		)
 	);
 
-	
 	/*  --- Header Settings ---  */
 
 	$wp_customize->add_panel(
@@ -265,6 +264,14 @@ function theme_customizer_setting( $wp_customize ) {
 		'theme_mobile_header_settings',
 		array(
 			'title' => esc_html__( 'Mobile header colors', 'custom-theme' ),
+			'panel' => 'theme_header_settings',
+		) 
+	);
+
+	$wp_customize->add_section(
+		'theme_header_auth_button',
+		array(
+			'title' => esc_html__( 'Header authorization button', 'custom-theme' ),
 			'panel' => 'theme_header_settings',
 		) 
 	);
@@ -556,6 +563,44 @@ function theme_customizer_setting( $wp_customize ) {
 				'settings' => 'header_mobile_hover_sub_menu_color',
 			)
 		)
+	);
+
+	/*  --- Header authorization button ---  */
+
+	$wp_customize->add_setting(
+		'header_auth_button_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => 'Log in / Sign up',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_auth_button_text',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_header_auth_button',
+			'label'   => esc_html__( 'Header authorization button text', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'header_auth_button_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'header_auth_button_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_header_auth_button',
+			'label'   => esc_html__( 'Header authorization button link', 'custom-theme' ),
+		) 
 	);
 
 	/*  --- Footer Settings ---  */
