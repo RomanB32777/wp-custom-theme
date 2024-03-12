@@ -234,7 +234,7 @@ function theme_customizer_setting( $wp_customize ) {
 			$wp_customize,
 			'stars_inactive_color',
 			array(
-				'label'    => esc_html__( 'Stars active color', 'custom-theme' ),
+				'label'    => esc_html__( 'Stars inactive color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'stars_inactive_color',
 			)
