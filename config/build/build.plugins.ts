@@ -18,8 +18,8 @@ export function buildPlugins({ mode }: IBuildOptions): Configuration["plugins"] 
 			__ENV__: JSON.stringify(mode),
 		}),
 		new MiniCssExtractPlugin({
-			filename: "[name].css",
-			chunkFilename: "[name].css",
+			filename: "css/[name].css",
+			chunkFilename: "css/[name].css",
 		}),
 	];
 

@@ -9,7 +9,7 @@ const createAndAppendMenuElement = (
 		const linkEl = document.createElement("a");
 
 		const listElClasses = [
-			"font-roboto",
+			"font-lineSeedJp",
 			"relative",
 			"flex",
 			"items-center",
@@ -17,8 +17,8 @@ const createAndAppendMenuElement = (
 			"p-2",
 			"text-sm",
 			"text-dark",
-			"font-semibold",
-			"xl:!font-bold",
+			"font-bold",
+			"md:!font-normal",
 		];
 		listEl.classList.add(...listElClasses);
 

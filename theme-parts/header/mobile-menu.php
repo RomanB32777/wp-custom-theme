@@ -1,7 +1,7 @@
-<div class="mobile-menu hidden absolute xl:!hidden" id="mobile-menu" role="dialog" aria-modal="true">
+<div class="mobile-menu hidden absolute md:!hidden" id="mobile-menu" role="dialog" aria-modal="true">
 	<div class="close-menu fixed inset-0 z-10 bg-dark-opacity"></div>
 	<div
-		class="fixed mobile-menu-wrapper inset-y-0 right-0 z-10 flex flex-col w-full overflow-y-auto px-4 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+		class="fixed mobile-menu-wrapper inset-y-0 right-0 z-10 flex flex-col w-full overflow-y-auto px-4 py-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 	>
 		<div class="flex items-center justify-between">
 			<div class="sm:hidden">
@@ -30,8 +30,8 @@
 					class="dropdown-menu dropdown-menu-lang mobile-exclude absolute -left-2 top-full z-10 mt-0 w-max max-w-md overflow-hidden rounded-lg shadow-lg ring-1 p-2 invisible ring-gray-900/5 duration-200 opacity-0 group-hover:opacity-100 group-hover:visible"
 				></ul>
 			</div>
-			<button class="close-menu rounded-md text-white -m-2.5 p-2.5" type="button">
-				<span class="font-roboto sr-only">Close menu</span>
+			<button class="close-menu rounded-md text-dark -m-2.5 p-2.5" type="button">
+				<span class="font-lineSeedJp sr-only">Close menu</span>
 				<svg
 					class="h-6 w-6"
 					fill="none"
@@ -56,15 +56,11 @@
 							'theme_location' => 'header',
 							'depth'          => 2,
 							'container'      => null,
-							'menu_class'     => 'space-y-2 py-6 divide-y divide-dark-grizzly',
+							'menu_class'     => 'space-y-2 py-6 divide-y divide-primary',
 							'walker'         => new Header_Walker_Nav_Menu(),
 						) 
 					); 
 					?>
-				<!-- Auth buttons -->
-				<div class="mx-auto">
-					<?php get_template_part( 'theme-parts/header/auth-buttons' ); ?>
-				</div>
 			</div>
 		</div>
 	</div>

@@ -8,21 +8,22 @@ import { buildDevServer } from "./build.server";
 import { buildLoaders } from "./build.loaders";
 import { buildPlugins } from "./build.plugins";
 import { buildResolvers } from "./build.resolvers";
-import type { IBuildOptions } from "./types";
+import type { IBuildOptions, IEntryPaths } from "./types";
 
 export function buildWebpack(options: IBuildOptions): Configuration {
 	const { mode, paths } = options;
 
 	const isProduction = mode === "production";
 
+	const { blocks, shortcodes, ...entryPaths } = paths.entry;
+	const entry: IEntryPaths = { ...entryPaths };
+
 	const config: Configuration = {
 		mode: mode ?? "development",
-		entry: {
-			main: paths.entry,
-		},
+		entry: {},
 		output: {
 			path: paths.output,
-			filename: "[name].js",
+			filename: "js/[name].js",
 			clean: isProduction,
 		},
 		plugins: buildPlugins(options),
@@ -34,12 +35,24 @@ export function buildWebpack(options: IBuildOptions): Configuration {
 		devServer: isProduction ? undefined : buildDevServer(options),
 	};
 
-	const isExistPluginStyles = fs.existsSync(paths.pluginStyles);
+	const isExistBlocksStyles = fs.existsSync(blocks);
+	const isExistShortcodeStyles = fs.existsSync(shortcodes);
 
-	if (isExistPluginStyles && typeof config.entry === "object") {
+	if (isExistBlocksStyles && typeof config.entry === "object") {
+		entry.blocks = blocks;
+
 		config.entry = {
 			...config.entry,
-			plugin: paths.pluginStyles,
+			...entry,
+		};
+	}
+
+	if (isExistShortcodeStyles && typeof config.entry === "object") {
+		entry.shortcodes = shortcodes;
+
+		config.entry = {
+			...config.entry,
+			...entry,
 		};
 	}
 
@@ -52,6 +65,11 @@ export function buildWebpack(options: IBuildOptions): Configuration {
 						type: "css/mini-extract",
 						chunks: "all",
 						enforce: true,
+					},
+					swiper: {
+						chunks: "all",
+						test: /[\\/]node_modules[\\/]swiper[\\/]/,
+						name: "swiper",
 					},
 				},
 			},

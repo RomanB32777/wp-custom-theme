@@ -12,7 +12,7 @@ if ( post_password_required() ) {
 			$comment_field = '
 				<div class="col-span-full">
 					<textarea
-						class="font-roboto block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="font-lineSeedJp block w-full border main-border shadow-sm ring-1 ring-inset p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
 						id="comment-form-textarea"
 						name="comment-form-textarea"
 						rows="3"
@@ -28,14 +28,14 @@ if ( post_password_required() ) {
 						<div
 							class="switcher w-11 h-6 bg-gray-200 rounded-full peer peer-focus:outline-none peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
 						></div>
-						<span class="font-roboto ms-3 text-sm font-medium">' . esc_html__( 'Save current username and email?', 'custom-theme' ) . '</span>
+						<span class="font-lineSeedJp ms-3 text-sm font-medium">' . esc_html__( 'Save current username and email?', 'custom-theme' ) . '</span>
 					</label>
 				</div>';
 
 			$author_field = '
 				<div class="comment-form-author col-span-3 col-start-1">
 					<input
-						class="font-roboto block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="font-lineSeedJp block w-full border main-border shadow-sm ring-1 ring-inset p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
 						id="comment-form-author"
 						type="text"
 						name="comment-form-author"
@@ -48,7 +48,7 @@ if ( post_password_required() ) {
 			$email_field = '
 				<div class="comment-form-email col-span-3">
 					<input
-						class="font-roboto block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="font-lineSeedJp block w-full border main-border shadow-sm ring-1 ring-inset p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
 						id="comment-form-email"
 						type="email"
 						name="comment-form-email"
@@ -76,7 +76,7 @@ if ( post_password_required() ) {
 
 		for ( $i = 1; $i <= 5; $i++ ) {
 			$rating_field .= '
-						<div id="star-' . $i . '" data-value="' . $i . '" class="comment-star text-center cursor-pointer bg-white-opacity py-3 px-4 rounded-lg md:!p-0 md:bg-transparent">
+						<div id="star-' . $i . '" data-value="' . $i . '" class="comment-star text-center cursor-pointer bg-white-opacity py-3 px-4 md:!p-0 md:bg-transparent">
 							<div class="star mb-2">
 								<svg
 									width="24"
@@ -91,7 +91,7 @@ if ( post_password_required() ) {
 									></path>
 								</svg>
 							</div>
-							<span class="font-roboto text-base font-normal">' . $i . '</span>
+							<span class="font-lineSeedJp text-base font-normal">' . $i . '</span>
 						</div>
 					';
 		}
@@ -116,8 +116,8 @@ if ( post_password_required() ) {
 					'rating'           => $rating_field,
 				),
 				'submit_field'         => $submit_field,
-				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="main-button comment-submit font-roboto relative text-base font-black w-full rounded-lg py-5 cursor-pointer disabled:opacity-75 %3$s" value="%4$s" />',
-				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title font-roboto mt-3 mb-6 font-bold md:text-2xl">',
+				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="main-button comment-submit font-lineSeedJp relative text-base font-semibold w-full py-5 cursor-pointer disabled:opacity-75 %3$s" value="%4$s" />',
+				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title block-title font-lineSeedJp mt-3 mb-6 font-semibold md:text-2xl">',
 				'title_reply_after'    => '</h5>',
 				'title_reply'          => esc_html__( 'Leave a feedback', 'custom-theme' ),
 				'title_reply_to'       => esc_html__( 'Leave a Reply to %s', 'custom-theme' ),

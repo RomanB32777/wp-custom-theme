@@ -1,16 +1,16 @@
-<nav class="relative flex h-20 items-center justify-between">
-	<div class="flex flex-1 items-center justify-between">
-		<div class="flex items-center xl:flex-1">
+<nav class="relative flex items-center justify-between">
+	<div class="flex flex-1 items-center justify-between flex-wrap gap-y-9">
+		<div class="flex items-center md:justify-center md:flex-1 lg:!justify-start">
 			<?php get_template_part( 'theme-parts/logo' ); ?>
 		</div>
-		<div class="flex xl:!hidden">
+		<div class="flex md:!hidden">
 			<button
 				class="hamburger-btn inline-flex items-center justify-center rounded-lg text-gray-700 -m-2.5 p-2.5"
 				type="button"
 			>
-				<span class="font-roboto sr-only">Open main menu</span
+				<span class="font-lineSeedJp sr-only">Open main menu</span
 				><svg
-					class="h-8 w-8 text-white"
+					class="h-8 w-8 text-dark"
 					fill="none"
 					viewbox="0 0 24 24"
 					stroke-width="1.5"
@@ -25,26 +25,26 @@
 				</svg>
 			</button>
 		</div>
-		<div class="hidden xl:!flex xl:gap-x-5">
+		<div class="hidden w-full md:!flex md:!justify-center md:gap-x-5 lg:!w-auto lg:!justify-start">
 			<?php
 				wp_nav_menu( 
 					array( 
 						'theme_location' => 'header',
 						'depth'          => 2,
 						'container'      => null,
-						'menu_class'     => 'hidden xl:!flex xl:gap-x-5',
+						'menu_class'     => 'hidden md:!flex md:gap-x-8',
 						'walker'         => new Header_Walker_Nav_Menu(),
 					) 
 				); 
 				?>
-			<div class="dropdown group relative -mx-3 pt-2 lang-switcher xl:m-0 xl:py-1">
+			<div class="dropdown group relative -mx-3 pt-2 lang-switcher md:m-0 md:py-1">
 				<a 
-					class="main-menu-link dropdown-toggle font-roboto flex justify-between items-center gap-x-1 duration-200 font-bold text-sm w-auto uppercase hover:bg-transparent hover:text-grizzly" 
+					class="main-menu-link dropdown-toggle font-lineSeedJp flex justify-between items-center gap-x-1 duration-200 font-bold text-sm w-auto uppercase hover:bg-transparent hover:text-grizzly" 
 					href="#" 
 					aria-expanded="false"
 				>
 					<svg 
-						class="dropdown-arrow h-5 w-5 flex-none duration-200 xl:group-hover:rotate-180" 
+						class="dropdown-arrow h-5 w-5 flex-none duration-200 md:group-hover:rotate-180" 
 						viewBox="0 0 20 20" 
 						fill="currentColor" 
 						aria-hidden="true"
@@ -61,10 +61,6 @@
 				>
 				</ul>
 			</div>
-		</div>
-		<div class="hidden xl:!flex xl:flex-1 xl:justify-end">
-			<!-- Auth buttons -->
-			<?php get_template_part( 'theme-parts/header/auth-buttons' ); ?>
 		</div>
 	</div>
 </nav>

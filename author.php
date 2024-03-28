@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-<main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="theme-main-content [&>*]:my-7">
+<main class="pt-32 pb-10 mx-auto max-w-7xl px-4 sm:px-6 md:!pt-48 lg:!pt-32 lg:px-8">
+	<div class="main-content [&>*]:my-7">
 		<!-- Title Box Start -->
 	
 		<div class="flex flex-col gap-6 md:!gap-10 md:!flex-row">
@@ -12,9 +12,9 @@
 			</div>
 
 			<div class="basis-full">
-				<h1 class="font-roboto mb-4"><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h1>
+				<h1 class="font-lineSeedJp mb-4"><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h1>
 				<?php if ( get_the_author_meta( 'description' ) ) { ?>
-					<p class="font-roboto text-base text-grizzly-light md:!text-xl">
+					<p class="font-lineSeedJp text-base text-grizzly-light md:!text-xl">
 						<?php echo esc_html( get_the_author_meta( 'description' ) ); ?>
 					</p>
 				<?php } ?>
@@ -42,17 +42,17 @@
 						?>
 
 						<div class="post-item">
-							<div class="font-roboto text-xs text-grizzly-light">
+							<div class="font-lineSeedJp text-xs text-grizzly-light">
 								<span>
 									<?php echo get_the_date(); ?>
 								</span>
 							</div>
-							<h5 class="font-roboto my-3">
+							<h5 class="font-lineSeedJp my-3">
 								<a class="no-underline duration-200" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 									<?php the_title(); ?>
 								</a>
 							</h5>
-							<p class="font-roboto font-base text-grizzly-light">
+							<p class="font-lineSeedJp font-base text-grizzly-light">
 								<?php echo esc_html( wp_trim_words( get_the_excerpt(), 48, ' ...' ) ); ?>
 							</p>
 						</div>
@@ -67,8 +67,8 @@
 					<!-- Posts not found Start -->
 
 					<div class="text-center">
-						<h2 class="font-roboto"><?php esc_html_e( 'Posts not found', 'custom-theme' ); ?></h2>
-						<p class="font-roboto">
+						<h2 class="font-lineSeedJp"><?php esc_html_e( 'Posts not found', 'custom-theme' ); ?></h2>
+						<p class="font-lineSeedJp">
 							<?php esc_html_e( 'No posts has been found. Please return to the homepage.', 'custom-theme' ); ?>
 						</p>
 					</div>

@@ -32,7 +32,7 @@ if ( ! class_exists( 'Footer_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes
 			$custom_classes     = array(
-				'font-roboto text-sm font-bold',
+				'font-lineSeedJp text-base',
 			);
 			$custom_class_names = esc_attr( implode( ' ', $custom_classes ) );
 
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Footer_Walker_Nav_Menu' ) ) {
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $custom_class_names . ' ' . $class_names . '">';
 
-			$link_class_names = 'no-underline duration-200';
+			$link_class_names = 'underline duration-200';
 
 			// link attributes
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';

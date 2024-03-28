@@ -4,6 +4,8 @@ function theme_customizer_setting( $wp_customize ) {
 	$primary_color   = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
 	$secondary_color = ! empty( $_ENV['SECONDARY_COLOR'] ) ? $_ENV['SECONDARY_COLOR'] : '#f9b002';
 	
+	$border_color = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
+
 	$links_color       = ! empty( $_ENV['LINKS_COLOR'] ) ? $_ENV['LINKS_COLOR'] : '#d63031';
 	$links_hover_color = ! empty( $_ENV['LINKS_HOVER_COLOR'] ) ? $_ENV['LINKS_HOVER_COLOR'] : '#d63031';
 
@@ -31,7 +33,8 @@ function theme_customizer_setting( $wp_customize ) {
 	$footer_menu_color       = ! empty( $_ENV['FOOTER_MENU_LINK_COLOR'] ) ? $_ENV['FOOTER_MENU_LINK_COLOR'] : '#fff';
 	$footer_hover_menu_color = ! empty( $_ENV['FOOTER_MENU_LINK_HOVER_COLOR'] ) ? $_ENV['FOOTER_MENU_LINK_HOVER_COLOR'] : '#fff';
 
-	$table_color            = ! empty( $_ENV['TABLE_COLOR'] ) ? $_ENV['TABLE_COLOR'] : '#3e7966';
+	$table_odd_color        = ! empty( $_ENV['TABLE_COLOR'] ) ? $_ENV['TABLE_COLOR'] : '#3e7966';
+	$table_even_color       = ! empty( $_ENV['TABLE_COLOR'] ) ? $_ENV['TABLE_COLOR'] : '#3e7966';
 	$table_content_color    = ! empty( $_ENV['TABLE_CONTENT_COLOR'] ) ? $_ENV['TABLE_CONTENT_COLOR'] : '#fff';
 	$table_border_color     = ! empty( $_ENV['TABLE_BORDER_COLOR'] ) ? $_ENV['TABLE_BORDER_COLOR'] : '#3e7966';
 	$table_th_color         = ! empty( $_ENV['TABLE_TH_COLOR'] ) ? $_ENV['TABLE_TH_COLOR'] : '#0e5a43';
@@ -39,6 +42,8 @@ function theme_customizer_setting( $wp_customize ) {
 
 	$stars_active_color   = ! empty( $_ENV['YELLOW_COLOR'] ) ? $_ENV['YELLOW_COLOR'] : '#f9b002';
 	$stars_inactive_color = ! empty( $_ENV['GRIZZLY_LIGHT_COLOR'] ) ? $_ENV['GRIZZLY_LIGHT_COLOR'] : '#7f8c8d';
+
+	$buttons_fixed_background_color = ! empty( $_ENV['DARK_COLOR'] ) ? $_ENV['DARK_COLOR'] : '#1b1d21';
 
 	/*  --- Primary color ---  */
 
@@ -82,6 +87,29 @@ function theme_customizer_setting( $wp_customize ) {
 				'label'    => esc_html__( 'Secondary color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'secondary_color',
+			)
+		)
+	);
+
+	/*  --- Border color ---  */
+
+	$wp_customize->add_setting(
+		'border_color',
+		array(
+			'default'           => $border_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'border_color',
+			array(
+				'label'    => esc_html__( 'Border color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'border_color',
 			)
 		)
 	);
@@ -240,6 +268,27 @@ function theme_customizer_setting( $wp_customize ) {
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'buttons_fixed_background_color',
+		array(
+			'default'           => $buttons_fixed_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'buttons_fixed_background_color',
+			array(
+				'label'    => esc_html__( 'Fixed button background color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'buttons_fixed_background_color',
+			)
+		)
+	);
 	
 	/*  --- Header Settings ---  */
 
@@ -264,14 +313,6 @@ function theme_customizer_setting( $wp_customize ) {
 		'theme_mobile_header_settings',
 		array(
 			'title' => esc_html__( 'Mobile header colors', 'custom-theme' ),
-			'panel' => 'theme_header_settings',
-		) 
-	);
-
-	$wp_customize->add_section(
-		'theme_header_auth_buttons',
-		array(
-			'title' => esc_html__( 'Header authorization buttons', 'custom-theme' ),
 			'panel' => 'theme_header_settings',
 		) 
 	);
@@ -565,80 +606,6 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	/*  --- Header authorization buttons ---  */
-
-	$wp_customize->add_setting(
-		'header_login_button_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Log In',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_login_button_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header login button text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_login_button_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_login_button_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header login button link', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_sign_button_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Sign Up',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_sign_button_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header sign button text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_sign_button_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_sign_button_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header sign button link', 'custom-theme' ),
-		) 
-	);
-
 	/*  --- Footer Settings ---  */
 
 	$wp_customize->add_section(
@@ -735,102 +702,6 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	/*  --- Footer description ---  */
-
-	$wp_customize->add_setting(
-		'footer_description',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_description',
-		array(
-			'type'        => 'textarea',
-			'section'     => 'theme_footer_settings',
-			'label'       => esc_html__( 'Footer Description', 'custom-theme' ),
-			'description' => esc_html__( 'Add your description to the footer.', 'custom-theme' ),
-		) 
-	);
-
-	/*  --- Footer links ---  */
-
-	$wp_customize->add_setting(
-		'footer_guide_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Explore Now',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_guide_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer new member guide text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'footer_guide_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_guide_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer new member guide link', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'footer_brand_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Have Fun Now',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_brand_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer brand ambassador text', 'custom-theme' ),
-		) 
-	);
-
-
-	$wp_customize->add_setting(
-		'footer_brand_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_brand_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer brand ambassador link', 'custom-theme' ),
-		) 
-	);
-
 	/*  --- Theme Settings ---  */
 
 	$wp_customize->add_panel(
@@ -842,12 +713,10 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	/*  --- Table colors ---  */
-
 	$wp_customize->add_section(
-		'theme_settings_table_colors',
+		'theme_settings_table_settings',
 		array(
-			'title' => esc_html__( 'Table colors', 'custom-theme' ),
+			'title' => esc_html__( 'Table settings', 'custom-theme' ),
 			'panel' => 'theme_settings',
 		) 
 	);
@@ -855,9 +724,9 @@ function theme_customizer_setting( $wp_customize ) {
 	/*  --- Table color ---  */
 
 	$wp_customize->add_setting(
-		'table_color',
+		'table_odd_color',
 		array(
-			'default'           => $table_color,
+			'default'           => $table_odd_color,
 			'sanitize_callback' => 'sanitize_hex_color',
 			'capability'        => 'edit_theme_options',
 		)
@@ -866,11 +735,32 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
 			$wp_customize,
-			'table_color',
+			'table_odd_color',
 			array(
-				'label'    => esc_html__( 'Table background color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_colors',
-				'settings' => 'table_color',
+				'label'    => esc_html__( 'Table background odd rows color', 'custom-theme' ),
+				'section'  => 'theme_settings_table_settings',
+				'settings' => 'table_odd_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'table_even_color',
+		array(
+			'default'           => $table_even_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'table_even_color',
+			array(
+				'label'    => esc_html__( 'Table background even rows color', 'custom-theme' ),
+				'section'  => 'theme_settings_table_settings',
+				'settings' => 'table_even_color',
 			)
 		)
 	);
@@ -890,7 +780,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_border_color',
 			array(
 				'label'    => esc_html__( 'Table border color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_colors',
+				'section'  => 'theme_settings_table_settings',
 				'settings' => 'table_border_color',
 			)
 		)
@@ -912,7 +802,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_th_color',
 			array(
 				'label'    => esc_html__( 'Table header background color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_colors',
+				'section'  => 'theme_settings_table_settings',
 				'settings' => 'table_th_color',
 			)
 		)
@@ -933,7 +823,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_th_content_color',
 			array(
 				'label'    => esc_html__( 'Table header text color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_colors',
+				'section'  => 'theme_settings_table_settings',
 				'settings' => 'table_th_content_color',
 			)
 		)
@@ -954,10 +844,282 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_content_color',
 			array(
 				'label'    => esc_html__( 'Table body text color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_colors',
+				'section'  => 'theme_settings_table_settings',
 				'settings' => 'table_content_color',
 			)
 		)
+	);
+
+	/*  --- Table border radius ---  */
+
+	$wp_customize->add_setting(
+		'table_border_radius',
+		array(
+			'default'   => 0,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'table_border_radius',
+			array(
+				'label'   => esc_html__( 'Table border radius', 'custom-theme' ),
+				'min'     => 0,
+				'max'     => 100,
+				'step'    => 1,
+				'section' => 'theme_settings_table_settings',
+			) 
+		) 
+	);
+
+	/*  --- Slider settings ---  */
+
+	$wp_customize->add_section(
+		'theme_slider_settings',
+		array(
+			'title' => esc_html__( 'Slider settings', 'custom-theme' ),
+			'panel' => 'theme_settings',
+		) 
+	);
+
+	/*  --- Slides main settings ---  */
+
+	$wp_customize->add_setting(
+		'is_loop_slider',
+		array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_loop_slider',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Slider loop', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'is_disable_autoplay',
+		array(
+			'default'   => '0',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_disable_autoplay',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Disable slider autoplay', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_autoplay_delay',
+		array(
+			'default'   => 5000,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_autoplay_delay',
+			array(
+				'label'   => esc_html__( 'Slider autoplay delay', 'custom-theme' ),
+				'min'     => 0,
+				'max'     => 30000,
+				'step'    => 500,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+	
+	/*  --- Slides per view settings ---  */
+
+	$wp_customize->add_setting(
+		'slider_mobile_slides_per_view',
+		array(
+			'default'   => 1,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_mobile_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Mobile slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_tablet_slides_per_view',
+		array(
+			'default'   => 2,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_tablet_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Tablet slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_laptop_slides_per_view',
+		array(
+			'default'   => 3,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_laptop_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Laptop slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_desktop_slides_per_view',
+		array(
+			'default'   => 4,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_desktop_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Desktop slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	/*  --- Slides between settings ---  */
+
+	$wp_customize->add_setting(
+		'slider_mobile_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_mobile_space_between',
+			array(
+				'label'   => esc_html__( 'Mobile space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_tablet_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_tablet_space_between',
+			array(
+				'label'   => esc_html__( 'Tablet space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_laptop_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_laptop_space_between',
+			array(
+				'label'   => esc_html__( 'Laptop space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_desktop_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_desktop_space_between',
+			array(
+				'label'   => esc_html__( 'Desktop space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
 	);
 }
 add_action( 'customize_register', 'theme_customizer_setting' );
@@ -973,6 +1135,12 @@ function theme_customizer_style_settings() {
 		$secondary_custom_color = '#f9b002';
 	} else {
 		$secondary_custom_color = get_theme_mod( 'secondary_color' );
+	}
+
+	if ( ! $border_custom_color = get_theme_mod( 'border_color' ) ) {
+		$border_custom_color = '#17946d';
+	} else {
+		$border_custom_color = get_theme_mod( 'border_color' );
 	}
 
 	if ( ! $links_custom_color = get_theme_mod( 'links_color' ) ) {
@@ -1015,6 +1183,12 @@ function theme_customizer_style_settings() {
 		$stars_custom_inactive_color = '#7f8c8d';
 	} else {
 		$stars_custom_inactive_color = get_theme_mod( 'stars_inactive_color' );
+	}
+
+	if ( ! $buttons_custom_fixed_background_color = get_theme_mod( 'buttons_fixed_background_color' ) ) {
+		$buttons_custom_fixed_background_color = '#1b1d21';
+	} else {
+		$buttons_custom_fixed_background_color = get_theme_mod( 'buttons_fixed_background_color' );
 	}
 
 	if ( ! $header_custom_color = get_theme_mod( 'header_color' ) ) {
@@ -1113,10 +1287,16 @@ function theme_customizer_style_settings() {
 		$footer_custom_hover_menu_color = get_theme_mod( 'footer_hover_menu_color' );
 	}
 
-	if ( ! $table_custom_color = get_theme_mod( 'table_color' ) ) {
-		$table_custom_color = '#3e7966';
+	if ( ! $table_custom_odd_color = get_theme_mod( 'table_odd_color' ) ) {
+		$table_custom_odd_color = '#3e7966';
 	} else {
-		$table_custom_color = get_theme_mod( 'table_color' );
+		$table_custom_odd_color = get_theme_mod( 'table_odd_color' );
+	}
+
+	if ( ! $table_custom_even_color = get_theme_mod( 'table_even_color' ) ) {
+		$table_custom_even_color = '#3e7966';
+	} else {
+		$table_custom_even_color = get_theme_mod( 'table_even_color' );
 	}
 
 	if ( ! $table_custom_border_color = get_theme_mod( 'table_border_color' ) ) {
@@ -1143,11 +1323,21 @@ function theme_customizer_style_settings() {
 		$table_custom_content_color = get_theme_mod( 'table_content_color' );
 	}
 
+	if ( ! $table_custom_border_radius = get_theme_mod( 'table_border_radius' ) ) {
+		$table_custom_border_radius = 0;
+	} else {
+		$table_custom_border_radius = get_theme_mod( 'table_border_radius' );
+	}
+
 	if ( ! $is_priority_theme_primary_color = get_theme_mod( 'is_priority_theme_primary_color' ) ) {
 		$is_priority_theme_primary_color = false;
 	} else {
 		$is_priority_theme_primary_color = get_theme_mod( 'is_priority_theme_primary_color' );
 	}
+
+	$primary_custom_grizzly_color   = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 50%)';
+	$primary_custom_light_color     = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 25%)';
+	$primary_custom_brightest_color = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 10%)';
 
 	$custom_css = '
 		body {
@@ -1208,55 +1398,108 @@ function theme_customizer_style_settings() {
 
 		footer a {
 			color: ' . esc_attr( $footer_custom_menu_color ) . ';
+			text-decoration-color: ' . esc_attr( $footer_custom_menu_color ) . ';
 		}
 
 		footer a:hover {
 			color: ' . esc_attr( $footer_custom_hover_menu_color ) . ';
+			text-decoration-color: ' . esc_attr( $footer_custom_hover_menu_color ) . ';
+
 		}
 
-		.theme-main-content ul li::before,
+		.main-blocks ul li::before,
 		.main-button,
-		input[type=checkbox]:checked ~ .switcher {
+		input[type=checkbox]:checked ~ .switcher,
+		main .block-title::before,
+		.main-blocks h1::before,
+		.main-blocks h2::before,
+		.wp-block-post-content ul li::before,
+		.wp-block-post-content .block-title::before,
+		.wp-block-post-content h1::before,
+		.wp-block-post-content h2::before  {
 			background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 		}
 
+		.main-border,
+		.divide-primary>:not([hidden])~:not([hidden]),
 		.comment-list .comment .comment-wrapper {
-			border-color: ' . esc_attr( $primary_custom_color ) . ';
+			border-color: ' . esc_attr( $border_custom_color ) . ' !important;
+		}
+
+		.nav-wrapper {
+			box-shadow:
+				0 0 transparent,
+				0 0 transparent,
+				0 20px 25px -5px rgb(0 0 0 / 10%),
+				0 8px 10px -6px rgb(0 0 0 / 10%);
+			box-shadow:
+				var(--tw-ring-offset-shadow, 0 0 transparent),
+				var(--tw-ring-shadow, 0 0 transparent),
+				0 20px 25px -5px ' . esc_attr( $primary_custom_light_color ) . ',
+				0 8px 10px -6px ' . esc_attr( $primary_custom_light_color ) . ';
+		}
+
+		.bullet-dot {
+			background-color: ' . esc_attr( $primary_custom_light_color ) . ' !important;
+		}
+
+		.bullet-dot:hover,
+		.swiper-bullet.nav-active .bullet-dot {
+			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
+		}
+
+		a.shortcode-link:hover,
+		a.title-link:hover {
+			color: ' . esc_attr( $secondary_custom_color ) . ' !important;
+		}
+
+		.fixed-button {
+			background-color: ' . esc_attr( $buttons_custom_fixed_background_color ) . ' !important;
 		}
 
 		.comment-list .comment .comment-wrapper .comment-author {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
-		.main-button.button-sign-up {
-			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
+		.main-blocks a:not(.ez-toc-link, .shortcode-link),
+		.comment-edit-link,
+		.comment-reply-link {
+			color: ' . esc_attr( $links_custom_color ) . ';
 		}
 
-		main a:not(.ez-toc-link) {
-			color: ' . esc_attr( $links_custom_color ) . ' !important;
+		.main-blocks a:not(.ez-toc-link, .shortcode-link):hover,
+		.comment-edit-link:hover,
+		.comment-reply-link:hover  {
+			color: ' . esc_attr( $links_custom_hover_color ) . ';
 		}
 
-		main a:not(.ez-toc-link):hover {
-			color: ' . esc_attr( $links_custom_hover_color ) . ' !important;
-		}
-
-		.main-button {
+		.main-button,
+		.main-button a,
+		.main-button span,
+		.fixed-button,
+		.shortcode-link .image-content {
 			color: ' . esc_attr( $buttons_custom_content_color ) . ' !important;
 		}
 
 		.wp-block-table table {
-			border-color: ' . esc_attr( $table_custom_border_color ) . ';
-			background-color: ' . esc_attr( $table_custom_color ) . ';
+			border-collapse: separate;
+			border-spacing: 0;
+		}
+
+		.wp-block-table table tbody tr:nth-child(odd) > * {
+			background-color: ' . esc_attr( $table_custom_odd_color ) . ';
+		}
+
+		.wp-block-table table tbody tr:nth-child(even) > * {
+			background-color: ' . esc_attr( $table_custom_even_color ) . ';
 		}
 
 		.wp-block-table table th {
-			border-color: ' . esc_attr( $table_custom_border_color ) . ';
 			color: ' . esc_attr( $table_custom_th_content_color ) . ';
 			background-color: ' . esc_attr( $table_custom_th_color ) . ';
 		}
 
 		.wp-block-table table td {
-			border-color: ' . esc_attr( $table_custom_border_color ) . ';
 			color: ' . esc_attr( $table_custom_content_color ) . ';
 		}
 
@@ -1264,6 +1507,39 @@ function theme_customizer_style_settings() {
 		.wp-block-table table tr td {
 			border-right: 1px solid ' . esc_attr( $table_custom_th_color ) . ';
 			border-bottom: 1px solid ' . esc_attr( $table_custom_th_color ) . ';
+		}
+
+		.wp-block-table table tr th,
+		.wp-block-table table tr td {
+			border-right: 1px solid ' . esc_attr( $table_custom_border_color ) . ';
+			border-bottom: 1px solid ' . esc_attr( $table_custom_border_color ) . ';
+			border-color: ' . esc_attr( $table_custom_border_color ) . ';
+		}
+
+		.wp-block-table table tr th:first-child,
+		.wp-block-table table tr td:first-child {
+			border-left: 1px solid ' . esc_attr( $table_custom_border_color ) . ';
+		}
+
+		.wp-block-table table tr th {
+			border-top: 1px solid ' . esc_attr( $table_custom_border_color ) . ';
+			border-color: ' . esc_attr( $table_custom_border_color ) . ';
+		}
+
+		.wp-block-table table tr:first-child th:first-child {
+			border-top-left-radius: ' . esc_attr( $table_custom_border_radius ) . 'px;
+		}
+
+		.wp-block-table table tr:first-child th:last-child {
+			border-top-right-radius: ' . esc_attr( $table_custom_border_radius ) . 'px;
+		}
+
+		.wp-block-table table tr:last-child td:first-child {
+			border-bottom-left-radius: ' . esc_attr( $table_custom_border_radius ) . 'px;
+		}
+
+		.wp-block-table table tr:last-child td:last-child {
+			border-bottom-right-radius: ' . esc_attr( $table_custom_border_radius ) . 'px;
 		}
 
 		.star {
@@ -1274,7 +1550,7 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $stars_custom_active_color ) . ';
 		}
 
-		@media (min-width: 1280px) {
+		@media (min-width: 768px) {
 			.main-menu-link {
 				color: ' . esc_attr( $header_custom_menu_color ) . ';
 			}
@@ -1303,10 +1579,6 @@ function theme_customizer_style_settings() {
 	';
 
 	if ( $is_priority_theme_primary_color ) {
-		$primary_custom_grizzly_color   = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 50%)';
-		$primary_custom_light_color     = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 25%)';
-		$primary_custom_brightest_color = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 10%)';
-
 		$custom_css .= '
 			.wp-custom-blocks-questions .question {
 				border-color: ' . esc_attr( $primary_custom_light_color ) . ' !important;
@@ -1319,9 +1591,19 @@ function theme_customizer_style_settings() {
 
 			.wp-custom-blocks-questions .question .more-arrow.active,
 			.wp-custom-blocks-cards .item-card button,
-			.wp-custom-blocks-steps .step .line,
-			.wp-custom-blocks-steps .step .number {
+			.wp-custom-blocks-steps .step .number,
+			.wp-custom-blocks-banner .bonus-button,
+			.wp-custom-blocks-author,
+			.wp-block-wp-custom-blocks-button button {
 				background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
+			}
+
+			.wp-custom-blocks-banner .domain {
+				color: ' . esc_attr( $primary_custom_color ) . ' !important;
+			}
+
+			.wp-custom-blocks-steps .step .line {
+				border-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 			}
 
 			.wp-custom-blocks-steps .step .description {
@@ -1332,20 +1614,8 @@ function theme_customizer_style_settings() {
 				border-color: ' . $primary_custom_grizzly_color . ' !important;
 			}
 
-			.wp-custom-blocks-banner .bonus-button {
-				background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
-			}
-
-			.wp-custom-blocks-banner .domain {
-				color: ' . esc_attr( $primary_custom_color ) . ' !important;
-			}
-
 			.wp-custom-blocks-banner .payment {
 				background-color: ' . $primary_custom_brightest_color . ' !important;
-			}
-
-			.wp-custom-blocks-author {
-				background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 			}
 
 			.wp-custom-blocks-bonuses .link-button {
@@ -1369,3 +1639,4 @@ function theme_customizer_style_settings() {
 	wp_enqueue_style( $key );
 }
 add_action( 'wp_enqueue_scripts', 'theme_customizer_style_settings' );
+add_action( 'enqueue_block_editor_assets', 'theme_customizer_style_settings' );

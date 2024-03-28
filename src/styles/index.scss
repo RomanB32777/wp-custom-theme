@@ -1,9 +1,16 @@
+// fonts
+@import "fonts";
+
+// swiper
+@import "swiper";
+
 // tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-main {
+main,
+.wp-block-post-content {
 	h1,
 	h2,
 	h3,
@@ -17,7 +24,7 @@ main {
 	h5 a,
 	h6 a {
 		-webkit-backface-visibility: hidden;
-		font-family: "Roboto", sans-serif;
+		font-family: "LINESeedJP", "Arial", sans-serif;
 		font-weight: 700;
 	}
 
@@ -63,18 +70,24 @@ main {
 	}
 }
 
-.theme-main-content {
+.main-blocks {
 	.wp-block-table thead {
 		border-bottom: none;
 	}
 
+	.ez-toc-list ul li::before {
+		content: none;
+	}
+}
+
+.wp-block-post-content,
+.main-blocks {
 	ul,
 	ol {
 		padding-left: 32px;
 
 		li {
 			position: relative;
-			padding-left: 20px;
 			margin-bottom: 10px;
 		}
 	}
@@ -82,18 +95,46 @@ main {
 	ol {
 		list-style: decimal;
 	}
+}
 
-	ul:not(.ez-toc-list) li::before {
-		position: absolute;
-		top: 3px;
-		left: -13px;
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		content: "";
-	}
+main .block-title,
+.main-blocks h1,
+.main-blocks h2,
+.main-blocks ul:not(.ez-toc-list) li,
+.wp-block-post-content .block-title,
+.wp-block-post-content h1,
+.wp-block-post-content h2,
+.wp-block-post-content ul li {
+	display: flex;
+}
 
-	.ez-toc-list ul li::before {
-		content: none;
-	}
+main .block-title,
+.main-blocks h1,
+.main-blocks h2,
+.wp-block-post-content .block-title,
+.wp-block-post-content h1,
+.wp-block-post-content h2 {
+	align-items: center;
+}
+
+main .block-title::before,
+.main-blocks h1::before,
+.main-blocks h2::before,
+.main-blocks ul:not(.ez-toc-list) li::before,
+.wp-block-post-content .block-title::before,
+.wp-block-post-content h1::before,
+.wp-block-post-content h2::before,
+.wp-block-post-content ul li::before {
+	display: block;
+	width: 16px;
+	min-width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	margin-right: 8px;
+	content: "";
+}
+
+.main-blocks ul:not(.ez-toc-list) li::before,
+.wp-block-post-content ul li::before {
+	margin-top: 4px;
 }

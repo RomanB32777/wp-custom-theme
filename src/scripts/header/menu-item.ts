@@ -12,7 +12,7 @@ dropdownMenuItems.forEach((item) => {
 
 		const currentWindowWidth = window.innerWidth;
 
-		if (currentWindowWidth < baseBreakpoints.xl) {
+		if (currentWindowWidth < baseBreakpoints.md) {
 			dropdownArrow?.classList.toggle("rotate-180");
 
 			dropdownMenu?.classList.toggle("hidden");

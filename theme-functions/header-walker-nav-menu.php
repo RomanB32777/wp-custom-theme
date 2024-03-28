@@ -15,7 +15,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$indent        = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 			$display_depth = ( $depth + 1 ); // because it counts the first submenu as 0
 			$classes       = array(
-				'dropdown-menu mt-2 space-y-2 duration-200 hidden ring-gray-900/5 rounded-lg xl:opacity-0 xl:group-hover:opacity-100 xl:!block xl:invisible xl:group-hover:visible xl:!mt-0 xl:!space-y-0 xl:absolute xl:-left-2 xl:top-full xl:z-10 xl:w-max xl:max-w-md xl:overflow-hidden xl:shadow-lg xl:ring-1 xl:p-2',
+				'dropdown-menu mt-2 space-y-2 duration-200 hidden ring-gray-900/5 rounded-lg md:opacity-0 md:group-hover:opacity-100 md:!block md:invisible md:group-hover:visible md:!mt-0 md:!space-y-0 md:absolute md:-left-2 md:top-full md:z-10 md:w-max md:max-w-md md:overflow-hidden md:shadow-lg md:ring-1 md:p-2',
 				( $display_depth >= 2 ? 'sub-sub-menu' : '' ),
 				'menu-depth-' . $display_depth,
 			);
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes (<li>)
 			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item -mx-3 pt-2 xl:!m-0 xl:!py-1' : 'sub-menu-item font-roboto relative flex items-center gap-x-6 p-2 text-sm font-semibold xl:!font-bold' ),
+				( $depth === 0 ? 'main-menu-item -mx-3 pt-2 md:!m-0 md:!py-1' : 'sub-menu-item font-lineSeedJp relative flex items-center gap-x-6 p-2 text-base font-bold md:!font-normal' ),
 				( $depth >= 2 ? 'sub-sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 				$dropdown_classes[] = 'dropdown group relative';
 			} elseif ( $depth === 0 ) {
 				// without child elements - simple item
-				$dropdown_classes[] = 'font-roboto font-semibold -mx-3 pt-2 text-base xl:!py-1 xl:!m-0 xl:!text-sm xl:!font-bold';
+				$dropdown_classes[] = 'font-lineSeedJp font-bold -mx-3 pt-2 text-base md:!py-1 md:!m-0 md:!font-normal';
 			}
 			$dropdown_class_names = esc_attr( implode( ' ', $dropdown_classes ) );
 
@@ -62,10 +62,10 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
-			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 xl:!p-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 xl:!px-0 xl:!py-0 xl:!inline xl:!rounded-none';
+			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 md:!p-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 md:!px-0 md:!py-0 md:!inline md:!rounded-none';
 
 			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
-				$link_class_names = 'main-menu-link dropdown-toggle font-roboto w-full flex justify-between items-center gap-x-1 text-base font-semibold duration-200 pl-3 py-2 rounded-lg pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!py-0 xl:!rounded-none xl:!w-auto';
+				$link_class_names = 'main-menu-link dropdown-toggle font-lineSeedJp w-full flex justify-between items-center gap-x-1 text-base font-bold duration-200 pl-3 py-2 rounded-lg pr-3.5 md:!font-normal md:!pl-0 md:!pr-0 md:!py-0 md:!rounded-none md:!w-auto';
 			}
 
 			// link attributes
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			// dropdown arrow
 			$dropdown_arrow_html = '
 				<svg
-					class="dropdown-arrow h-5 w-5 flex-none duration-200 xl:group-hover:rotate-180"
+					class="dropdown-arrow h-5 w-5 flex-none duration-200 md:group-hover:rotate-180"
 					viewbox="0 0 20 20"
 					fill="currentColor"
 					aria-hidden="true"
