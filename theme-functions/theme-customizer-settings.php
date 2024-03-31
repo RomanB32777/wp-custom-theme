@@ -1443,6 +1443,7 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $primary_custom_light_color ) . ' !important;
 		}
 
+		.secondary-button,
 		.bullet-dot:hover,
 		.swiper-bullet.nav-active .bullet-dot {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
@@ -1476,6 +1477,9 @@ function theme_customizer_style_settings() {
 		.main-button,
 		.main-button a,
 		.main-button span,
+		.secondary-button,
+		.secondary-button a,
+		.secondary-button span,
 		.fixed-button,
 		.shortcode-link .image-content {
 			color: ' . esc_attr( $buttons_custom_content_color ) . ' !important;

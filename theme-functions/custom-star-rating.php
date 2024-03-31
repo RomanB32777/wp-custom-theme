@@ -38,7 +38,13 @@ function custom_star_rating( $args = array() ) {
 	$rating       = (float) str_replace( ',', '.', $parsed_args['rating'] );
 	$stars_number = $parsed_args['stars_number'];
 
-	$full_stars  = floor( $rating );
+	$full_stars = floor( $rating );
+
+	if ( $full_stars > $stars_number ) {
+		$full_stars = $stars_number;
+		$rating     = $stars_number;
+	}
+
 	$half_stars  = ceil( $rating - $full_stars );
 	$empty_stars = $stars_number - $full_stars - $half_stars;
 

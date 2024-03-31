@@ -55,7 +55,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 
 	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_classes, $comment ); ?> id="comment-<?php echo esc_attr( $comment_id ); ?>">
 
-		<?php if ( 'div' != $args['style'] ) { ?>
+		<?php if ( 'div' !== $args['style'] ) { ?>
 			<div id="div-comment-<?php echo esc_attr( $comment_id ); ?>" class="comment-wrapper relative border p-4 sm:!py-8 sm:!px-6">
 		<?php } ?>
 

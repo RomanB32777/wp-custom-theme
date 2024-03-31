@@ -46,18 +46,18 @@ function init_organizations() {
 
 	register_post_type( 'organization', $args );
 
-	/* --- Deposit Methods: Custom Taxonomy --- */
+	/* --- Payment Methods: Custom Taxonomy --- */
 
-	$organizations_deposit_method_title = esc_html__( 'Deposit Methods', 'custom-theme' );
-	if ( get_option( 'organizations_deposit_method_title' ) ) {
-		$organizations_deposit_method_title = get_option( 'organizations_deposit_method_title', 'Deposit Methods' );
+	$organizations_payment_method_title = esc_html__( 'Payment Methods', 'custom-theme' );
+	if ( get_option( 'organizations_payment_method_title' ) ) {
+		$organizations_payment_method_title = get_option( 'organizations_payment_method_title', 'Payment Methods' );
 	}
 
 	$labels = array(
-		'name'              => $organizations_deposit_method_title,
-		'singular_name'     => $organizations_deposit_method_title,
+		'name'              => $organizations_payment_method_title,
+		'singular_name'     => $organizations_payment_method_title,
 		'search_items'      => esc_html__( 'Find Taxonomy', 'custom-theme' ),
-		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $organizations_deposit_method_title,
+		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $organizations_payment_method_title,
 		'parent_item'       => esc_html__( 'Parent Taxonomy', 'custom-theme' ),
 		'parent_item_colon' => esc_html__( 'Parent Taxonomy:', 'custom-theme' ),
 		'edit_item'         => esc_html__( 'Edit Taxonomy', 'custom-theme' ),
@@ -65,7 +65,7 @@ function init_organizations() {
 		'update_item'       => esc_html__( 'Update Taxonomy', 'custom-theme' ),
 		'add_new_item'      => esc_html__( 'Add New Taxonomy', 'custom-theme' ),
 		'new_item_name'     => esc_html__( 'Taxonomy', 'custom-theme' ),
-		'menu_name'         => $organizations_deposit_method_title,
+		'menu_name'         => $organizations_payment_method_title,
 	); 
 
 	$args = array(
@@ -83,7 +83,7 @@ function init_organizations() {
 		'_builtin'              => false,
 	);
 
-	register_taxonomy( 'deposit-method', 'organization', $args );
+	register_taxonomy( 'payment-method', 'organization', $args );
 
 	/* --- Devices: Custom Taxonomy --- */
 
@@ -778,11 +778,11 @@ function organizations_save_fields( $post_id ) {
 
 /*  Organizations - Additional Fields End */
 
-/*  Add Deposit Methods logo Start  */
+/*  Add Payment Methods logo Start  */
 
 /* --- Add custom taxonomy field --- */
 
-function add_deposit_method_taxonomy_image( $taxonomy ) {
+function add_payment_method_taxonomy_image( $taxonomy ) {
 	?>
 <div class="form-field term-group">
 	<label for="taxonomy-image-id">
@@ -798,22 +798,22 @@ function add_deposit_method_taxonomy_image( $taxonomy ) {
 	<?php
 }
 
-add_action( 'deposit-method_add_form_fields', 'add_deposit_method_taxonomy_image', 10, 2 );
+add_action( 'payment-method_add_form_fields', 'add_payment_method_taxonomy_image', 10, 2 );
 
 /* --- Save the custom taxonomy field --- */
 
-function save_deposit_method_taxonomy_image( $term_id, $tt_id ) {
+function save_payment_method_taxonomy_image( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
 	}
 }
 
-add_action( 'created_deposit-method', 'save_deposit_method_taxonomy_image', 10, 2 );
+add_action( 'created_payment-method', 'save_payment_method_taxonomy_image', 10, 2 );
 
 /* --- Add custom taxonomy field for edit --- */
 
-function edit_deposit_method_image_upload( $term, $taxonomy ) {
+function edit_payment_method_image_upload( $term, $taxonomy ) {
 	?>
 <tr class="form-field term-group-wrap">
 	<th scope="row">
@@ -838,11 +838,11 @@ function edit_deposit_method_image_upload( $term, $taxonomy ) {
 	<?php
 }
 
-add_action( 'deposit-method_edit_form_fields', 'edit_deposit_method_image_upload', 10, 2 );
+add_action( 'payment-method_edit_form_fields', 'edit_payment_method_image_upload', 10, 2 );
 
 /* --- Save the edited value of the custom taxonomy field --- */
 
-function update_deposit_method_image_upload( $term_id, $tt_id ) {
+function update_payment_method_image_upload( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		update_term_meta( $term_id, 'taxonomy-image-id', $image );
@@ -851,9 +851,9 @@ function update_deposit_method_image_upload( $term_id, $tt_id ) {
 	}
 }
 
-add_action( 'edited_deposit-method', 'update_deposit_method_image_upload', 10, 2 );
+add_action( 'edited_payment-method', 'update_payment_method_image_upload', 10, 2 );
 
-/*  Add Deposit Methods logo End  */
+/*  Add Payment Methods logo End  */
 
 
 /*  Add Devices logo Start  */
