@@ -20,7 +20,6 @@ export function buildLoaders({ mode }: IBuildOptions): ModuleOptions["rules"] {
 		test: /\.css$/i,
 		use: [
 			MiniCssExtractPlugin.loader,
-
 			{
 				loader: "css-loader",
 				options: {

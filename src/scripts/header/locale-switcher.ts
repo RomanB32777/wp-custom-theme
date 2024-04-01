@@ -9,7 +9,6 @@ const createAndAppendMenuElement = (
 		const linkEl = document.createElement("a");
 
 		const listElClasses = [
-			"font-roboto",
 			"relative",
 			"flex",
 			"items-center",

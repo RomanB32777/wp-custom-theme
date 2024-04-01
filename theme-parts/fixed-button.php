@@ -12,7 +12,7 @@ if ( ! empty( $button_link ) && ! empty( $button_link['title'] ) ) {
 			title="<?php echo esc_attr( $button_link['title'] ); ?>" 
 			target="<?php echo esc_attr( $button_link['target'] ); ?>" 
 			rel="nofollow"
-			class="font-roboto font-bold text-3xl"
+			class="font-bold text-3xl"
 		>
 			<?php echo esc_html( $button_link['title'] ); ?>
 		</a>

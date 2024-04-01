@@ -31,7 +31,7 @@
 				></ul>
 			</div>
 			<button class="close-menu rounded-md text-white -m-2.5 p-2.5" type="button">
-				<span class="font-roboto sr-only">Close menu</span>
+				<span class="sr-only">Close menu</span>
 				<svg
 					class="h-6 w-6"
 					fill="none"

@@ -7,14 +7,19 @@ export default (env: TEnvVariables) => {
 	const envMode = env.mode;
 	const envPort = Number(env.port);
 
+	const srcPath = path.resolve(__dirname, "src");
+
 	return buildWebpack({
 		port: envPort || 5050,
 		mode: envMode ?? "production",
 		paths: {
 			output: path.resolve(__dirname, "dist"),
-			entry: path.resolve(__dirname, "src", "index.ts"),
-			src: path.resolve(__dirname, "src"),
-			pluginStyles: path.resolve(__dirname, "..", "wp-blocks", "build", "style.css"),
+			entry: {
+				main: path.resolve(srcPath, "index.ts"),
+				imageUploader: path.resolve(srcPath, "scripts", "image-uploader.ts"),
+				blocks: path.resolve(__dirname, "..", "wp-blocks", "build", "style.css"),
+			},
+			src: srcPath,
 		},
 	});
 };

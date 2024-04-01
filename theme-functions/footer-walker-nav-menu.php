@@ -32,7 +32,7 @@ if ( ! class_exists( 'Footer_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes
 			$custom_classes     = array(
-				'font-roboto text-sm font-bold',
+				'text-sm font-bold',
 			);
 			$custom_class_names = esc_attr( implode( ' ', $custom_classes ) );
 

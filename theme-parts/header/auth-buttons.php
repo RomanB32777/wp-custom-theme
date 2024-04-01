@@ -5,7 +5,7 @@
 	$sign_text = ! empty( get_theme_mod( 'header_sign_button_text' ) ) ? get_theme_mod( 'header_sign_button_text' ) : __( 'Sign Up', 'custom-theme' );
 	$sign_link = get_theme_mod( 'header_sign_button_url' ); 
 
-	$allowed_html = array(
+	$allowed_buttons_html = array(
 		'br'     => array(),
 		'em'     => array(),
 		'strong' => array(),
@@ -20,20 +20,20 @@
 			type="button"
 			aria-expanded="false"
 		>
-			<span class="font-roboto text-base xl:!text-sm font-bold">
-				<?php echo wp_kses( $login_text, $allowed_html ); ?>
+			<span class="text-base xl:!text-sm font-bold">
+				<?php echo wp_kses( $login_text, $allowed_buttons_html ); ?>
 			</span>
 		</button>
 	</a>
 
 	<a class="auth-btn no-underline" href="<?php echo esc_url( $sign_link ); ?>">
 		<button
-			class="main-button button-sign-up rounded-lg p-3"
+			class="secondary-button button-sign-up rounded-lg p-3"
 			type="button"
 			aria-expanded="false"
 		>
-			<span class="font-roboto text-base xl:!text-sm font-bold">
-				<?php echo wp_kses( $sign_text, $allowed_html ); ?>
+			<span class="text-base xl:!text-sm font-bold">
+				<?php echo wp_kses( $sign_text, $allowed_buttons_html ); ?>
 			</span>
 		</button>
 	</a>
