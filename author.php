@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="theme-main-content [&>*]:my-7">
+	<div class="main-content [&>*]:my-7">
 		<!-- Title Box Start -->
 	
 		<div class="flex flex-col gap-6 md:!gap-10 md:!flex-row">
@@ -14,7 +14,7 @@
 			<div class="basis-full">
 				<h1 class="mb-4"><?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></h1>
 				<?php if ( get_the_author_meta( 'description' ) ) { ?>
-					<p class="text-base text-grizzly-light md:!text-xl">
+					<p class="text-base md:!text-xl">
 						<?php echo esc_html( get_the_author_meta( 'description' ) ); ?>
 					</p>
 				<?php } ?>
@@ -42,7 +42,7 @@
 						?>
 
 						<div class="post-item">
-							<div class="text-xs text-grizzly-light">
+							<div class="text-xs">
 								<span>
 									<?php echo get_the_date(); ?>
 								</span>
@@ -52,7 +52,7 @@
 									<?php the_title(); ?>
 								</a>
 							</h5>
-							<p class="font-base text-grizzly-light">
+							<p class="font-base">
 								<?php echo esc_html( wp_trim_words( get_the_excerpt(), 48, ' ...' ) ); ?>
 							</p>
 						</div>

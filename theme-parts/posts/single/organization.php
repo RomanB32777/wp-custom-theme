@@ -17,21 +17,24 @@
 		'strong' => array(),
 		'span'   => array(
 			'class' => true,
+			'style' => true,
 		),
 		'div'    => array(
 			'class' => true,
+			'style' => true,
 		),
 		'p'      => array(),
 		'ul'     => array(),
 		'ol'     => array(),
 		'li'     => array(),
 	);
-
-	$short_desc     = get_post_meta( get_the_ID(), 'organization_short_desc', true );
-	$overall_rating = esc_html( get_post_meta( get_the_ID(), 'organization_overall_rating', true ) );
-	$external_link  = esc_url( get_post_meta( get_the_ID(), 'organization_external_link', true ) );
-	$button_title   = esc_html( get_post_meta( get_the_ID(), 'organization_button_title', true ) );
 	
+	$short_desc       = get_post_meta( get_the_ID(), 'organization_short_desc', true );
+	$external_link    = esc_url( get_post_meta( get_the_ID(), 'organization_external_link', true ) );
+	$button_title     = esc_html( get_post_meta( get_the_ID(), 'organization_button_title', true ) );
+	$bonus_value      = esc_html( get_post_meta( get_the_ID(), 'organization_bonus_value', true ) );
+	$promotional_code = esc_html( get_post_meta( get_the_ID(), 'organization_promotional_code', true ) );
+
 	$rating_trust    = esc_html( get_post_meta( get_the_ID(), 'organization_rating_trust', true ) );
 	$rating_games    = esc_html( get_post_meta( get_the_ID(), 'organization_rating_games', true ) );
 	$rating_bonus    = esc_html( get_post_meta( get_the_ID(), 'organization_rating_bonus', true ) );
@@ -41,17 +44,14 @@
 	$rating_coef     = esc_html( get_post_meta( get_the_ID(), 'organization_rating_coef', true ) );
 	$rating_payments = esc_html( get_post_meta( get_the_ID(), 'organization_rating_payments', true ) );
 	$rating_features = esc_html( get_post_meta( get_the_ID(), 'organization_rating_features', true ) );
+	$overall_rating  = esc_html( get_post_meta( get_the_ID(), 'organization_overall_rating', true ) );
 
-	$without_ratings = 
-		empty( $rating_trust ) && 
-		empty( $rating_games ) && 
-		empty( $rating_bonus ) && 
-		empty( $rating_customer ) && 
-		empty( $rating_pre ) &&
-		empty( $rating_live ) &&
-		empty( $rating_coef ) &&
-		empty( $rating_payments ) &&
-		empty( $rating_features );
+	$background_image_width  = 1920;
+	$background_image_height = 820;
+	$background_image_id     = esc_html( get_post_meta( get_the_ID(), 'organization_background_image', true ) );
+	$src_background_image    = wp_get_attachment_image_src( $background_image_id, 'full' );
+
+	$post_title_attr = the_title_attribute( 'echo=0' );
 
 	if ( empty( $button_title ) ) {
 		if ( get_option( 'organizations_play_now_title' ) ) {
@@ -61,487 +61,374 @@
 		}
 	}
 
+	if ( get_option( 'custom_rating_stars_number' ) ) {
+		$rating_stars_number_value = get_option( 'custom_rating_stars_number' );
+	} else {
+		$rating_stars_number_value = '5';
+	}
+
+	function custom_organization_meta_rating( $args ) {
+		$defaults = array(
+			'meta_rating'               => 0,
+			'default_title'             => '',
+			'rating_title_option_name'  => '',
+			'rating_stars_number_value' => '5',
+		);
+		
+		$parsed_args = wp_parse_args( $args, $defaults );
+
+		$meta_rating               = $parsed_args['meta_rating'];
+		$default_title             = $parsed_args['default_title'];
+		$rating_title_option_name  = $parsed_args['rating_title_option_name'];
+		$rating_stars_number_value = $parsed_args['rating_stars_number_value'];
+
+		if ( $meta_rating ) { ?>
+			<div class="rating-block w-full flex flex-wrap items-center gap-4 py-4 md:!py-8">
+				<p class="order-2 font-semibold text-lg md:!text-xl w-52 md:!order-1">
+					<?php 
+					$rating_title = get_option( $rating_title_option_name );
+
+					if ( $rating_title ) {
+						echo esc_html( $rating_title );
+					} else {
+						echo esc_html( $default_title );
+					} 
+					?>
+				</p>
+						
+				<div class="rating-line order-3 relative w-full rounded-xl bg-primary-light overflow-hidden h-6 md:flex-1 md:!order-2">
+					<div 
+						class="gradient-line absolute left-0 top-0 h-full rounded-xl bg-gradient-to-r from-primary-brightest to-primary"
+						style="width: <?php echo esc_attr( round( ( $meta_rating / $rating_stars_number_value ) * 100 ) ); ?>%;"
+					></div>
+				</div>
+
+				<div class="order-1 font-semibold text-lg md:!text-xl md:!order-3">
+					<?php echo esc_html( number_format( (float) $meta_rating, 0 ) . '/' . number_format( (float) $rating_stars_number_value, 0 ) ); ?>
+				</div>
+
+			</div>
+			<?php 
+		} 
+	}
+
+
 	?>
 
-<main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<main class="pt-20 pb-10">
 
-	<div class="divide-y divide-primary">
+	<!-- Organization Header Start -->
 
-		<!-- Organization Header Start -->
+	<div class="relative pb-20 lg:!pb-40 lg:pt-20">
+		<div class="absolute inset-0 aspect-h-1 aspect-w-1 w-full h-full overflow-hidden bg-dark lg:aspect-none">
+			<?php if ( ! empty( $src_background_image ) ) { ?>
+				<img
+					class="h-full w-full object-cover object-right lg:!object-center"
+					src=<?php echo esc_url( $src_background_image[0] ); ?>
+					alt="<?php echo esc_attr( $post_title_attr ); ?>"
+					width="<?php echo esc_attr( $background_image_width ); ?>"
+					height="<?php echo esc_attr( $background_image_height ); ?>"
+				/>
+			<?php } ?>
+		</div>
 
-		<div class="py-12 flex flex-col justify-between items-center gap-10 lg:!flex-row">
-			<div class="relative aspect-h-1 aspect-w-1 bg-gray-200 w-32 h-32 lg:aspect-none">
-				<?php
-					$post_title_attr = the_title_attribute( 'echo=0' );
-		
-				if ( wp_get_attachment_image( get_post_thumbnail_id() ) ) {
-					echo wp_get_attachment_image(
-						get_post_thumbnail_id(),
-						array( 128, 128 ),
-						'',
-						array(
-							'class' => 'h-full w-full object-cover object-center',
-							'alt'   => $post_title_attr,
-						) 
-					);
-				} 
-				?>
-		
-				<div class="absolute -right-4 -top-4 flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-					<span class="font-bold text-base">
-						<?php echo esc_html( number_format( (float) $overall_rating, 1, '.', ',' ) ); ?>
-					</span>
-					<div class="star active">
-						<svg
-							width="16"
-							height="16"
-							viewbox="0 0 12 12"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-								fill="currentColor"
-							></path>
-						</svg>
-					</div>
-				</div>
+		<div class="relative flex flex-col gap-y-6 gap-x-10 mx-auto max-w-7xl px-4 sm:px-6 lg:!flex-row lg:px-8">
+			<div class="text-grizzly text-lg mb-14 lg:hidden">
+				<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
 			</div>
-	
-			<div class="flex-1 text-center lg:!text-left">
-				<!-- Title Start -->
-			
-				<h1 class="font-bold text-4xl">
+
+			<div class="flex-1 order-2 lg:!order-1">
+				<div class="hidden mb-4 text-grizzly text-lg lg:!block">
+					<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
+				</div>
+				
+				<h1 class="font-semibold text-white text-3xl mb-3 lg:!text-5xl lg:!mb-4">
 					<?php the_title(); ?>
 				</h1>
-			
-				<!-- Title End -->
-			
+	
+				<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
+					<div class="flex items-center gap-x-2 mb-8 lg:!mb-6">
+						<?php
+							custom_star_rating(
+								array(
+									'rating'          => $overall_rating,
+									'wrapper_classes' => 'gap-x-2',
+									'star_classes'    => 'w-6 h-6',
+								)
+							);
+						?>
+						<span class="text-base text-white font-medium lg:!text-xl">
+							<?php echo esc_html( number_format( round( $overall_rating, 1 ), 1, '.', ',' ) ); ?>
+						</span>
+					</div>
+				<?php } ?>
+	
 				<?php if ( $short_desc ) { ?>
-			
-					<!-- Short Description of the organization Start -->
-			
-					<div class="text-base text-grizzly-light mt-4">
+					<div class="text-base text-grizzly mb-6 lg:!text-xl">
 						<?php echo wp_kses( $short_desc, $organization_single_allowed_html ); ?>
 					</div>
-			
-					<!-- Short Description of the organization End -->
-			
 				<?php } ?>
-								
-			</div>
-	
-			<?php if ( $external_link ) { ?>
 
-				<!-- Button Start -->
-				
-				<div>
+				<?php if ( $bonus_value || $promotional_code ) { ?>
+					<div class="flex flex-col items-center gap-y-4 gap-x-5 mb-8 lg:!flex-row">
+						<?php if ( $promotional_code ) { ?>
+							<div 
+								class="bonus-border copy-button group duration-200 self-stretch bg-dark-opacity flex flex-1 items-center justify-between gap-3 p-4 rounded-xl cursor-pointer lg:!p-5"
+								data-copy-text="<?php echo esc_attr( $promotional_code ); ?>"
+							>
+								<div class="flex items-center gap-3 md:!gap-5">
+									<div class="bg-white rounded-full w-11 h-11 min-w-11 flex items-center justify-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+											<mask 
+												id="mask0_44_14348" 
+												style="mask-type:luminance"
+												maskUnits="userSpaceOnUse" 
+												x="6" 
+												y="6" 
+												width="18" 
+												height="18"
+											>
+												<path 
+													fill-rule="evenodd" 
+													clip-rule="evenodd"
+													d="M22 6H8C6.9 6 6 6.9 6 8V22C6 23.1 6.9 24 8 24H22C23.1 24 24 23.1 24 22V8C24 6.9 23.1 6 22 6ZM10.5 21C9.67 21 9 20.33 9 19.5C9 18.67 9.67 18 10.5 18C11.33 18 12 18.67 12 19.5C12 20.33 11.33 21 10.5 21ZM10.5 12C9.67 12 9 11.33 9 10.5C9 9.67 9.67 9 10.5 9C11.33 9 12 9.67 12 10.5C12 11.33 11.33 12 10.5 12ZM15 16.5C14.17 16.5 13.5 15.83 13.5 15C13.5 14.17 14.17 13.5 15 13.5C15.83 13.5 16.5 14.17 16.5 15C16.5 15.83 15.83 16.5 15 16.5ZM19.5 21C18.67 21 18 20.33 18 19.5C18 18.67 18.67 18 19.5 18C20.33 18 21 18.67 21 19.5C21 20.33 20.33 21 19.5 21ZM19.5 12C18.67 12 18 11.33 18 10.5C18 9.67 18.67 9 19.5 9C20.33 9 21 9.67 21 10.5C21 11.33 20.33 12 19.5 12Z" 
+													fill="white"
+												/>
+											</mask>
+											<g mask="url(#mask0_44_14348)">
+												<rect x="2" y="2" width="26" height="26" fill="black"/>
+											</g>
+										</svg>
+									</div>
+
+									<span class="font-semibold text-xl text-white lg:!text-2xl">
+										<?php echo esc_html( $promotional_code ); ?>
+									</span>
+								</div>
+
+								<div class="main-link flex-none text-lg font-medium uppercase relative">
+									<div class="flex items-center gap-2 duration-200 group-[.active]:!hidden">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+											<path 
+												d="M5.83366 5.83334V2.50001C5.83366 2.27899 5.92146 2.06703 6.07774 1.91075C6.23402 1.75447 6.44598 1.66667 6.66699 1.66667H17.5003C17.7213 1.66667 17.9333 1.75447 18.0896 1.91075C18.2459 2.06703 18.3337 2.27899 18.3337 2.50001V13.3333C18.3337 13.5544 18.2459 13.7663 18.0896 13.9226C17.9333 14.0789 17.7213 14.1667 17.5003 14.1667H14.167V17.4942C14.167 17.9575 13.7928 18.3333 13.3278 18.3333H2.50616C2.39593 18.3334 2.28676 18.3118 2.18489 18.2697C2.08303 18.2276 1.99048 18.1657 1.91253 18.0878C1.83459 18.0099 1.77278 17.9173 1.73065 17.8154C1.68851 17.7136 1.66688 17.6044 1.66699 17.4942L1.66949 6.67251C1.66949 6.20917 2.04366 5.83334 2.50866 5.83334H5.83366ZM7.50033 5.83334H13.3278C13.7912 5.83334 14.167 6.20751 14.167 6.67251V12.5H16.667V3.33334H7.50033V5.83334ZM3.33616 7.50001L3.33366 16.6667H12.5003V7.50001H3.33616Z" 
+												fill="currentColor"
+											/>
+										</svg>
+
+										<span>
+											<?php esc_html_e( 'copy', 'custom-theme' ); ?>
+										</span>
+									</div>
+
+									<?php if ( $external_link ) { ?>
+										<a 
+											href="<?php echo esc_url( $external_link ); ?>" 
+											title="<?php echo esc_attr( $button_title ); ?>" 
+											class="hidden no-underline items-center gap-2 duration-200 group-[.active]:flex" 
+											rel="nofollow" 
+											target="_blank"
+										>
+											<span>
+												<?php esc_html_e( 'visit site', 'custom-theme' ); ?>
+											</span>
+
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+												<path 
+													d="M10 16L20 8L10 0V5C4.477 5 0 9.477 0 15C0 15.273 0.0100002 15.543 0.0319996 15.81C1.54 12.95 4.542 11 8 11H10V16Z" 
+													fill="currentColor"
+												/>
+											</svg>
+										</a>
+									<?php } ?>
+								</div>
+							</div>
+						<?php } ?>
+		
+						<?php if ( $bonus_value ) { ?>
+							<div class="bonus-border flex flex-col items-center self-stretch bg-dark-opacity p-4 rounded-xl lg:!p-5">
+								<p class="text-base text-white uppercase">
+									<?php esc_html_e( 'bonus', 'custom-theme' ); ?>
+								</p>
+								<p class="text-2xl text-yellow">
+									<?php echo esc_html( $bonus_value ); ?>
+								</p>
+							</div>
+						<?php } ?>
+					</div>
+				<?php } ?>
+	
+				<?php if ( $external_link ) { ?>
 					<a 
 						href="<?php echo esc_url( $external_link ); ?>" 
 						title="<?php echo esc_attr( $button_title ); ?>" 
-						class="main-button text-xl text-center py-4 px-10 no-underline" 
+						class="main-button inline-block w-full py-5 px-16 rounded-xl text-xl text-center font-bold no-underline lg:!w-auto" 
 						rel="nofollow" 
 						target="_blank"
 					>
 						<?php echo esc_html( $button_title ); ?> 
 					</a>
-				</div>
-					
-				<!-- Button End -->
+				<?php } ?>
+			</div>
 
-			<?php } ?>
-		</div>
-
-		<!-- Organization Header End -->
-
-		<!-- Ratings Block Start -->
-
-		<div class="flex flex-col max-w-4xl mx-auto gap-y-6 py-10 md:justify-around md:!flex-row md:items-center">
-
-			<?php if ( ! boolval( $without_ratings ) ) { ?>
-				
-				<div class="order-2 flex flex-wrap justify-between gap-y-3 md:!order-2 md:w-3/4">
-
-					<?php if ( $rating_trust ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_trust, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_1_title = get_option( 'rating_1' ); ?>
-									
-								<?php
-								if ( $rating_1_title ) {
-									echo esc_html( $rating_1_title );
-								} else {
-									esc_html_e( 'Trust & Fairness', 'custom-theme' );
-								} 
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_games ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_games, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_2_title = get_option( 'rating_2' ); ?>
-									
-								<?php
-								if ( $rating_2_title ) {
-									echo esc_html( $rating_2_title );
-								} else {
-									esc_html_e( 'Games & Software', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_bonus ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_bonus, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_3_title = get_option( 'rating_3' ); ?>
-									
-								<?php
-								if ( $rating_3_title ) {
-									echo esc_html( $rating_3_title );
-								} else {
-									esc_html_e( 'Bonuses & Promotions', 'custom-theme' );
-								} 
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_customer ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_customer, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_4_title = get_option( 'rating_4' ); ?>
-									
-								<?php
-								if ( $rating_4_title ) {
-									echo esc_html( $rating_4_title );
-								} else {
-									esc_html_e( 'Customer Support', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_pre ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_pre, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_5_title = get_option( 'rating_5' ); ?>
-									
-								<?php
-								if ( $rating_5_title ) {
-									echo esc_html( $rating_5_title );
-								} else {
-									esc_html_e( 'Pre', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_live ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_live, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_6_title = get_option( 'rating_6' ); ?>
-									
-								<?php
-								if ( $rating_6_title ) {
-									echo esc_html( $rating_6_title );
-								} else {
-									esc_html_e( 'Live', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_coef ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_coef, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_7_title = get_option( 'rating_7' ); ?>
-									
-								<?php
-								if ( $rating_7_title ) {
-									echo esc_html( $rating_7_title );
-								} else {
-									esc_html_e( 'Coefficients', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_payments ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_payments, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_8_title = get_option( 'rating_8' ); ?>
-									
-								<?php
-								if ( $rating_8_title ) {
-									echo esc_html( $rating_8_title );
-								} else {
-									esc_html_e( 'Convenience of payments', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-
-					<?php if ( $rating_features ) { ?>
-						<div class="w-full flex items-center gap-4 sm:!w-[45%]">
-							<div class="flex items-center gap-1 py-1 px-2 bg-white rounded-2xl shadow">
-								<span class="font-bold text-base">
-									<?php echo esc_html( number_format( (float) $rating_features, 1, '.', ',' ) ); ?>
-								</span>
-								<div class="star active">
-									<svg
-										width="16"
-										height="16"
-										viewbox="0 0 12 12"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M5.30345 0.963523C5.45313 0.502869 6.10483 0.502872 6.25451 0.963528L7.15601 3.7381C7.22294 3.94411 7.41492 4.08359 7.63154 4.08359H10.5489C11.0333 4.08359 11.2347 4.7034 10.8428 4.9881L8.48262 6.70288C8.30737 6.8302 8.23405 7.05588 8.30098 7.26189L9.20249 10.0365C9.35216 10.4971 8.82492 10.8802 8.43307 10.5955L6.07287 8.88071C5.89763 8.75339 5.66033 8.75339 5.48509 8.88071L3.12487 10.5955C2.73302 10.8802 2.20578 10.4971 2.35545 10.0365L3.25698 7.2619C3.32392 7.05588 3.25059 6.8302 3.07535 6.70288L0.715164 4.9881C0.323307 4.7034 0.524694 4.08359 1.00906 4.08359H3.92639C4.14301 4.08359 4.33498 3.94412 4.40192 3.7381L5.30345 0.963523Z"
-											fill="currentColor"
-										></path>
-									</svg>
-								</div>
-							</div>
-		
-							<p class="text-base">
-								<?php $rating_9_title = get_option( 'rating_9' ); ?>
-									
-								<?php
-								if ( $rating_9_title ) {
-									echo esc_html( $rating_9_title );
-								} else {
-									esc_html_e( 'Interface/Features', 'custom-theme' );
-								}  
-								?>
-							</p>
-						</div>
-					<?php } ?>
-				</div>
-
-			<?php } ?>
-			<div class="order-1 text-center md:!order-2">
-				<p class="text-5xl font-bold">
-					<?php echo esc_html( number_format( (float) $overall_rating, 1, '.', ',' ) ); ?>
-				</p>
-				<p class="text-base">
+			<div class="order-1 lg:!order-2 lg:!flex-1">
+				<div class="h-full flex items-center lg:!justify-center">
 					<?php
-					$rating_overall_title = get_option( 'rating_overall' );
-
-					if ( $rating_overall_title ) {
-						echo esc_html( $rating_overall_title );
-					} else {
-						esc_html_e( 'Overall Rating', 'custom-theme' );
+			
+					if ( wp_get_attachment_image( get_post_thumbnail_id() ) ) {
+						echo wp_get_attachment_image(
+							get_post_thumbnail_id(),
+							array( 512, 200 ),
+							'',
+							array(
+								'class' => 'h-full w-auto max-w-28 max-h-48 object-cover object-center lg:!max-w-none',
+								'alt'   => $post_title_attr,
+							) 
+						);
 					} 
 					?>
-				</p>
+				</div>
 			</div>
 		</div>
-
-		<!-- Ratings Block End -->
-
 	</div>
 
+	<!-- Organization Header End -->
 
-	<div class="theme-main-content [&>*]:my-7">
-		<?php 
-		if ( have_posts() ) :
-			while ( have_posts() ) :
-				the_post();
-				the_content();
-			endwhile;
-		endif; 
-		?>
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="main-blocks [&>*]:my-7 [&>*]:md:!my-14">
+			<!-- Ratings Block Start -->
+		
+			<div class="bg-white rounded-xl px-4 md:!px-8 md:!rounded-3xl">
+				<?php if ( is_numeric( $overall_rating ) ) { ?>
+					<div class="divide-y">
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_trust,
+								'rating_title_option_name' => 'rating_1',
+								'default_title'            => 'Trust & Fairness',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_games,
+								'rating_title_option_name' => 'rating_2',
+								'default_title'            => 'Games & Software',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_bonus,
+								'rating_title_option_name' => 'rating_3',
+								'default_title'            => 'Bonuses & Promotions',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_customer,
+								'rating_title_option_name' => 'rating_4',
+								'default_title'            => 'Customer Support',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_pre,
+								'rating_title_option_name' => 'rating_5',
+								'default_title'            => 'Pre',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_live,
+								'rating_title_option_name' => 'rating_6',
+								'default_title'            => 'Live',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_coef,
+								'rating_title_option_name' => 'rating_7',
+								'default_title'            => 'Coefficients',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_payments,
+								'rating_title_option_name' => 'rating_8',
+								'default_title'            => 'Convenience of payments',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+						<?php 
+						custom_organization_meta_rating(
+							array(
+								'meta_rating'              => $rating_features,
+								'rating_title_option_name' => 'rating_9',
+								'default_title'            => 'Interface/Features',
+								'rating_stars_number_value' => $rating_stars_number_value,
+							) 
+						); 
+						?>
+					</div>
+				
+				<?php } ?>
+			</div>
+		
+			<!-- Ratings Block End -->
+	
+			<?php 
+			if ( have_posts() ) :
+				while ( have_posts() ) :
+					the_post();
+					the_content();
+				endwhile;
+			endif; 
+			?>
+		</div>
+	
+		<div class="[&>*]:my-7 [&>*]:md:!my-14">
+	
+			<!-- Author Info Start -->
+	
+			<?php
+				get_template_part( '/theme-parts/author-info' );
+				get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40 );
+			?>
+	
+			<!-- Author Info End -->
+	
+			<!-- Comments Start -->
+	
+			<?php
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
+			?>
+	
+			<!-- Comments End -->
+	
+		</div>
 	</div>
-
-	<div class="[&>*]:my-7">
-
-		<!-- Author Info Start -->
-
-		<?php
-			get_template_part( '/theme-parts/author-info' );
-			get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40, false );
-		?>
-
-		<!-- Author Info End -->
-
-		<!-- Comments Start -->
-
-		<?php
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-		?>
-
-		<!-- Comments End -->
-
-	</div>
+	
 </main>

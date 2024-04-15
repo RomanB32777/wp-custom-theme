@@ -18,6 +18,7 @@ export default (env: TEnvVariables) => {
 				main: path.resolve(srcPath, "index.ts"),
 				imageUploader: path.resolve(srcPath, "scripts", "image-uploader.ts"),
 				blocks: path.resolve(__dirname, "..", "wp-blocks", "build", "style.css"),
+				shortcodes: path.resolve(__dirname, "..", "wp-shortcodes", "dist", "css", "main.css"),
 			},
 			src: srcPath,
 		},

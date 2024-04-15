@@ -3,7 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
+main,
+.wp-block-post-content {
 	h1,
 	h2,
 	h3,
@@ -17,20 +18,20 @@ main {
 	h5 a,
 	h6 a {
 		-webkit-backface-visibility: hidden;
-		font-family: "Roboto", "Arial", sans-serif;
+		font-family: "Inter", "Arial", sans-serif;
 		font-weight: 700;
 	}
 
 	h1,
 	h1 a {
-		font-size: 3.157em;
-		line-height: 1.2em;
+		font-size: 3rem; /* 48px */
+		line-height: 1;
 	}
 
 	h2,
 	h2 a {
-		font-size: 2.369em;
-		line-height: 1.2em;
+		font-size: 2.25rem; /* 36px */
+		line-height: 2.5rem; /* 40px */
 	}
 
 	h3,
@@ -63,18 +64,43 @@ main {
 	}
 }
 
-.theme-main-content {
+.main-blocks {
+	h2 {
+		position: relative;
+		z-index: 1;
+
+		&::before {
+			position: absolute;
+			z-index: -10;
+			width: 180px;
+			height: 60px;
+			border-radius: 50px 4px;
+			margin: auto;
+			content: "";
+			inset: 0;
+			transform: skewY(-6deg);
+		}
+	}
+
 	.wp-block-table thead {
 		border-bottom: none;
 	}
 
+	div#ez-toc-container {
+		padding: 16px 24px;
+		border: none;
+		border-radius: 12px;
+	}
+}
+
+.wp-block-post-content,
+.main-blocks {
 	ul,
 	ol {
 		padding-left: 32px;
 
 		li {
 			position: relative;
-			padding-left: 20px;
 			margin-bottom: 10px;
 		}
 	}
@@ -82,18 +108,53 @@ main {
 	ol {
 		list-style: decimal;
 	}
+}
 
-	ul:not(.ez-toc-list) li::before {
-		position: absolute;
-		top: 3px;
-		left: -13px;
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		content: "";
-	}
+.main-blocks ul:not([class*="ez-toc-list"]) li,
+.wp-block-post-content ul li {
+	display: flex;
+}
 
-	.ez-toc-list ul li::before {
-		content: none;
+.main-blocks ul:not([class*="ez-toc-list"]) li::before,
+.wp-block-post-content ul li::before {
+	display: block;
+	width: 8px;
+	min-width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	margin-top: 12px;
+	margin-right: 8px;
+	content: "";
+}
+
+.bonus-border {
+	background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='white' stroke-width='1' stroke-dasharray='10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
+@media (width <= 768px) {
+	main,
+	.wp-block-post-content {
+		h1,
+		h1 a,
+		h2,
+		h2 a {
+			font-size: 1.5rem; /* 24px */
+			line-height: 2rem; /* 32px */
+		}
+
+		h2 {
+			margin-top: 3.5rem !important; /* 56px */
+			margin-bottom: 3.5rem !important; /* 56px */
+		}
+
+		div#ez-toc-container {
+			width: 100%;
+		}
 	}
+}
+
+// We need to have a .editor-style-wrapper or .wp-block selector inside the css file so
+// the file will be enqueued inside the iframe - fucking wordpress
+.wp-block {
+	opacity: 1;
 }

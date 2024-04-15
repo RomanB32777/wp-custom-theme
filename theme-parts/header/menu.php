@@ -62,9 +62,5 @@
 				</ul>
 			</div>
 		</div>
-		<div class="hidden xl:!flex xl:flex-1 xl:justify-end">
-			<!-- Auth buttons -->
-			<?php get_template_part( 'theme-parts/header/auth-buttons' ); ?>
-		</div>
 	</div>
 </nav>

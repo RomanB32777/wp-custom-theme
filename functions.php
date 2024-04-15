@@ -63,7 +63,7 @@ function enqueue_time_versioned_style( $handle, $src = '', $deps = array(), $med
 }
 
 function fonts_theme() {
-	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap', array(), null );
+	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap', array(), null );
 }
 add_action( 'wp_enqueue_scripts', 'fonts_theme' );
 add_action( 'enqueue_block_editor_assets', 'fonts_theme' );
@@ -76,10 +76,10 @@ add_action( 'wp_enqueue_scripts', 'style_theme' );
 add_action( 'enqueue_block_editor_assets', 'style_theme' );
 
 function style_loader_tag_filter_preload( $tag, $handle, $href ) {
-	if ( 'googlefonts' === $handle ) {      
-		$new_tag = str_replace( 'text/css', 'font/woff2', $tag );
+	if ( 'googlefonts' === $handle ) {
+		$noscript = '<noscript><link rel="stylesheet" href="' . $href . '"></noscript>';
 
-		return str_replace( "rel='stylesheet'", "rel='preload' as='font' crossorigin='anonymous'", $new_tag );
+		return str_replace( "media='all'", "media='print' onload='this.onload=null;this.media=" . '"all"' . "'", $tag ) . $noscript;
 	}
 
 	if ( 'wp-block-library' === $handle ) {
@@ -198,7 +198,6 @@ function show_all_comment_fields( $fields ) {
 		$first_field = reset( $comment_field_keys );
 		$last_field  = end( $comment_field_keys );
 
-
 		foreach ( $fields as $name => $field ) {
 			if ( 'comment' === $name ) {
 				echo apply_filters( 'comment_form_field_comment', $field );
@@ -281,19 +280,20 @@ function comment_meta_box_age( $comment ) {
 }
 
 add_filter( 'comment_form_defaults', 'add_comment_field' );
-function add_comment_field( $default ) {
+function add_comment_field( $comment_fields ) {
 
-	$default['fields']['rating'] = '<p class="comment-form-rating"><label for="rating">rating</label><input id="rating" name="rating" size="30" type="text" /></p>';
+	$comment_fields['fields']['rating'] = '<p class="comment-form-rating"><label for="rating">rating</label><input id="rating" name="rating" size="30" type="text" /></p>';
 
-	$default['fields']['is-get-auth-data'] = '<p class="comment-form-is-get-auth-data"><label for="is-get-auth-data">is-get-auth-data</label><input id="is-get-auth-data" name="is-get-auth-data" size="30" type="text" /></p>';
+	$comment_fields['fields']['is-get-auth-data'] = '<p class="comment-form-is-get-auth-data"><label for="is-get-auth-data">is-get-auth-data</label><input id="is-get-auth-data" name="is-get-auth-data" size="30" type="text" /></p>';
 
-	return $default;
+	return $comment_fields;
 }
 
 require_once __DIR__ . '/theme-functions/custom-comment-items.php';
 
 // ajax comment
 require_once __DIR__ . '/theme-functions/wp-handle-comment-ajax.php';
+require_once __DIR__ . '/theme-functions/wp-pagination-comment-ajax.php';
 
 add_action( 'wp_ajax_sendcomment', 'ajax_send_comment' );
 add_action( 'wp_ajax_nopriv_sendcomment', 'ajax_send_comment' );
@@ -343,8 +343,8 @@ add_action( 'widgets_init', 'theme_widgets_init' );
 function theme_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Footer', 'custom-theme' ),
-			'id'            => 'footer-widgets',
+			'name'          => esc_html__( 'Social widgets', 'custom-theme' ),
+			'id'            => 'social-widgets',
 			'description'   => esc_html__( 'For text and images only.', 'custom-theme' ),
 			'before_widget' => '<div id="%1$s" class="%2$s">',
 			'after_widget'  => '</div>',
@@ -380,3 +380,97 @@ function set_approver_on_transition_only( $new_status, $old_status, $post ) {
 
 	wp_set_post_terms( $post->ID, $user->ID, 'approver' );
 }
+
+
+function add_user_custom_contact_method( $method ) {
+	$custom_contact = array(
+		'facebook' => __( 'Facebook' ),
+		'linkedin' => __( 'LinkedIn' ),
+	);
+
+	$method = array_merge( $method, $custom_contact );
+
+	return $method;
+}
+	
+add_filter( 'user_contactmethods', 'add_user_custom_contact_method' );
+
+function custom_user_profile_form( WP_User $user ) {
+	if ( get_option( 'custom_rating_stars_number' ) ) {
+		$rating_stars_number_value = get_option( 'custom_rating_stars_number' );
+	} else {
+		$rating_stars_number_value = '5';
+	}
+
+	$user_position = get_user_meta( $user->ID, 'position', true );
+	$user_rating   = get_user_meta( $user->ID, 'rating', true );
+ 
+	?>
+		<style type="text/css">			
+			.rating-wrap label {
+				padding-right: 12px;
+			}
+
+			.rating-wrap label:last-child {
+				padding-right: 0;
+			}
+
+			.rating-wrap label input[type=radio] {
+				margin-right: 0 !important;
+			}
+		</style>
+
+		<h2><?php esc_html_e( 'Custom settings', 'custom-theme' ); ?></h2>
+		<table class="form-table">
+			<tbody>
+				<tr class="acf-field acf-field-text" data-name="position" data-type="text">
+					<td class="acf-label">
+						<label for="user_position">
+							<?php esc_html_e( 'Position', 'custom-theme' ); ?>
+						</label>
+					</td>
+					<td class="acf-input">
+						<div class="acf-input-wrap">
+							<input
+								type="text"
+								value="<?php echo esc_attr( $user_position ); ?>"
+								name="user_position"
+								id="user_position"
+							>
+						</div>			
+					</td>
+				</tr>
+				<tr class="acf-field acf-field-text" data-name="rating" data-type="text">
+					<td class="acf-label">
+						<label for="user_rating">
+							<?php esc_html_e( 'User rating', 'custom-theme' ); ?>
+						</label>
+					</td>
+					<td class="acf-input">
+						<div class="rating-wrap">
+							<?php for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) { ?>
+								<label>
+									<input type="radio" name="user_rating" value="<?php esc_attr_e( $i ); ?>" <?php checked( $user_rating, $i ); ?>>
+									<?php esc_attr_e( $i ); ?>
+								</label>
+							<?php } ?>
+						</div>			
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	<?php
+}
+add_action( 'show_user_profile', 'custom_user_profile_form' ); 
+add_action( 'edit_user_profile', 'custom_user_profile_form' ); 
+	
+function custom_user_profile_save( $user_id ) {
+	if ( ! current_user_can( 'edit_user', $user_id ) ) {
+		return;
+	}
+	
+	update_user_meta( $user_id, 'position', $_REQUEST['user_position'] );
+	update_user_meta( $user_id, 'rating', $_REQUEST['user_rating'] );
+}
+add_action( 'personal_options_update', 'custom_user_profile_save' );
+add_action( 'edit_user_profile_update', 'custom_user_profile_save' );

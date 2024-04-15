@@ -75,6 +75,7 @@ jQuery(document).ready(function ($) {
 		ratingStars = $(".comment-star"),
 		commentListSelector = ".comment-list",
 		loadButtonSelector = "#load-comments",
+		commentCountSelector = "#comments-count",
 		allPageAttrName = "data-comment-all-count",
 		currentPageAttrName = "data-comment-current-count";
 
@@ -145,6 +146,7 @@ jQuery(document).ready(function ($) {
 			},
 			success(response: string) {
 				const commentList = $(commentListSelector);
+				const commentsCountEl = $(commentCountSelector);
 
 				// if this post already has comments
 				if (commentList.length) {
@@ -184,6 +186,14 @@ jQuery(document).ready(function ($) {
 					loadButton.attr(currentPageAttrName, newCurrentCount);
 				}
 
+				if (commentsCountEl) {
+					const commentsCountDataAttr = "data-comments-count";
+					const newCommentsCount = (Number(commentsCountEl.attr(commentsCountDataAttr)) || 0) + 1;
+
+					commentsCountEl.text(`${newCommentsCount} comments`);
+					commentsCountEl.attr(commentsCountDataAttr, newCommentsCount);
+				}
+
 				cancelReplyLink.trigger("click");
 
 				// clear fields
@@ -206,5 +216,51 @@ jQuery(document).ready(function ($) {
 		});
 
 		return false;
+	});
+
+	const loadButton = $(loadButtonSelector);
+	const commentList = $(commentListSelector);
+
+	loadButton?.on("click", function () {
+		const postId = $(this).attr("data-post-id");
+		const perPage = $(this).attr("data-comment-per-page") || 5;
+		const allCount = $(this).attr("data-comment-all-count") || 0;
+		const currentCount = $(this).attr(currentPageAttrName) || commentList.children().length;
+
+		if (!postId) {
+			return;
+		}
+
+		$.ajax({
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			url: ajax_data.ajax_url,
+			type: "post",
+			data: {
+				action: "load_comments",
+				"post-id": postId,
+				"per-page": perPage,
+				"current-count": currentCount,
+			},
+			beforeSend() {
+				changeLoadButtonState(loadButton);
+			},
+			success(response: string) {
+				if (response) {
+					commentList.append(response);
+				}
+			},
+			complete() {
+				const currentCommentCount = commentList.children().length;
+
+				if (currentCommentCount < allCount) {
+					loadButton.attr(currentPageAttrName, currentCommentCount);
+				} else {
+					loadButton.parent().toggleClass("hidden");
+				}
+
+				changeLoadButtonState(loadButton);
+			},
+		});
 	});
 });

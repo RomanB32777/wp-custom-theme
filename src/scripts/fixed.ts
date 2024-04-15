@@ -1,5 +1,3 @@
-import { baseBreakpoints } from "./constants";
-
 const throttle = (func: (...args: unknown[]) => void, timeout: number) => {
 	let ready: boolean = true;
 
@@ -17,17 +15,37 @@ const throttle = (func: (...args: unknown[]) => void, timeout: number) => {
 
 const showOnPx = 100;
 const invisibleClasses = ["invisible", "opacity-0"];
+const sessionHiddenButtonKey = "hidden-fixed-button";
 
 const backToTopButton = document.querySelector<HTMLButtonElement>("#back-to-top");
 const fixedButton = document.querySelector<HTMLDivElement>("#fixed-button");
+const closeFixedButton = fixedButton?.querySelector<HTMLButtonElement>("#close-fixed-button");
 
 const getScrollContainer = () => document.documentElement || document.body;
 
-const handleVisibleFixedButton = (isVisible: boolean) => {
+const handleVisibleFixedButton = (isVisible = false) => {
 	if (isVisible) {
 		fixedButton?.classList.remove(...invisibleClasses);
 	} else {
 		fixedButton?.classList.add(...invisibleClasses);
+	}
+};
+
+const getIsSessionVisibleButton = () => !sessionStorage.getItem(sessionHiddenButtonKey);
+
+const setBottomPositionForBackToTopButton = (isVisibleFixedButton = false) => {
+	if (!backToTopButton) {
+		return;
+	}
+
+	backToTopButton.style.bottom = "2rem";
+	document.body.style.paddingBottom = null;
+
+	if (fixedButton && isVisibleFixedButton) {
+		const fixedButtonHeight = fixedButton.clientHeight;
+
+		document.body.style.paddingBottom = `${fixedButtonHeight}px`;
+		backToTopButton.style.bottom = `${fixedButtonHeight + 20}px`;
 	}
 };
 
@@ -43,49 +61,38 @@ if (backToTopButton || fixedButton) {
 				backToTopButton?.classList.add(...invisibleClasses);
 			}
 
-			handleVisibleFixedButton(
-				scrollContainer.scrollTop > showOnPx && window.innerWidth < baseBreakpoints.lg
-			);
+			handleVisibleFixedButton(scrollContainer.scrollTop > showOnPx && getIsSessionVisibleButton());
 		},
 		{ capture: true, passive: true }
 	);
 
-	if (fixedButton) {
-		const breakpoint = window.matchMedia(`(min-width:${baseBreakpoints.lg}px)`);
-
-		const breakpointChecker = () => {
-			const scrollContainer = getScrollContainer();
-
-			handleVisibleFixedButton(!breakpoint.matches && scrollContainer.scrollTop > showOnPx);
-		};
-
-		breakpoint.onchange = breakpointChecker;
-	}
-
 	if (backToTopButton) {
 		const orientation = window.matchMedia("(orientation: portrait)");
 
-		const setBottomPositionForBackToTopButton = () => {
-			backToTopButton.style.bottom = "2rem";
-			document.body.style.paddingBottom = null;
+		setBottomPositionForBackToTopButton(getIsSessionVisibleButton());
 
-			if (fixedButton && window.innerWidth < baseBreakpoints.lg) {
-				const fixedButtonHeight = fixedButton.clientHeight;
-
-				document.body.style.paddingBottom = `${fixedButtonHeight}px`;
-				backToTopButton.style.bottom = `${fixedButtonHeight + 20}px`;
+		orientation.addEventListener(
+			"change",
+			throttle(() => setBottomPositionForBackToTopButton(getIsSessionVisibleButton()), 100),
+			{
+				passive: true,
 			}
-		};
+		);
 
-		setBottomPositionForBackToTopButton();
-
-		orientation.addEventListener("change", throttle(setBottomPositionForBackToTopButton, 100), {
-			passive: true,
-		});
-		window.addEventListener("resize", throttle(setBottomPositionForBackToTopButton, 100), {
-			passive: true,
-		});
+		window.addEventListener(
+			"resize",
+			throttle(() => setBottomPositionForBackToTopButton(getIsSessionVisibleButton()), 100),
+			{
+				passive: true,
+			}
+		);
 	}
+
+	closeFixedButton?.addEventListener("click", () => {
+		handleVisibleFixedButton();
+		setBottomPositionForBackToTopButton();
+		sessionStorage.setItem(sessionHiddenButtonKey, "true");
+	});
 }
 
 backToTopButton?.addEventListener("click", () => {

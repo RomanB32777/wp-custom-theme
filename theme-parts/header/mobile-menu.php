@@ -49,22 +49,32 @@
 			</button>
 		</div>
 		<div class="flow-root grow">
-			<div class="flex flex-col h-full justify-between">
-				<?php
-					wp_nav_menu( 
-						array( 
-							'theme_location' => 'header',
-							'depth'          => 2,
-							'container'      => null,
-							'menu_class'     => 'space-y-2 py-6 divide-y divide-dark-grizzly',
-							'walker'         => new Header_Walker_Nav_Menu(),
-						) 
-					); 
-					?>
-				<!-- Auth buttons -->
-				<div class="mx-auto">
-					<?php get_template_part( 'theme-parts/header/auth-buttons' ); ?>
+			<div class="flex flex-col h-full justify-between divide-y divide-dark-grizzly">
+				<div class="flex flex-col h-full justify-between pb-6">
+					<?php
+						wp_nav_menu( 
+							array( 
+								'theme_location' => 'header',
+								'depth'          => 2,
+								'container'      => null,
+								'menu_class'     => 'space-y-2 py-6 divide-y divide-dark-grizzly',
+								'walker'         => new Header_Walker_Nav_Menu(),
+							) 
+						); 
+						?>
+
+					<?php if ( is_active_sidebar( 'social-widgets' ) ) { ?>
+						<div>
+							<?php dynamic_sidebar( 'social-widgets' ); ?>
+						</div>
+					<?php } ?>
 				</div>
+
+				<p class="text-sm text-grizzly pt-6">
+					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
+					<?php esc_html_e( '&copy;' ); ?> 
+					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | <?php esc_html_e( 'All Rights Reserved', 'custom-theme' ); ?> 
+				</p>
 			</div>
 		</div>
 	</div>

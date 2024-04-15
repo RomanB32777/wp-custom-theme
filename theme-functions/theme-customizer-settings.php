@@ -9,7 +9,9 @@ function theme_customizer_setting( $wp_customize ) {
 	$links_color       = ! empty( $_ENV['LINKS_COLOR'] ) ? $_ENV['LINKS_COLOR'] : '#d63031';
 	$links_hover_color = ! empty( $_ENV['LINKS_HOVER_COLOR'] ) ? $_ENV['LINKS_HOVER_COLOR'] : '#d63031';
 
-	$buttons_content_color = ! empty( $_ENV['BUTTONS_CONTENT_COLOR'] ) ? $_ENV['BUTTONS_CONTENT_COLOR'] : '#fff';
+	$buttons_content_color                = ! empty( $_ENV['BUTTONS_CONTENT_COLOR'] ) ? $_ENV['BUTTONS_CONTENT_COLOR'] : '#fff';
+	$author_social_icons_background_color = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
+	$author_social_icons_color            = ! empty( $_ENV['BUTTONS_CONTENT_COLOR'] ) ? $_ENV['BUTTONS_CONTENT_COLOR'] : '#fff';
 	
 	$body_color         = ! empty( $_ENV['BODY_COLOR'] ) ? $_ENV['BODY_COLOR'] : '#4e4e4e';
 	$body_content_color = ! empty( $_ENV['BODY_CONTENT_COLOR'] ) ? $_ENV['BODY_CONTENT_COLOR'] : '#fff';
@@ -43,7 +45,11 @@ function theme_customizer_setting( $wp_customize ) {
 	$stars_active_color   = ! empty( $_ENV['YELLOW_COLOR'] ) ? $_ENV['YELLOW_COLOR'] : '#f9b002';
 	$stars_inactive_color = ! empty( $_ENV['GRIZZLY_LIGHT_COLOR'] ) ? $_ENV['GRIZZLY_LIGHT_COLOR'] : '#7f8c8d';
 
-	$buttons_fixed_background_color = ! empty( $_ENV['DARK_COLOR'] ) ? $_ENV['DARK_COLOR'] : '#1b1d21';
+	$buttons_fixed_background_color      = ! empty( $_ENV['DARK_COLOR'] ) ? $_ENV['DARK_COLOR'] : '#1b1d21';
+	$button_fixed_bonus_background_color = ! empty( $_ENV['RED_COLOR'] ) ? $_ENV['RED_COLOR'] : '#d63031';
+
+	$slider_navigation_background_color = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
+	$slider_navigation_icon_color       = ! empty( $_ENV['GRIZZLY_COLOR'] ) ? $_ENV['GRIZZLY_COLOR'] : '#4e4e53';
 
 	/*  --- Primary color ---  */
 
@@ -183,6 +189,49 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'author_social_icons_background_color',
+		array(
+			'default'           => $author_social_icons_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'author_social_icons_background_color',
+			array(
+				'label'    => esc_html__( 'Author social icons background color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'author_social_icons_background_color',
+			)
+		)
+	);
+
+
+	$wp_customize->add_setting(
+		'author_social_icons_color',
+		array(
+			'default'           => $author_social_icons_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'author_social_icons_color',
+			array(
+				'label'    => esc_html__( 'Author social icons color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'author_social_icons_color',
+			)
+		)
+	);
+
 	/*  --- Body color ---  */
 
 	$wp_customize->add_setting(
@@ -289,6 +338,27 @@ function theme_customizer_setting( $wp_customize ) {
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'button_fixed_bonus_background_color',
+		array(
+			'default'           => $button_fixed_bonus_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'button_fixed_bonus_background_color',
+			array(
+				'label'    => esc_html__( 'Fixed button bonus background color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'button_fixed_bonus_background_color',
+			)
+		)
+	);
 	
 	/*  --- Header Settings ---  */
 
@@ -313,14 +383,6 @@ function theme_customizer_setting( $wp_customize ) {
 		'theme_mobile_header_settings',
 		array(
 			'title' => esc_html__( 'Mobile header colors', 'custom-theme' ),
-			'panel' => 'theme_header_settings',
-		) 
-	);
-
-	$wp_customize->add_section(
-		'theme_header_auth_buttons',
-		array(
-			'title' => esc_html__( 'Header authorization buttons', 'custom-theme' ),
 			'panel' => 'theme_header_settings',
 		) 
 	);
@@ -505,27 +567,6 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting(
-		'header_mobile_sub_menu_background_color',
-		array(
-			'default'           => $header_mobile_sub_menu_background_color,
-			'sanitize_callback' => 'sanitize_hex_color',
-			'capability'        => 'edit_theme_options',
-		) 
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'header_mobile_sub_menu_background_color',
-			array(
-				'label'    => esc_html__( 'Submenu mobile background color', 'custom-theme' ),
-				'section'  => 'theme_mobile_header_settings',
-				'settings' => 'header_mobile_sub_menu_background_color',
-			)
-		)
-	);
-
 	/*  --- Submenu link color ---  */
 
 	$wp_customize->add_setting(
@@ -612,80 +653,6 @@ function theme_customizer_setting( $wp_customize ) {
 				'settings' => 'header_mobile_hover_sub_menu_color',
 			)
 		)
-	);
-
-	/*  --- Header authorization buttons ---  */
-
-	$wp_customize->add_setting(
-		'header_login_button_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Log In',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_login_button_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header login button text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_login_button_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_login_button_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header login button link', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_sign_button_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Sign Up',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_sign_button_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header sign button text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'header_sign_button_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'header_sign_button_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_header_auth_buttons',
-			'label'   => esc_html__( 'Header sign button link', 'custom-theme' ),
-		) 
 	);
 
 	/*  --- Footer Settings ---  */
@@ -782,102 +749,6 @@ function theme_customizer_setting( $wp_customize ) {
 				'settings' => 'footer_hover_menu_color',
 			)
 		)
-	);
-
-	/*  --- Footer description ---  */
-
-	$wp_customize->add_setting(
-		'footer_description',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_description',
-		array(
-			'type'        => 'textarea',
-			'section'     => 'theme_footer_settings',
-			'label'       => esc_html__( 'Footer Description', 'custom-theme' ),
-			'description' => esc_html__( 'Add your description to the footer.', 'custom-theme' ),
-		) 
-	);
-
-	/*  --- Footer links ---  */
-
-	$wp_customize->add_setting(
-		'footer_guide_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Explore Now',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_guide_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer new member guide text', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'footer_guide_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_guide_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer new member guide link', 'custom-theme' ),
-		) 
-	);
-
-	$wp_customize->add_setting(
-		'footer_brand_text',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => 'Have Fun Now',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_brand_text',
-		array(
-			'type'    => 'text',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer brand ambassador text', 'custom-theme' ),
-		) 
-	);
-
-
-	$wp_customize->add_setting(
-		'footer_brand_url',
-		array(
-			'capability'        => 'edit_theme_options',
-			'default'           => '',
-			'sanitize_callback' => 'wp_kses_post',
-		) 
-	);
-	
-	$wp_customize->add_control(
-		'footer_brand_url',
-		array(
-			'type'    => 'url',
-			'section' => 'theme_footer_settings',
-			'label'   => esc_html__( 'Footer brand ambassador link', 'custom-theme' ),
-		) 
 	);
 
 	/*  --- Theme Settings ---  */
@@ -1030,7 +901,6 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-
 	/*  --- Table border radius ---  */
 
 	$wp_customize->add_setting(
@@ -1053,6 +923,330 @@ function theme_customizer_setting( $wp_customize ) {
 				'section' => 'theme_settings_table_settings',
 			) 
 		) 
+	);
+
+	/*  --- Slider settings ---  */
+
+	$wp_customize->add_section(
+		'theme_slider_settings',
+		array(
+			'title' => esc_html__( 'Slider settings', 'custom-theme' ),
+			'panel' => 'theme_settings',
+		) 
+	);
+
+	/*  --- Slides main settings ---  */
+
+	$wp_customize->add_setting(
+		'is_loop_slider',
+		array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_loop_slider',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Slider loop', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'is_disable_slider_navigation',
+		array(
+			'default'   => '0',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_disable_slider_navigation',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Disable slider navigation', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'is_disable_slider_pagination',
+		array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_disable_slider_pagination',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Disable slider pagination', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'is_disable_slider_autoplay',
+		array(
+			'default'   => '0',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_disable_slider_autoplay',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Disable slider autoplay', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_autoplay_delay',
+		array(
+			'default'   => 5000,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_autoplay_delay',
+			array(
+				'label'   => esc_html__( 'Slider autoplay delay', 'custom-theme' ),
+				'min'     => 0,
+				'max'     => 30000,
+				'step'    => 500,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+	
+	/*  --- Slides per view settings ---  */
+
+	$wp_customize->add_setting(
+		'slider_mobile_slides_per_view',
+		array(
+			'default'   => 1,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_mobile_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Mobile slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_tablet_slides_per_view',
+		array(
+			'default'   => 2,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_tablet_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Tablet slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_laptop_slides_per_view',
+		array(
+			'default'   => 3,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_laptop_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Laptop slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_desktop_slides_per_view',
+		array(
+			'default'   => 4,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_desktop_slides_per_view',
+			array(
+				'label'   => esc_html__( 'Desktop slides per view', 'custom-theme' ),
+				'min'     => 1,
+				'max'     => 10,
+				'step'    => 1,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	/*  --- Slides between settings ---  */
+
+	$wp_customize->add_setting(
+		'slider_mobile_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_mobile_space_between',
+			array(
+				'label'   => esc_html__( 'Mobile space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_tablet_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_tablet_space_between',
+			array(
+				'label'   => esc_html__( 'Tablet space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_laptop_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_laptop_space_between',
+			array(
+				'label'   => esc_html__( 'Laptop space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_desktop_space_between',
+		array(
+			'default'   => 24,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'slider_desktop_space_between',
+			array(
+				'label'   => esc_html__( 'Desktop space between slides', 'custom-theme' ),
+				'min'     => 2,
+				'max'     => 64,
+				'step'    => 2,
+				'section' => 'theme_slider_settings',
+			) 
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'slider_navigation_background_color',
+		array(
+			'default'           => $slider_navigation_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'slider_navigation_background_color',
+			array(
+				'label'    => esc_html__( 'Slider navigation background color', 'custom-theme' ),
+				'section'  => 'theme_slider_settings',
+				'settings' => 'slider_navigation_background_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'slider_navigation_icon_color',
+		array(
+			'default'           => $slider_navigation_icon_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'slider_navigation_icon_color',
+			array(
+				'label'    => esc_html__( 'Slider navigation icon color', 'custom-theme' ),
+				'section'  => 'theme_slider_settings',
+				'settings' => 'slider_navigation_icon_color',
+			)
+		)
 	);
 }
 add_action( 'customize_register', 'theme_customizer_setting' );
@@ -1094,6 +1288,18 @@ function theme_customizer_style_settings() {
 		$buttons_custom_content_color = get_theme_mod( 'buttons_content_color' );
 	}
 
+	if ( ! $author_custom_social_icons_background_color = get_theme_mod( 'author_social_icons_background_color' ) ) {
+		$author_custom_social_icons_background_color = '#17946d';
+	} else {
+		$author_custom_social_icons_background_color = get_theme_mod( 'author_social_icons_background_color' );
+	}
+
+	if ( ! $author_custom_social_icons_color = get_theme_mod( 'author_social_icons_color' ) ) {
+		$author_custom_social_icons_color = '#fff';
+	} else {
+		$author_custom_social_icons_color = get_theme_mod( 'author_social_icons_color' );
+	}
+
 	if ( ! $body_custom_color = get_theme_mod( 'body_color' ) ) {
 		$body_custom_color = '#4e4e4e';
 	} else {
@@ -1122,6 +1328,12 @@ function theme_customizer_style_settings() {
 		$buttons_custom_fixed_background_color = '#1b1d21';
 	} else {
 		$buttons_custom_fixed_background_color = get_theme_mod( 'buttons_fixed_background_color' );
+	}
+
+	if ( ! $button_custom_fixed_bonus_background_color = get_theme_mod( 'button_fixed_bonus_background_color' ) ) {
+		$button_custom_fixed_bonus_background_color = '#d63031';
+	} else {
+		$button_custom_fixed_bonus_background_color = get_theme_mod( 'button_fixed_bonus_background_color' );
 	}
 
 	if ( ! $header_custom_color = get_theme_mod( 'header_color' ) ) {
@@ -1268,6 +1480,18 @@ function theme_customizer_style_settings() {
 		$is_priority_theme_primary_color = get_theme_mod( 'is_priority_theme_primary_color' );
 	}
 
+	if ( ! $slider_custom_navigation_background_color = get_theme_mod( 'slider_navigation_background_color' ) ) {
+		$slider_custom_navigation_background_color = '#17946d';
+	} else {
+		$slider_custom_navigation_background_color = get_theme_mod( 'slider_navigation_background_color' );
+	}
+
+	if ( ! $slider_custom_navigation_icon_color = get_theme_mod( 'slider_navigation_icon_color' ) ) {
+		$slider_custom_navigation_icon_color = '#4e4e53';
+	} else {
+		$slider_custom_navigation_icon_color = get_theme_mod( 'slider_navigation_icon_color' );
+	}
+
 	$primary_custom_grizzly_color   = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 50%)';
 	$primary_custom_light_color     = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 25%)';
 	$primary_custom_brightest_color = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 10%)';
@@ -1337,9 +1561,11 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $footer_custom_hover_menu_color ) . ';
 		}
 
-		.theme-main-content ul li::before,
+		.main-blocks ul:not(.ez-toc-list) li::before,
+		.wp-block-post-content ul li::before,
 		.main-button,
-		input[type=checkbox]:checked ~ .switcher {
+		input[type=checkbox]:checked ~ .switcher,
+		.bullet-dot {
 			background-color: ' . esc_attr( $primary_custom_color ) . ' !important;
 		}
 
@@ -1348,8 +1574,14 @@ function theme_customizer_style_settings() {
 			border-color: ' . esc_attr( $border_custom_color ) . ' !important;
 		}
 
-		.secondary-button {
+		.secondary-button,
+		.bullet-dot:hover,
+		.swiper-bullet.nav-active .bullet-dot {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
+		}
+
+		.main-link {
+			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
 		a.shortcode-link:hover,
@@ -1361,16 +1593,20 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $buttons_custom_fixed_background_color ) . ' !important;
 		}
 
-		.comment-list .comment .comment-wrapper .comment-author {
-			color: ' . esc_attr( $primary_custom_color ) . ';
+		.fixed-button .fixed-bonus .background-bonus {
+			background-color: ' . esc_attr( $button_custom_fixed_bonus_background_color ) . ' !important;
 		}
 
-		main a:not(.ez-toc-link) {
-			color: ' . esc_attr( $links_custom_color ) . ' !important;
+		.main-blocks a:not(.ez-toc-link, .shortcode-link),
+		.comment-edit-link,
+		.comment-reply-link {
+			color: ' . esc_attr( $links_custom_color ) . ';
 		}
 
-		main a:not(.ez-toc-link):hover {
-			color: ' . esc_attr( $links_custom_hover_color ) . ' !important;
+		.main-blocks a:not(.ez-toc-link, .shortcode-link):hover,
+		.comment-edit-link:hover,
+		.comment-reply-link:hover  {
+			color: ' . esc_attr( $links_custom_hover_color ) . ';
 		}
 
 		.main-button,
@@ -1380,8 +1616,14 @@ function theme_customizer_style_settings() {
 		.secondary-button a,
 		.secondary-button span,
 		.fixed-button,
+		.fixed-button .fixed-bonus,
 		.shortcode-link .image-content {
 			color: ' . esc_attr( $buttons_custom_content_color ) . ' !important;
+		}
+
+		.social-icon {
+			background-color: ' . esc_attr( $author_custom_social_icons_background_color ) . ';
+			color: ' . esc_attr( $author_custom_social_icons_color ) . ';
 		}
 
 		.wp-block-table table {
@@ -1449,6 +1691,31 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $stars_custom_active_color ) . ';
 		}
 
+		.rating-block .rating-line {
+			background-color: ' . esc_attr( $primary_custom_light_color ) . ';
+		}
+
+		.rating-block .rating-line .gradient-line {
+			background-image: linear-gradient(to right, ' . esc_attr( $primary_custom_brightest_color ) . ' 0%, ' . esc_attr( $primary_custom_color ) . ' 100%);
+		}
+
+		.copy-button.active {
+			background-color: ' . esc_attr( $primary_custom_brightest_color ) . ';
+		}
+
+		.slider-navigation .slider-arrow {
+			background-color: ' . esc_attr( $slider_custom_navigation_background_color ) . ';
+			color: ' . esc_attr( $slider_custom_navigation_icon_color ) . ';
+		}
+
+		h2::before {
+			background-color: ' . esc_attr( $primary_custom_light_color ) . ';
+		}
+
+		.wp-custom-blocks-main-banner h2::before {
+			display: none;
+		}
+
 		@media (min-width: 1280px) {
 			.main-menu-link {
 				color: ' . esc_attr( $header_custom_menu_color ) . ';
@@ -1479,16 +1746,6 @@ function theme_customizer_style_settings() {
 
 	if ( $is_priority_theme_primary_color ) {
 		$custom_css .= '
-			.wp-custom-blocks-questions .question {
-				border-color: ' . esc_attr( $primary_custom_light_color ) . ' !important;
-			}
-
-			.wp-custom-blocks-questions .question.active,
-			.wp-custom-blocks-questions .question:hover {
-				background-color: ' . esc_attr( $primary_custom_brightest_color ) . ' !important;
-			}
-
-			.wp-custom-blocks-questions .question .more-arrow.active,
 			.wp-custom-blocks-cards .item-card button,
 			.wp-custom-blocks-steps .step .number,
 			.wp-custom-blocks-banner .bonus-button,

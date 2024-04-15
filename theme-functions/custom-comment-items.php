@@ -44,46 +44,38 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 		$add_below = 'div-comment';
 	}
 
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$rating_stars_number = get_option( 'custom_rating_stars_number' );
-	} else {
-		$rating_stars_number = '5';
-	}
-
-	$comment_classes = $comment_class . 'my-3 [&>ul]:ml-8';
+	$comment_classes = $comment_class . ' py-6 [&>ul]:ml-8 [&>ul]:divide-y';
 	?>
 
 	<<?php echo esc_attr( $tag ); ?><?php comment_class( $comment_classes, $comment ); ?> id="comment-<?php echo esc_attr( $comment_id ); ?>">
 
 		<?php if ( 'div' !== $args['style'] ) { ?>
-			<div id="div-comment-<?php echo esc_attr( $comment_id ); ?>" class="comment-wrapper main-border relative rounded-lg border p-4 sm:!py-8 sm:!px-6">
+			<div id="div-comment-<?php echo esc_attr( $comment_id ); ?>" class="comment-wrapper relative">
 		<?php } ?>
 
 		<div class="comment-content">
-			<div class="flex flex-col mb-6 sm:items-center sm:justify-between sm:!flex-row">
-				<div class="mb-2 flex items-center sm:mb-0">
-					<p class="comment-author font-semibold text-lg">
-						<?php echo esc_html( get_comment_author( $comment_id ) ); ?>
-					</p>
-					<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
-						<div class="ml-4 flex gap-x-1">
-							<?php
-								custom_star_rating(
-									array(
-										'rating'       => $rating,
-										'stars_number' => $rating_stars_number,
-									)
-								);
-							?>
-						</div>
-					<?php } ?>
-				</div>
-
-				<p class="text-grizzly-light font-medium text-sm">
-					<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
+			<div class="mb-4">
+				<p class="comment-author mb-2 font-semibold text-xl">
+					<?php echo esc_html( get_comment_author( $comment_id ) ); ?>
 				</p>
+
+				<div class="flex items-center justify-between gap-x-2 md:!gap-x-4 md:!justify-start">
+					<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
+						<?php
+							custom_star_rating(
+								array(
+									'rating' => $rating,
+								)
+							);
+						?>
+					<?php } ?>
+					
+					<p class="text-grizzly-dark font-medium text-sm">
+						<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
+					</p>
+				</div>
 			</div>
-			<div class="text-base font-normal">
+			<div class="text-lg">
 				<?php comment_text( $comment_id ); ?>
 			</div>
 
@@ -106,7 +98,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 				$edit_link = '<a class="comment-edit-link" href="' . esc_url( get_edit_comment_link( $comment ) ) . '">(' . esc_html__( 'Edit', 'custom-theme' ) . ')</a>';
 	
 				?>
-					<div class="mt-6">  
+					<div class="mt-3 [&>a]:no-underline">  
 						<?php echo wp_kses( $edit_link, $allowed_comment_html ); ?>
 						<?php echo wp_kses( $reply_link, $allowed_comment_html ); ?>
 					</div>
