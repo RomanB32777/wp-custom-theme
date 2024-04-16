@@ -75,53 +75,49 @@ jQuery(document).ready(function ($) {
 
 	// Upload Taxonomy Image End
 
-	// Upload mobile image of organization page - Start
+	// Upload image of organization page - Start
 
-	$("body").on(
-		"click",
-		".custom_upload_mobile_button",
-		function (e: { preventDefault: () => void }) {
-			"use strict";
+	$("body").on("click", ".custom_upload_button", function (e: { preventDefault: () => void }) {
+		"use strict";
 
-			e.preventDefault();
+		e.preventDefault();
 
-			const button = $(this);
+		const button = $(this);
 
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			const customUploader = wp
-				.media({
-					title: "Insert image",
-					library: {
-						type: "image",
-					},
-					button: {
-						text: "Set mobile image",
-					},
-					multiple: false,
-				})
-				.on("select", function () {
-					"use strict";
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const customUploader = wp
+			.media({
+				title: "Insert image",
+				library: {
+					type: "image",
+				},
+				button: {
+					text: "Set image",
+				},
+				multiple: false,
+			})
+			.on("select", function () {
+				"use strict";
 
-					const attachment = customUploader.state().get("selection").first().toJSON();
+				const attachment = customUploader.state().get("selection").first().toJSON();
 
-					$(button)
-						.removeClass("button")
-						.html(
-							'<img class="custom-mobile-admin-image" src="' +
-								attachment.url +
-								'" style="max-width: 100%; width: auto; display:block;" />'
-						)
-						.next()
-						.val(attachment.id)
-						.next()
-						.show();
-				})
-				.open();
-		}
-	);
+				$(button)
+					.removeClass("button")
+					.html(
+						'<img class="custom-admin-image" src="' +
+							attachment.url +
+							'" style="max-width: 100%; width: auto; display:block;" />'
+					)
+					.next()
+					.val(attachment.id)
+					.next()
+					.show();
+			})
+			.open();
+	});
 
-	$("body").on("click", ".custom_remove_mobile_button", function () {
+	$("body").on("click", ".custom_remove_button", function () {
 		"use strict";
 
 		$(this).hide().prev().val("").prev().addClass("button").html("Upload image");
@@ -129,5 +125,5 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	// Upload Mobile image of organization page - End
+	// Upload image of organization page - End
 });

@@ -6,8 +6,17 @@ add_action( 'init', 'init_organizations', 0 );
 
 function init_organizations() {
 
-	$organization_slug = 'organization';
 	$organization_name = esc_html__( 'Organizations', 'custom-theme' );
+
+	if ( get_option( 'organizations_section_name' ) ) {
+		$organization_name = get_option( 'organizations_section_name', 'Organizations' );
+	}
+
+	$organization_slug = 'organization';
+
+	if ( get_option( 'organizations_section_slug' ) ) {
+		$organization_slug = get_option( 'organizations_section_slug', 'organization' );
+	}
 
 	$args = array(
 		'labels'             => array(
@@ -204,42 +213,42 @@ function organizations_short_save_fields( $post_id ) {
 
 /*  Organizations - Short Description End */
 
-/*  Organizations - Bonus Start */
+/*  Organizations - Breadcrumb Title Start */
 
-add_action( 'admin_init', 'organizations_bonus' );
+add_action( 'admin_init', 'organizations_breadcrumb_title_fields' );
 
-function organizations_bonus() {
+function organizations_breadcrumb_title_fields() {
 	add_meta_box(
-		'organizations_bonus_meta_box',
-		esc_html__( 'Bonus', 'custom-theme' ),
-		'organizations_bonus_display_meta_box',
+		'organizations_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'organizations_breadcrumb_title_display_meta_box',
 		'organization',
 		'normal',
 		'high'
 	);
 }
 
-function organizations_bonus_display_meta_box( $organization ) {
+function organizations_breadcrumb_title_display_meta_box( $organization ) {
 
-	wp_nonce_field( 'organizations_bonus_box', 'organizations_bonus_nonce' );
+	wp_nonce_field( 'organizations_breadcrumb_title_box', 'organizations_breadcrumb_title_nonce' );
 
-	$organization_bonus = get_post_meta( $organization->ID, 'organization_bonus', false );
-	
+	$organization_breadcrumb_title = get_post_meta( $organization->ID, 'organization_breadcrumb_title', false );
+
 	$editor_args = array(
 		'tinymce'       => false,
 		'quicktags'     => false,
 		'media_buttons' => false,
-		'textarea_rows' => 4,
+		'textarea_rows' => 1,
 	);
 	?>
 
-<div class="components-base-control organization_bonus">
+<div class="components-base-control organization_breadcrumb_title">
 	<div class="components-base-control__field">
 		<?php
-		if ( empty( $organization_bonus[0] ) ) {
-			$organization_bonus[0] = '';
+		if ( empty( $organization_breadcrumb_title[0] ) ) {
+			$organization_breadcrumb_title[0] = '';
 		}
-		wp_editor( $organization_bonus[0], 'organization_bonus', $editor_args );
+		wp_editor( $organization_breadcrumb_title[0], 'organization_breadcrumb_title', $editor_args );
 		?>
 	</div>
 </div>
@@ -247,17 +256,17 @@ function organizations_bonus_display_meta_box( $organization ) {
 	<?php
 }
 
-add_action( 'save_post', 'organizations_bonus_save', 10, 2 );
+add_action( 'save_post', 'organizations_breadcrumb_title_save_fields', 10, 2 );
 
-function organizations_bonus_save( $post_id ) {
+function organizations_breadcrumb_title_save_fields( $post_id ) {
 
-	if ( ! isset( $_POST['organizations_bonus_nonce'] ) ) {
+	if ( ! isset( $_POST['organizations_breadcrumb_title_nonce'] ) ) {
 		return $post_id;
 	}
 
-		$nonce = $_POST['organizations_bonus_nonce'];
+		$nonce = $_POST['organizations_breadcrumb_title_nonce'];
 
-	if ( ! wp_verify_nonce( $nonce, 'organizations_bonus_box' ) ) {
+	if ( ! wp_verify_nonce( $nonce, 'organizations_breadcrumb_title_box' ) ) {
 		return $post_id;
 	}
 
@@ -271,11 +280,234 @@ function organizations_bonus_save( $post_id ) {
 		}
 	}
 
-		$organization_bonus = $_POST['organization_bonus'];
-		update_post_meta( $post_id, 'organization_bonus', $organization_bonus );
+		$organization_breadcrumb_title = $_POST['organization_breadcrumb_title'];
+		update_post_meta( $post_id, 'organization_breadcrumb_title', $organization_breadcrumb_title );
 }
 
-/*  Organizations - Bonus End */
+/*  Organizations - Breadcrumb Title End */
+
+/*  Organizations - Bonus Title Start */
+
+add_action( 'admin_init', 'organizations_bonus_title' );
+
+function organizations_bonus_title() {
+	add_meta_box(
+		'organizations_bonus_title_meta_box',
+		esc_html__( 'Bonus title', 'custom-theme' ),
+		'organizations_bonus_title_display_meta_box',
+		'organization',
+		'normal',
+		'high'
+	);
+}
+
+function organizations_bonus_title_display_meta_box( $organization ) {
+
+	wp_nonce_field( 'organizations_bonus_title_box', 'organizations_bonus_title_nonce' );
+
+	$organization_bonus_title = get_post_meta( $organization->ID, 'organization_bonus_title', false );
+	
+	$editor_args = array(
+		'tinymce'       => array(
+			'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
+		),
+		'quicktags'     => array(
+			'buttons' => 'em,strong,link,close',
+		),
+		'media_buttons' => false,
+		'textarea_rows' => 8,
+	);
+	?>
+
+<div class="components-base-control organization_bonus_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $organization_bonus_title[0] ) ) {
+			$organization_bonus_title[0] = '';
+		}
+		wp_editor( $organization_bonus_title[0], 'organization_bonus_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'organizations_bonus_title_save', 10, 2 );
+
+function organizations_bonus_title_save( $post_id ) {
+
+	if ( ! isset( $_POST['organizations_bonus_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['organizations_bonus_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'organizations_bonus_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'organization' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$organization_bonus_title = $_POST['organization_bonus_title'];
+	update_post_meta( $post_id, 'organization_bonus_title', $organization_bonus_title );
+}
+
+/*  Organizations - Bonus Title End */
+
+/*  Organizations - Bonus Value Start */
+
+add_action( 'admin_init', 'organizations_bonus_value' );
+
+function organizations_bonus_value() {
+	add_meta_box(
+		'organizations_bonus_value_meta_box',
+		esc_html__( 'Bonus value', 'custom-theme' ),
+		'organizations_bonus_value_display_meta_box',
+		'organization',
+		'normal',
+		'high'
+	);
+}
+
+function organizations_bonus_value_display_meta_box( $organization ) {
+
+	wp_nonce_field( 'organizations_bonus_value_box', 'organizations_bonus_value_nonce' );
+
+	$organization_bonus_value = get_post_meta( $organization->ID, 'organization_bonus_value', false );
+	
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control organization_bonus_value">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $organization_bonus_value[0] ) ) {
+			$organization_bonus_value[0] = '';
+		}
+		wp_editor( $organization_bonus_value[0], 'organization_bonus_value', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'organizations_bonus_value_save', 10, 2 );
+
+function organizations_bonus_value_save( $post_id ) {
+
+	if ( ! isset( $_POST['organizations_bonus_value_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['organizations_bonus_value_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'organizations_bonus_value_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'organization' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$organization_bonus_value = $_POST['organization_bonus_value'];
+	update_post_meta( $post_id, 'organization_bonus_value', $organization_bonus_value );
+}
+
+/*  Organizations - Bonus Value End */
+
+/*  Organizations - Promotional Code Start */
+
+add_action( 'admin_init', 'organizations_promotional_code' );
+
+function organizations_promotional_code() {
+	add_meta_box(
+		'organizations_promotional_code_meta_box',
+		esc_html__( 'Promotional code ', 'custom-theme' ),
+		'organizations_promotional_code_display_meta_box',
+		'organization',
+		'normal',
+		'high'
+	);
+}
+
+function organizations_promotional_code_display_meta_box( $organization ) {
+
+	wp_nonce_field( 'organizations_promotional_code_box', 'organizations_promotional_code_nonce' );
+
+	$organization_promotional_code = get_post_meta( $organization->ID, 'organization_promotional_code', false );
+	
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control organization_promotional_code">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $organization_promotional_code[0] ) ) {
+			$organization_promotional_code[0] = '';
+		}
+		wp_editor( $organization_promotional_code[0], 'organization_promotional_code', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'organizations_promotional_code_save', 10, 2 );
+
+function organizations_promotional_code_save( $post_id ) {
+
+	if ( ! isset( $_POST['organizations_promotional_code_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['organizations_promotional_code_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'organizations_promotional_code_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'organization' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$organization_promotional_code = $_POST['organization_promotional_code'];
+	update_post_meta( $post_id, 'organization_promotional_code', $organization_promotional_code );
+}
+
+/*  Organizations - Promotional Code End */
 
 /*  Organizations - Ratings Start */
 
@@ -701,7 +933,27 @@ function custom_mobile_image_uploader( $name, $value = '' ) {
 	';
 }
 
-/*  The standard field for the upload Mobile image of organization single page - End  */
+/*  The standard field for the upload image of organization single page - Start  */
+
+function custom_image_uploader( $name, $value = '' ) {
+	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
+	$display = 'none';
+ 
+	if ( $image_attributes = wp_get_attachment_image_src( $value, 'mercury-2000-400' ) ) {
+		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
+		$display = 'block';
+	} 
+ 
+	return '
+		<div style="margin-top: 1em;">
+			<a href="#" style="display: inline-block;" class="custom_upload_button' . $image . '</a>
+			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
+			<a href="#" class="custom_remove_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove image', 'custom-theme' ) . '</a>
+		</div>
+	';
+}
+
+/*  The standard field for the upload image of organization single page - End  */
 
 /*  Upload Mobile image of organization single page - Start  */
 
@@ -722,7 +974,7 @@ function custom_organization_mobile_image_block_show( $organization ) {
 	wp_nonce_field( 'custom_organization_mobile_box', 'custom_organization_mobile_nonce' );
 	$organization_mobile_image = 'organization_mobile_image';
 
-	echo custom_mobile_image_uploader( $organization_mobile_image, get_post_meta( $organization->ID, $organization_mobile_image, true ) );
+	echo custom_image_uploader( $organization_mobile_image, get_post_meta( $organization->ID, $organization_mobile_image, true ) );
 }
  
 function custom_organization_mobile_image_block_save( $post_id ) {

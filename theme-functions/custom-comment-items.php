@@ -44,12 +44,6 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 		$add_below = 'div-comment';
 	}
 
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$rating_stars_number = get_option( 'custom_rating_stars_number' );
-	} else {
-		$rating_stars_number = '5';
-	}
-
 	$comment_classes = $comment_class . 'my-3 [&>ul]:ml-8';
 	?>
 
@@ -70,8 +64,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 							<?php
 								custom_star_rating(
 									array(
-										'rating'       => $rating,
-										'stars_number' => $rating_stars_number,
+										'rating' => $rating,
 									)
 								);
 							?>

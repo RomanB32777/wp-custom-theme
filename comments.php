@@ -12,7 +12,7 @@ if ( post_password_required() ) {
 			$comment_field = '
 				<div class="col-span-full">
 					<textarea
-						class="block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block resize-none w-full rounded-lg border-0 p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-textarea"
 						name="comment-form-textarea"
 						rows="3"
@@ -35,7 +35,7 @@ if ( post_password_required() ) {
 			$author_field = '
 				<div class="comment-form-author col-span-3 col-start-1">
 					<input
-						class="block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block w-full rounded-lg border-0 ring-grizzly p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-author"
 						type="text"
 						name="comment-form-author"
@@ -48,7 +48,7 @@ if ( post_password_required() ) {
 			$email_field = '
 				<div class="comment-form-email col-span-3">
 					<input
-						class="block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block w-full rounded-lg border-0 ring-grizzly p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-email"
 						type="email"
 						name="comment-form-email"
@@ -58,10 +58,6 @@ if ( post_password_required() ) {
 						value="' . esc_attr( $commenter['comment_author_email'] ) . '"
 					/>
 				</div>';
-
-				$rating_field = '
-					<div class="col-span-2">
-						<div class="h-full flex items-center justify-around">';
 
 			$rating_field = '
 				<div class="col-span-2">

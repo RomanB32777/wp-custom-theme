@@ -281,13 +281,13 @@ function comment_meta_box_age( $comment ) {
 }
 
 add_filter( 'comment_form_defaults', 'add_comment_field' );
-function add_comment_field( $default ) {
+function add_comment_field( $comment_fields ) {
 
-	$default['fields']['rating'] = '<p class="comment-form-rating"><label for="rating">rating</label><input id="rating" name="rating" size="30" type="text" /></p>';
+	$comment_fields['fields']['rating'] = '<p class="comment-form-rating"><label for="rating">rating</label><input id="rating" name="rating" size="30" type="text" /></p>';
 
-	$default['fields']['is-get-auth-data'] = '<p class="comment-form-is-get-auth-data"><label for="is-get-auth-data">is-get-auth-data</label><input id="is-get-auth-data" name="is-get-auth-data" size="30" type="text" /></p>';
+	$comment_fields['fields']['is-get-auth-data'] = '<p class="comment-form-is-get-auth-data"><label for="is-get-auth-data">is-get-auth-data</label><input id="is-get-auth-data" name="is-get-auth-data" size="30" type="text" /></p>';
 
-	return $default;
+	return $comment_fields;
 }
 
 require_once __DIR__ . '/theme-functions/custom-comment-items.php';
@@ -379,4 +379,15 @@ function set_approver_on_transition_only( $new_status, $old_status, $post ) {
 	$user = wp_get_current_user();
 
 	wp_set_post_terms( $post->ID, $user->ID, 'approver' );
+}
+
+add_filter( 'bcn_breadcrumb_title', 'custom_breadcrumb_title', 3, 10 );
+function custom_breadcrumb_title( $title, $type, $id ) {
+	$breadcrumb_title = get_post_meta( $id, 'organization_breadcrumb_title', true );
+
+	if ( in_array( 'post-organization', $type ) && ! empty( $breadcrumb_title ) ) {
+		$title = wp_kses( $breadcrumb_title, array() );
+	}
+
+	return $title;
 }

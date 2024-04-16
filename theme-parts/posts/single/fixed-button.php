@@ -1,9 +1,10 @@
 <?php 
-	$item_id                     = get_the_ID();
-	$organization_logo_id        = get_post_thumbnail_id( $item_id );
-	$organization_overall_rating = esc_html( get_post_meta( $item_id, 'organization_overall_rating', true ) );
-	$organization_external_link  = esc_url( get_post_meta( $item_id, 'organization_external_link', true ) );
-	$organization_button_title   = esc_html( get_post_meta( $item_id, 'organization_button_title', true ) );
+	$item_id                      = get_the_ID();
+	$organization_logo_id         = get_post_thumbnail_id( $item_id );
+	$organization_mobile_image_id = esc_html( get_post_meta( get_the_ID(), 'organization_mobile_image', true ) );
+	$organization_overall_rating  = esc_html( get_post_meta( $item_id, 'organization_overall_rating', true ) );
+	$organization_external_link   = esc_url( get_post_meta( $item_id, 'organization_external_link', true ) );
+	$organization_button_title    = esc_html( get_post_meta( $item_id, 'organization_button_title', true ) );
 
 if ( get_option( 'custom_rating_stars_number' ) ) {
 	$rating_stars_number = get_option( 'custom_rating_stars_number' );
@@ -24,8 +25,35 @@ if ( empty( $organization_button_title ) ) {
 	<div class="mx-auto max-w-7xl py-3 px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between">
 			<div class="flex items-center gap-3 sm:!gap-6">
-				<?php if ( $organization_logo_id ) { ?>
-					<?php echo wp_get_attachment_image( $organization_logo_id, array( 80, 80 ) ); ?>
+				<?php 
+				if ( $organization_logo_id || $organization_mobile_image_id ) { 
+					$image_size = 80;
+					$src_image  = wp_get_attachment_image_src(
+						$organization_logo_id,
+						array(
+							$image_size,
+							$image_size,
+						)
+					);
+
+					$src_mobile_image = wp_get_attachment_image_src(
+						$organization_mobile_image_id,
+						array(
+							$image_size,
+							$image_size,
+						)
+					);
+					?>
+
+					<div class="w-20 h-20">
+						<img
+							class="h-full w-auto object-cover object-center"
+							src="<?php echo esc_url( $src_mobile_image ? $src_mobile_image[0] : $src_image[0] ); ?>"
+							alt="<?php echo esc_attr( $organization_name ); ?>"
+							width="<?php echo esc_attr( $image_size ); ?>"
+							height="<?php echo esc_attr( $image_size ); ?>"
+						>
+					</div>
 				<?php } ?>
 		
 				<div>
@@ -41,7 +69,6 @@ if ( empty( $organization_button_title ) ) {
 									custom_star_rating(
 										array(
 											'rating'       => $organization_overall_rating,
-											'stars_number' => $rating_stars_number,
 											'star_classes' => 'w-4 h-4',
 										)
 									);

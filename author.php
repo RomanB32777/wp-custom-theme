@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="theme-main-content [&>*]:my-7">
+	<div class="main-content [&>*]:my-7">
 		<!-- Title Box Start -->
 	
 		<div class="flex flex-col gap-6 md:!gap-10 md:!flex-row">
