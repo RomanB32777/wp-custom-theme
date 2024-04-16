@@ -97,6 +97,20 @@ function organizations_settings_init() {
 	);
 
 	add_settings_section(
+		'organizations_tab_titles',
+		esc_html__( 'Titles', 'custom-theme' ),
+		'organizations_tab_titles_callback',
+		'organizations_tab'
+	);
+
+	add_settings_section(
+		'organizations_tab_slugs',
+		esc_html__( 'Slugs', 'custom-theme' ),
+		'organizations_tab_slugs_callback',
+		'organizations_tab'
+	);
+
+	add_settings_section(
 		'organizations_tab_other_settings',
 		esc_html__( 'Other settings', 'custom-theme' ),
 		'organizations_tab_other_settings_callback',
@@ -110,6 +124,22 @@ function organizations_settings_init() {
 		?>
 		<p id="<?php echo esc_attr( $args['id'] ); ?>">
 			<?php esc_html_e( 'Here you can change the default titles of the ratings.', 'custom-theme' ); ?>
+		</p>
+			<?php
+	}
+
+	function organizations_tab_titles_callback( $args ) {
+		?>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php esc_html_e( 'Here you can change the default titles.', 'custom-theme' ); ?>
+		</p>
+			<?php
+	}
+
+	function organizations_tab_slugs_callback( $args ) {
+		?>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php esc_html_e( 'Here you can change the default slugs.', 'custom-theme' ); ?>
 		</p>
 			<?php
 	}
@@ -302,6 +332,68 @@ function organizations_settings_init() {
 			<?php } ?>
 		</select>
 			<?php
+	}
+
+	/*
+		----------------
+
+	Title setting fields
+
+	----------------  */
+
+	/*  --- "Organizations" section title ---  */
+
+	add_settings_field(
+		'organizations_section_name',
+		esc_html__( 'The title of the &quot;Organizations&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_section_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'organizations_section_name', 
+			'option_name' => 'organizations_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'organizations_section_name', 'esc_attr' );
+
+	function custom_textfield_section_name_callback( $args ) {
+		$option      = esc_attr( get_option( $args['option_name'] ) );
+		$id          = $args['id'];
+		$option_name = $args['option_name'];
+		?>
+		<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default &quot;Organizations&quot;' ); ?>" class="regular-text" />
+		<?php
+	}
+
+	/*
+	------------------------
+
+	Slugs setting fields
+
+	------------------------  */
+
+	/*  --- Organizations slug ---  */
+
+	add_settings_field(
+		'organizations_section_slug',
+		esc_html__( 'The slug of the &quot;Organizations&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_slugs_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'organization_slug', 
+			'option_name' => 'organizations_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'organizations_section_slug', 'esc_attr' );
+
+	function custom_textfield_slugs_callback( $args ) {
+		$option      = esc_attr( get_option( $args['option_name'] ) );
+		$id          = $args['id'];
+		$option_name = $args['option_name'];
+		?>
+		<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default' ); ?> &quot;<?php echo esc_attr( $id ); ?>&quot;" class="regular-text" />
+		<?php
 	}
 
 	/*

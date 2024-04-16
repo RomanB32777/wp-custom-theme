@@ -474,3 +474,14 @@ function custom_user_profile_save( $user_id ) {
 }
 add_action( 'personal_options_update', 'custom_user_profile_save' );
 add_action( 'edit_user_profile_update', 'custom_user_profile_save' );
+
+add_filter( 'bcn_breadcrumb_title', 'custom_breadcrumb_title', 3, 10 );
+function custom_breadcrumb_title( $title, $type, $id ) {
+	$breadcrumb_title = get_post_meta( $id, 'organization_breadcrumb_title', true );
+
+	if ( in_array( 'post-organization', $type ) && ! empty( $breadcrumb_title ) ) {
+		$title = wp_kses( $breadcrumb_title, array() );
+	}
+
+	return $title;
+}

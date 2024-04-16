@@ -5,9 +5,18 @@
 add_action( 'init', 'init_organizations', 0 );
 
 function init_organizations() {
-
-	$organization_slug = 'organization';
+	
 	$organization_name = esc_html__( 'Organizations', 'custom-theme' );
+
+	if ( get_option( 'organizations_section_name' ) ) {
+		$organization_name = get_option( 'organizations_section_name', 'Organizations' );
+	}
+	
+	$organization_slug = 'organization';
+
+	if ( get_option( 'organizations_section_slug' ) ) {
+		$organization_slug = get_option( 'organizations_section_slug', 'organization' );
+	}
 
 	$args = array(
 		'labels'             => array(
@@ -203,6 +212,79 @@ function organizations_short_save_fields( $post_id ) {
 }
 
 /*  Organizations - Short Description End */
+
+/*  Organizations - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'organizations_breadcrumb_title_fields' );
+
+function organizations_breadcrumb_title_fields() {
+	add_meta_box(
+		'organizations_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'organizations_breadcrumb_title_display_meta_box',
+		'organization',
+		'normal',
+		'high'
+	);
+}
+
+function organizations_breadcrumb_title_display_meta_box( $organization ) {
+
+	wp_nonce_field( 'organizations_breadcrumb_title_box', 'organizations_breadcrumb_title_nonce' );
+
+	$organization_breadcrumb_title = get_post_meta( $organization->ID, 'organization_breadcrumb_title', false );
+	
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control organization_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $organization_breadcrumb_title[0] ) ) {
+			$organization_breadcrumb_title[0] = '';
+		}
+		wp_editor( $organization_breadcrumb_title[0], 'organization_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'organizations_breadcrumb_title_save_fields', 10, 2 );
+
+function organizations_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['organizations_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['organizations_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'organizations_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'organization' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+		$organization_breadcrumb_title = $_POST['organization_breadcrumb_title'];
+		update_post_meta( $post_id, 'organization_breadcrumb_title', $organization_breadcrumb_title );
+}
+
+/*  Organizations - Breadcrumb Title End */
 
 /*  Organizations - Bonus Title Start */
 

@@ -30,7 +30,7 @@
 				wp_nav_menu( 
 					array( 
 						'theme_location' => 'header',
-						'depth'          => 2,
+						'depth'          => 5,
 						'container'      => null,
 						'menu_class'     => 'hidden xl:!flex xl:gap-x-5',
 						'walker'         => new Header_Walker_Nav_Menu(),
