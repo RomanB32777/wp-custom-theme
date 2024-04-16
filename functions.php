@@ -477,10 +477,16 @@ add_action( 'edit_user_profile_update', 'custom_user_profile_save' );
 
 add_filter( 'bcn_breadcrumb_title', 'custom_breadcrumb_title', 3, 10 );
 function custom_breadcrumb_title( $title, $type, $id ) {
-	$breadcrumb_title = get_post_meta( $id, 'organization_breadcrumb_title', true );
+	$organization_breadcrumb_title = get_post_meta( $id, 'organization_breadcrumb_title', true );
 
-	if ( in_array( 'post-organization', $type ) && ! empty( $breadcrumb_title ) ) {
-		$title = wp_kses( $breadcrumb_title, array() );
+	if ( in_array( 'post-organization', $type ) && ! empty( $organization_breadcrumb_title ) ) {
+		$title = wp_kses( $organization_breadcrumb_title, array() );
+	}
+
+	$page_breadcrumb_title = get_field( 'custom_breadcrumb_title', $id );
+
+	if ( in_array( 'post-page', $type ) && ! empty( $page_breadcrumb_title ) ) {
+		$title = wp_kses( $page_breadcrumb_title, array() );
 	}
 
 	return $title;
