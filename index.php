@@ -4,9 +4,11 @@
 	<?php
 		global $post;
 
-		$page_id          = get_the_ID();
-		$post_title       = $post->post_title;
-		$page_description = get_field( 'top-description', $page_id );
+		$page_id           = get_the_ID();
+		$post_custom_title = get_field( 'custom_title', $page_id );
+		$page_description  = get_field( 'top-description', $page_id );
+		
+		$post_title = $post_custom_title ? $post_custom_title : $post->post_title;
 
 		$approver_info     = null;
 		$approver_taxonomy = 'approver';
