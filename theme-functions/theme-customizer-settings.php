@@ -1366,11 +1366,15 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
-		.main-blocks a:not(.ez-toc-link, .shortcode-link) {
+		.main-blocks a:not(.ez-toc-link, .shortcode-link),
+		.author-info a,
+		#comments a {
 			color: ' . esc_attr( $links_custom_color ) . ' !important;
 		}
 
-		.main-blocks a:not(.ez-toc-link, .shortcode-link):hover {
+		.main-blocks a:not(.ez-toc-link, .shortcode-link):hover,
+		.author-info a:hover,
+		#comments a:hover {
 			color: ' . esc_attr( $links_custom_hover_color ) . ' !important;
 		}
 
