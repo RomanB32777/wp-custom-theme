@@ -42,17 +42,6 @@
 	$rating_payments = esc_html( get_post_meta( get_the_ID(), 'organization_rating_payments', true ) );
 	$rating_features = esc_html( get_post_meta( get_the_ID(), 'organization_rating_features', true ) );
 
-	$without_ratings = 
-		empty( $rating_trust ) && 
-		empty( $rating_games ) && 
-		empty( $rating_bonus ) && 
-		empty( $rating_customer ) && 
-		empty( $rating_pre ) &&
-		empty( $rating_live ) &&
-		empty( $rating_coef ) &&
-		empty( $rating_payments ) &&
-		empty( $rating_features );
-
 	if ( empty( $button_title ) ) {
 		if ( get_option( 'organizations_play_now_title' ) ) {
 			$button_title = esc_html( get_option( 'organizations_play_now_title' ) );
@@ -210,7 +199,7 @@
 
 		<div class="flex flex-col max-w-4xl mx-auto gap-y-6 py-10 md:justify-around md:!flex-row md:items-center">
 
-			<?php if ( ! boolval( $without_ratings ) ) { ?>
+			<?php if ( is_numeric( $overall_rating ) ) { ?>
 				
 				<div class="order-2 flex flex-wrap justify-between gap-y-3 md:!order-2 md:w-3/4">
 
