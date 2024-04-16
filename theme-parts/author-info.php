@@ -11,7 +11,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15, $
 	?>
 	<div class="author-info">
 		<?php if ( ! empty( $block_title ) ) { ?>
-			<h5 class="block-title font-lineSeedJp mb-6 md:text-2xl">
+			<h5 class="block-title mb-6 md:text-2xl">
 				<?php echo esc_html( $block_title ); ?>
 			</h5>
 		<?php } ?>
@@ -46,7 +46,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15, $
 			</div>
 			<div class="flex items-center justify-center min-w-48">
 				<a class="main-button inline-block w-full text-center p-3 no-underline" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>">
-					<span class="font-lineSeedJp text-base xl:!text-sm font-bold">
+					<span class="text-base xl:!text-sm font-bold">
 						<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
 					</span>
 				</a>

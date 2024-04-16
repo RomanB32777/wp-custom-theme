@@ -100,7 +100,7 @@ main,
 main .block-title,
 .main-blocks h1,
 .main-blocks h2,
-.main-blocks ul:not(.ez-toc-list) li,
+.main-blocks ul:not([class*="ez-toc-list"]) li,
 .wp-block-post-content .block-title,
 .wp-block-post-content h1,
 .wp-block-post-content h2,
@@ -120,7 +120,7 @@ main .block-title,
 main .block-title::before,
 .main-blocks h1::before,
 .main-blocks h2::before,
-.main-blocks ul:not(.ez-toc-list) li::before,
+.main-blocks ul:not([class*="ez-toc-list"]) li::before,
 .wp-block-post-content .block-title::before,
 .wp-block-post-content h1::before,
 .wp-block-post-content h2::before,
@@ -134,7 +134,13 @@ main .block-title::before,
 	content: "";
 }
 
-.main-blocks ul:not(.ez-toc-list) li::before,
+.main-blocks ul:not([class*="ez-toc-list"]) li::before,
 .wp-block-post-content ul li::before {
 	margin-top: 4px;
+}
+
+// We need to have a .editor-style-wrapper or .wp-block selector inside the css file so
+// the file will be enqueued inside the iframe - fucking wordpress
+.wp-block {
+	opacity: 1;
 }

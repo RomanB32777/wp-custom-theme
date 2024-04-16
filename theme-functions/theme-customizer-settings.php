@@ -1340,7 +1340,8 @@ function theme_customizer_style_settings() {
 	$primary_custom_brightest_color = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 10%)';
 
 	$custom_css = '
-		body {
+		body.theme-body,
+		.editor-styles-wrapper  {
 			background-color: ' . esc_attr( $body_custom_color ) . ';
 			color: ' . esc_attr( $body_custom_content_color ) . ';
 		}
@@ -1407,7 +1408,7 @@ function theme_customizer_style_settings() {
 
 		}
 
-		.main-blocks ul li::before,
+		.main-blocks ul:not(.ez-toc-list) li::before,
 		.main-button,
 		input[type=checkbox]:checked ~ .switcher,
 		main .block-title::before,
@@ -1463,14 +1464,12 @@ function theme_customizer_style_settings() {
 		}
 
 		.main-blocks a:not(.ez-toc-link, .shortcode-link),
-		.comment-edit-link,
-		.comment-reply-link {
+		#comments a {
 			color: ' . esc_attr( $links_custom_color ) . ';
 		}
 
 		.main-blocks a:not(.ez-toc-link, .shortcode-link):hover,
-		.comment-edit-link:hover,
-		.comment-reply-link:hover  {
+		#comments a:hover {
 			color: ' . esc_attr( $links_custom_hover_color ) . ';
 		}
 

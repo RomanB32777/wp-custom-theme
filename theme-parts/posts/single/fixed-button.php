@@ -29,7 +29,7 @@ if ( empty( $organization_button_title ) ) {
 				<?php } ?>
 		
 				<div>
-					<p class="font-lineSeedJp font-bold text-base mb-1 sm:!mb-2 sm:!text-2xl">
+					<p class="font-bold text-base mb-1 sm:!mb-2 sm:!text-2xl">
 						<?php echo esc_html( get_the_title( $item_id ) ); ?>
 					</p>
 					
@@ -41,7 +41,6 @@ if ( empty( $organization_button_title ) ) {
 									custom_star_rating(
 										array(
 											'rating'       => $organization_overall_rating,
-											'stars_number' => $rating_stars_number,
 											'star_classes' => 'w-4 h-4',
 										)
 									);
@@ -64,7 +63,7 @@ if ( empty( $organization_button_title ) ) {
 								</svg>
 							</div>
 
-							<span class="font-lineSeedJp text-base text-grizzly-light">
+							<span class="text-base text-grizzly-light">
 								<?php echo esc_html( number_format( (float) $organization_overall_rating, 1, '.', ',' ) ); ?>/<?php echo esc_html( $rating_stars_number ); ?>
 							</span>
 						</div>
@@ -79,7 +78,7 @@ if ( empty( $organization_button_title ) ) {
 					<a 
 						href="<?php echo esc_url( $organization_external_link ); ?>" 
 						title="<?php echo esc_attr( $organization_button_title ); ?>" 
-						class="main-button font-lineSeedJp text-base text-center no-underline py-2 px-3 sm:!text-lg sm:!py-4 sm:!px-6" 
+						class="main-button text-base text-center no-underline py-2 px-3 sm:!text-lg sm:!py-4 sm:!px-6" 
 						rel="nofollow" 
 						target="_blank"
 					>

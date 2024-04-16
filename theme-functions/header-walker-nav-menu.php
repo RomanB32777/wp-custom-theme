@@ -15,8 +15,9 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$indent        = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 			$display_depth = ( $depth + 1 ); // because it counts the first submenu as 0
 			$classes       = array(
-				'dropdown-menu mt-2 space-y-2 duration-200 hidden ring-gray-900/5 rounded-lg md:opacity-0 md:group-hover:opacity-100 md:!block md:invisible md:group-hover:visible md:!mt-0 md:!space-y-0 md:absolute md:-left-2 md:top-full md:z-10 md:w-max md:max-w-md md:overflow-hidden md:shadow-lg md:ring-1 md:p-2',
-				( $display_depth >= 2 ? 'sub-sub-menu' : '' ),
+				'dropdown-menu mt-2 space-y-2 duration-200 ring-gray-900/5 rounded-lg pl-6 md:!px-4 md:!mt-0 md:!space-y-0 md:w-max md:max-w-md md:overflow-hidden',
+				( $depth >= 1 ? 'sub-sub-menu' : '' ),
+				( $depth > 0 ? 'md:group-hover/sub:opacity-100 md:group-hover/sub:visible' : 'hidden md:py-2 md:shadow-lg md:ring-1 md:opacity-0 md:!block md:invisible md:group-hover/main:opacity-100 md:group-hover/main:visible md:absolute md:-left-2 md:top-full md:z-10' ),
 				'menu-depth-' . $display_depth,
 			);
 			$class_names   = implode( ' ', $classes );
@@ -35,23 +36,25 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 
 			// depth dependent classes (<li>)
-			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item -mx-3 pt-2 md:!m-0 md:!py-1' : 'sub-menu-item font-lineSeedJp relative flex items-center gap-x-6 p-2 text-base font-bold md:!font-normal' ),
-				( $depth >= 2 ? 'sub-sub-menu-item' : '' ),
+			$depth_classes = array(
+				( $depth === 0 ? 'main-menu-item pt-2 md:!m-0 md:!py-1' : 'sub-menu-item relative text-base font-bold md:!font-normal' ),
+				( $depth >= 1 ? 'sub-sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
+
 			$depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
 
 			$is_dropdown_item = isset( $args->has_children ) && $args->has_children;
-			$dropdown_classes = array();
+
+			$dropdown_classes = array( 'font-bold pt-2 text-base md:!py-1 md:!m-0 md:!font-normal' );
 
 			if ( $is_dropdown_item ) {
+
 				// with child elements - dropdown item
-				$dropdown_classes[] = 'dropdown group relative';
-			} elseif ( $depth === 0 ) {
-				// without child elements - simple item
-				$dropdown_classes[] = 'font-lineSeedJp font-bold -mx-3 pt-2 text-base md:!py-1 md:!m-0 md:!font-normal';
+				$dropdown_classes[] = 'dropdown relative';
+				$dropdown_classes[] = $depth > 0 ? 'group/sub' : 'group/main';
 			}
+
 			$dropdown_class_names = esc_attr( implode( ' ', $dropdown_classes ) );
 
 			// passed classes
@@ -62,10 +65,11 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
-			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 md:!p-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 md:!px-0 md:!py-0 md:!inline md:!rounded-none';
+			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 md:!py-1 md:!px-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 md:!rounded-none md:!px-0';
 
-			if ( isset( $args->has_children ) && $args->has_children && 0 === $depth && $args->depth > 1 ) {
-				$link_class_names = 'main-menu-link dropdown-toggle font-lineSeedJp w-full flex justify-between items-center gap-x-1 text-base font-bold duration-200 pl-3 py-2 rounded-lg pr-3.5 md:!font-normal md:!pl-0 md:!pr-0 md:!py-0 md:!rounded-none md:!w-auto';
+			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 ) {
+				// for only top link with child
+				$link_class_names .= ' dropdown-toggle w-full !flex items-center gap-x-1 text-base font-bold duration-200 pl-3 pr-3.5 md:!font-normal md:!px-0 md:!w-auto';
 			}
 
 			// link attributes
@@ -76,9 +80,10 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$attributes .= ' class="menu-link ' . $link_class_names . '"';
 
 			// dropdown arrow
-			$dropdown_arrow_html = '
+			$dropdown_group_selector = $depth > 0 ? 'md:group-hover/sub:rotate-180' : 'md:group-hover/main:rotate-180';
+			$dropdown_arrow_html     = '
 				<svg
-					class="dropdown-arrow h-5 w-5 flex-none duration-200 md:group-hover:rotate-180"
+					class="dropdown-arrow h-5 w-5 flex-none duration-200 ' . $dropdown_group_selector . '"
 					viewbox="0 0 20 20"
 					fill="currentColor"
 					aria-hidden="true"
@@ -97,6 +102,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 				$args->link_before,
 				apply_filters( 'the_title', $item->title, $item->ID ),
 				$args->link_after,
+				// TODO сделать дропдаун и для дочерних элементов
 				( $is_dropdown_item && 0 === $depth ? $dropdown_arrow_html : '' ),
 				$args->after
 			);
@@ -107,9 +113,11 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 		function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
 			$id_field = $this->db_fields['id'];
+			
 			if ( is_object( $args[0] ) ) {
 				$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
 			}
+
 			return parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 		}
 	}

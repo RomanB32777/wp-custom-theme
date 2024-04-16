@@ -30,7 +30,7 @@ function get_page_info( $approver_id ) {
 	?>
 	<div class="py-8 flex flex-row flex-wrap items-center justify-center gap-y-3 divide-x divide-primary">
 		<?php if ( ! empty( $author_name ) ) { ?>
-			<div class="flex flex-col items-center pr-5 font-lineSeedJp text-base sm:!pr-7">
+			<div class="flex flex-col items-center pr-5 text-base sm:!pr-7">
 				<p class="mb-2">
 					<!-- 記事の著者 -->
 					<?php esc_html_e( 'Author', 'custom-theme' ); ?>
@@ -41,7 +41,7 @@ function get_page_info( $approver_id ) {
 			</div>
 		<?php } ?>
 		<?php if ( ! empty( $approver_id ) ) { ?>
-			<div class="flex flex-col items-center px-5 font-lineSeedJp text-base sm:!px-7">
+			<div class="flex flex-col items-center px-5 text-base sm:!px-7">
 				<p class="mb-2">
 					<!-- 専門家による確認済み -->
 					✅ <?php esc_html_e( 'Verified by experts', 'custom-theme' ); ?>
@@ -51,7 +51,7 @@ function get_page_info( $approver_id ) {
 				</a>
 			</div>
 		<?php } ?>
-		<div class="flex flex-col items-center px-5 font-lineSeedJp text-base sm:!px-7">
+		<div class="flex flex-col items-center px-5 text-base sm:!px-7">
 			<p class="mb-2">
 				<!-- 更新 -->
 				<?php esc_html_e( 'Renew', 'custom-theme' ); ?>
@@ -60,7 +60,7 @@ function get_page_info( $approver_id ) {
 				<?php printf( _x( '%s', 'update title', 'custom-theme' ), get_the_modified_date() ); ?>
 			</p>
 		</div>
-		<div class="flex flex-col items-center pl-5 font-lineSeedJp text-base sm:!pl-7">
+		<div class="flex flex-col items-center pl-5 text-base sm:!pl-7">
 			<p class="mb-2">
 				<!-- コメント -->
 				<?php esc_html_e( 'Comments', 'custom-theme' ); ?>

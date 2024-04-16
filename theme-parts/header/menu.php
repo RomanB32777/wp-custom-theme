@@ -8,7 +8,7 @@
 				class="hamburger-btn inline-flex items-center justify-center rounded-lg text-gray-700 -m-2.5 p-2.5"
 				type="button"
 			>
-				<span class="font-lineSeedJp sr-only">Open main menu</span
+				<span class="sr-only">Open main menu</span
 				><svg
 					class="h-8 w-8 text-dark"
 					fill="none"
@@ -30,7 +30,7 @@
 				wp_nav_menu( 
 					array( 
 						'theme_location' => 'header',
-						'depth'          => 2,
+						'depth'          => 5,
 						'container'      => null,
 						'menu_class'     => 'hidden md:!flex md:gap-x-8',
 						'walker'         => new Header_Walker_Nav_Menu(),
@@ -39,7 +39,7 @@
 				?>
 			<div class="dropdown group relative -mx-3 pt-2 lang-switcher md:m-0 md:py-1">
 				<a 
-					class="main-menu-link dropdown-toggle font-lineSeedJp flex justify-between items-center gap-x-1 duration-200 font-bold text-sm w-auto uppercase hover:bg-transparent hover:text-grizzly" 
+					class="main-menu-link dropdown-toggle flex justify-between items-center gap-x-1 duration-200 font-bold text-sm w-auto uppercase hover:bg-transparent hover:text-grizzly" 
 					href="#" 
 					aria-expanded="false"
 				>

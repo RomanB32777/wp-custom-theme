@@ -59,7 +59,7 @@
 		
 			<!-- Title Box Start -->
 		
-			<h1 class="font-lineSeedJp py-8 text-center font-bold text-2xl md:!text-5xl">
+			<h1 class="py-8 text-center font-bold text-2xl md:!text-5xl">
 				<?php echo wp_kses( $post_title, $allowed_html ); ?>
 			</h1>
 		
@@ -80,7 +80,7 @@
 
 			<!-- Description Box Start -->
 
-			<div class="font-lineSeedJp py-8">
+			<div class="py-8">
 				<?php echo wp_kses( $page_description, $allowed_html ); ?>
 			</div>
 
@@ -91,8 +91,8 @@
 	</div>
 
 	
-	<div class="flex flex-col justify-between gap-x-5 pt-7 border-t main-border lg:!flex-row">
-		<div class="order-2 main-content w-full lg:!w-[70%] lg:!order-1">
+	<div class="flex flex-col-reverse justify-between gap-x-5 pt-7 border-t main-border lg:!flex-row">
+		<div class="main-content w-full lg:!w-[70%]">
 
 			<div class="main-blocks [&>*]:my-7">
 				<?php 
@@ -151,7 +151,7 @@
 			</div>
 		</div>
 		
-		<div class="order-1 w-full lg:!w-[30%] lg:!order-2 [&>*]:my-7">
+		<div class="w-full lg:!w-[30%] [&>*]:my-7">
 			<?php get_sidebar(); ?>
 		</div>
 	</div>

@@ -13,6 +13,18 @@ function custom_star_rating( $args = array() ) {
 			'xmlns'   => true,
 			'class'   => true,
 		),
+		'g'    => array(
+			'mask' => true,
+		),
+		'mask' => array(
+			'id'        => true,
+			'style'     => true,
+			'maskUnits' => true,
+			'x'         => true,
+			'y'         => true,
+			'width'     => true,
+			'height'    => true,
+		),
 		'path' => array(
 			'd'            => true,
 			'fill'         => true,
@@ -22,21 +34,32 @@ function custom_star_rating( $args = array() ) {
 			'stroke-width' => true,
 			'class'        => true,
 		),
+		'rect' => array(
+			'x'      => true,
+			'y'      => true,
+			'width'  => true,
+			'height' => true,
+			'fill'   => true,
+			'class'  => true,
+		),
 	);
 
 	$defaults = array(
 		'rating'          => 0,
-		'stars_number'    => 0,
 		'echo'            => true,
 		'wrapper_classes' => 'gap-x-1',
 		'star_classes'    => '',
 	);
 	
-	$parsed_args = wp_parse_args( $args, $defaults );
-	$rating      = $parsed_args['rating'];
+	$stars_number = 5;
 
-	$rating       = (float) str_replace( ',', '.', $parsed_args['rating'] );
-	$stars_number = $parsed_args['stars_number'];
+	if ( get_option( 'custom_rating_stars_number' ) ) {
+		$stars_number = get_option( 'custom_rating_stars_number' );
+	} 
+
+	$parsed_args = wp_parse_args( $args, $defaults );
+
+	$rating = (float) str_replace( ',', '.', $parsed_args['rating'] );
 
 	$full_stars = floor( $rating );
 

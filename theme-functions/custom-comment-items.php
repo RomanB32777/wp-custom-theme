@@ -44,12 +44,6 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 		$add_below = 'div-comment';
 	}
 
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$rating_stars_number = get_option( 'custom_rating_stars_number' );
-	} else {
-		$rating_stars_number = '5';
-	}
-
 	$comment_classes = $comment_class . 'my-3 [&>ul]:ml-8';
 	?>
 
@@ -62,7 +56,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 		<div class="comment-content">
 			<div class="flex flex-col mb-6 sm:items-center sm:justify-between sm:!flex-row">
 				<div class="mb-2 flex items-center sm:mb-0">
-					<p class="comment-author font-lineSeedJp font-semibold text-lg">
+					<p class="comment-author font-semibold text-lg">
 						<?php echo esc_html( get_comment_author( $comment_id ) ); ?>
 					</p>
 					<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
@@ -70,8 +64,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 							<?php
 								custom_star_rating(
 									array(
-										'rating'       => $rating,
-										'stars_number' => $rating_stars_number,
+										'rating' => $rating,
 									)
 								);
 							?>
@@ -79,11 +72,11 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 					<?php } ?>
 				</div>
 
-				<p class="font-lineSeedJp text-grizzly-light font-medium text-sm">
+				<p class="text-grizzly-light font-medium text-sm">
 					<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
 				</p>
 			</div>
-			<div class="font-lineSeedJp text-base font-normal">
+			<div class="text-base font-normal">
 				<?php comment_text( $comment_id ); ?>
 			</div>
 

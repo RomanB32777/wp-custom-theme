@@ -29,7 +29,7 @@ if ( ! empty( $authors ) ) {
 	?>
 
 	<div class="authors-info relative">
-		<h5 class="block-title font-lineSeedJp mb-6 md:text-2xl">
+		<h5 class="block-title mb-6 md:text-2xl">
 			<span>
 				<?php esc_html_e( 'Authors', 'custom-theme' ); ?>
 			</span>
@@ -72,7 +72,7 @@ if ( ! empty( $authors ) ) {
 										>
 									</a>
 								</div>
-								<p class="font-lineSeedJp font-base">
+								<p class="font-base">
 									<a class="title-link duration-200 hover:text-secondary no-underline" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">
 										<?php echo wp_kses( $author_name, $allowed_html ); ?>
 									</a>

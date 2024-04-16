@@ -35,7 +35,7 @@ if ( $recent_query->have_posts() ) {
 	?>
 
 	<div class="recent-pages relative">
-		<h5 class="block-title font-lineSeedJp mb-6 md:text-2xl">
+		<h5 class="block-title mb-6 md:text-2xl">
 			<span>
 				<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
 			</span>
@@ -75,7 +75,7 @@ if ( $recent_query->have_posts() ) {
 								<div class="flex flex-col h-full gap-5 p-4 sm:!py-8 sm:!px-6">
 									<div class="flex justify-between items-center">
 										<div class="flex gap-3 items-center">
-											<a class="title-link font-lineSeedJp no-underline text-base duration-200 hover:text-secondary" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">
+											<a class="title-link no-underline text-base duration-200 hover:text-secondary" href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">
 												<?php echo wp_kses( $author_name, $allowed_html ); ?>
 											</a>
 
@@ -92,18 +92,18 @@ if ( $recent_query->have_posts() ) {
 											</div>
 										</div>
 	
-										<small class="font-lineSeedJp">
+										<small>
 											<?php the_time( get_option( 'date_format' ) ); ?>
 										</small>
 									</div>								
 	
 									<div class="flex-1">
-										<a class="title-link font-lineSeedJp font-bold text-base duration-200 hover:text-secondary no-underline" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" rel="page">
+										<a class="title-link font-bold text-base duration-200 hover:text-secondary no-underline" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" rel="page">
 											<?php the_title(); ?>
 										</a>
 									</div>
 
-									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="main-button font-lineSeedJp text-base font-bold text-center py-3 px-4 no-underline">
+									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="main-button text-base font-bold text-center py-3 px-4 no-underline">
 										<span>
 											<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
 										</span>
