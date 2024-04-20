@@ -75,8 +75,7 @@ jQuery(document).ready(function ($) {
 
 	// Upload Taxonomy Image End
 
-	// Upload image of organization page - Start
-
+	// Upload image - Start
 	$("body").on("click", ".custom_upload_button", function (e: { preventDefault: () => void }) {
 		"use strict";
 
@@ -125,5 +124,5 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	// Upload image of organization page - End
+	// Upload image - End
 });
