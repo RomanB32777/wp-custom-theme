@@ -1,10 +1,11 @@
 <?php
 
-/*  Organizations - Post Type Start */
+/*  Init Custom Post Types Start */
 
-add_action( 'init', 'init_organizations', 0 );
+add_action( 'init', 'init_custom_post_types', 0 );
 
-function init_organizations() {
+function init_custom_post_types() {
+	/*  Organizations - Post Type Start */
 
 	$organization_name = esc_html__( 'Organizations', 'custom-theme' );
 
@@ -14,11 +15,11 @@ function init_organizations() {
 
 	$organization_slug = 'organization';
 
-	if ( get_option( 'organizations_section_slug' ) ) {
-		$organization_slug = get_option( 'organizations_section_slug', 'organization' );
+	if ( get_option( 'organization_section_slug' ) ) {
+		$organization_slug = get_option( 'organization_section_slug', 'organization' );
 	}
 
-	$args = array(
+	$organization_args = array(
 		'labels'             => array(
 			'name'         => $organization_name,
 			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
@@ -53,20 +54,61 @@ function init_organizations() {
 		),
 	);
 
-	register_post_type( 'organization', $args );
+	register_post_type( 'organization', $organization_args );
 
-	/* --- Payment Methods: Custom Taxonomy --- */
+	/*  Organizations - Post Type End */
 
-	$organizations_payment_method_title = esc_html__( 'Payment Methods', 'custom-theme' );
-	if ( get_option( 'organizations_payment_method_title' ) ) {
-		$organizations_payment_method_title = get_option( 'organizations_payment_method_title', 'Payment Methods' );
+	/*  Apps - Post Type Start */
+
+	$app_name = esc_html__( 'Apps', 'custom-theme' );
+
+	if ( get_option( 'apps_section_name' ) ) {
+		$app_name = get_option( 'apps_section_name', 'Apps' );
 	}
 
-	$labels = array(
-		'name'              => $organizations_payment_method_title,
-		'singular_name'     => $organizations_payment_method_title,
+	$app_args = array(
+		'labels'             => array(
+			'name'         => $app_name,
+			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
+			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
+			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
+			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
+		),
+		'singular_label'     => __( 'app' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_rest'       => true,
+		'menu_icon'          => 'dashicons-smartphone',
+		'_builtin'           => false,
+		'_edit_link'         => 'post.php?post=%d',
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'supports'           => array(
+			'title',
+			'editor',
+			'author',
+			'comments',
+			'thumbnail',
+			'excerpt',
+			'revisions',
+		),
+		'has_archive'        => false,
+		'rest_base'          => 'app',
+		'rewrite'            => false,
+	);
+
+	register_post_type( 'app', $app_args );
+
+	/* --- App Platforms: Custom Taxonomy --- */
+
+	$app_platforms_title = esc_html__( 'App platforms', 'custom-theme' );
+
+	$platform_labels = array(
+		'name'              => $app_platforms_title,
+		'singular_name'     => $app_platforms_title,
 		'search_items'      => esc_html__( 'Find Taxonomy', 'custom-theme' ),
-		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $organizations_payment_method_title,
+		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $app_platforms_title,
 		'parent_item'       => esc_html__( 'Parent Taxonomy', 'custom-theme' ),
 		'parent_item_colon' => esc_html__( 'Parent Taxonomy:', 'custom-theme' ),
 		'edit_item'         => esc_html__( 'Edit Taxonomy', 'custom-theme' ),
@@ -74,11 +116,11 @@ function init_organizations() {
 		'update_item'       => esc_html__( 'Update Taxonomy', 'custom-theme' ),
 		'add_new_item'      => esc_html__( 'Add New Taxonomy', 'custom-theme' ),
 		'new_item_name'     => esc_html__( 'Taxonomy', 'custom-theme' ),
-		'menu_name'         => $organizations_payment_method_title,
+		'menu_name'         => $app_platforms_title,
 	); 
 
-	$args = array(
-		'labels'                => $labels,
+	$platform_args = array(
+		'labels'                => $platform_labels,
 		'public'                => true,
 		'show_in_nav_menus'     => true,
 		'show_ui'               => true,
@@ -92,20 +134,61 @@ function init_organizations() {
 		'_builtin'              => false,
 	);
 
-	register_taxonomy( 'payment-method', 'organization', $args );
+	register_taxonomy( 'app-platform', 'app', $platform_args );
 
-	/* --- Devices: Custom Taxonomy --- */
+	/*  Apps - Post Type End */
 
-	$organizations_devices_title = esc_html__( 'Devices', 'custom-theme' );
-	if ( get_option( 'organizations_devices_title' ) ) {
-		$organizations_devices_title = get_option( 'organizations_devices_title', 'Devices' );
+	/*  Payments - Post Type Start */
+
+	$payment_name = esc_html__( 'Payments', 'custom-theme' );
+
+	if ( get_option( 'payments_section_name' ) ) {
+		$payment_name = get_option( 'payments_section_name', 'Payments' );
 	}
 
-	$labels = array(
-		'name'              => $organizations_devices_title,
-		'singular_name'     => $organizations_devices_title,
+	$payment_args = array(
+		'labels'             => array(
+			'name'         => $payment_name,
+			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
+			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
+			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
+			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
+		),
+		'singular_label'     => __( 'payment' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_rest'       => true,
+		'menu_icon'          => 'dashicons-store',
+		'_builtin'           => false,
+		'_edit_link'         => 'post.php?post=%d',
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'supports'           => array(
+			'title',
+			'editor',
+			'author',
+			'comments',
+			'thumbnail',
+			'excerpt',
+			'revisions',
+		),
+		'has_archive'        => false,
+		'rest_base'          => 'payment',
+		'rewrite'            => false,
+	);
+
+	register_post_type( 'payment', $payment_args );
+
+	/* --- Payment Systems: Custom Taxonomy --- */
+
+	$app_systems_title = esc_html__( 'Payment systems', 'custom-theme' );
+
+	$system_labels = array(
+		'name'              => $app_systems_title,
+		'singular_name'     => $app_systems_title,
 		'search_items'      => esc_html__( 'Find Taxonomy', 'custom-theme' ),
-		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $organizations_devices_title,
+		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $app_systems_title,
 		'parent_item'       => esc_html__( 'Parent Taxonomy', 'custom-theme' ),
 		'parent_item_colon' => esc_html__( 'Parent Taxonomy:', 'custom-theme' ),
 		'edit_item'         => esc_html__( 'Edit Taxonomy', 'custom-theme' ),
@@ -113,11 +196,11 @@ function init_organizations() {
 		'update_item'       => esc_html__( 'Update Taxonomy', 'custom-theme' ),
 		'add_new_item'      => esc_html__( 'Add New Taxonomy', 'custom-theme' ),
 		'new_item_name'     => esc_html__( 'Taxonomy', 'custom-theme' ),
-		'menu_name'         => $organizations_devices_title,
+		'menu_name'         => $app_systems_title,
 	); 
 
-	$args = array(
-		'labels'                => $labels,
+	$system_args = array(
+		'labels'                => $system_labels,
 		'public'                => true,
 		'show_in_nav_menus'     => true,
 		'show_ui'               => true,
@@ -131,10 +214,144 @@ function init_organizations() {
 		'_builtin'              => false,
 	);
 
-	register_taxonomy( 'device', 'organization', $args );
+	register_taxonomy( 'payment-system', 'payment', $system_args );
+
+	/*  Payments - Post Type End */
+
+	/*  Registration - Post Type Start */
+
+	$registration_name = esc_html__( 'Registration', 'custom-theme' );
+
+	if ( get_option( 'registration_section_name' ) ) {
+		$registration_name = get_option( 'registration_section_name', 'Registration' );
+	}
+
+	$registration_args = array(
+		'labels'             => array(
+			'name'         => $registration_name,
+			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
+			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
+			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
+			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
+		),
+		'singular_label'     => __( 'registration' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_rest'       => true,
+		'menu_icon'          => 'dashicons-admin-network',
+		'_builtin'           => false,
+		'_edit_link'         => 'post.php?post=%d',
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'supports'           => array(
+			'title',
+			'editor',
+			'author',
+			'comments',
+			'thumbnail',
+			'excerpt',
+			'revisions',
+		),
+		'has_archive'        => false,
+		'rest_base'          => 'registration',
+		'rewrite'            => false,
+	);
+
+	register_post_type( 'registration', $registration_args );
+
+	/*  Registration - Post Type End */
+
+	/*  Bonuses - Post Type Start */
+
+	$bonus_name = esc_html__( 'Bonuses', 'custom-theme' );
+
+	if ( get_option( 'bonuses_section_name' ) ) {
+		$bonus_name = get_option( 'bonuses_section_name', 'Bonuses' );
+	}
+
+	$bonus_args = array(
+		'labels'             => array(
+			'name'         => $bonus_name,
+			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
+			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
+			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
+			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
+		),
+		'singular_label'     => __( 'bonus' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_rest'       => true,
+		'menu_icon'          => 'dashicons-money-alt',
+		'_builtin'           => false,
+		'_edit_link'         => 'post.php?post=%d',
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'supports'           => array(
+			'title',
+			'editor',
+			'author',
+			'comments',
+			'thumbnail',
+			'excerpt',
+			'revisions',
+		),
+		'has_archive'        => false,
+		'rest_base'          => 'bonus',
+		'rewrite'            => false,
+	);
+
+	register_post_type( 'bonus', $bonus_args );
+
+	/*  Bonuses - Post Type End */
+
+	/*  Promotional Codes - Post Type Start */
+
+	$promo_name = esc_html__( 'Promotional codes', 'custom-theme' );
+
+	if ( get_option( 'promo_section_name' ) ) {
+		$promo_name = get_option( 'promo_section_name', 'Promotional codes' );
+	}
+
+	$promo_args = array(
+		'labels'             => array(
+			'name'         => $promo_name,
+			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
+			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
+			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
+			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
+		),
+		'singular_label'     => __( 'promo' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_rest'       => true,
+		'menu_icon'          => 'dashicons-tickets-alt',
+		'_builtin'           => false,
+		'_edit_link'         => 'post.php?post=%d',
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'supports'           => array(
+			'title',
+			'editor',
+			'author',
+			'comments',
+			'thumbnail',
+			'excerpt',
+			'revisions',
+		),
+		'has_archive'        => false,
+		'rest_base'          => 'promo',
+		'rewrite'            => false,
+	);
+
+	register_post_type( 'promo', $promo_args );
+
+	/*  Promotional Codes - Post Type End */
 }
 
-/*  Organizations - Post Type End */
+/*  Init Custom Post Types End */
 
 /*  Organizations - Short Description Start */
 
@@ -1102,11 +1319,355 @@ function organizations_save_fields( $post_id ) {
 
 /*  Organizations - Additional Fields End */
 
-/*  Add Payment Methods logo Start  */
+/*  Relationship of the Child Post Types and Organizations Start  */
+
+add_action( 'admin_init', 'custom_post_types_organizations_list' );
+
+function custom_post_types_organizations_list() {
+
+	$organizations_section_name = esc_html__( 'Organizations', 'custom-theme' );
+
+	if ( get_option( 'organizations_section_name' ) ) {
+		$organizations_section_name = get_option( 'organizations_section_name', 'Organizations' );
+	}
+
+	add_meta_box(
+		'custom_apps_organizations_list_meta_box',
+		$organizations_section_name,
+		'custom_post_types_display_organizations_list_meta_box',
+		'app',
+		'side',
+		'high'
+	);
+
+	add_meta_box(
+		'custom_payments_organizations_list_meta_box',
+		$organizations_section_name,
+		'custom_post_types_display_organizations_list_meta_box',
+		'payment',
+		'side',
+		'high'
+	);
+
+	add_meta_box(
+		'custom_registration_organizations_list_meta_box',
+		$organizations_section_name,
+		'custom_post_types_display_organizations_list_meta_box',
+		'registration',
+		'side',
+		'high'
+	);
+
+	add_meta_box(
+		'custom_bonuses_organizations_list_meta_box',
+		$organizations_section_name,
+		'custom_post_types_display_organizations_list_meta_box',
+		'bonus',
+		'side',
+		'high'
+	);
+
+	add_meta_box(
+		'custom_promo_organizations_list_meta_box',
+		$organizations_section_name,
+		'custom_post_types_display_organizations_list_meta_box',
+		'promo',
+		'side',
+		'high'
+	);
+}
+
+function custom_post_types_display_organizations_list_meta_box( $post ) {
+	$organizations = get_posts(
+		array(
+			'post_type'      => 'organization',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+		) 
+	);
+
+	if ( $organizations ) {
+		$elements = array();
+
+		foreach ( $organizations as $organization ) {
+			$elements[ $organization->ID ] = $organization->post_title;
+		}
+
+		?>
+	<div style="max-height:200px; overflow-y:auto;">
+		<ul>
+			<li>
+				<label>
+					<input type="radio" name="post_parent" value="0" <?php checked( 0, $post->post_parent ); ?>>
+					<?php esc_html_e( 'Without parent', 'custom-theme' ); ?>
+				</label>
+			</li>
+			<?php foreach ( $elements as $id => $element ) { ?>
+				<li>
+					<label>
+						<input type="radio" name="post_parent" value="<?php echo esc_attr( $id ); ?>" <?php checked( $id, $post->post_parent ); ?>>
+						<?php echo esc_html( $element ); ?>
+					</label>
+				</li>
+			<?php } ?>
+		</ul>
+	</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/* Relationship of the Child Post Types and Organizations Start  */
+
+
+/*  Display the Relationship of the Organization and Child Post Types Start  */
+
+add_action( 'admin_init', 'custom_organizations_post_types_list' );
+
+function custom_organizations_post_types_list() {
+
+	$apps_section_name = esc_html__( 'Apps', 'custom-theme' );
+
+	if ( get_option( 'apps_section_name' ) ) {
+		$apps_section_name = get_option( 'apps_section_name', 'Apps' );
+	}
+
+	add_meta_box(
+		'custom_organizations_apps_list_meta_box',
+		$apps_section_name,
+		'custom_organizations_display_apps_list_meta_box',
+		'organization',
+		'side',
+		'high'
+	);
+
+	$payments_section_name = esc_html__( 'Payments', 'custom-theme' );
+
+	if ( get_option( 'payments_section_name' ) ) {
+		$payments_section_name = get_option( 'payments_section_name', 'Payments' );
+	}
+
+	add_meta_box(
+		'custom_organizations_payments_list_meta_box',
+		$payments_section_name,
+		'custom_organizations_display_payments_list_meta_box',
+		'organization',
+		'side',
+		'high'
+	);
+
+	$registration_section_name = esc_html__( 'Registration', 'custom-theme' );
+
+	if ( get_option( 'registration_section_name' ) ) {
+		$registration_section_name = get_option( 'registration_section_name', 'Registration' );
+	}
+
+	add_meta_box(
+		'custom_organizations_registration_list_meta_box',
+		$registration_section_name,
+		'custom_organizations_display_registration_list_meta_box',
+		'organization',
+		'side',
+		'high'
+	);
+
+	$bonuses_section_name = esc_html__( 'Bonuses', 'custom-theme' );
+
+	if ( get_option( 'bonuses_section_name' ) ) {
+		$bonuses_section_name = get_option( 'bonuses_section_name', 'Bonuses' );
+	}
+
+	add_meta_box(
+		'custom_organizations_bonuses_list_meta_box',
+		$bonuses_section_name,
+		'custom_organizations_display_bonuses_list_meta_box',
+		'organization',
+		'side',
+		'high'
+	);
+
+	$promo_section_name = esc_html__( 'Promotional codes', 'custom-theme' );
+
+	if ( get_option( 'promo_section_name' ) ) {
+		$promo_section_name = get_option( 'promo_section_name', 'Promotional codes' );
+	}
+
+	add_meta_box(
+		'custom_organizations_promo_list_meta_box',
+		$promo_section_name,
+		'custom_organizations_display_promo_list_meta_box',
+		'organization',
+		'side',
+		'high'
+	);
+}
+
+/*  Display the Relationship of the Organization and Apps Start  */
+
+function custom_organizations_display_apps_list_meta_box( $post ) {
+	$apps = get_posts(
+		array(
+			'post_type'      => 'app',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'post_parent'    => $post->ID,
+			
+		)
+	);
+
+	if ( $apps ) {
+		?>
+		<div style="max-height:200px; overflow-y:auto;">
+			<ul>
+			<?php foreach ( $apps as $app ) { ?>
+				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/*  Display the Relationship of the Organization and Apps End  */
+
+/*  Display the Relationship of the Organization and Payments Start  */
+
+function custom_organizations_display_payments_list_meta_box( $post ) {
+	$apps = get_posts(
+		array(
+			'post_type'      => 'payment',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'post_parent'    => $post->ID,
+			
+		)
+	);
+
+	if ( $apps ) {
+		?>
+		<div style="max-height:200px; overflow-y:auto;">
+			<ul>
+			<?php foreach ( $apps as $app ) { ?>
+				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/*  Display the Relationship of the Organization and Payments End  */
+
+/*  Display the Relationship of the Organization and Registration Start  */
+
+function custom_organizations_display_registration_list_meta_box( $post ) {
+	$apps = get_posts(
+		array(
+			'post_type'      => 'registration',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'post_parent'    => $post->ID,
+			
+		)
+	);
+
+	if ( $apps ) {
+		?>
+		<div style="max-height:200px; overflow-y:auto;">
+			<ul>
+			<?php foreach ( $apps as $app ) { ?>
+				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/*  Display the Relationship of the Organization and Registration End  */
+
+/*  Display the Relationship of the Organization and Bonuses Start  */
+
+function custom_organizations_display_bonuses_list_meta_box( $post ) {
+	$apps = get_posts(
+		array(
+			'post_type'      => 'bonus',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'post_parent'    => $post->ID,
+			
+		)
+	);
+
+	if ( $apps ) {
+		?>
+		<div style="max-height:200px; overflow-y:auto;">
+			<ul>
+			<?php foreach ( $apps as $app ) { ?>
+				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/*  Display the Relationship of the Organization and Bonuses End  */
+
+/*  Display the Relationship of the Organization and Promo Start  */
+
+function custom_organizations_display_promo_list_meta_box( $post ) {
+	$apps = get_posts(
+		array(
+			'post_type'      => 'promo',
+			'posts_per_page' => -1,
+			'orderby'        => 'post_title',
+			'order'          => 'ASC',
+			'post_parent'    => $post->ID,
+			
+		)
+	);
+
+	if ( $apps ) {
+		?>
+		<div style="max-height:200px; overflow-y:auto;">
+			<ul>
+			<?php foreach ( $apps as $app ) { ?>
+				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
+			<?php } ?>
+			</ul>
+		</div>
+		<?php
+	} else {
+		esc_html_e( 'No items', 'custom-theme' );
+	}
+}
+
+/*  Display the Relationship of the Organization and Promo End  */
+
+
+/*  Display the Relationship of the Organization and Child Post Types End  */
+
+
+/*  Add Payment Systems logo Start  */
 
 /* --- Add custom taxonomy field --- */
 
-function add_payment_method_taxonomy_image( $taxonomy ) {
+function add_payment_system_taxonomy_image( $taxonomy ) {
 	?>
 <div class="form-field term-group">
 	<label for="taxonomy-image-id">
@@ -1122,22 +1683,22 @@ function add_payment_method_taxonomy_image( $taxonomy ) {
 	<?php
 }
 
-add_action( 'payment-method_add_form_fields', 'add_payment_method_taxonomy_image', 10, 2 );
+add_action( 'payment-system_add_form_fields', 'add_payment_system_taxonomy_image', 10, 2 );
 
 /* --- Save the custom taxonomy field --- */
 
-function save_payment_method_taxonomy_image( $term_id, $tt_id ) {
+function save_payment_system_taxonomy_image( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
 	}
 }
 
-add_action( 'created_payment-method', 'save_payment_method_taxonomy_image', 10, 2 );
+add_action( 'created_payment-system', 'save_payment_system_taxonomy_image', 10, 2 );
 
 /* --- Add custom taxonomy field for edit --- */
 
-function edit_payment_method_image_upload( $term, $taxonomy ) {
+function edit_payment_system_image_upload( $term, $taxonomy ) {
 	?>
 <tr class="form-field term-group-wrap">
 	<th scope="row">
@@ -1162,11 +1723,11 @@ function edit_payment_method_image_upload( $term, $taxonomy ) {
 	<?php
 }
 
-add_action( 'payment-method_edit_form_fields', 'edit_payment_method_image_upload', 10, 2 );
+add_action( 'payment-system_edit_form_fields', 'edit_payment_system_image_upload', 10, 2 );
 
 /* --- Save the edited value of the custom taxonomy field --- */
 
-function update_payment_method_image_upload( $term_id, $tt_id ) {
+function update_payment_system_image_upload( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		update_term_meta( $term_id, 'taxonomy-image-id', $image );
@@ -1175,16 +1736,16 @@ function update_payment_method_image_upload( $term_id, $tt_id ) {
 	}
 }
 
-add_action( 'edited_payment-method', 'update_payment_method_image_upload', 10, 2 );
+add_action( 'edited_payment-system', 'update_payment_system_image_upload', 10, 2 );
 
-/*  Add Payment Methods logo End  */
+/*  Add Payment Systems logo End  */
 
 
-/*  Add Devices logo Start  */
+/*  Add App Platforms logo Start  */
 
 /* --- Add custom taxonomy field --- */
 
-function add_device_taxonomy_image( $taxonomy ) {
+function add_app_platform_taxonomy_image( $taxonomy ) {
 	?>
 <div class="form-field term-group">
 	<label for="taxonomy-image-id">
@@ -1200,22 +1761,22 @@ function add_device_taxonomy_image( $taxonomy ) {
 	<?php
 }
 
-add_action( 'device_add_form_fields', 'add_device_taxonomy_image', 10, 2 );
+add_action( 'app-platform_add_form_fields', 'add_app_platform_taxonomy_image', 10, 2 );
 
 /* --- Save the custom taxonomy field --- */
 
-function save_device_taxonomy_image( $term_id, $tt_id ) {
+function save_app_platform_taxonomy_image( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
 	}
 }
 
-add_action( 'created_device', 'save_device_taxonomy_image', 10, 2 );
+add_action( 'created_app-platform', 'save_app_platform_taxonomy_image', 10, 2 );
 
 /* --- Add custom taxonomy field for edit --- */
 
-function edit_device_image_upload( $term, $taxonomy ) {
+function edit_app_platform_image_upload( $term, $taxonomy ) {
 	?>
 <tr class="form-field term-group-wrap">
 	<th scope="row">
@@ -1240,11 +1801,11 @@ function edit_device_image_upload( $term, $taxonomy ) {
 	<?php
 }
 
-add_action( 'device_edit_form_fields', 'edit_device_image_upload', 10, 2 );
+add_action( 'app-platform_edit_form_fields', 'edit_app_platform_image_upload', 10, 2 );
 
 /* --- Save the edited value of the custom taxonomy field --- */
 
-function update_device_image_upload( $term_id, $tt_id ) {
+function update_app_platform_image_upload( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		update_term_meta( $term_id, 'taxonomy-image-id', $image );
@@ -1253,6 +1814,64 @@ function update_device_image_upload( $term_id, $tt_id ) {
 	}
 }
 
-add_action( 'edited_device', 'update_device_image_upload', 10, 2 );
+add_action( 'edited_app-platform', 'update_app_platform_image_upload', 10, 2 );
 
-/*  Add Devices logo End  */
+/*  Add App Platforms logo End  */
+
+/*  Rewrite Links Of Custom Post Types Start  */
+
+function custom_posts_rewrite_rules() {
+	foreach ( get_post_types(
+		array(
+			'public'   => true,
+			'_builtin' => false,
+		),
+	) as $post_type ) {
+		if ( 'organization' === $post_type ) { 
+			continue;
+		}
+
+		$post_slug   = $post_type;
+		$rewrite_tag = '%' . $post_type . '%';
+
+		add_rewrite_tag( $rewrite_tag, '([^/]+)', $post_type . '=' );
+
+		$post_section_slug = $post_type . '_section_slug';
+		
+		if ( get_option( $post_section_slug ) ) {
+			$post_slug = get_option( $post_section_slug, $post_type );
+		}
+		
+		add_permastruct( $post_type, '%parent_name%/' . $post_slug . '/' . $rewrite_tag, false );
+		
+		add_rewrite_rule( '^([^/]+)/' . $post_slug . '/([^/]+)/?', 'index.php?' . $post_type . '=$matches[2]', 'top' );
+	
+	}
+}
+add_action( 'init', 'custom_posts_rewrite_rules' );
+
+
+function custom_post_type_permalinks( $link, $post ) {
+	if ( in_array(
+		get_post_type( $post ),
+		get_post_types(
+			array(
+				'public'   => true,
+				'_builtin' => false,
+			),
+		) 
+	) ) {
+		if ( $post->post_parent ) {
+			$parent = get_post( $post->post_parent );
+
+			if ( ! empty( $parent->post_name ) ) {
+				return str_replace( '%parent_name%', $parent->post_name, $link ); 
+			}
+		}   
+	}
+	return $link;
+}
+
+add_filter( 'post_type_link', 'custom_post_type_permalinks', 10, 3 );
+
+/*  Rewrite Links Of Custom Post Types End  */

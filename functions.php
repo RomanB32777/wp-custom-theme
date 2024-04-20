@@ -113,7 +113,7 @@ add_action( 'wp_enqueue_scripts', 'scripts_theme' );
 function custom_taxonomy_image_uploader() {
 	global $typenow;
 	
-	if ( 'organization' === $typenow ) {
+	if ( in_array( $typenow, array( 'app', 'payment' ) ) ) {
 
 		if ( ! did_action( 'wp_enqueue_media' ) ) {
 			wp_enqueue_media();
@@ -138,11 +138,11 @@ require_once __DIR__ . '/theme-functions/custom-star-rating.php';
 
 /**  Custom Star Rating - End  */
 
-/** Organizations Post Type - Start  */
+/** Custom Post Type - Start  */
 
-require_once __DIR__ . '/theme-functions/organizations-post-type.php';
+require_once __DIR__ . '/theme-functions/custom-post-types.php';
 
-/**  Organizations Post Type - End  */
+/**  Custom Post Type - End  */
 
 /** Theme Customizer Range - Start  */
 
