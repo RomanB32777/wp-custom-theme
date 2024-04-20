@@ -346,7 +346,7 @@ function organizations_settings_init() {
 	add_settings_field(
 		'organizations_section_name',
 		esc_html__( 'The title of the &quot;Organizations&quot; custom post type', 'custom-theme' ),
-		'custom_textfield_section_name_callback',
+		'custom_textfield_name_callback',
 		'organizations_tab',
 		'organizations_tab_titles',
 		array(
@@ -356,14 +356,70 @@ function organizations_settings_init() {
 	);
 	register_setting( 'organizations_tab', 'organizations_section_name', 'esc_attr' );
 
-	function custom_textfield_section_name_callback( $args ) {
-		$option      = esc_attr( get_option( $args['option_name'] ) );
-		$id          = $args['id'];
-		$option_name = $args['option_name'];
-		?>
-		<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default &quot;Organizations&quot;' ); ?>" class="regular-text" />
-		<?php
-	}
+	add_settings_field(
+		'apps_section_name',
+		esc_html__( 'The title of the &quot;Apps&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'apps_section_name', 
+			'option_name' => 'apps_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'apps_section_name', 'esc_attr' );
+
+	add_settings_field(
+		'payments_section_name',
+		esc_html__( 'The title of the &quot;Payments&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'payments_section_name', 
+			'option_name' => 'payments_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'payments_section_name', 'esc_attr' );
+
+	add_settings_field(
+		'registration_section_name',
+		esc_html__( 'The title of the &quot;Registration&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'registration_section_name', 
+			'option_name' => 'registration_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'registration_section_name', 'esc_attr' );
+
+	add_settings_field(
+		'bonuses_section_name',
+		esc_html__( 'The title of the &quot;Bonuses&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'bonuses_section_name', 
+			'option_name' => 'bonuses_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'bonuses_section_name', 'esc_attr' );
+
+	add_settings_field(
+		'promo_section_name',
+		esc_html__( 'The title of the &quot;Promotional Codes&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_titles',
+		array(
+			'id'          => 'promo_section_name', 
+			'option_name' => 'promo_section_name',
+		)  
+	);
+	register_setting( 'organizations_tab', 'promo_section_name', 'esc_attr' );
 
 	/*
 	------------------------
@@ -375,24 +431,90 @@ function organizations_settings_init() {
 	/*  --- Organizations slug ---  */
 
 	add_settings_field(
-		'organizations_section_slug',
+		'organization_section_slug',
 		esc_html__( 'The slug of the &quot;Organizations&quot; custom post type', 'custom-theme' ),
-		'custom_textfield_slugs_callback',
+		'custom_textfield_name_callback',
 		'organizations_tab',
 		'organizations_tab_slugs',
 		array(
 			'id'          => 'organization_slug', 
-			'option_name' => 'organizations_section_slug',
+			'option_name' => 'organization_section_slug',
 		)  
 	);
-	register_setting( 'organizations_tab', 'organizations_section_slug', 'esc_attr' );
+	register_setting( 'organizations_tab', 'organization_section_slug', 'esc_attr' );
 
-	function custom_textfield_slugs_callback( $args ) {
+	add_settings_field(
+		'app_section_slug',
+		esc_html__( 'The slug of the &quot;Apps&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'app_slug', 
+			'option_name' => 'app_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'app_section_slug', 'esc_attr' );
+
+	add_settings_field(
+		'payment_section_slug',
+		esc_html__( 'The slug of the &quot;Payments&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'payments_slug', 
+			'option_name' => 'payment_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'payment_section_slug', 'esc_attr' );
+
+	add_settings_field(
+		'registration_section_slug',
+		esc_html__( 'The slug of the &quot;Registration&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'registration_slug', 
+			'option_name' => 'registration_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'registration_section_slug', 'esc_attr' );
+
+	add_settings_field(
+		'bonus_section_slug',
+		esc_html__( 'The slug of the &quot;Bonuses&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'bonuses_slug', 
+			'option_name' => 'bonus_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'bonus_section_slug', 'esc_attr' );
+
+	add_settings_field(
+		'promo_section_slug',
+		esc_html__( 'The slug of the &quot;Promotional Codes&quot; custom post type', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'organizations_tab',
+		'organizations_tab_slugs',
+		array(
+			'id'          => 'promo_slug', 
+			'option_name' => 'promo_section_slug',
+		)  
+	);
+	register_setting( 'organizations_tab', 'promo_section_slug', 'esc_attr' );
+
+	function custom_textfield_name_callback( $args ) {
 		$option      = esc_attr( get_option( $args['option_name'] ) );
 		$id          = $args['id'];
 		$option_name = $args['option_name'];
+
 		?>
-		<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default' ); ?> &quot;<?php echo esc_attr( $id ); ?>&quot;" class="regular-text" />
+		<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" class="regular-text" />
 		<?php
 	}
 
