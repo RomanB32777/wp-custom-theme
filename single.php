@@ -14,7 +14,9 @@
 <?php } else { ?>
 	<main class="pt-20 pb-10">
 
-		<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
+		</div>
 
 		<div class="main-blocks [&>*]:my-7">
 			<?php 
