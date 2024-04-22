@@ -1307,17 +1307,382 @@ function organizations_save_fields( $post_id ) {
 		}
 	}
 
-		$organization_external_link = esc_url( $_POST['organization_external_link'] );
-		update_post_meta( $post_id, 'organization_external_link', $organization_external_link );
+	$organization_external_link = esc_url( $_POST['organization_external_link'] );
+	update_post_meta( $post_id, 'organization_external_link', $organization_external_link );
 
-		$organization_button_title = sanitize_text_field( $_POST['organization_button_title'] );
-		update_post_meta( $post_id, 'organization_button_title', $organization_button_title );
+	$organization_button_title = sanitize_text_field( $_POST['organization_button_title'] );
+	update_post_meta( $post_id, 'organization_button_title', $organization_button_title );
 
-		$organization_permalink_button_title = sanitize_text_field( $_POST['organization_permalink_button_title'] );
-		update_post_meta( $post_id, 'organization_permalink_button_title', $organization_permalink_button_title );
+	$organization_permalink_button_title = sanitize_text_field( $_POST['organization_permalink_button_title'] );
+	update_post_meta( $post_id, 'organization_permalink_button_title', $organization_permalink_button_title );
 }
 
 /*  Organizations - Additional Fields End */
+
+/*  Apps - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'apps_breadcrumb_title_fields' );
+
+function apps_breadcrumb_title_fields() {
+	add_meta_box(
+		'apps_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'apps_breadcrumb_title_display_meta_box',
+		'app',
+		'normal',
+		'high'
+	);
+}
+
+function apps_breadcrumb_title_display_meta_box( $app ) {
+
+	wp_nonce_field( 'apps_breadcrumb_title_box', 'apps_breadcrumb_title_nonce' );
+
+	$app_breadcrumb_title = get_post_meta( $app->ID, 'app_breadcrumb_title', false );
+
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control app_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $app_breadcrumb_title[0] ) ) {
+			$app_breadcrumb_title[0] = '';
+		}
+		wp_editor( $app_breadcrumb_title[0], 'app_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'apps_breadcrumb_title_save_fields', 10, 2 );
+
+function apps_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['apps_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['apps_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'apps_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'app' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$app_breadcrumb_title = $_POST['app_breadcrumb_title'];
+	update_post_meta( $post_id, 'app_breadcrumb_title', $app_breadcrumb_title );
+}
+
+/*  Apps - Breadcrumb Title End */
+
+/*  Payments - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'payments_breadcrumb_title_fields' );
+
+function payments_breadcrumb_title_fields() {
+	add_meta_box(
+		'payments_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'payments_breadcrumb_title_display_meta_box',
+		'payment',
+		'normal',
+		'high'
+	);
+}
+
+function payments_breadcrumb_title_display_meta_box( $payment ) {
+
+	wp_nonce_field( 'payments_breadcrumb_title_box', 'payments_breadcrumb_title_nonce' );
+
+	$payment_breadcrumb_title = get_post_meta( $payment->ID, 'payment_breadcrumb_title', false );
+
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control payment_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $payment_breadcrumb_title[0] ) ) {
+			$payment_breadcrumb_title[0] = '';
+		}
+		wp_editor( $payment_breadcrumb_title[0], 'payment_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'payments_breadcrumb_title_save_fields', 10, 2 );
+
+function payments_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['payments_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['payments_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'payments_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'payment' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$payment_breadcrumb_title = $_POST['payment_breadcrumb_title'];
+	update_post_meta( $post_id, 'payment_breadcrumb_title', $payment_breadcrumb_title );
+}
+
+/*  Payments - Breadcrumb Title End */
+
+/*  Registration - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'registration_breadcrumb_title_fields' );
+
+function registration_breadcrumb_title_fields() {
+	add_meta_box(
+		'registration_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'registration_breadcrumb_title_display_meta_box',
+		'registration',
+		'normal',
+		'high'
+	);
+}
+
+function registration_breadcrumb_title_display_meta_box( $registration ) {
+
+	wp_nonce_field( 'registration_breadcrumb_title_box', 'registration_breadcrumb_title_nonce' );
+
+	$registration_breadcrumb_title = get_post_meta( $registration->ID, 'registration_breadcrumb_title', false );
+
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control registration_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $registration_breadcrumb_title[0] ) ) {
+			$registration_breadcrumb_title[0] = '';
+		}
+		wp_editor( $registration_breadcrumb_title[0], 'registration_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'registration_breadcrumb_title_save_fields', 10, 2 );
+
+function registration_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['registration_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['registration_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'registration_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'registration' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$registration_breadcrumb_title = $_POST['registration_breadcrumb_title'];
+	update_post_meta( $post_id, 'registration_breadcrumb_title', $registration_breadcrumb_title );
+}
+
+/*  Registration - Breadcrumb Title End */
+
+/*  Bonuses - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'bonuses_breadcrumb_title_fields' );
+
+function bonuses_breadcrumb_title_fields() {
+	add_meta_box(
+		'bonuses_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'bonuses_breadcrumb_title_display_meta_box',
+		'bonus',
+		'normal',
+		'high'
+	);
+}
+
+function bonuses_breadcrumb_title_display_meta_box( $bonus ) {
+
+	wp_nonce_field( 'bonuses_breadcrumb_title_box', 'bonuses_breadcrumb_title_nonce' );
+
+	$bonus_breadcrumb_title = get_post_meta( $bonus->ID, 'bonus_breadcrumb_title', false );
+
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control bonus_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $bonus_breadcrumb_title[0] ) ) {
+			$bonus_breadcrumb_title[0] = '';
+		}
+		wp_editor( $bonus_breadcrumb_title[0], 'bonus_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'bonuses_breadcrumb_title_save_fields', 10, 2 );
+
+function bonuses_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['bonuses_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['bonuses_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'bonuses_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'bonus' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$bonus_breadcrumb_title = $_POST['bonus_breadcrumb_title'];
+	update_post_meta( $post_id, 'bonus_breadcrumb_title', $bonus_breadcrumb_title );
+}
+
+/*  Bonuses - Breadcrumb Title End */
+
+/*  Promo - Breadcrumb Title Start */
+
+add_action( 'admin_init', 'promo_breadcrumb_title_fields' );
+
+function promo_breadcrumb_title_fields() {
+	add_meta_box(
+		'promo_breadcrumb_title_meta_box',
+		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
+		'promo_breadcrumb_title_display_meta_box',
+		'promo',
+		'normal',
+		'high'
+	);
+}
+
+function promo_breadcrumb_title_display_meta_box( $promo ) {
+
+	wp_nonce_field( 'promo_breadcrumb_title_box', 'promo_breadcrumb_title_nonce' );
+
+	$promo_breadcrumb_title = get_post_meta( $promo->ID, 'promo_breadcrumb_title', false );
+
+	$editor_args = array(
+		'tinymce'       => false,
+		'quicktags'     => false,
+		'media_buttons' => false,
+		'textarea_rows' => 1,
+	);
+	?>
+
+<div class="components-base-control promo_breadcrumb_title">
+	<div class="components-base-control__field">
+		<?php
+		if ( empty( $promo_breadcrumb_title[0] ) ) {
+			$promo_breadcrumb_title[0] = '';
+		}
+		wp_editor( $promo_breadcrumb_title[0], 'promo_breadcrumb_title', $editor_args );
+		?>
+	</div>
+</div>
+
+	<?php
+}
+
+add_action( 'save_post', 'promo_breadcrumb_title_save_fields', 10, 2 );
+
+function promo_breadcrumb_title_save_fields( $post_id ) {
+
+	if ( ! isset( $_POST['promo_breadcrumb_title_nonce'] ) ) {
+		return $post_id;
+	}
+
+		$nonce = $_POST['promo_breadcrumb_title_nonce'];
+
+	if ( ! wp_verify_nonce( $nonce, 'promo_breadcrumb_title_box' ) ) {
+		return $post_id;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+
+	if ( 'promo' == $_POST['post_type'] ) {
+		if ( ! current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		}
+	}
+
+	$promo_breadcrumb_title = $_POST['promo_breadcrumb_title'];
+	update_post_meta( $post_id, 'promo_breadcrumb_title', $promo_breadcrumb_title );
+}
+
+/*  Promo - Breadcrumb Title End */
 
 /*  Relationship of the Child Post Types and Organizations Start  */
 
@@ -1821,51 +2186,36 @@ add_action( 'edited_app-platform', 'update_app_platform_image_upload', 10, 2 );
 /*  Rewrite Links Of Custom Post Types Start  */
 
 function custom_posts_rewrite_rules() {
-	foreach ( get_post_types(
-		array(
-			'public'   => true,
-			'_builtin' => false,
-		),
-	) as $post_type ) {
-		if ( 'organization' === $post_type ) { 
-			continue;
-		}
-
-		$post_slug   = $post_type;
+	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
+	
+	foreach ( $custom_child_post_types as $post_type ) {
 		$rewrite_tag = '%' . $post_type . '%';
 
 		add_rewrite_tag( $rewrite_tag, '([^/]+)', $post_type . '=' );
 
-		$post_section_slug = $post_type . '_section_slug';
-		
-		if ( get_option( $post_section_slug ) ) {
-			$post_slug = get_option( $post_section_slug, $post_type );
+		$organization_slug = 'organization';
+
+		if ( get_option( 'organization_section_slug' ) ) {
+			$organization_slug = get_option( 'organization_section_slug', 'organization' );
 		}
 		
-		add_permastruct( $post_type, '%parent_name%/' . $post_slug . '/' . $rewrite_tag, false );
+		add_permastruct( $post_type, "$organization_slug/%parent_name%/$rewrite_tag", false );
 		
-		add_rewrite_rule( '^([^/]+)/' . $post_slug . '/([^/]+)/?', 'index.php?' . $post_type . '=$matches[2]', 'top' );
-	
+		add_rewrite_rule( "^$organization_slug/([^/]+)/([^/]+)/?", 'index.php?' . $post_type . '=$matches[2]', 'top' );
 	}
 }
 add_action( 'init', 'custom_posts_rewrite_rules' );
 
 
 function custom_post_type_permalinks( $link, $post ) {
-	if ( in_array(
-		get_post_type( $post ),
-		get_post_types(
-			array(
-				'public'   => true,
-				'_builtin' => false,
-			),
-		) 
-	) ) {
+	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
+
+	if ( in_array( get_post_type( $post ), $custom_child_post_types ) ) {
 		if ( $post->post_parent ) {
 			$parent = get_post( $post->post_parent );
 
 			if ( ! empty( $parent->post_name ) ) {
-				return str_replace( '%parent_name%', $parent->post_name, $link ); 
+				return str_replace( '%parent_name%', $parent->post_name, $link );
 			}
 		}   
 	}
@@ -1873,5 +2223,16 @@ function custom_post_type_permalinks( $link, $post ) {
 }
 
 add_filter( 'post_type_link', 'custom_post_type_permalinks', 10, 3 );
+
+function custom_rewrite_conflicts( $request ) {
+	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
+
+	if ( ! is_admin() && in_array( $request['post_type'], $custom_child_post_types ) ) {
+		$request['post_type'] = $custom_child_post_types;
+	}
+
+	return $request;
+}
+add_filter( 'request', 'custom_rewrite_conflicts' );
 
 /*  Rewrite Links Of Custom Post Types End  */

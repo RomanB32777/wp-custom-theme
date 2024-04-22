@@ -141,6 +141,14 @@ function organizations_settings_init() {
 		<p id="<?php echo esc_attr( $args['id'] ); ?>">
 			<?php esc_html_e( 'Here you can change the default slugs.', 'custom-theme' ); ?>
 		</p>
+		<div class="card">
+			<p>
+				<strong><?php echo esc_html( 'WARNING:', 'custom-theme' ); ?></strong><br>
+				<?php echo esc_html( 'Slugs at custom post types (e.g. Organizations, Apps) cannot be the same.', 'custom-theme' ); ?>
+				<hr>
+				<em><?php esc_html_e( 'After saving these settings, please, go to &quot;Settings&quot; - &quot;', 'custom-theme' ); ?><strong><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>" title="<?php esc_attr_e( 'Permalinks', 'custom-theme' ); ?>"><?php esc_html_e( 'Permalinks', 'custom-theme' ); ?></a></strong><?php esc_html_e( '&quot; and click the &quot;Save Changes&quot; button.', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Only after this action, new slugs will work.', 'custom-theme' ); ?></strong></em>
+			</p>
+		</div>
 			<?php
 	}
 
