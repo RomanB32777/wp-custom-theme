@@ -383,10 +383,16 @@ function set_approver_on_transition_only( $new_status, $old_status, $post ) {
 
 add_filter( 'bcn_breadcrumb_title', 'custom_breadcrumb_title', 3, 10 );
 function custom_breadcrumb_title( $title, $type, $id ) {
-	$organization_breadcrumb_title = get_post_meta( $id, 'organization_breadcrumb_title', true );
-
-	if ( in_array( 'post-organization', $type ) && ! empty( $organization_breadcrumb_title ) ) {
-		$title = wp_kses( $organization_breadcrumb_title, array() );
+	$custom_post_types = array( 'organization', 'app', 'payment', 'promo', 'registration', 'bonus' );
+	
+	foreach ( $custom_post_types as $post_type ) {
+		if ( in_array( "post-$post_type", $type ) ) {
+			$post_breadcrumb_title = get_post_meta( $id, $post_type . '_breadcrumb_title', true );
+	
+			if ( ! empty( $post_breadcrumb_title ) ) {
+				return wp_kses( $post_breadcrumb_title, array() );
+			}
+		}
 	}
 
 	$page_breadcrumb_title = get_field( 'custom_breadcrumb_title', $id );
