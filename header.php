@@ -8,5 +8,5 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="sm:!overflow-auto font-inter">
+<body class="theme-body sm:!overflow-auto font-inter">
 	<?php get_template_part( 'theme-parts/header/header' ); ?>

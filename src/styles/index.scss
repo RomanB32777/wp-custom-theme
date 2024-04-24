@@ -112,17 +112,19 @@ main,
 
 .main-blocks ul:not([class*="ez-toc-list"]) li,
 .wp-block-post-content ul li {
-	display: flex;
+	padding-left: 12px;
 }
 
 .main-blocks ul:not([class*="ez-toc-list"]) li::before,
 .wp-block-post-content ul li::before {
+	position: absolute;
+	left: 0;
 	display: block;
 	width: 8px;
 	min-width: 8px;
 	height: 8px;
 	border-radius: 50%;
-	margin-top: 12px;
+	margin-top: 8px;
 	margin-right: 8px;
 	content: "";
 }

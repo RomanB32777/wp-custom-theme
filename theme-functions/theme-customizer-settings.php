@@ -1497,7 +1497,8 @@ function theme_customizer_style_settings() {
 	$primary_custom_brightest_color = 'rgb(' . esc_attr( join( ' ', sscanf( $primary_custom_color, '#%02x%02x%02x' ) ) ) . ' / 10%)';
 
 	$custom_css = '
-		body {
+		body.theme-body,
+		.editor-styles-wrapper {
 			background-color: ' . esc_attr( $body_custom_color ) . ';
 			color: ' . esc_attr( $body_custom_content_color ) . ';
 		}
