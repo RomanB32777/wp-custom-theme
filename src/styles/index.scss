@@ -97,15 +97,9 @@ main,
 	}
 }
 
-main .block-title,
-.main-blocks h1,
-.main-blocks h2,
 .main-blocks ul:not([class*="ez-toc-list"]) li,
-.wp-block-post-content .block-title,
-.wp-block-post-content h1,
-.wp-block-post-content h2,
 .wp-block-post-content ul li {
-	display: flex;
+	padding-left: 24px;
 }
 
 main .block-title,
@@ -114,6 +108,7 @@ main .block-title,
 .wp-block-post-content .block-title,
 .wp-block-post-content h1,
 .wp-block-post-content h2 {
+	display: flex;
 	align-items: center;
 }
 
@@ -130,13 +125,24 @@ main .block-title::before,
 	min-width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	margin-right: 8px;
 	content: "";
+}
+
+main .block-title::before,
+.main-blocks h1::before,
+.main-blocks h2::before,
+.wp-block-post-content .block-title::before,
+.wp-block-post-content h1::before,
+.wp-block-post-content h2::before {
+	margin-right: 8px;
 }
 
 .main-blocks ul:not([class*="ez-toc-list"]) li::before,
 .wp-block-post-content ul li::before {
+	position: absolute;
+	left: 0;
 	margin-top: 4px;
+	content: "";
 }
 
 // We need to have a .editor-style-wrapper or .wp-block selector inside the css file so
