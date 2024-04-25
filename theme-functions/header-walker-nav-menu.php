@@ -64,12 +64,21 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
-			$link_class_names = $depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 xl:!py-1 xl:!px-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 xl:!rounded-none xl:!px-0';
+
+			$link_classes = array(
+				$depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 xl:!py-1 xl:!px-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 xl:!rounded-none xl:!px-0',
+			);
 
 			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 ) {
 				// for only top link with child
-				$link_class_names .= ' dropdown-toggle w-full !flex items-center gap-x-1 text-base font-semibold duration-200 pl-3 pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!w-auto';
+				if ( 0 === $depth ) {
+					$link_classes[] = 'dropdown-toggle';
+				}
+
+				$link_classes[] = 'w-full !flex items-center gap-x-1 text-base font-semibold duration-200 pl-3 pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!w-auto';
 			}
+
+			$link_class_names = implode( ' ', $link_classes );
 
 			// link attributes
 			$attributes  = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
