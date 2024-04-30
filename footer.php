@@ -10,7 +10,7 @@
 						class="hamburger-btn inline-flex items-center justify-center rounded-md -m-2.5 p-2.5"
 						type="button"
 					>
-						<span class="font-notoSans sr-only">Open main menu</span
+						<span class="sr-only">Open main menu</span
 						><svg
 							class="h-8 w-8"
 							fill="none"
@@ -30,7 +30,7 @@
 			</div>
 			<?php if ( ! empty( get_theme_mod( 'footer_description' ) ) ) { ?>
 				<div class="my-6 basis-full lg:!mt-0 lg:!mb-6 xl:!mb-0">
-					<p class="font-notoSans text-sm">
+					<p class="text-sm">
 						<?php
 							$allowed_html = array(
 								'a'      => array(
@@ -64,7 +64,7 @@
 					) 
 				); 
 				?>
-			<p class="font-notoSans text-sm text-center pt-6">
+			<p class="text-sm text-center pt-6">
 				<?php echo esc_html( gmdate( 'Y' ) ); ?> 
 				<?php esc_html_e( '&copy;' ); ?> 
 				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>.
@@ -78,7 +78,7 @@
 
 <!-- Back to Top Start -->
 
-<button class="fixed right-4 sm:right-6 lg:right-8 bottom-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
+<button class="main-button fixed right-4 sm:right-6 lg:right-8 bottom-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

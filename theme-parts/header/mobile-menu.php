@@ -31,7 +31,7 @@
 				></ul>
 			</div>
 			<button class="close-menu rounded-md text-white -m-2.5 p-2.5" type="button">
-				<span class="font-notoSans sr-only">Close menu</span>
+				<span class="sr-only">Close menu</span>
 				<svg
 					class="h-6 w-6"
 					fill="none"
@@ -54,7 +54,7 @@
 					wp_nav_menu( 
 						array( 
 							'theme_location' => 'header',
-							'depth'          => 2,
+							'depth'          => 5,
 							'container'      => null,
 							'menu_class'     => 'space-y-2 py-6 divide-y divide-dark-grizzly',
 							'walker'         => new Header_Walker_Nav_Menu(),

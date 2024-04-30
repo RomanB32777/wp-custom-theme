@@ -5,7 +5,7 @@ if ( post_password_required() ) {
 
 	$commenter = wp_get_current_commenter();
 ?>
-<div id="comments">
+<div class="relative left-1/2 w-screen -translate-x-2/4" id="comments">
 	<!-- Start feedback block-->
 	<div class="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
 		<img
@@ -19,7 +19,7 @@ if ( post_password_required() ) {
 			$comment_field = '
 				<div class="col-span-full">
 					<textarea
-						class="font-notoSans block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block w-full rounded-lg border-0 shadow-sm p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-textarea"
 						name="comment-form-textarea"
 						rows="3"
@@ -35,14 +35,14 @@ if ( post_password_required() ) {
 						<div
 							class="switcher w-11 h-6 bg-gray-200 rounded-full peer peer-focus:outline-none peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
 						></div>
-						<span class="font-notoSans ms-3 text-sm font-medium">' . esc_html__( 'Save current username and email?', 'custom-theme' ) . '</span>
+						<span class="ms-3 text-sm font-medium">' . esc_html__( 'Save current username and email?', 'custom-theme' ) . '</span>
 					</label>
 				</div>';
 
 			$author_field = '
 				<div class="comment-form-author col-span-3 col-start-1">
 					<input
-						class="font-notoSans block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block w-full rounded-lg border-0 shadow-sm p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-author"
 						type="text"
 						name="comment-form-author"
@@ -55,7 +55,7 @@ if ( post_password_required() ) {
 			$email_field = '
 				<div class="comment-form-email col-span-3">
 					<input
-						class="font-notoSans block w-full rounded-lg border-0 shadow-sm ring-1 ring-inset ring-grizzly p-6 text-sm placeholder:text-grizzly focus:ring-2 focus:ring-inset focus:ring-primary text-dark"
+						class="block w-full rounded-lg border-0 shadow-sm p-6 text-sm placeholder:text-grizzly text-dark"
 						id="comment-form-email"
 						type="email"
 						name="comment-form-email"
@@ -98,7 +98,7 @@ if ( post_password_required() ) {
 									></path>
 								</svg>
 							</div>
-							<span class="font-notoSans text-base font-normal">' . $i . '</span>
+							<span class="text-base font-normal">' . $i . '</span>
 						</div>
 					';
 		}
@@ -133,8 +133,8 @@ if ( post_password_required() ) {
 					'rating'           => $rating_field,
 				),
 				'submit_field'         => $submit_field,
-				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="comment-submit font-notoSans relative uppercase py-5 mx-auto italic cursor-pointer disabled:opacity-75 submit %3$s" value="%4$s" />',
-				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title font-notoSans text-base font-black italic uppercase mb-6 md:!text-2xl">',
+				'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="comment-submit relative uppercase py-5 mx-auto italic cursor-pointer disabled:opacity-75 submit %3$s" value="%4$s" />',
+				'title_reply_before'   => '<h5 id="reply-title" class="comment-reply-title text-base font-black italic uppercase mb-6 md:!text-2xl">',
 				'title_reply_after'    => '</h5>',
 				'title_reply'          => esc_html__( 'Leave a feedback', 'custom-theme' ),
 				'title_reply_to'       => esc_html__( 'Leave a Reply to %s', 'custom-theme' ),
@@ -157,11 +157,11 @@ if ( post_password_required() ) {
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="comments-wrapper py-10 md:py-14">
 			<h5
-				class="font-notoSans text-base font-black italic uppercase mb-6 md:!text-2xl"
+				class="text-base font-black italic uppercase mb-6 md:!text-2xl"
 			>
 				<?php esc_html_e( 'Comments', 'custom-theme' ); ?>
 			</h5>
-			<p class="font-notoSans max-w-3xl text-base mb-6 md:mb-11">
+			<p class="max-w-3xl text-base mb-6 md:mb-11">
 				<?php 
 					$default_description = __(
 						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut urna ipsum sagittis auctor
@@ -222,7 +222,7 @@ if ( post_password_required() ) {
 					<div class="text-center font-black text-base italic uppercase mt-6">
 						<span 
 							id="load-comments" 
-							class="font-notoSans cursor-pointer"
+							class="cursor-pointer"
 							data-post-id="<?php echo esc_attr( get_the_ID() ); ?>"
 							data-comment-per-page="<?php echo esc_attr( $max_comments_number ); ?>"
 							data-comment-all-count="<?php echo esc_attr( $comments_number ); ?>"
@@ -236,7 +236,7 @@ if ( post_password_required() ) {
 
 				<?php else : ?>
 					<div class="empty-comments text-center font-black text-base italic uppercase mt-6">
-						<span class="font-notoSans">
+						<span>
 							<?php esc_html_e( 'No comments', 'custom-theme' ); ?>
 						</span>
 					</div>

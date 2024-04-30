@@ -17,7 +17,7 @@
 		aria-expanded="false"
 	>
 		<div class="background absolute w-full h-full rounded-lg transform -skew-x-12"></div>
-		<span class="font-notoSans sr-only">Icon</span>
+		<span class="sr-only">Icon</span>
 		<svg 
 			class="relative icon-button mx-3 my-2" 
 			width="24" 
@@ -40,7 +40,7 @@
 		</svg>
 	</button>
 	<div class="relative ml-3">
-		<span class="main-menu-link mobile-exclude font-notoSans text-sm font-bold uppercase duration-200">
+		<span class="main-menu-link mobile-exclude text-sm font-bold uppercase duration-200">
 			<?php echo wp_kses( $auth_text, $allowed_html ); ?>
 		</span>
 	</div>

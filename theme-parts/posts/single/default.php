@@ -1,17 +1,20 @@
-<?php get_header(); ?>
-
 <main class="pt-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="main-blocks [&>*]:my-7">
-		<?php 
-		if ( have_posts() ) :
-			while ( have_posts() ) :
-				the_post();
-				the_content();
-			endwhile;
-		endif; 
-		?>
-	</div>
 
+	<div class="pb-10">
+		<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
+	
+		<div class="main-blocks [&>*]:my-7">
+			<?php 
+			if ( have_posts() ) :
+				while ( have_posts() ) :
+					the_post();
+					the_content();
+				endwhile;
+			endif; 
+			?>
+		</div>
+	</div>
+	
 	<!-- Comments Start -->
 
 	<?php
@@ -27,6 +30,5 @@
 	<?php get_template_part( 'theme-parts/subscribe' ); ?>
 
 	<!-- End subscribe block-->
-</main>
 
-<?php get_footer(); ?>
+</main>

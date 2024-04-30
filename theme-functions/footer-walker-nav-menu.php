@@ -31,9 +31,7 @@ if ( ! class_exists( 'Footer_Walker_Nav_Menu' ) ) {
 			$indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 
 			// depth dependent classes
-			$custom_classes     = array(
-				'font-notoSans text-sm font-bold',
-			);
+			$custom_classes     = array( 'text-sm font-bold' );
 			$custom_class_names = esc_attr( implode( ' ', $custom_classes ) );
 
 			// passed classes

@@ -1,8 +1,16 @@
+export interface IEntryPaths {
+	main: string;
+	imageUploader: string;
+	blocks?: string;
+	shortcodes?: string;
+}
+
+export type TEntryPathKeys = keyof IEntryPaths;
+
 export interface IBuildPaths {
-	entry: string;
+	entry: IEntryPaths;
 	output: string;
 	src: string;
-	pluginStyles: string;
 }
 
 export type TBuildMode = "production" | "development";

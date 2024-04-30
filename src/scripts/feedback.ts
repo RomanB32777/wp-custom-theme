@@ -65,7 +65,9 @@ executeRating();
 // jQuery
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-jQuery(function ($) {
+jQuery(document).ready(function ($) {
+	"use strict";
+
 	const commentForm = $("#comment_form"),
 		checkboxField = $("#is-get-auth-data"),
 		authorFieldWrapper = $(".comment-form-author"),

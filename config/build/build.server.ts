@@ -22,13 +22,10 @@ export function buildDevServer({ port, paths }: IBuildOptions): DevServerConfigu
 		allowedHosts: "all",
 		watchFiles: {
 			paths: [
-				paths.src, // ['src/**/*.*'],
+				paths.src,
 				path.resolve(__dirname, "theme-functions"),
 				path.resolve(__dirname, "theme-parts"),
 			],
-			// options: {
-			// 	usePolling: true,
-			// },
 		},
 	};
 }

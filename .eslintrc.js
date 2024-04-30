@@ -1,5 +1,3 @@
-// const path = require("path");
-
 module.exports = {
 	extends: [
 		"eslint:recommended",
@@ -15,7 +13,12 @@ module.exports = {
 	parser: "@typescript-eslint/parser",
 	rules: {
 		"no-shadow": [2, { allow: ["done"] }],
-		"prettier/prettier": ["warn"],
+		"prettier/prettier": [
+			"warn",
+			{
+				endOfLine: "auto",
+			},
+		],
 
 		// import rules
 		"import/no-cycle": ["error", { ignoreExternal: true, maxDepth: 1 }],
@@ -29,13 +32,7 @@ module.exports = {
 						position: "after",
 					},
 				],
-				groups: [
-					"builtin",
-					"external",
-					"internal",
-					["parent", "sibling"],
-					"index",
-				],
+				groups: ["builtin", "external", "internal", ["parent", "sibling"], "index"],
 				"newlines-between": "always-and-inside-groups",
 				distinctGroup: false,
 				pathGroupsExcludedImportTypes: ["builtin"],
@@ -72,10 +69,7 @@ module.exports = {
 				format: ["PascalCase"],
 			},
 		],
-		"@typescript-eslint/consistent-type-imports": [
-			"warn",
-			{ prefer: "type-imports" },
-		],
+		"@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
 	},
 	parserOptions: {
 		ecmaVersion: "latest",

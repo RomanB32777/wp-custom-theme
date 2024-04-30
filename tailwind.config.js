@@ -23,6 +23,8 @@ const {
 	YELLOW_LIGHT_COLOR,
 } = process.env;
 
+const alternativeFonts = ["Arial", "sans-serif"];
+
 module.exports = {
 	content: [
 		"./theme-functions/**/*.php",
@@ -67,7 +69,10 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				notoSans: ['"NotoSans"', "Arial", "sans-serif"],
+				roboto: ['"Roboto"', ...alternativeFonts],
+				notoSans: ['"NotoSans"', ...alternativeFonts],
+				lineSeedJp: ['"LINESeedJP"', ...alternativeFonts],
+				inter: ['"Inter"', ...alternativeFonts],
 			},
 			letterSpacing: {
 				wide: "0.75rem",

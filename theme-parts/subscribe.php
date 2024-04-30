@@ -1,4 +1,4 @@
-<div class="relative isolate overflow-hidden bg-gray-900 py-10 lg:py-28">
+<div class="relative left-1/2 w-screen -translate-x-2/4 isolate overflow-hidden bg-gray-900 py-10 lg:py-28">
 	<img
 		class="absolute inset-0 -z-10 h-full w-full object-cover md:object-center"
 		src="<?php bloginfo( 'template_directory' ); ?>/src/assets/images/subscribe-bg.webp"
@@ -9,11 +9,11 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="max-w-xl mx-auto lg:max-w-lg">
 			<h5
-				class="font-notoSans mb-6 text-base font-black tracking-tight text-white italic uppercase md:!text-2xl"
+				class="mb-6 text-base font-black tracking-tight text-white italic uppercase md:!text-2xl"
 			>
 				<?php esc_html_e( 'Want the latest news?', 'custom-theme' ); ?>
 			</h5>
-			<p class="font-notoSans mb-6 text-base text-white lg:mb-11">
+			<p class="mb-6 text-base text-white lg:mb-11">
 				<?php
 					$default_description = __(
 						'Get exclusive betting news and the latest odds from top-rated sportsbooks, straight to
@@ -45,12 +45,12 @@
 					?>
 			</p>
 			<form class="flex flex-col relative mb-8 lg:flex-row" id="subscribe-form">
-				<label class="font-notoSans sr-only" for="subscribe-email-address"
+				<label class="sr-only" for="subscribe-email-address"
 					>
 					<?php esc_html_e( 'Email address', 'custom-theme' ); ?>
 				</label
 				><input
-					class="font-notoSans min-w-0 flex-auto rounded-lg border-0 py-5 text-dark shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-grizzly pl-3.5 pr-50% focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+					class="min-w-0 flex-auto rounded-lg border-0 py-5 text-dark shadow-sm placeholder:text-grizzly pl-3.5 pr-50% sm:text-sm sm:leading-6"
 					id="subscribe-email-address"
 					name="email"
 					type="email"
@@ -68,21 +68,15 @@
 						<div
 							class="background absolute w-full h-full rounded-lg transform -skew-x-12"
 						></div>
-						<input name="submit" type="submit" id="submit" class="font-notoSans relative uppercase py-5 mx-auto italic cursor-pointer w-full" value="<?php echo esc_attr__( 'Subscribe', 'custom-theme' ); ?>">
+						<input name="submit" type="submit" id="submit" class="relative uppercase py-5 mx-auto italic cursor-pointer w-full" value="<?php echo esc_attr__( 'Subscribe', 'custom-theme' ); ?>">
 					</button>
 				</div>
 			</form>
 			<?php
-				wp_nav_menu( 
-					array( 
-						'theme_location' => 'subscribe',
-						'depth'          => 1,
-						'container'      => null,
-						'menu_class'     => 'flex mx-auto w-fit gap-x-10',
-						'walker'         => new Socials_Walker_Nav_Menu(),
-					) 
-				); 
-				?>
+			if ( is_active_sidebar( 'subscribe-widgets' ) ) {
+				dynamic_sidebar( 'subscribe-widgets' ); 
+			} 
+			?>
 		</div>
 	</div>
 </div>
