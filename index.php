@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-<main class="pt-20 pb-10">
-	<div class="main-blocks [&>*]:my-7">
+<main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+	<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
 		<?php 
 		if ( have_posts() ) :
 			while ( have_posts() ) :
@@ -12,7 +12,7 @@
 		?>
 	</div>
 
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 [&>*]:my-7 [&>*]:md:!my-14">
+	<div class="[&>*]:my-7 [&>*]:md:!my-14">
 
 		<!-- Recent Pages Start -->
 

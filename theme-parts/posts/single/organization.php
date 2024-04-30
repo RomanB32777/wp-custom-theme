@@ -294,7 +294,7 @@
 	<!-- Organization Header End -->
 
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="main-blocks [&>*]:my-7 [&>*]:md:!my-14">
+		<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
 			<!-- Ratings Block Start -->
 		
 			<div class="bg-white rounded-xl px-4 md:!px-8 md:!rounded-3xl">
