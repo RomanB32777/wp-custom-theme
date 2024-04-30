@@ -113,7 +113,7 @@ add_action( 'wp_enqueue_scripts', 'scripts_theme' );
 function custom_taxonomy_image_uploader() {
 	global $typenow;
 	
-	if ( in_array( $typenow, array( 'app', 'payment' ) ) ) {
+	if ( in_array( $typenow, array( 'organization', 'app', 'payment' ) ) ) {
 
 		if ( ! did_action( 'wp_enqueue_media' ) ) {
 			wp_enqueue_media();
