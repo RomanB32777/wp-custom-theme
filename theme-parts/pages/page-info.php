@@ -67,16 +67,11 @@ function get_page_info( $approver_id ) {
 			</p>
 			<p class="text-center">
 				<?php
-				printf(
-					_nx(
-						'%1$s comment',
-						'%1$s comments',
-						$comments_number,
-						'comments title',
-						'custom-theme'
-					),
-					number_format_i18n( $comments_number ),
-				);
+					comments_number(
+						__( '0 comments', 'custom-theme' ),
+						__( '1 comment', 'custom-theme' ),
+						__( '% comments', 'custom-theme' ) 
+					); 
 				?>
 			</p>
 		</div>

@@ -105,7 +105,7 @@ if ( $recent_query->have_posts() ) {
 
 									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="main-button text-base font-bold text-center py-3 px-4 no-underline">
 										<span>
-											<?php esc_html_e( 'Read more', 'custom-theme' ); ?>
+											<?php esc_html_e( 'Read another articles', 'custom-theme' ); ?>
 										</span>
 									</a>
 								</div>
