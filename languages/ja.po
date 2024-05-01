@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme Ja\n"
 "POT-Creation-Date: 2024-04-30 22:39+0300\n"
-"PO-Revision-Date: 2024-04-30 22:40+0300\n"
+"PO-Revision-Date: 2024-05-01 16:39+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -807,7 +807,7 @@ msgstr "別の記事を読む"
 
 #: theme-parts/pages/page-info.php:47
 msgid "Verified by experts"
-msgstr ""
+msgstr "専門家による確認済み"
 
 #: theme-parts/pages/page-info.php:57
 msgid "Renew"

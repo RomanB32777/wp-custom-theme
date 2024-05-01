@@ -1,9 +1,8 @@
 <?php
 
 function get_page_info( $approver_id ) {
-	$approver_name   = '';
-	$comments_number = get_comments_number();
-	$author_name     = get_the_author_meta( 'display_name' );
+	$approver_name = '';
+	$author_name   = get_the_author_meta( 'display_name' );
 
 	$allowed_html = array(
 		'a'      => array(
@@ -32,7 +31,6 @@ function get_page_info( $approver_id ) {
 		<?php if ( ! empty( $author_name ) ) { ?>
 			<div class="flex flex-col items-center pr-5 text-base sm:!pr-7">
 				<p class="mb-2">
-					<!-- 記事の著者 -->
 					<?php esc_html_e( 'Author', 'custom-theme' ); ?>
 				</p>
 				<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">
@@ -43,7 +41,6 @@ function get_page_info( $approver_id ) {
 		<?php if ( ! empty( $approver_id ) ) { ?>
 			<div class="flex flex-col items-center px-5 text-base sm:!px-7">
 				<p class="mb-2">
-					<!-- 専門家による確認済み -->
 					✅ <?php esc_html_e( 'Verified by experts', 'custom-theme' ); ?>
 				</p>
 				<a href="<?php echo esc_url( get_author_posts_url( $approver_id ) ); ?>" title="<?php echo esc_attr( $approver_name ); ?>" rel="approver">
@@ -53,16 +50,14 @@ function get_page_info( $approver_id ) {
 		<?php } ?>
 		<div class="flex flex-col items-center px-5 text-base sm:!px-7">
 			<p class="mb-2">
-				<!-- 更新 -->
 				<?php esc_html_e( 'Renew', 'custom-theme' ); ?>
 			</p>
 			<p>
-				<?php printf( _x( '%s', 'update title', 'custom-theme' ), get_the_modified_date() ); ?>
+				<?php echo wp_kses( get_the_modified_date(), $allowed_html ); ?>
 			</p>
 		</div>
 		<div class="flex flex-col items-center pl-5 text-base sm:!pl-7">
 			<p class="mb-2">
-				<!-- コメント -->
 				<?php esc_html_e( 'Comments', 'custom-theme' ); ?>
 			</p>
 			<p class="text-center">
