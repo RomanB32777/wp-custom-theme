@@ -1,72 +1,19 @@
-import Swiper from "swiper";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import type { Swiper } from "swiper";
 import type { SwiperOptions } from "swiper/types/swiper-options";
 
-import { baseBreakpoints } from "./constants";
-
-const initSwiperSlider = (containerName: string, options: SwiperOptions = {}) => {
-	const {
-		breakpoints,
-		pagination = {
-			clickable: true,
-			el: ".swiper-pagination",
-			bulletClass: "swiper-bullet group w-3 h-3",
-			bulletActiveClass: "nav-active",
-			renderBullet(_index: number, className: string) {
-				return `
-				<button class="${className}">
-					<span class="bullet-dot inline-block w-full h-full duration-200 rounded-full bg-primary-light hover:bg-secondary group-[.nav-active]:bg-secondary"></span>
-				</button>
-			`;
-			},
-		},
-		navigation = {
-			nextEl: `.arrow-right-${containerName.replace(/[#.]/gm, "")}`,
-			prevEl: `.arrow-left-${containerName.replace(/[#.]/gm, "")}`,
-			disabledClass: "nav-disabled",
-		},
-		...swiperOptions
-	} = options;
-
-	return new Swiper(containerName, {
-		modules: [Navigation, Pagination, Autoplay],
-		slidesPerView: 4,
-		spaceBetween: 24,
-		autoplay: {
-			delay: 5000,
-		},
-		pagination,
-		navigation,
-		breakpoints: {
-			[baseBreakpoints.xs]: {
-				slidesPerView: 1,
-			},
-			[baseBreakpoints.sm]: {
-				slidesPerView: 2,
-			},
-			[baseBreakpoints.md]: {
-				slidesPerView: 3,
-			},
-			[baseBreakpoints.xl]: {
-				slidesPerView: 4,
-				spaceBetween: 24,
-			},
-			...breakpoints,
-		},
-		...swiperOptions,
-	});
-};
+import { initSwiperSlider } from "./init-slider";
+import { baseBreakpoints, type TBreakpoints } from "./constants";
 
 const sliderElementName = "swiper-slider";
 
-const sliders = document.querySelectorAll<HTMLDivElement>(`.${sliderElementName}`);
+const initSliders = () => {
+	let swipers: Swiper[] = [];
 
-for (let i = 0; i < sliders.length; i++) {
-	const slider = sliders[i];
+	const sliders = document.querySelectorAll<HTMLDivElement>(`.${sliderElementName}`);
 
-	const { id } = slider;
+	const enableSwiper = (slider: HTMLDivElement) => {
+		const { id } = slider;
 
-	if (id) {
 		const isLoop = slider.getAttribute("data-slider-loop") === "true";
 		const isDisableNavigation = slider.getAttribute("data-slider-disable-navigation");
 		const isDisablePagination = slider.getAttribute("data-slider-disable-pagination");
@@ -121,6 +68,52 @@ for (let i = 0; i < sliders.length; i++) {
 			swiperOptions.pagination = false;
 		}
 
-		initSwiperSlider(`#${id}`, swiperOptions);
+		const swiperSlider = initSwiperSlider(`#${id}`, swiperOptions);
+
+		swipers.push(swiperSlider);
+
+		return swiperSlider;
+	};
+
+	const breakpointChecker = (breakpoint: MediaQueryList, slider: HTMLDivElement) => {
+		swipers = swipers.filter((item) => !item.destroyed);
+
+		if (breakpoint.matches) {
+			const currSwiper = swipers.find((swiper) => swiper?.el.id === slider.id);
+
+			currSwiper?.destroy();
+		} else {
+			return enableSwiper(slider);
+		}
+	};
+
+	for (let i = 0; i < sliders.length; i++) {
+		const slider = sliders[i];
+
+		const { id } = slider;
+
+		if (!id) {
+			continue;
+		}
+
+		const swiperSlider = enableSwiper(slider);
+
+		const destroyBreakpoint = slider.getAttribute("data-slider-destroy-breakpoint");
+
+		if (Object.keys(baseBreakpoints).includes(destroyBreakpoint)) {
+			const breakpoint = window.matchMedia(
+				`(min-width:${baseBreakpoints[destroyBreakpoint as TBreakpoints]}px)`
+			);
+
+			if (breakpoint.matches) {
+				swiperSlider.destroy();
+			}
+
+			breakpoint.onchange = () => breakpointChecker(breakpoint, slider);
+		}
 	}
-}
+
+	return swipers;
+};
+
+initSliders();

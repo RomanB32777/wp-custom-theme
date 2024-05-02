@@ -112,7 +112,8 @@ function enqueue_theme_versioned_script( $handle, $path = '', $deps = array() ) 
 function scripts_theme() {
 	wp_enqueue_script( 'jquery' );  
 
-	enqueue_theme_versioned_script( 'wp_custom_main_script', '/dist/js/main.js', array( 'jquery' ) );
+	enqueue_theme_versioned_script( 'theme-swiper-script', '/dist/js/swiper.js' );
+	enqueue_theme_versioned_script( 'wp_custom_main_script', '/dist/js/main.js', array( 'jquery', 'theme-swiper-script' ) );
 	wp_localize_script( 'wp_custom_main_script', 'ajax_data', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
 add_action( 'wp_enqueue_scripts', 'scripts_theme' );
