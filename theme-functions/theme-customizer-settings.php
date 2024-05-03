@@ -904,6 +904,23 @@ function theme_customizer_setting( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'is_disable_slider_pagination',
+		array(
+			'default'   => '0',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_disable_slider_pagination',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_slider_settings',
+			'label'   => esc_html__( 'Disable slider pagination', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
 		'is_disable_autoplay',
 		array(
 			'default'   => '0',

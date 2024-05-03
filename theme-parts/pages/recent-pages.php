@@ -32,6 +32,15 @@ if ( $recent_query->have_posts() ) {
 		'p'      => array(),
 	);
 
+	$slider_id                    = 'swiper-recent-pages';
+	$is_disable_slider_pagination = boolval( get_theme_mod( 'is_disable_slider_pagination' ) );
+
+	$swiper_wrapper_classes     = array(
+		'overflow-hidden px-px',
+		! $is_disable_slider_pagination ? 'pb-14' : '',
+	);
+	$swiper_wrapper_class_names = esc_attr( implode( ' ', $swiper_wrapper_classes ) );
+
 	?>
 
 	<div class="recent-pages relative">
@@ -41,10 +50,11 @@ if ( $recent_query->have_posts() ) {
 			</span>
 		</h5>
 
-		<div class="overflow-hidden px-px pb-14">
+		<div class="<?php echo esc_attr( $swiper_wrapper_class_names ); ?>">
 			<div class="swiper-slider"
-				id="swiper-recent-pages"
+				id="<?php echo esc_attr( $slider_id ); ?>"
 				data-slider-loop="<?php echo esc_attr( boolval( get_theme_mod( 'is_loop_slider' ) ) ? 'true' : 'false' ); ?>"
+				data-slider-disable-pagination="<?php echo esc_attr( $is_disable_slider_pagination ? 'true' : 'false' ); ?>"
 				data-slider-disable-autoplay="<?php echo esc_attr( boolval( get_theme_mod( 'is_disable_autoplay' ) ) ? 'true' : 'false' ); ?>"
 				data-slider-autoplay-delay="<?php echo esc_attr( ! empty( get_theme_mod( 'slider_autoplay_delay' ) ) ? get_theme_mod( 'slider_autoplay_delay' ) : 5000 ); ?>"
 				data-slides-per-view-xs="<?php echo esc_attr( ! empty( get_theme_mod( 'slider_mobile_slides_per_view' ) ) ? get_theme_mod( 'slider_mobile_slides_per_view' ) : 1 ); ?>"
@@ -116,7 +126,10 @@ if ( $recent_query->have_posts() ) {
 							wp_reset_postdata();
 					?>
 				</div>
-				<div class="swiper-pagination [&>*]:mr-3 [&>*:last-child]:mr-0"></div>
+				
+				<?php if ( ! $is_disable_slider_pagination ) { ?>
+					<div class="swiper-pagination [&>*]:mr-3 [&>*:last-child]:mr-0"></div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
