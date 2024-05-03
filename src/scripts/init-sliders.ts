@@ -15,6 +15,8 @@ const initSliders = () => {
 		const { id } = slider;
 
 		const isLoop = slider.getAttribute("data-slider-loop") === "true";
+		const isDisableNavigation = slider.getAttribute("data-slider-disable-navigation");
+		const isDisablePagination = slider.getAttribute("data-slider-disable-pagination");
 		const isDisableAutoplay = slider.getAttribute("data-slider-disable-autoplay");
 		const autoplayDelay = slider.getAttribute("data-slider-autoplay-delay");
 
@@ -32,7 +34,6 @@ const initSliders = () => {
 
 		const swiperOptions: SwiperOptions = {
 			loop: isLoop,
-			navigation: false,
 			breakpoints: {
 				[baseBreakpoints.xs]: {
 					slidesPerView: Number(xsSlidesPerView) || 1,
@@ -58,6 +59,14 @@ const initSliders = () => {
 							delay: Number(autoplayDelay) || 5000,
 						},
 		};
+
+		if (isDisableNavigation === "true") {
+			swiperOptions.navigation = false;
+		}
+
+		if (isDisablePagination === "true") {
+			swiperOptions.pagination = false;
+		}
 
 		const swiperSlider = initSwiperSlider(`#${id}`, swiperOptions);
 
