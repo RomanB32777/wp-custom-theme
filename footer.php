@@ -78,7 +78,7 @@
 
 <!-- Back to Top Start -->
 
-<button class="main-button fixed right-4 sm:right-6 lg:right-8 bottom-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
+<button class="main-button fixed z-10 right-4 sm:right-6 lg:right-8 bottom-8 w-10 h-10 p-2 border-none rounded-full duration-200 invisible opacity-0" id="back-to-top">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

@@ -8,5 +8,5 @@
 	<?php wp_head(); ?>
 </head>
 
-<body class="theme-body sm:!overflow-auto font-notoSans">
+<body class="theme-body sm:!overflow-y-auto overflow-x-hidden font-notoSans">
 	<?php get_template_part( 'theme-parts/header/header' ); ?>
