@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme Ja\n"
 "POT-Creation-Date: 2024-04-30 22:39+0300\n"
-"PO-Revision-Date: 2024-05-01 16:39+0300\n"
+"PO-Revision-Date: 2024-05-07 11:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: comments.php:20
 msgid "Start writing"
-msgstr ""
+msgstr "コメントを入力"
 
 #: comments.php:31
 msgid "Save current username and email?"
@@ -42,32 +42,32 @@ msgstr ""
 
 #: comments.php:43
 msgid "Enter your name"
-msgstr ""
+msgstr "名前・ニックネーム"
 
 #: comments.php:57
 msgid "Enter your email"
-msgstr ""
+msgstr "メールアドレス"
 
 #: comments.php:118
 msgid "Leave a feedback"
-msgstr ""
+msgstr "コメントする"
 
 #: comments.php:119
 #, php-format
 msgid "Leave a Reply to %s"
-msgstr ""
+msgstr "%s に返信を残す"
 
 #: comments.php:122
 msgid "Send"
-msgstr ""
+msgstr "送信する"
 
 #: comments.php:125
 msgid "Cancel"
-msgstr ""
+msgstr "返信をキャンセル"
 
 #: comments.php:148 functions.php:323
 msgid "Reply"
-msgstr ""
+msgstr "返信する"
 
 #: footer.php:8
 msgid "&copy;"
