@@ -286,10 +286,10 @@
 				</p>
 				<p class="text-base">
 					<?php
-					$rating_overall_title = get_option( 'rating_overall' );
+					$overall_rating_title = get_option( 'overall_rating' );
 
-					if ( $rating_overall_title ) {
-						echo esc_html( $rating_overall_title );
+					if ( $overall_rating_title ) {
+						echo esc_html( $overall_rating_title );
 					} else {
 						esc_html_e( 'Overall Rating', 'custom-theme' );
 					} 
