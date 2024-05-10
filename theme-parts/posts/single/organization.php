@@ -198,11 +198,11 @@
 	
 			<!-- Ratings Block Start -->
 	
-			<div class="flex flex-col max-w-4xl mx-auto gap-y-6 py-10 md:justify-around md:!flex-row md:items-center">
+			<div class="flex flex-col-reverse max-w-4xl mx-auto gap-y-6 py-10 md:justify-around md:!flex-row md:items-center">
 	
 				<?php if ( is_numeric( $overall_rating ) ) { ?>
 					
-					<div class="order-2 flex flex-wrap justify-between gap-y-3 md:!order-2 md:w-3/4">
+					<div class="flex flex-wrap justify-between gap-y-3 md:w-3/4">
 	
 						<?php 
 							custom_organization_meta_rating(
@@ -281,16 +281,17 @@
 					</div>
 	
 				<?php } ?>
-				<div class="order-1 text-center md:!order-2">
+
+				<div class="text-center">
 					<p class="text-5xl font-bold">
 						<?php echo esc_html( number_format( (float) $overall_rating, 1, '.', ',' ) ); ?>
 					</p>
 					<p class="text-base">
 						<?php
-						$rating_overall_title = get_option( 'rating_overall' );
+						$overall_rating_title = get_option( 'overall_rating' );
 	
-						if ( $rating_overall_title ) {
-							echo esc_html( $rating_overall_title );
+						if ( $overall_rating_title ) {
+							echo esc_html( $overall_rating_title );
 						} else {
 							esc_html_e( 'Overall Rating', 'custom-theme' );
 						} 

@@ -45,31 +45,37 @@ function custom_star_rating( $args = array() ) {
 	);
 
 	$defaults = array(
-		'rating'          => 0,
-		'echo'            => true,
-		'wrapper_classes' => 'gap-x-1',
-		'star_classes'    => '',
+		'rating'              => 0,
+		'echo'                => true,
+		'rating_stars_number' => 0,
+		'wrapper_classes'     => 'gap-x-1',
+		'star_classes'        => '',
 	);
 	
-	$stars_number = 5;
-
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$stars_number = get_option( 'custom_rating_stars_number' );
-	} 
 
 	$parsed_args = wp_parse_args( $args, $defaults );
+
+	$rating_stars_number = $parsed_args['rating_stars_number'];
+
+	if ( ! $rating_stars_number ) {
+		if ( get_option( 'custom_rating_stars_number' ) ) {
+			$rating_stars_number = get_option( 'custom_rating_stars_number' );
+		} else {
+			$rating_stars_number = 5;
+		}
+	} 
 
 	$rating = (float) str_replace( ',', '.', $parsed_args['rating'] );
 
 	$full_stars = floor( $rating );
 
-	if ( $full_stars > $stars_number ) {
-		$full_stars = $stars_number;
-		$rating     = $stars_number;
+	if ( $full_stars > $rating_stars_number ) {
+		$full_stars = $rating_stars_number;
+		$rating     = $rating_stars_number;
 	}
 
 	$half_stars  = ceil( $rating - $full_stars );
-	$empty_stars = $stars_number - $full_stars - $half_stars;
+	$empty_stars = $rating_stars_number - $full_stars - $half_stars;
 
 	$star_classes = $parsed_args['star_classes'];
 

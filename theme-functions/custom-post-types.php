@@ -1,416 +1,162 @@
 <?php
 
-/*  Init Custom Post Types Start */
+/*  The standard field for the upload Mobile image of custom single page - Start  */
 
-add_action( 'init', 'init_custom_post_types', 0 );
-
-function init_custom_post_types() {
-	/*  Organizations - Post Type Start */
-
-	$organization_name = esc_html__( 'Organizations', 'custom-theme' );
-
-	if ( get_option( 'organizations_section_name' ) ) {
-		$organization_name = get_option( 'organizations_section_name', 'Organizations' );
-	}
-
-	$organization_slug = 'organization';
-
-	if ( get_option( 'organization_section_slug' ) ) {
-		$organization_slug = get_option( 'organization_section_slug', 'organization' );
-	}
-
-	$organization_args = array(
-		'labels'             => array(
-			'name'         => $organization_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'organization' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-welcome-widgets-menus',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'organization',
-		'rewrite'            => array(
-			'slug'       => $organization_slug,
-			'with_front' => false,
-		),
-	);
-
-	register_post_type( 'organization', $organization_args );
-
-	/*  Organizations - Post Type End */
-
-	/*  Apps - Post Type Start */
-
-	$app_name = esc_html__( 'Apps', 'custom-theme' );
-
-	if ( get_option( 'apps_section_name' ) ) {
-		$app_name = get_option( 'apps_section_name', 'Apps' );
-	}
-
-	$app_args = array(
-		'labels'             => array(
-			'name'         => $app_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'app' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-smartphone',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'app',
-		'rewrite'            => false,
-	);
-
-	register_post_type( 'app', $app_args );
-
-	/* --- App Platforms: Custom Taxonomy --- */
-
-	$app_platforms_title = esc_html__( 'App platforms', 'custom-theme' );
-
-	$platform_labels = array(
-		'name'              => $app_platforms_title,
-		'singular_name'     => $app_platforms_title,
-		'search_items'      => esc_html__( 'Find Taxonomy', 'custom-theme' ),
-		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $app_platforms_title,
-		'parent_item'       => esc_html__( 'Parent Taxonomy', 'custom-theme' ),
-		'parent_item_colon' => esc_html__( 'Parent Taxonomy:', 'custom-theme' ),
-		'edit_item'         => esc_html__( 'Edit Taxonomy', 'custom-theme' ),
-		'view_item'         => esc_html__( 'View Taxonomy', 'custom-theme' ),
-		'update_item'       => esc_html__( 'Update Taxonomy', 'custom-theme' ),
-		'add_new_item'      => esc_html__( 'Add New Taxonomy', 'custom-theme' ),
-		'new_item_name'     => esc_html__( 'Taxonomy', 'custom-theme' ),
-		'menu_name'         => $app_platforms_title,
-	); 
-
-	$platform_args = array(
-		'labels'                => $platform_labels,
-		'public'                => true,
-		'show_in_nav_menus'     => true,
-		'show_ui'               => true,
-		'show_in_rest'          => true,
-		'show_tagcloud'         => true,
-		'hierarchical'          => true,
-		'update_count_callback' => '',
-		'rewrite'               => true,
-		'query_var'             => '',
-		'capabilities'          => array(),
-		'_builtin'              => false,
-	);
-
-	register_taxonomy( 'app-platform', 'app', $platform_args );
-
-	/*  Apps - Post Type End */
-
-	/*  Payments - Post Type Start */
-
-	$payment_name = esc_html__( 'Payments', 'custom-theme' );
-
-	if ( get_option( 'payments_section_name' ) ) {
-		$payment_name = get_option( 'payments_section_name', 'Payments' );
-	}
-
-	$payment_args = array(
-		'labels'             => array(
-			'name'         => $payment_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'payment' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-store',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'payment',
-		'rewrite'            => false,
-	);
-
-	register_post_type( 'payment', $payment_args );
-
-	/* --- Payment Systems: Custom Taxonomy --- */
-
-	$app_systems_title = esc_html__( 'Payment systems', 'custom-theme' );
-
-	$system_labels = array(
-		'name'              => $app_systems_title,
-		'singular_name'     => $app_systems_title,
-		'search_items'      => esc_html__( 'Find Taxonomy', 'custom-theme' ),
-		'all_items'         => esc_html__( 'All ', 'custom-theme' ) . $app_systems_title,
-		'parent_item'       => esc_html__( 'Parent Taxonomy', 'custom-theme' ),
-		'parent_item_colon' => esc_html__( 'Parent Taxonomy:', 'custom-theme' ),
-		'edit_item'         => esc_html__( 'Edit Taxonomy', 'custom-theme' ),
-		'view_item'         => esc_html__( 'View Taxonomy', 'custom-theme' ),
-		'update_item'       => esc_html__( 'Update Taxonomy', 'custom-theme' ),
-		'add_new_item'      => esc_html__( 'Add New Taxonomy', 'custom-theme' ),
-		'new_item_name'     => esc_html__( 'Taxonomy', 'custom-theme' ),
-		'menu_name'         => $app_systems_title,
-	); 
-
-	$system_args = array(
-		'labels'                => $system_labels,
-		'public'                => true,
-		'show_in_nav_menus'     => true,
-		'show_ui'               => true,
-		'show_in_rest'          => true,
-		'show_tagcloud'         => true,
-		'hierarchical'          => true,
-		'update_count_callback' => '',
-		'rewrite'               => true,
-		'query_var'             => '',
-		'capabilities'          => array(),
-		'_builtin'              => false,
-	);
-
-	register_taxonomy( 'payment-system', 'payment', $system_args );
-
-	/*  Payments - Post Type End */
-
-	/*  Registration - Post Type Start */
-
-	$registration_name = esc_html__( 'Registration', 'custom-theme' );
-
-	if ( get_option( 'registration_section_name' ) ) {
-		$registration_name = get_option( 'registration_section_name', 'Registration' );
-	}
-
-	$registration_args = array(
-		'labels'             => array(
-			'name'         => $registration_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'registration' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-admin-network',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'registration',
-		'rewrite'            => false,
-	);
-
-	register_post_type( 'registration', $registration_args );
-
-	/*  Registration - Post Type End */
-
-	/*  Bonuses - Post Type Start */
-
-	$bonus_name = esc_html__( 'Bonuses', 'custom-theme' );
-
-	if ( get_option( 'bonuses_section_name' ) ) {
-		$bonus_name = get_option( 'bonuses_section_name', 'Bonuses' );
-	}
-
-	$bonus_args = array(
-		'labels'             => array(
-			'name'         => $bonus_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'bonus' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-money-alt',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'bonus',
-		'rewrite'            => false,
-	);
-
-	register_post_type( 'bonus', $bonus_args );
-
-	/*  Bonuses - Post Type End */
-
-	/*  Promotional Codes - Post Type Start */
-
-	$promo_name = esc_html__( 'Promotional codes', 'custom-theme' );
-
-	if ( get_option( 'promo_section_name' ) ) {
-		$promo_name = get_option( 'promo_section_name', 'Promotional codes' );
-	}
-
-	$promo_args = array(
-		'labels'             => array(
-			'name'         => $promo_name,
-			'add_new'      => esc_html__( 'Add New', 'custom-theme' ),
-			'edit_item'    => esc_html__( 'Edit Item', 'custom-theme' ),
-			'add_new_item' => esc_html__( 'Add New', 'custom-theme' ),
-			'view_item'    => esc_html__( 'View Item', 'custom-theme' ),
-		),
-		'singular_label'     => __( 'promo' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_rest'       => true,
-		'menu_icon'          => 'dashicons-tickets-alt',
-		'_builtin'           => false,
-		'_edit_link'         => 'post.php?post=%d',
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'supports'           => array(
-			'title',
-			'editor',
-			'author',
-			'comments',
-			'thumbnail',
-			'excerpt',
-			'revisions',
-		),
-		'has_archive'        => false,
-		'rest_base'          => 'promo',
-		'rewrite'            => false,
-	);
-
-	register_post_type( 'promo', $promo_args );
-
-	/*  Promotional Codes - Post Type End */
+function custom_mobile_image_uploader( $name, $value = '' ) {
+	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
+	$display = 'none';
+ 
+	if ( $image_attributes = wp_get_attachment_image_src( $value ) ) {
+		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
+		$display = 'block';
+	} 
+ 
+	return '
+		<div style="margin-top: 1em;">
+			<a href="#" style="display: inline-block;" class="custom_upload_mobile_button' . $image . '</a>
+			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
+			<a href="#" class="custom_remove_mobile_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove mobile image', 'custom-theme' ) . '</a>
+		</div>
+	';
 }
 
-/*  Init Custom Post Types End */
+/*  The standard field for the upload image of custom single page - Start  */
 
-/*  Organizations - Short Description Start */
-
-add_action( 'admin_init', 'organizations_short_fields' );
-
-function organizations_short_fields() {
-	add_meta_box(
-		'organizations_short_meta_box',
-		esc_html__( 'Short Description', 'custom-theme' ),
-		'organizations_short_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
+function custom_image_uploader( $name, $value = '' ) {
+	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
+	$display = 'none';
+ 
+	if ( $image_attributes = wp_get_attachment_image_src( $value ) ) {
+		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
+		$display = 'block';
+	} 
+ 
+	return '
+		<div style="margin-top: 1em;">
+			<a href="#" style="display: inline-block;" class="custom_upload_button' . $image . '</a>
+			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
+			<a href="#" class="custom_remove_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove image', 'custom-theme' ) . '</a>
+		</div>
+	';
 }
 
-function organizations_short_display_meta_box( $organization ) {
+/*  The standard field for the upload image of organization single page - End  */
 
-	wp_nonce_field( 'organizations_short_box', 'organizations_short_nonce' );
+/*  Add Taxonomy Logo Start  */
 
-	$organization_short_desc = get_post_meta( $organization->ID, 'organization_short_desc', false );
+/* --- Add custom taxonomy field --- */
+
+function add_taxonomy_taxonomy_image( $taxonomy ) {
+	?>
+<div class="form-field term-group">
+	<label for="taxonomy-image-id">
+		<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
+	</label>
+	<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" class="custom_media_url" value="">
+	<div id="taxonomy-image-wrapper"></div>
+	<p>
+		<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
+		<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
+	</p>
+</div>
+	<?php
+}
+
+/* --- Save the custom taxonomy field --- */
+
+function save_taxonomy_taxonomy_image( $term_id, $tt_id ) {
+	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
+		$image = esc_attr( $_POST['taxonomy-image-id'] );
+		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
+	}
+}
+
+/* --- Add custom taxonomy field for edit --- */
+
+function edit_taxonomy_image_upload( $term, $taxonomy ) {
+	?>
+<tr class="form-field term-group-wrap">
+	<th scope="row">
+		<label for="taxonomy-image-id">
+			<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
+		</label>
+	</th>
+	<td>
+		<?php $image_id = get_term_meta( $term->term_id, 'taxonomy-image-id', true ); ?>
+		<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" value="<?php echo esc_attr( $image_id ); ?>">
+		<div id="taxonomy-image-wrapper">
+		<?php if ( $image_id ) { ?>
+			<?php echo wp_get_attachment_image( $image_id ); ?>
+		<?php } ?>
+			</div>
+			<p>
+			<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
+			<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
+		</p>
+	</td>
+</tr>
+	<?php
+}
+
+/* --- Save the edited value of the custom taxonomy field --- */
+
+function update_taxonomy_system_image_upload( $term_id, $tt_id ) {
+	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
+		$image = esc_attr( $_POST['taxonomy-image-id'] );
+		update_term_meta( $term_id, 'taxonomy-image-id', $image );
+	} else {
+		update_term_meta( $term_id, 'taxonomy-image-id', '' );
+	}
+}
+
+/*  Add Taxonomy Logo End  */
+
+/*  Add Custom Text Field Start */
+
+function custom_text_field_display_meta_box( $field_name, $post, $editor_args = array(), $label = '' ) {
+
+	$post_type = $post->post_type;
+
+	wp_nonce_field( "{$post_type}_{$field_name}_box", "{$post_type}_{$field_name}_nonce" );
+
+	$field_value = get_post_meta( $post->ID, "{$post_type}_{$field_name}", false );
 	
-	$editor_args = array(
-		'tinymce'       => array(
-			'toolbar1' => 'bold,italic,underline,bullist,numlist,link,unlink,undo,redo',
-		),
-		'quicktags'     => array(
-			'buttons' => 'em,strong,link,ul,li,ol,close',
-		),
-		'media_buttons' => false,
-		'textarea_rows' => 4,
-	);
 	?>
 
-<div class="components-base-control organization_short_desc">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $organization_short_desc[0] ) ) {
-			$organization_short_desc[0] = '';
-		}
-		wp_editor( $organization_short_desc[0], 'organization_short_desc', $editor_args );
-		?>
+	<div class="components-base-control">
+		<div class="components-base-control__field">
+			<?php
+			if ( empty( $field_value[0] ) ) {
+				$field_value[0] = '';
+			}
+
+			if ( ! empty( $label ) ) { 
+				?>
+
+				<label class="components-base-control__label">
+					<?php echo esc_html( $label ); ?>
+				</label>
+				
+				<?php 
+			}
+
+			wp_editor( $field_value[0], "{$post_type}_{$field_name}", $editor_args );
+			?>
+		</div>
 	</div>
-</div>
 
 	<?php
 }
 
-add_action( 'save_post', 'organizations_short_save_fields', 10, 2 );
+function custom_save_text_field( $post_type, $field_name, $post_id ) {
 
-function organizations_short_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_short_nonce'] ) ) {
+	if ( ! isset( $_POST[ "{$post_type}_{$field_name}_nonce" ] ) ) {
 		return $post_id;
 	}
 
-		$nonce = $_POST['organizations_short_nonce'];
+	$nonce = $_POST[ "{$post_type}_{$field_name}_nonce" ];
 
-	if ( ! wp_verify_nonce( $nonce, 'organizations_short_box' ) ) {
+	if ( ! wp_verify_nonce( $nonce, "{$post_type}_{$field_name}_box" ) ) {
 		return $post_id;
 	}
 
@@ -418,353 +164,37 @@ function organizations_short_save_fields( $post_id ) {
 		return $post_id;
 	}
 
-	if ( 'organization' == $_POST['post_type'] ) {
+	if ( $post_type === $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
 			return $post_id;
 		}
 	}
 
-		$organization_short_desc = $_POST['organization_short_desc'];
-		update_post_meta( $post_id, 'organization_short_desc', $organization_short_desc );
+	$field_value = $_POST[ "{$post_type}_{$field_name}" ];
+	update_post_meta( $post_id, "{$post_type}_{$field_name}", $field_value );
 }
 
-/*  Organizations - Short Description End */
+/*  Add Custom Text Field End */
 
-/*  Organizations - Breadcrumb Title Start */
+/*  Add Custom Overall Rating Start  */
 
-add_action( 'admin_init', 'organizations_breadcrumb_title_fields' );
+function custom_overall_rating_display_meta_box( $post ) {
 
-function organizations_breadcrumb_title_fields() {
-	add_meta_box(
-		'organizations_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'organizations_breadcrumb_title_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
-}
+	$meta      = get_post_meta( $post->ID );
+	$post_type = $post->post_type;
 
-function organizations_breadcrumb_title_display_meta_box( $organization ) {
+	wp_nonce_field( "{$post_type}_rating_box", "{$post_type}_rating_nonce" );
 
-	wp_nonce_field( 'organizations_breadcrumb_title_box', 'organizations_breadcrumb_title_nonce' );
-
-	$organization_breadcrumb_title = get_post_meta( $organization->ID, 'organization_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control organization_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $organization_breadcrumb_title[0] ) ) {
-			$organization_breadcrumb_title[0] = '';
-		}
-		wp_editor( $organization_breadcrumb_title[0], 'organization_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'organizations_breadcrumb_title_save_fields', 10, 2 );
-
-function organizations_breadcrumb_title_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['organizations_breadcrumb_title_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'organizations_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-		$organization_breadcrumb_title = $_POST['organization_breadcrumb_title'];
-		update_post_meta( $post_id, 'organization_breadcrumb_title', $organization_breadcrumb_title );
-}
-
-/*  Organizations - Breadcrumb Title End */
-
-/*  Organizations - Bonus Title Start */
-
-add_action( 'admin_init', 'organizations_bonus_title' );
-
-function organizations_bonus_title() {
-	add_meta_box(
-		'organizations_bonus_title_meta_box',
-		esc_html__( 'Bonus title', 'custom-theme' ),
-		'organizations_bonus_title_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
-}
-
-function organizations_bonus_title_display_meta_box( $organization ) {
-
-	wp_nonce_field( 'organizations_bonus_title_box', 'organizations_bonus_title_nonce' );
-
-	$organization_bonus_title = get_post_meta( $organization->ID, 'organization_bonus_title', false );
-	
-	$editor_args = array(
-		'tinymce'       => array(
-			'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
-		),
-		'quicktags'     => array(
-			'buttons' => 'em,strong,link,close',
-		),
-		'media_buttons' => false,
-		'textarea_rows' => 8,
-	);
-	?>
-
-<div class="components-base-control organization_bonus_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $organization_bonus_title[0] ) ) {
-			$organization_bonus_title[0] = '';
-		}
-		wp_editor( $organization_bonus_title[0], 'organization_bonus_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'organizations_bonus_title_save', 10, 2 );
-
-function organizations_bonus_title_save( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_bonus_title_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['organizations_bonus_title_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'organizations_bonus_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$organization_bonus_title = $_POST['organization_bonus_title'];
-	update_post_meta( $post_id, 'organization_bonus_title', $organization_bonus_title );
-}
-
-/*  Organizations - Bonus Title End */
-
-/*  Organizations - Bonus Value Start */
-
-add_action( 'admin_init', 'organizations_bonus_value' );
-
-function organizations_bonus_value() {
-	add_meta_box(
-		'organizations_bonus_value_meta_box',
-		esc_html__( 'Bonus value', 'custom-theme' ),
-		'organizations_bonus_value_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
-}
-
-function organizations_bonus_value_display_meta_box( $organization ) {
-
-	wp_nonce_field( 'organizations_bonus_value_box', 'organizations_bonus_value_nonce' );
-
-	$organization_bonus_value = get_post_meta( $organization->ID, 'organization_bonus_value', false );
-	
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control organization_bonus_value">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $organization_bonus_value[0] ) ) {
-			$organization_bonus_value[0] = '';
-		}
-		wp_editor( $organization_bonus_value[0], 'organization_bonus_value', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'organizations_bonus_value_save', 10, 2 );
-
-function organizations_bonus_value_save( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_bonus_value_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['organizations_bonus_value_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'organizations_bonus_value_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$organization_bonus_value = $_POST['organization_bonus_value'];
-	update_post_meta( $post_id, 'organization_bonus_value', $organization_bonus_value );
-}
-
-/*  Organizations - Bonus Value End */
-
-/*  Organizations - Promotional Code Start */
-
-add_action( 'admin_init', 'organizations_promotional_code' );
-
-function organizations_promotional_code() {
-	add_meta_box(
-		'organizations_promotional_code_meta_box',
-		esc_html__( 'Promotional code ', 'custom-theme' ),
-		'organizations_promotional_code_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
-}
-
-function organizations_promotional_code_display_meta_box( $organization ) {
-
-	wp_nonce_field( 'organizations_promotional_code_box', 'organizations_promotional_code_nonce' );
-
-	$organization_promotional_code = get_post_meta( $organization->ID, 'organization_promotional_code', false );
-	
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control organization_promotional_code">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $organization_promotional_code[0] ) ) {
-			$organization_promotional_code[0] = '';
-		}
-		wp_editor( $organization_promotional_code[0], 'organization_promotional_code', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'organizations_promotional_code_save', 10, 2 );
-
-function organizations_promotional_code_save( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_promotional_code_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['organizations_promotional_code_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'organizations_promotional_code_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$organization_promotional_code = $_POST['organization_promotional_code'];
-	update_post_meta( $post_id, 'organization_promotional_code', $organization_promotional_code );
-}
-
-/*  Organizations - Promotional Code End */
-
-/*  Organizations - Ratings Start */
-
-add_action( 'admin_init', 'organizations_ratings_fields' );
-
-function organizations_ratings_fields() {
-
-	add_meta_box(
-		'organizations_ratings_meta_box',
-		esc_html__( 'Item Ratings', 'custom-theme' ),
-		'organizations_ratings_display_meta_box',
-		'organization',
-		'normal',
-		'high'
-	);
-}
-
-function organizations_ratings_display_meta_box( $organization ) {
-
-	wp_nonce_field( 'organizations_ratings_box', 'organizations_ratings_nonce' );
-	$meta = get_post_meta( $organization->ID );
-
-	$organization_rating_trust    = ( isset( $meta['organization_rating_trust'][0] ) && '' !== $meta['organization_rating_trust'][0] ) ? $meta['organization_rating_trust'][0] : '';
-	$organization_rating_games    = ( isset( $meta['organization_rating_games'][0] ) && '' !== $meta['organization_rating_games'][0] ) ? $meta['organization_rating_games'][0] : '';
-	$organization_rating_bonus    = ( isset( $meta['organization_rating_bonus'][0] ) && '' !== $meta['organization_rating_bonus'][0] ) ? $meta['organization_rating_bonus'][0] : '';
-	$organization_rating_customer = ( isset( $meta['organization_rating_customer'][0] ) && '' !== $meta['organization_rating_customer'][0] ) ? $meta['organization_rating_customer'][0] : '';
-	$organization_rating_pre      = ( isset( $meta['organization_rating_pre'][0] ) && '' !== $meta['organization_rating_pre'][0] ) ? $meta['organization_rating_pre'][0] : '';
-	$organization_rating_live     = ( isset( $meta['organization_rating_live'][0] ) && '' !== $meta['organization_rating_live'][0] ) ? $meta['organization_rating_live'][0] : '';
-	$organization_rating_coef     = ( isset( $meta['organization_rating_coef'][0] ) && '' !== $meta['organization_rating_coef'][0] ) ? $meta['organization_rating_coef'][0] : '';
-	$organization_rating_payments = ( isset( $meta['organization_rating_payments'][0] ) && '' !== $meta['organization_rating_payments'][0] ) ? $meta['organization_rating_payments'][0] : '';
-	$organization_rating_features = ( isset( $meta['organization_rating_features'][0] ) && '' !== $meta['organization_rating_features'][0] ) ? $meta['organization_rating_features'][0] : '';
+	$post_overall_rating = ( isset( $meta[ "{$post_type}_overall_rating" ][0] ) && '' !== $meta[ "{$post_type}_overall_rating" ][0] ) ? $meta[ "{$post_type}_overall_rating" ][0] : '';
 
 	// Get the number of stars in the rating
 
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$rating_stars_number_value = get_option( 'custom_rating_stars_number' );
-	} else {
-		$rating_stars_number_value = '5';
-	}
+	$rating_stars_number_value = 5;
 
+	if ( get_option( "{$post_type}_rating_stars_number" ) ) {
+		$rating_stars_number_value = get_option( "{$post_type}_rating_stars_number" );
+	}
+	
 	?>
 
 <style type="text/css">
@@ -785,242 +215,15 @@ function organizations_ratings_display_meta_box( $organization ) {
 	}
 </style>
 
-<div class="components-base-control organization_rating_trust">
+<div class="components-base-control post_overall_rating">
 	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_1_title = get_option( 'rating_1' );
-			if ( $rating_1_title ) {
-				echo esc_html( $rating_1_title );
-			} else {
-				esc_html_e( 'Trust & Fairness', 'custom-theme' );
-			} 
-			?>
-		</label>
-
 		<div class="custom-theme-single-rating-box">
 			<?php
 			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
 				?>
 				<label>
-					<input type="radio" name="organization_rating_trust" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_trust, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_games">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_2_title = get_option( 'rating_2' );
-			if ( $rating_2_title ) {
-				echo esc_html( $rating_2_title );
-			} else {
-				esc_html_e( 'Games & Software', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_games" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_games, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_bonus">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_3_title = get_option( 'rating_3' );
-			if ( $rating_3_title ) {
-				echo esc_html( $rating_3_title );
-			} else {
-				esc_html_e( 'Bonuses & Promotions', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_bonus" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_bonus, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_customer">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_4_title = get_option( 'rating_4' );
-			if ( $rating_4_title ) {
-				echo esc_html( $rating_4_title );
-			} else {
-				esc_html_e( 'Customer Support', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_customer" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_customer, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_pre">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_5_title = get_option( 'rating_5' );
-			if ( $rating_5_title ) {
-				echo esc_html( $rating_5_title );
-			} else {
-				esc_html_e( 'In the pre', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_pre" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_pre, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_live">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_6_title = get_option( 'rating_6' );
-			if ( $rating_6_title ) {
-				echo esc_html( $rating_6_title );
-			} else {
-				esc_html_e( 'Live', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_live" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_live, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_coef">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_7_title = get_option( 'rating_7' );
-			if ( $rating_7_title ) {
-				echo esc_html( $rating_7_title );
-			} else {
-				esc_html_e( 'Coefficients', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_coef" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_coef, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_payments">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_8_title = get_option( 'rating_8' );
-			if ( $rating_8_title ) {
-				echo esc_html( $rating_8_title );
-			} else {
-				esc_html_e( 'Convenience of payments', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_payments" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_payments, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
-				</label>
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="components-base-control organization_rating_features">
-	<div class="components-base-control__field">
-		<label class="components-base-control__label">
-			<?php
-			$rating_9_title = get_option( 'rating_9' );
-			if ( $rating_9_title ) {
-				echo esc_html( $rating_9_title );
-			} else {
-				esc_html_e( 'Interface/Features', 'custom-theme' );
-			} 
-			?>
-		</label>
-		<div class="custom-theme-single-rating-box">
-			<?php
-			for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) {
-				?>
-				<label>
-					<input type="radio" name="organization_rating_features" value="<?php esc_attr_e( $i ); ?>" <?php checked( $organization_rating_features, $i ); ?>>
-					<?php esc_attr_e( $i ); ?>
+					<input type="radio" name="<?php echo esc_attr( $post_type ); ?>_overall_rating" value="<?php echo esc_attr( $i ); ?>" <?php checked( $post_overall_rating, $i ); ?>>
+					<?php echo esc_attr( $i ); ?>
 				</label>
 				<?php
 			}
@@ -1032,181 +235,15 @@ function organizations_ratings_display_meta_box( $organization ) {
 	<?php
 }
 
-add_action( 'save_post', 'organizations_ratings_save_fields', 10, 2 );
+function custom_overall_rating_save_field( $post_type, $post_id ) {
 
-function organizations_ratings_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_ratings_nonce'] ) ) {
+	if ( ! isset( $_POST[ "{$post_type}_rating_nonce" ] ) ) {
 		return $post_id;
 	}
 
-		$nonce = $_POST['organizations_ratings_nonce'];
+	$nonce = $_POST[ "{$post_type}_rating_nonce" ];
 
-	if ( ! wp_verify_nonce( $nonce, 'organizations_ratings_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	if ( isset( $_POST['organization_rating_trust'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_trust', sanitize_text_field( wp_unslash( $_POST['organization_rating_trust'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_games'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_games', sanitize_text_field( wp_unslash( $_POST['organization_rating_games'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_bonus'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_bonus', sanitize_text_field( wp_unslash( $_POST['organization_rating_bonus'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_customer'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_customer', sanitize_text_field( wp_unslash( $_POST['organization_rating_customer'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_pre'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_pre', sanitize_text_field( wp_unslash( $_POST['organization_rating_pre'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_live'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_live', sanitize_text_field( wp_unslash( $_POST['organization_rating_live'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_coef'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_coef', sanitize_text_field( wp_unslash( $_POST['organization_rating_coef'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_payments'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_payments', sanitize_text_field( wp_unslash( $_POST['organization_rating_payments'] ) ) );
-	}
-
-	if ( isset( $_POST['organization_rating_features'] ) ) {
-		update_post_meta( $post_id, 'organization_rating_features', sanitize_text_field( wp_unslash( $_POST['organization_rating_features'] ) ) );
-	}
-
-	if ( ! wp_is_post_revision( $post_id ) ) {
-
-		$organization_rating_trust    = get_post_meta( $post_id, 'organization_rating_trust', true );
-		$organization_rating_games    = get_post_meta( $post_id, 'organization_rating_games', true );
-		$organization_rating_bonus    = get_post_meta( $post_id, 'organization_rating_bonus', true );
-		$organization_rating_customer = get_post_meta( $post_id, 'organization_rating_customer', true );
-		$organization_rating_pre      = get_post_meta( $post_id, 'organization_rating_pre', true );
-		$organization_rating_live     = get_post_meta( $post_id, 'organization_rating_live', true );
-		$organization_rating_coef     = get_post_meta( $post_id, 'organization_rating_coef', true );
-		$organization_rating_payments = get_post_meta( $post_id, 'organization_rating_payments', true );
-		$organization_rating_features = get_post_meta( $post_id, 'organization_rating_features', true );
-		
-		$organization_ratings_all = array(
-			$organization_rating_trust,
-			$organization_rating_games,
-			$organization_rating_bonus,
-			$organization_rating_customer,
-			$organization_rating_pre,
-			$organization_rating_live,
-			$organization_rating_coef,
-			$organization_rating_payments,
-			$organization_rating_features,
-		);
-
-		function filter_rating_callback( $rating ) {
-			return intval( $rating ) > 0;
-		}
-		
-		$organization_ratings_all_filtered = array_filter( $organization_ratings_all, 'filter_rating_callback' );
-
-		$organization_overall_rating = esc_html( array_sum( $organization_ratings_all_filtered ) / count( $organization_ratings_all_filtered ) );
-
-		if ( is_float( $organization_overall_rating ) ) {
-			$organization_overall_rating = number_format( $organization_overall_rating, 1 ); }
-
-		update_post_meta( $post_id, 'organization_overall_rating', $organization_overall_rating );
-
-	}
-}
-
-/*  Organizations - Ratings End */
-
-/*  The standard field for the upload Mobile image of organization single page - Start  */
-
-function custom_mobile_image_uploader( $name, $value = '' ) {
-	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
-	$display = 'none';
- 
-	if ( $image_attributes = wp_get_attachment_image_src( $value, 'mercury-2000-400' ) ) {
-		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
-		$display = 'block';
-	} 
- 
-	return '
-		<div style="margin-top: 1em;">
-			<a href="#" style="display: inline-block;" class="custom_upload_mobile_button' . $image . '</a>
-			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
-			<a href="#" class="custom_remove_mobile_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove mobile image', 'custom-theme' ) . '</a>
-		</div>
-	';
-}
-
-/*  The standard field for the upload image of organization single page - Start  */
-
-function custom_image_uploader( $name, $value = '' ) {
-	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
-	$display = 'none';
- 
-	if ( $image_attributes = wp_get_attachment_image_src( $value, 'mercury-2000-400' ) ) {
-		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
-		$display = 'block';
-	} 
- 
-	return '
-		<div style="margin-top: 1em;">
-			<a href="#" style="display: inline-block;" class="custom_upload_button' . $image . '</a>
-			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
-			<a href="#" class="custom_remove_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove image', 'custom-theme' ) . '</a>
-		</div>
-	';
-}
-
-/*  The standard field for the upload image of organization single page - End  */
-
-/*  Upload Mobile image of organization single page - Start  */
-
-function custom_organization_mobile_image_block() {
-	add_meta_box(
-		'custom_mobile_image_box',
-		esc_html__( 'Mobile Image', 'custom-theme' ),
-		'custom_organization_mobile_image_block_show',
-		'organization',
-		'normal',
-		'core'
-	);
-}
-add_action( 'admin_menu', 'custom_organization_mobile_image_block' );
-
-function custom_organization_mobile_image_block_show( $organization ) {
-
-	wp_nonce_field( 'custom_organization_mobile_box', 'custom_organization_mobile_nonce' );
-	$organization_mobile_image = 'organization_mobile_image';
-
-	echo custom_image_uploader( $organization_mobile_image, get_post_meta( $organization->ID, $organization_mobile_image, true ) );
-}
- 
-function custom_organization_mobile_image_block_save( $post_id ) {
-
-	if ( ! isset( $_POST['custom_organization_mobile_nonce'] ) ) {
-		return $post_id;
-	}
-
-	$nonce = $_POST['custom_organization_mobile_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'custom_organization_mobile_box' ) ) {
+	if ( ! wp_verify_nonce( $nonce, "{$post_type}_rating_box" ) ) {
 		return $post_id;
 	}
 
@@ -1214,90 +251,66 @@ function custom_organization_mobile_image_block_save( $post_id ) {
 		return $post_id;
 	}
 
-	if ( 'organization' == $_POST['post_type'] ) {
+	if ( $post_type === $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
 			return $post_id;
 		}
 	}
 
-	$organization_mobile_image = 'organization_mobile_image';
-	update_post_meta( $post_id, $organization_mobile_image, sanitize_text_field( $_POST[ $organization_mobile_image ] ) );
-}
-add_action( 'save_post', 'custom_organization_mobile_image_block_save' );
-
-/*  Upload Mobile image of organization single page - End  */
-
-/*  Organizations - Additional Fields Start */
-
-add_action( 'admin_init', 'organizations_fields' );
-
-function organizations_fields() {
-	add_meta_box(
-		'organizations_meta_box',
-		esc_html__( 'Additional information', 'custom-theme' ),
-		'organizations_display_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
+	if ( isset( $_POST[ "{$post_type}_overall_rating" ] ) ) {
+		update_post_meta( $post_id, "{$post_type}_overall_rating", sanitize_text_field( wp_unslash( $_POST[ "{$post_type}_overall_rating" ] ) ) );
+	}
 }
 
-function organizations_display_meta_box( $organization ) {
+/*  Add Custom Overall Rating End  */
 
-	wp_nonce_field( 'organizations_box', 'organizations_nonce' );
-	$organization_id                     = get_post_custom( $organization->ID );
-	$organization_external_link          = get_post_meta( $organization->ID, 'organization_external_link', true );
-	$organization_button_title           = get_post_meta( $organization->ID, 'organization_button_title', true );
-	$organization_permalink_button_title = get_post_meta( $organization->ID, 'organization_permalink_button_title', true );
+/*  Add Additional Fields Start */
 
-	$editor_args = array(
-		'tinymce'       => array(
-			'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
-		),
-		'quicktags'     => array(
-			'buttons' => 'em,strong,link,close',
-		),
-		'media_buttons' => false,
-		'textarea_rows' => 8,
-	);
+function custom_additional_fields_display_meta_box( $post ) {
+
+	$post_type = $post->post_type;
+
+	wp_nonce_field( "{$post_type}_additional_box", "{$post_type}_additional_nonce" );
+
+	$post_external_link          = get_post_meta( $post->ID, "{$post_type}_external_link", true );
+	$post_button_title           = get_post_meta( $post->ID, "{$post_type}_button_title", true );
+	$post_permalink_button_title = get_post_meta( $post->ID, "{$post_type}_permalink_button_title", true );
 
 	?>
 
-<div class="components-base-control organization_external_link">
+<div class="components-base-control">
 	<div class="components-base-control__field">
-		<label class="components-base-control__label" for="organization_external_link-0"><?php esc_html_e( 'External URL for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Play Now', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
-		<input type="url" name="organization_external_link" id="organization_external_link-0" value="<?php echo esc_url( $organization_external_link ); ?>" style="display: block; margin-bottom: 10px;" />
+		<label class="components-base-control__label" for="<?php echo esc_attr( $post_type ); ?>_external_link-0"><?php esc_html_e( 'External URL for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Follow Link', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
+		<input type="url" name="<?php echo esc_attr( $post_type ); ?>_external_link" id="<?php echo esc_attr( $post_type ); ?>_external_link-0" value="<?php echo esc_url( $post_external_link ); ?>" style="display: block; margin-bottom: 10px;" />
 	</div>
 </div>
 
-<div class="components-base-control organization_button_title">
+<div class="components-base-control">
 	<div class="components-base-control__field">
-		<label class="components-base-control__label" for="organization_button_title-0"><?php esc_html_e( 'Custom title for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Play Now', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
-		<input type="text" name="organization_button_title" id="organization_button_title-0" value="<?php echo esc_attr( $organization_button_title ); ?>" style="display: block; margin-bottom: 10px;" />
+		<label class="components-base-control__label" for="<?php echo esc_attr( $post_type ); ?>_button_title-0"><?php esc_html_e( 'Custom title for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Follow Link', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
+		<input type="text" name="<?php echo esc_attr( $post_type ); ?>_button_title" id="<?php echo esc_attr( $post_type ); ?>_button_title-0" value="<?php echo esc_attr( $post_button_title ); ?>" style="display: block; margin-bottom: 10px;" />
 	</div>
 </div>
 
-<div class="components-base-control organization_permalink_button_title">
+<div class="components-base-control">
 	<div class="components-base-control__field">
-		<label class="components-base-control__label" for="organization_permalink_button_title-0"><?php esc_html_e( 'Custom title for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Read Review', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
-		<input type="text" name="organization_permalink_button_title" id="organization_permalink_button_title-0" value="<?php echo esc_attr( $organization_permalink_button_title ); ?>" style="display: block; margin-bottom: 10px;" />
+		<label class="components-base-control__label" for="<?php echo esc_attr( $post_type ); ?>_permalink_button_title-0"><?php esc_html_e( 'Custom title for the', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Read', 'custom-theme' ); ?></strong> <?php esc_html_e( 'button', 'custom-theme' ); ?></label>
+		<input type="text" name="<?php echo esc_attr( $post_type ); ?>_permalink_button_title" id="<?php echo esc_attr( $post_type ); ?>_permalink_button_title-0" value="<?php echo esc_attr( $post_permalink_button_title ); ?>" style="display: block; margin-bottom: 10px;" />
 	</div>
 </div>
 
 	<?php
 }
 
-add_action( 'save_post', 'organizations_save_fields', 10, 2 );
+function custom_additional_fields_save_field( $post_type, $post_id ) {
 
-function organizations_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['organizations_nonce'] ) ) {
+	if ( ! isset( $_POST[ "{$post_type}_additional_nonce" ] ) ) {
 		return $post_id;
 	}
 
-		$nonce = $_POST['organizations_nonce'];
+	$nonce = $_POST[ "{$post_type}_additional_nonce" ];
 
-	if ( ! wp_verify_nonce( $nonce, 'organizations_box' ) ) {
+	if ( ! wp_verify_nonce( $nonce, "{$post_type}_additional_box" ) ) {
 		return $post_id;
 	}
 
@@ -1305,388 +318,59 @@ function organizations_save_fields( $post_id ) {
 		return $post_id;
 	}
 
-	if ( 'organization' == $_POST['post_type'] ) {
+	if ( $post_type === $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) ) {
 			return $post_id;
 		}
 	}
 
-	$organization_external_link = esc_url( $_POST['organization_external_link'] );
-	update_post_meta( $post_id, 'organization_external_link', $organization_external_link );
+	$post_external_link = esc_url( $_POST[ "{$post_type}_external_link" ] );
+	update_post_meta( $post_id, "{$post_type}_external_link", $post_external_link );
 
-	$organization_button_title = sanitize_text_field( $_POST['organization_button_title'] );
-	update_post_meta( $post_id, 'organization_button_title', $organization_button_title );
+	$post_button_title = sanitize_text_field( $_POST[ "{$post_type}_button_title" ] );
+	update_post_meta( $post_id, "{$post_type}_button_title", $post_button_title );
 
-	$organization_permalink_button_title = sanitize_text_field( $_POST['organization_permalink_button_title'] );
-	update_post_meta( $post_id, 'organization_permalink_button_title', $organization_permalink_button_title );
+	$post_permalink_button_title = sanitize_text_field( $_POST[ "{$post_type}_permalink_button_title" ] );
+	update_post_meta( $post_id, "{$post_type}_permalink_button_title", $post_permalink_button_title );
 }
 
-/*  Organizations - Additional Fields End */
-
-/*  Apps - Breadcrumb Title Start */
-
-add_action( 'admin_init', 'apps_breadcrumb_title_fields' );
-
-function apps_breadcrumb_title_fields() {
-	add_meta_box(
-		'apps_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'apps_breadcrumb_title_display_meta_box',
-		'app',
-		'normal',
-		'high'
-	);
-}
-
-function apps_breadcrumb_title_display_meta_box( $app ) {
-
-	wp_nonce_field( 'apps_breadcrumb_title_box', 'apps_breadcrumb_title_nonce' );
-
-	$app_breadcrumb_title = get_post_meta( $app->ID, 'app_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control app_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $app_breadcrumb_title[0] ) ) {
-			$app_breadcrumb_title[0] = '';
-		}
-		wp_editor( $app_breadcrumb_title[0], 'app_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'apps_breadcrumb_title_save_fields', 10, 2 );
-
-function apps_breadcrumb_title_save_fields( $post_id ) {
+/*  Add Additional Fields End */
 
-	if ( ! isset( $_POST['apps_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
+/** Custom Organizations - Start  */
 
-		$nonce = $_POST['apps_breadcrumb_title_nonce'];
+require_once __DIR__ . '/custom-post-types/organizations.php';
 
-	if ( ! wp_verify_nonce( $nonce, 'apps_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'app' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
+/**  Custom Organizations - End  */
 
-	$app_breadcrumb_title = $_POST['app_breadcrumb_title'];
-	update_post_meta( $post_id, 'app_breadcrumb_title', $app_breadcrumb_title );
-}
+/** Custom Apps - Start  */
 
-/*  Apps - Breadcrumb Title End */
-
-/*  Payments - Breadcrumb Title Start */
-
-add_action( 'admin_init', 'payments_breadcrumb_title_fields' );
-
-function payments_breadcrumb_title_fields() {
-	add_meta_box(
-		'payments_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'payments_breadcrumb_title_display_meta_box',
-		'payment',
-		'normal',
-		'high'
-	);
-}
-
-function payments_breadcrumb_title_display_meta_box( $payment ) {
-
-	wp_nonce_field( 'payments_breadcrumb_title_box', 'payments_breadcrumb_title_nonce' );
-
-	$payment_breadcrumb_title = get_post_meta( $payment->ID, 'payment_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control payment_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $payment_breadcrumb_title[0] ) ) {
-			$payment_breadcrumb_title[0] = '';
-		}
-		wp_editor( $payment_breadcrumb_title[0], 'payment_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'payments_breadcrumb_title_save_fields', 10, 2 );
-
-function payments_breadcrumb_title_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['payments_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
+require_once __DIR__ . '/custom-post-types/apps.php';
 
-		$nonce = $_POST['payments_breadcrumb_title_nonce'];
+/**  Custom Apps - End  */
 
-	if ( ! wp_verify_nonce( $nonce, 'payments_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'payment' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$payment_breadcrumb_title = $_POST['payment_breadcrumb_title'];
-	update_post_meta( $post_id, 'payment_breadcrumb_title', $payment_breadcrumb_title );
-}
-
-/*  Payments - Breadcrumb Title End */
-
-/*  Registration - Breadcrumb Title Start */
-
-add_action( 'admin_init', 'registration_breadcrumb_title_fields' );
-
-function registration_breadcrumb_title_fields() {
-	add_meta_box(
-		'registration_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'registration_breadcrumb_title_display_meta_box',
-		'registration',
-		'normal',
-		'high'
-	);
-}
-
-function registration_breadcrumb_title_display_meta_box( $registration ) {
-
-	wp_nonce_field( 'registration_breadcrumb_title_box', 'registration_breadcrumb_title_nonce' );
-
-	$registration_breadcrumb_title = get_post_meta( $registration->ID, 'registration_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control registration_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $registration_breadcrumb_title[0] ) ) {
-			$registration_breadcrumb_title[0] = '';
-		}
-		wp_editor( $registration_breadcrumb_title[0], 'registration_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'registration_breadcrumb_title_save_fields', 10, 2 );
-
-function registration_breadcrumb_title_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['registration_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
+/** Custom Payments - Start  */
 
-		$nonce = $_POST['registration_breadcrumb_title_nonce'];
+require_once __DIR__ . '/custom-post-types/payments.php';
 
-	if ( ! wp_verify_nonce( $nonce, 'registration_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'registration' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$registration_breadcrumb_title = $_POST['registration_breadcrumb_title'];
-	update_post_meta( $post_id, 'registration_breadcrumb_title', $registration_breadcrumb_title );
-}
-
-/*  Registration - Breadcrumb Title End */
-
-/*  Bonuses - Breadcrumb Title Start */
-
-add_action( 'admin_init', 'bonuses_breadcrumb_title_fields' );
-
-function bonuses_breadcrumb_title_fields() {
-	add_meta_box(
-		'bonuses_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'bonuses_breadcrumb_title_display_meta_box',
-		'bonus',
-		'normal',
-		'high'
-	);
-}
-
-function bonuses_breadcrumb_title_display_meta_box( $bonus ) {
-
-	wp_nonce_field( 'bonuses_breadcrumb_title_box', 'bonuses_breadcrumb_title_nonce' );
-
-	$bonus_breadcrumb_title = get_post_meta( $bonus->ID, 'bonus_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control bonus_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $bonus_breadcrumb_title[0] ) ) {
-			$bonus_breadcrumb_title[0] = '';
-		}
-		wp_editor( $bonus_breadcrumb_title[0], 'bonus_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'bonuses_breadcrumb_title_save_fields', 10, 2 );
-
-function bonuses_breadcrumb_title_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['bonuses_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['bonuses_breadcrumb_title_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'bonuses_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'bonus' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$bonus_breadcrumb_title = $_POST['bonus_breadcrumb_title'];
-	update_post_meta( $post_id, 'bonus_breadcrumb_title', $bonus_breadcrumb_title );
-}
-
-/*  Bonuses - Breadcrumb Title End */
-
-/*  Promo - Breadcrumb Title Start */
-
-add_action( 'admin_init', 'promo_breadcrumb_title_fields' );
-
-function promo_breadcrumb_title_fields() {
-	add_meta_box(
-		'promo_breadcrumb_title_meta_box',
-		esc_html__( 'Breadcrumb Title', 'custom-theme' ),
-		'promo_breadcrumb_title_display_meta_box',
-		'promo',
-		'normal',
-		'high'
-	);
-}
-
-function promo_breadcrumb_title_display_meta_box( $promo ) {
-
-	wp_nonce_field( 'promo_breadcrumb_title_box', 'promo_breadcrumb_title_nonce' );
-
-	$promo_breadcrumb_title = get_post_meta( $promo->ID, 'promo_breadcrumb_title', false );
-
-	$editor_args = array(
-		'tinymce'       => false,
-		'quicktags'     => false,
-		'media_buttons' => false,
-		'textarea_rows' => 1,
-	);
-	?>
-
-<div class="components-base-control promo_breadcrumb_title">
-	<div class="components-base-control__field">
-		<?php
-		if ( empty( $promo_breadcrumb_title[0] ) ) {
-			$promo_breadcrumb_title[0] = '';
-		}
-		wp_editor( $promo_breadcrumb_title[0], 'promo_breadcrumb_title', $editor_args );
-		?>
-	</div>
-</div>
-
-	<?php
-}
-
-add_action( 'save_post', 'promo_breadcrumb_title_save_fields', 10, 2 );
-
-function promo_breadcrumb_title_save_fields( $post_id ) {
-
-	if ( ! isset( $_POST['promo_breadcrumb_title_nonce'] ) ) {
-		return $post_id;
-	}
-
-		$nonce = $_POST['promo_breadcrumb_title_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'promo_breadcrumb_title_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'promo' == $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$promo_breadcrumb_title = $_POST['promo_breadcrumb_title'];
-	update_post_meta( $post_id, 'promo_breadcrumb_title', $promo_breadcrumb_title );
-}
-
-/*  Promo - Breadcrumb Title End */
+/**  Custom Payments - End  */
+
+/** Custom Registration - Start  */
+
+require_once __DIR__ . '/custom-post-types/registration.php';
+
+/**  Custom Registration - End  */
+
+/** Custom Bonuses - Start  */
+
+require_once __DIR__ . '/custom-post-types/bonuses.php';
+
+/**  Custom Bonuses - End  */
+
+/** Custom Promo - Start  */
+
+require_once __DIR__ . '/custom-post-types/promo.php';
+
+/**  Custom Promo - End  */
 
 /*  Relationship of the Child Post Types and Organizations Start  */
 
@@ -1700,50 +384,18 @@ function custom_post_types_organizations_list() {
 		$organizations_section_name = get_option( 'organizations_section_name', 'Organizations' );
 	}
 
-	add_meta_box(
-		'custom_apps_organizations_list_meta_box',
-		$organizations_section_name,
-		'custom_post_types_display_organizations_list_meta_box',
-		'app',
-		'side',
-		'high'
-	);
+	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
 
-	add_meta_box(
-		'custom_payments_organizations_list_meta_box',
-		$organizations_section_name,
-		'custom_post_types_display_organizations_list_meta_box',
-		'payment',
-		'side',
-		'high'
-	);
-
-	add_meta_box(
-		'custom_registration_organizations_list_meta_box',
-		$organizations_section_name,
-		'custom_post_types_display_organizations_list_meta_box',
-		'registration',
-		'side',
-		'high'
-	);
-
-	add_meta_box(
-		'custom_bonuses_organizations_list_meta_box',
-		$organizations_section_name,
-		'custom_post_types_display_organizations_list_meta_box',
-		'bonus',
-		'side',
-		'high'
-	);
-
-	add_meta_box(
-		'custom_promo_organizations_list_meta_box',
-		$organizations_section_name,
-		'custom_post_types_display_organizations_list_meta_box',
-		'promo',
-		'side',
-		'high'
-	);
+	foreach ( $custom_child_post_types as $post_type ) {
+		add_meta_box(
+			"custom_{$post_type}_organizations_list_meta_box",
+			$organizations_section_name,
+			'custom_post_types_display_organizations_list_meta_box',
+			$post_type,
+			'side',
+			'high'
+		);
+	}
 }
 
 function custom_post_types_display_organizations_list_meta_box( $post ) {
@@ -1788,406 +440,11 @@ function custom_post_types_display_organizations_list_meta_box( $post ) {
 	}
 }
 
-/* Relationship of the Child Post Types and Organizations Start  */
-
-
-/*  Display the Relationship of the Organization and Child Post Types Start  */
-
-add_action( 'admin_init', 'custom_organizations_post_types_list' );
-
-function custom_organizations_post_types_list() {
-
-	$apps_section_name = esc_html__( 'Apps', 'custom-theme' );
-
-	if ( get_option( 'apps_section_name' ) ) {
-		$apps_section_name = get_option( 'apps_section_name', 'Apps' );
-	}
-
-	add_meta_box(
-		'custom_organizations_apps_list_meta_box',
-		$apps_section_name,
-		'custom_organizations_display_apps_list_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
-
-	$payments_section_name = esc_html__( 'Payments', 'custom-theme' );
-
-	if ( get_option( 'payments_section_name' ) ) {
-		$payments_section_name = get_option( 'payments_section_name', 'Payments' );
-	}
-
-	add_meta_box(
-		'custom_organizations_payments_list_meta_box',
-		$payments_section_name,
-		'custom_organizations_display_payments_list_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
-
-	$registration_section_name = esc_html__( 'Registration', 'custom-theme' );
-
-	if ( get_option( 'registration_section_name' ) ) {
-		$registration_section_name = get_option( 'registration_section_name', 'Registration' );
-	}
-
-	add_meta_box(
-		'custom_organizations_registration_list_meta_box',
-		$registration_section_name,
-		'custom_organizations_display_registration_list_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
-
-	$bonuses_section_name = esc_html__( 'Bonuses', 'custom-theme' );
-
-	if ( get_option( 'bonuses_section_name' ) ) {
-		$bonuses_section_name = get_option( 'bonuses_section_name', 'Bonuses' );
-	}
-
-	add_meta_box(
-		'custom_organizations_bonuses_list_meta_box',
-		$bonuses_section_name,
-		'custom_organizations_display_bonuses_list_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
-
-	$promo_section_name = esc_html__( 'Promotional codes', 'custom-theme' );
-
-	if ( get_option( 'promo_section_name' ) ) {
-		$promo_section_name = get_option( 'promo_section_name', 'Promotional codes' );
-	}
-
-	add_meta_box(
-		'custom_organizations_promo_list_meta_box',
-		$promo_section_name,
-		'custom_organizations_display_promo_list_meta_box',
-		'organization',
-		'side',
-		'high'
-	);
-}
-
-/*  Display the Relationship of the Organization and Apps Start  */
-
-function custom_organizations_display_apps_list_meta_box( $post ) {
-	$apps = get_posts(
-		array(
-			'post_type'      => 'app',
-			'posts_per_page' => -1,
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'post_parent'    => $post->ID,
-			
-		)
-	);
-
-	if ( $apps ) {
-		?>
-		<div style="max-height:200px; overflow-y:auto;">
-			<ul>
-			<?php foreach ( $apps as $app ) { ?>
-				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
-			<?php } ?>
-			</ul>
-		</div>
-		<?php
-	} else {
-		esc_html_e( 'No items', 'custom-theme' );
-	}
-}
-
-/*  Display the Relationship of the Organization and Apps End  */
-
-/*  Display the Relationship of the Organization and Payments Start  */
-
-function custom_organizations_display_payments_list_meta_box( $post ) {
-	$apps = get_posts(
-		array(
-			'post_type'      => 'payment',
-			'posts_per_page' => -1,
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'post_parent'    => $post->ID,
-			
-		)
-	);
-
-	if ( $apps ) {
-		?>
-		<div style="max-height:200px; overflow-y:auto;">
-			<ul>
-			<?php foreach ( $apps as $app ) { ?>
-				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
-			<?php } ?>
-			</ul>
-		</div>
-		<?php
-	} else {
-		esc_html_e( 'No items', 'custom-theme' );
-	}
-}
-
-/*  Display the Relationship of the Organization and Payments End  */
-
-/*  Display the Relationship of the Organization and Registration Start  */
-
-function custom_organizations_display_registration_list_meta_box( $post ) {
-	$apps = get_posts(
-		array(
-			'post_type'      => 'registration',
-			'posts_per_page' => -1,
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'post_parent'    => $post->ID,
-			
-		)
-	);
-
-	if ( $apps ) {
-		?>
-		<div style="max-height:200px; overflow-y:auto;">
-			<ul>
-			<?php foreach ( $apps as $app ) { ?>
-				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
-			<?php } ?>
-			</ul>
-		</div>
-		<?php
-	} else {
-		esc_html_e( 'No items', 'custom-theme' );
-	}
-}
-
-/*  Display the Relationship of the Organization and Registration End  */
-
-/*  Display the Relationship of the Organization and Bonuses Start  */
-
-function custom_organizations_display_bonuses_list_meta_box( $post ) {
-	$apps = get_posts(
-		array(
-			'post_type'      => 'bonus',
-			'posts_per_page' => -1,
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'post_parent'    => $post->ID,
-			
-		)
-	);
-
-	if ( $apps ) {
-		?>
-		<div style="max-height:200px; overflow-y:auto;">
-			<ul>
-			<?php foreach ( $apps as $app ) { ?>
-				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
-			<?php } ?>
-			</ul>
-		</div>
-		<?php
-	} else {
-		esc_html_e( 'No items', 'custom-theme' );
-	}
-}
-
-/*  Display the Relationship of the Organization and Bonuses End  */
-
-/*  Display the Relationship of the Organization and Promo Start  */
-
-function custom_organizations_display_promo_list_meta_box( $post ) {
-	$apps = get_posts(
-		array(
-			'post_type'      => 'promo',
-			'posts_per_page' => -1,
-			'orderby'        => 'post_title',
-			'order'          => 'ASC',
-			'post_parent'    => $post->ID,
-			
-		)
-	);
-
-	if ( $apps ) {
-		?>
-		<div style="max-height:200px; overflow-y:auto;">
-			<ul>
-			<?php foreach ( $apps as $app ) { ?>
-				<li><a href="<?php echo esc_url( get_permalink( $app->ID ) ); ?>" title="<?php echo esc_attr( $app->post_title ); ?>" target="_blank"><?php echo esc_html( $app->post_title ); ?></a></li>
-			<?php } ?>
-			</ul>
-		</div>
-		<?php
-	} else {
-		esc_html_e( 'No items', 'custom-theme' );
-	}
-}
-
-/*  Display the Relationship of the Organization and Promo End  */
-
-
-/*  Display the Relationship of the Organization and Child Post Types End  */
-
-
-/*  Add Payment Systems logo Start  */
-
-/* --- Add custom taxonomy field --- */
-
-function add_payment_system_taxonomy_image( $taxonomy ) {
-	?>
-<div class="form-field term-group">
-	<label for="taxonomy-image-id">
-		<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
-	</label>
-	<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" class="custom_media_url" value="">
-	<div id="taxonomy-image-wrapper"></div>
-	<p>
-		<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
-		<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
-	</p>
-</div>
-	<?php
-}
-
-add_action( 'payment-system_add_form_fields', 'add_payment_system_taxonomy_image', 10, 2 );
-
-/* --- Save the custom taxonomy field --- */
-
-function save_payment_system_taxonomy_image( $term_id, $tt_id ) {
-	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
-		$image = esc_attr( $_POST['taxonomy-image-id'] );
-		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
-	}
-}
-
-add_action( 'created_payment-system', 'save_payment_system_taxonomy_image', 10, 2 );
-
-/* --- Add custom taxonomy field for edit --- */
-
-function edit_payment_system_image_upload( $term, $taxonomy ) {
-	?>
-<tr class="form-field term-group-wrap">
-	<th scope="row">
-		<label for="taxonomy-image-id">
-			<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
-		</label>
-	</th>
-	<td>
-		<?php $image_id = get_term_meta( $term->term_id, 'taxonomy-image-id', true ); ?>
-		<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" value="<?php echo esc_attr( $image_id ); ?>">
-		<div id="taxonomy-image-wrapper">
-		<?php if ( $image_id ) { ?>
-			<?php echo wp_get_attachment_image( $image_id ); ?>
-		<?php } ?>
-			</div>
-			<p>
-			<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
-			<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
-		</p>
-	</td>
-</tr>
-	<?php
-}
-
-add_action( 'payment-system_edit_form_fields', 'edit_payment_system_image_upload', 10, 2 );
-
-/* --- Save the edited value of the custom taxonomy field --- */
-
-function update_payment_system_image_upload( $term_id, $tt_id ) {
-	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
-		$image = esc_attr( $_POST['taxonomy-image-id'] );
-		update_term_meta( $term_id, 'taxonomy-image-id', $image );
-	} else {
-		update_term_meta( $term_id, 'taxonomy-image-id', '' );
-	}
-}
-
-add_action( 'edited_payment-system', 'update_payment_system_image_upload', 10, 2 );
-
-/*  Add Payment Systems logo End  */
-
-
-/*  Add App Platforms logo Start  */
-
-/* --- Add custom taxonomy field --- */
-
-function add_app_platform_taxonomy_image( $taxonomy ) {
-	?>
-<div class="form-field term-group">
-	<label for="taxonomy-image-id">
-		<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
-	</label>
-	<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" class="custom_media_url" value="">
-	<div id="taxonomy-image-wrapper"></div>
-	<p>
-		<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
-		<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
-	</p>
-</div>
-	<?php
-}
-
-add_action( 'app-platform_add_form_fields', 'add_app_platform_taxonomy_image', 10, 2 );
-
-/* --- Save the custom taxonomy field --- */
-
-function save_app_platform_taxonomy_image( $term_id, $tt_id ) {
-	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
-		$image = esc_attr( $_POST['taxonomy-image-id'] );
-		add_term_meta( $term_id, 'taxonomy-image-id', $image, true );
-	}
-}
-
-add_action( 'created_app-platform', 'save_app_platform_taxonomy_image', 10, 2 );
-
-/* --- Add custom taxonomy field for edit --- */
-
-function edit_app_platform_image_upload( $term, $taxonomy ) {
-	?>
-<tr class="form-field term-group-wrap">
-	<th scope="row">
-		<label for="taxonomy-image-id">
-			<?php esc_html_e( 'Logo', 'custom-theme' ); ?>
-		</label>
-	</th>
-	<td>
-		<?php $image_id = get_term_meta( $term->term_id, 'taxonomy-image-id', true ); ?>
-		<input type="hidden" id="taxonomy-image-id" name="taxonomy-image-id" value="<?php echo esc_attr( $image_id ); ?>">
-		<div id="taxonomy-image-wrapper">
-		<?php if ( $image_id ) { ?>
-			<?php echo wp_get_attachment_image( $image_id ); ?>
-		<?php } ?>
-			</div>
-			<p>
-			<input type="button" class="button button-secondary custom_media_button" id="custom_media_button" name="custom_media_button" value="<?php esc_attr_e( 'Add Logo', 'custom-theme' ); ?>" />
-			<input type="button" class="button button-secondary custom_media_remove" id="custom_media_remove" name="custom_media_remove" value="<?php esc_attr_e( 'Remove Logo', 'custom-theme' ); ?>" />
-		</p>
-	</td>
-</tr>
-	<?php
-}
-
-add_action( 'app-platform_edit_form_fields', 'edit_app_platform_image_upload', 10, 2 );
-
-/* --- Save the edited value of the custom taxonomy field --- */
-
-function update_app_platform_image_upload( $term_id, $tt_id ) {
-	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
-		$image = esc_attr( $_POST['taxonomy-image-id'] );
-		update_term_meta( $term_id, 'taxonomy-image-id', $image );
-	} else {
-		update_term_meta( $term_id, 'taxonomy-image-id', '' );
-	}
-}
-
-add_action( 'edited_app-platform', 'update_app_platform_image_upload', 10, 2 );
-
-/*  Add App Platforms logo End  */
+/*  Relationship of the Child Post Types and Organizations End  */
 
 /*  Rewrite Links Of Custom Post Types Start  */
+
+add_action( 'init', 'custom_posts_rewrite_rules' );
 
 function custom_posts_rewrite_rules() {
 	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
@@ -2208,8 +465,6 @@ function custom_posts_rewrite_rules() {
 		add_rewrite_rule( "^$organization_slug/([^/]+)/([^/]+)/?", 'index.php?' . $post_type . '=$matches[2]', 'top' );
 	}
 }
-add_action( 'init', 'custom_posts_rewrite_rules' );
-
 
 function custom_post_type_permalinks( $link, $post ) {
 	$custom_child_post_types = array( 'app', 'payment', 'promo', 'registration', 'bonus' );
