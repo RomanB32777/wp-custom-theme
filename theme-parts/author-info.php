@@ -145,6 +145,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 										custom_star_rating(
 											array(
 												'rating' => $author_rating,
+												'rating_stars_number' => 5,
 												'wrapper_classes' => 'gap-x-2',
 												'star_classes' => 'w-6 h-6',
 											)

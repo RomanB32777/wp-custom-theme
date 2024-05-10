@@ -64,7 +64,8 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 						<?php
 							custom_star_rating(
 								array(
-									'rating' => $rating,
+									'rating'              => $rating,
+									'rating_stars_number' => 5,
 								)
 							);
 						?>

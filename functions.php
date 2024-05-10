@@ -1,7 +1,7 @@
 <?php
 
 global $custom_theme_version;
-$custom_theme_version = '1.1.2';
+$custom_theme_version = '1.2.0';
 
 $vendor_dir = __DIR__ . '/vendor';
 $env_file   = __DIR__ . '/.env';
