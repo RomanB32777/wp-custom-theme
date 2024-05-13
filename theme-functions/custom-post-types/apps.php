@@ -123,7 +123,7 @@ function app_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'app_short_description_save_field', 10, 2 );
 
 function app_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'app', 'short_desc', $post_id );
+	custom_save_post_type_field( 'app', 'short_desc', $post_id );
 }
 
 /*  Apps - Short Description End */
@@ -162,7 +162,7 @@ function app_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'app_breadcrumb_title_save_field', 10, 2 );
 
 function app_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'app', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'app', 'breadcrumb_title', $post_id );
 }
 
 /*  Apps - Breadcrumb Title End */
@@ -205,7 +205,7 @@ function app_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'app_bonus_title_save_field', 10, 2 );
 
 function app_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'app', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'app', 'bonus_title', $post_id );
 }
 
 /*  Apps - Bonus Title End */
@@ -244,7 +244,7 @@ function app_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'app_bonus_value_save_field', 10, 2 );
 
 function app_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'app', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'app', 'bonus_value', $post_id );
 }
 
 /*  Apps - Bonus Value End */
@@ -283,7 +283,7 @@ function app_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'app_promotional_code_save_field', 10, 2 );
 
 function app_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'app', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'app', 'promotional_code', $post_id );
 }
 
 /*  Apps - Promotional Code End */
@@ -309,7 +309,7 @@ function app_rating_field() {
 add_action( 'save_post', 'app_rating_save_field', 10, 2 );
 
 function app_rating_save_field( $post_id ) {
-	custom_overall_rating_save_field( 'app', $post_id );
+	custom_save_post_type_field( 'app', 'overall_rating', $post_id );
 }
 
 /*  Apps - Rating End */
@@ -362,7 +362,7 @@ function app_platform_links_save_field( $post_id ) {
 	$app_platforms = get_terms( 'app-platform', array( 'hide_empty' => false ) );
 
 	foreach ( $app_platforms as $app_platform ) {
-		custom_save_text_field( 'app', "platform_link_{$app_platform->term_id}", $post_id );
+		custom_save_post_type_field( 'app', "platform_link_{$app_platform->term_id}", $post_id );
 	}
 }
 
