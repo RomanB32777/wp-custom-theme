@@ -181,11 +181,16 @@
 						<a 
 							href="<?php echo esc_url( $external_link ); ?>" 
 							title="<?php echo esc_attr( $button_title ); ?>" 
-							class="main-button text-xl text-center py-4 px-10 no-underline" 
+							class="main-button relative flex items-center justify-center text-center text-base font-bold rounded-lg py-4 px-10 no-underline xl:!text-sm"
 							rel="nofollow" 
 							target="_blank"
 						>
-							<?php echo esc_html( $button_title ); ?> 
+							<div
+								class="background absolute w-full h-full rounded-lg transform -skew-x-12"
+							></div>
+							<span class="relative uppercase italic">
+								<?php echo esc_html( $button_title ); ?> 
+							</span>
 						</a>
 					</div>
 						

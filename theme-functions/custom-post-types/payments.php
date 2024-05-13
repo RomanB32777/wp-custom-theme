@@ -123,7 +123,7 @@ function payment_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'payment_short_description_save_field', 10, 2 );
 
 function payment_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'payment', 'short_desc', $post_id );
+	custom_save_post_type_field( 'payment', 'short_desc', $post_id );
 }
 
 /*  Payments - Short Description End */
@@ -162,7 +162,7 @@ function payment_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'payment_breadcrumb_title_save_field', 10, 2 );
 
 function payment_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'payment', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'payment', 'breadcrumb_title', $post_id );
 }
 
 /*  Payments - Breadcrumb Title End */
@@ -205,7 +205,7 @@ function payment_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'payment_bonus_title_save_field', 10, 2 );
 
 function payment_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'payment', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'payment', 'bonus_title', $post_id );
 }
 
 /*  Payments - Bonus Title End */
@@ -244,7 +244,7 @@ function payment_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'payment_bonus_value_save_field', 10, 2 );
 
 function payment_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'payment', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'payment', 'bonus_value', $post_id );
 }
 
 /*  Payments - Bonus Value End */
@@ -283,7 +283,7 @@ function payment_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'payment_promotional_code_save_field', 10, 2 );
 
 function payment_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'payment', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'payment', 'promotional_code', $post_id );
 }
 
 /*  Payments - Promotional Code End */
@@ -309,7 +309,7 @@ function payment_rating_field() {
 add_action( 'save_post', 'payment_rating_save_field', 10, 2 );
 
 function payment_rating_save_field( $post_id ) {
-	custom_overall_rating_save_field( 'payment', $post_id );
+	custom_save_post_type_field( 'payment', 'overall_rating', $post_id );
 }
 
 /*  Payments - Rating End */

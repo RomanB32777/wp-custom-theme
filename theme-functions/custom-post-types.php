@@ -1,32 +1,12 @@
 <?php
 
-/*  The standard field for the upload Mobile image of custom single page - Start  */
-
-function custom_mobile_image_uploader( $name, $value = '' ) {
-	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
-	$display = 'none';
- 
-	if ( $image_attributes = wp_get_attachment_image_src( $value ) ) {
-		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
-		$display = 'block';
-	} 
- 
-	return '
-		<div style="margin-top: 1em;">
-			<a href="#" style="display: inline-block;" class="custom_upload_mobile_button' . $image . '</a>
-			<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . esc_attr( $value ) . '" />
-			<a href="#" class="custom_remove_mobile_button components-button is-link is-destructive" style="margin-top: 1em; display:' . $display . '">' . esc_html__( 'Remove mobile image', 'custom-theme' ) . '</a>
-		</div>
-	';
-}
-
 /*  The standard field for the upload image of custom single page - Start  */
 
-function custom_image_uploader( $name, $value = '' ) {
+function custom_image_uploader( $name, $value = '', $size = '' ) {
 	$image   = ' button">' . esc_html__( 'Upload image', 'custom-theme' );
 	$display = 'none';
  
-	if ( $image_attributes = wp_get_attachment_image_src( $value ) ) {
+	if ( $image_attributes = wp_get_attachment_image_src( $value, $size ) ) {
 		$image   = '"><img src="' . $image_attributes[0] . '" style="max-width: 100%; width: auto; display: block;" />';
 		$display = 'block';
 	} 
@@ -40,7 +20,7 @@ function custom_image_uploader( $name, $value = '' ) {
 	';
 }
 
-/*  The standard field for the upload image of organization single page - End  */
+/*  The standard field for the upload image of custom single page - End  */
 
 /*  Add Taxonomy Logo Start  */
 
@@ -148,7 +128,7 @@ function custom_text_field_display_meta_box( $field_name, $post, $editor_args = 
 	<?php
 }
 
-function custom_save_text_field( $post_type, $field_name, $post_id ) {
+function custom_save_post_type_field( $post_type, $field_name, $post_id ) {
 
 	if ( ! isset( $_POST[ "{$post_type}_{$field_name}_nonce" ] ) ) {
 		return $post_id;
@@ -170,8 +150,9 @@ function custom_save_text_field( $post_type, $field_name, $post_id ) {
 		}
 	}
 
-	$field_value = $_POST[ "{$post_type}_{$field_name}" ];
-	update_post_meta( $post_id, "{$post_type}_{$field_name}", $field_value );
+	if ( isset( $_POST[ "{$post_type}_{$field_name}" ] ) ) {
+		update_post_meta( $post_id, "{$post_type}_{$field_name}", sanitize_text_field( wp_unslash( $_POST[ "{$post_type}_{$field_name}" ] ) ) );
+	}
 }
 
 /*  Add Custom Text Field End */
@@ -233,33 +214,6 @@ function custom_overall_rating_display_meta_box( $post ) {
 </div>
 
 	<?php
-}
-
-function custom_overall_rating_save_field( $post_type, $post_id ) {
-
-	if ( ! isset( $_POST[ "{$post_type}_rating_nonce" ] ) ) {
-		return $post_id;
-	}
-
-	$nonce = $_POST[ "{$post_type}_rating_nonce" ];
-
-	if ( ! wp_verify_nonce( $nonce, "{$post_type}_rating_box" ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( $post_type === $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	if ( isset( $_POST[ "{$post_type}_overall_rating" ] ) ) {
-		update_post_meta( $post_id, "{$post_type}_overall_rating", sanitize_text_field( wp_unslash( $_POST[ "{$post_type}_overall_rating" ] ) ) );
-	}
 }
 
 /*  Add Custom Overall Rating End  */

@@ -42,7 +42,9 @@ function theme_customizer_setting( $wp_customize ) {
 
 	$stars_active_color   = ! empty( $_ENV['YELLOW_COLOR'] ) ? $_ENV['YELLOW_COLOR'] : '#f9b15c';
 	$stars_inactive_color = ! empty( $_ENV['GRIZZLY_LIGHT_COLOR'] ) ? $_ENV['GRIZZLY_LIGHT_COLOR'] : '#7f8c8d';
-	
+
+	$buttons_fixed_background_color = ! empty( $_ENV['DARK_COLOR'] ) ? $_ENV['DARK_COLOR'] : '#1b1d21';
+
 	/*  --- Primary color ---  */
 
 	$wp_customize->add_setting(
@@ -263,6 +265,27 @@ function theme_customizer_setting( $wp_customize ) {
 				'label'    => esc_html__( 'Stars inactive color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'stars_inactive_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'buttons_fixed_background_color',
+		array(
+			'default'           => $buttons_fixed_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'buttons_fixed_background_color',
+			array(
+				'label'    => esc_html__( 'Fixed button background color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'buttons_fixed_background_color',
 			)
 		)
 	);
@@ -1014,6 +1037,12 @@ function theme_customizer_style_settings() {
 		$stars_custom_inactive_color = get_theme_mod( 'stars_inactive_color' );
 	}
 
+	if ( ! $buttons_custom_fixed_background_color = get_theme_mod( 'buttons_fixed_background_color' ) ) {
+		$buttons_custom_fixed_background_color = '#1b1d21';
+	} else {
+		$buttons_custom_fixed_background_color = get_theme_mod( 'buttons_fixed_background_color' );
+	}
+
 	if ( ! $header_custom_color = get_theme_mod( 'header_color' ) ) {
 		$header_custom_color = '#17946d';
 	} else {
@@ -1243,6 +1272,10 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
 		}
 
+		.fixed-button {
+			background-color: ' . esc_attr( $buttons_custom_fixed_background_color ) . ' !important;
+		}
+
 		.comment-list .comment .comment-wrapper .comment-author,
 		#load-comments,
 		.empty-comments {
@@ -1263,6 +1296,7 @@ function theme_customizer_style_settings() {
 		.secondary-button,
 		.secondary-button a,
 		.secondary-button span,
+		.fixed-button,
 		#back-to-top {
 			color: ' . esc_attr( $buttons_custom_content_color ) . ' !important;
 		}
