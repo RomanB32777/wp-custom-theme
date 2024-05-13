@@ -87,7 +87,7 @@ function promo_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'promo_short_description_save_field', 10, 2 );
 
 function promo_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'short_desc', $post_id );
+	custom_save_post_type_field( 'promo', 'short_desc', $post_id );
 }
 
 /*  Promotional Codes - Short Description End */
@@ -126,7 +126,7 @@ function promo_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'promo_breadcrumb_title_save_field', 10, 2 );
 
 function promo_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'promo', 'breadcrumb_title', $post_id );
 }
 
 /*  Promotional Codes - Breadcrumb Title End */
@@ -169,7 +169,7 @@ function promo_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'promo_bonus_title_save_field', 10, 2 );
 
 function promo_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'promo', 'bonus_title', $post_id );
 }
 
 /*  Promotional Codes - Bonus Title End */
@@ -208,7 +208,7 @@ function promo_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'promo_bonus_value_save_field', 10, 2 );
 
 function promo_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'promo', 'bonus_value', $post_id );
 }
 
 /*  Promotional Codes - Bonus Value End */
@@ -247,7 +247,7 @@ function promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'promotional_code_save_field', 10, 2 );
 
 function promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'promo', 'promotional_code', $post_id );
 }
 
 /*  Promotional Codes - Promotional Code End */
@@ -273,7 +273,7 @@ function promo_rating_field() {
 add_action( 'save_post', 'promo_rating_save_field', 10, 2 );
 
 function promo_rating_save_field( $post_id ) {
-	custom_save_text_field( 'promo', 'overall_rating', $post_id );
+	custom_save_post_type_field( 'promo', 'overall_rating', $post_id );
 }
 
 /*  Promotional Codes - Rating End */
@@ -333,7 +333,7 @@ function promo_background_image_display_meta_box( $promo ) {
 }
  
 function custom_promo_background_image_block_save( $post_id ) {
-	custom_save_text_field( 'promo', 'background_image', $post_id );
+	custom_save_post_type_field( 'promo', 'background_image', $post_id );
 }
 add_action( 'save_post', 'custom_promo_background_image_block_save' );
 

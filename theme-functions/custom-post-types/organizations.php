@@ -96,7 +96,7 @@ function organization_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_short_description_save_field', 10, 2 );
 
 function organization_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'short_desc', $post_id );
+	custom_save_post_type_field( 'organization', 'short_desc', $post_id );
 }
 
 /*  Organizations - Short Description End */
@@ -135,7 +135,7 @@ function organization_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_breadcrumb_title_save_field', 10, 2 );
 
 function organization_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'organization', 'breadcrumb_title', $post_id );
 }
 
 /*  Organizations - Breadcrumb Title End */
@@ -178,7 +178,7 @@ function organization_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_bonus_title_save_field', 10, 2 );
 
 function organization_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'organization', 'bonus_title', $post_id );
 }
 
 /*  Organizations - Bonus Title End */
@@ -217,7 +217,7 @@ function organization_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_bonus_value_save_field', 10, 2 );
 
 function organization_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'organization', 'bonus_value', $post_id );
 }
 
 /*  Organizations - Bonus Value End */
@@ -256,7 +256,7 @@ function organization_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_promotional_code_save_field', 10, 2 );
 
 function organization_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'organization', 'promotional_code', $post_id );
 }
 
 /*  Organizations - Promotional Code End */
@@ -295,7 +295,7 @@ function organization_shortcode_content_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_shortcode_content_save_field', 10, 2 );
 
 function organization_shortcode_content_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'shortcode_content', $post_id );
+	custom_save_post_type_field( 'organization', 'shortcode_content', $post_id );
 }
 
 /*  Organizations - Shortcode Content End */
@@ -647,7 +647,7 @@ function organization_mobile_image_display_meta_box( $organization ) {
 add_action( 'save_post', 'custom_organization_mobile_image_block_save' );
 
 function custom_organization_mobile_image_block_save( $post_id ) {
-	custom_save_text_field( 'organization', 'mobile_image', $post_id );
+	custom_save_post_type_field( 'organization', 'mobile_image', $post_id );
 }
 
 /*  Upload Mobile image of organization single page - End  */
@@ -682,7 +682,7 @@ function organization_background_image_display_meta_box( $organization ) {
 }
  
 function custom_organization_background_image_block_save( $post_id ) {
-	custom_save_text_field( 'organization', 'background_image', $post_id );
+	custom_save_post_type_field( 'organization', 'background_image', $post_id );
 }
 add_action( 'save_post', 'custom_organization_background_image_block_save' );
 

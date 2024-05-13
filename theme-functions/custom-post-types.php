@@ -128,7 +128,7 @@ function custom_text_field_display_meta_box( $field_name, $post, $editor_args = 
 	<?php
 }
 
-function custom_save_text_field( $post_type, $field_name, $post_id ) {
+function custom_save_post_type_field( $post_type, $field_name, $post_id ) {
 
 	if ( ! isset( $_POST[ "{$post_type}_{$field_name}_nonce" ] ) ) {
 		return $post_id;

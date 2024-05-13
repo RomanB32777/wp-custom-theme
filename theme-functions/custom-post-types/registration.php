@@ -87,7 +87,7 @@ function registration_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'registration_short_description_save_field', 10, 2 );
 
 function registration_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'short_desc', $post_id );
+	custom_save_post_type_field( 'registration', 'short_desc', $post_id );
 }
 
 /*  Registration - Short Description End */
@@ -126,7 +126,7 @@ function registration_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'registration_breadcrumb_title_save_field', 10, 2 );
 
 function registration_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'registration', 'breadcrumb_title', $post_id );
 }
 
 /*  Registration - Breadcrumb Title End */
@@ -169,7 +169,7 @@ function registration_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'registration_bonus_title_save_field', 10, 2 );
 
 function registration_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'registration', 'bonus_title', $post_id );
 }
 
 /*  Registration - Bonus Title End */
@@ -208,7 +208,7 @@ function registration_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'registration_bonus_value_save_field', 10, 2 );
 
 function registration_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'registration', 'bonus_value', $post_id );
 }
 
 /*  Registration - Bonus Value End */
@@ -247,7 +247,7 @@ function registration_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'registration_promotional_code_save_field', 10, 2 );
 
 function registration_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'registration', 'promotional_code', $post_id );
 }
 
 /*  Registration - Promotional Code End */
@@ -273,7 +273,7 @@ function registration_rating_field() {
 add_action( 'save_post', 'registration_rating_save_field', 10, 2 );
 
 function registration_rating_save_field( $post_id ) {
-	custom_save_text_field( 'registration', 'overall_rating', $post_id );
+	custom_save_post_type_field( 'registration', 'overall_rating', $post_id );
 }
 
 /*  Registration - Rating End */
@@ -333,7 +333,7 @@ function registration_background_image_display_meta_box( $registration ) {
 }
  
 function custom_registration_background_image_block_save( $post_id ) {
-	custom_save_text_field( 'registration', 'background_image', $post_id );
+	custom_save_post_type_field( 'registration', 'background_image', $post_id );
 }
 add_action( 'save_post', 'custom_registration_background_image_block_save' );
 
