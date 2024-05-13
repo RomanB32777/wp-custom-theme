@@ -96,7 +96,7 @@ function organization_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_short_description_save_field', 10, 2 );
 
 function organization_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'short_desc', $post_id );
+	custom_save_post_type_field( 'organization', 'short_desc', $post_id );
 }
 
 /*  Organizations - Short Description End */
@@ -135,7 +135,7 @@ function organization_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_breadcrumb_title_save_field', 10, 2 );
 
 function organization_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'organization', 'breadcrumb_title', $post_id );
 }
 
 /*  Organizations - Breadcrumb Title End */
@@ -178,7 +178,7 @@ function organization_bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_bonus_title_save_field', 10, 2 );
 
 function organization_bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'organization', 'bonus_title', $post_id );
 }
 
 /*  Organizations - Bonus Title End */
@@ -217,7 +217,7 @@ function organization_bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_bonus_value_save_field', 10, 2 );
 
 function organization_bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'organization', 'bonus_value', $post_id );
 }
 
 /*  Organizations - Bonus Value End */
@@ -256,7 +256,7 @@ function organization_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'organization_promotional_code_save_field', 10, 2 );
 
 function organization_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'organization', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'organization', 'promotional_code', $post_id );
 }
 
 /*  Organizations - Promotional Code End */
@@ -579,52 +579,37 @@ function organization_additional_save_fields( $post_id ) {
 
 /*  Upload Mobile image of organization single page - Start  */
 
-function custom_organization_mobile_image_block() {
+add_action( 'admin_menu', 'organization_mobile_image_block' );
+
+function organization_mobile_image_block() {
+	$post_type  = 'organization';
+	$field_name = 'mobile_image';
+
 	add_meta_box(
-		'custom_mobile_image_box',
+		"{$post_type}_{$field_name}_meta_box",
 		esc_html__( 'Mobile Image', 'custom-theme' ),
-		'custom_organization_mobile_image_block_show',
-		'organization',
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
 		'normal',
 		'core'
 	);
 }
-add_action( 'admin_menu', 'custom_organization_mobile_image_block' );
 
-function custom_organization_mobile_image_block_show( $organization ) {
+function organization_mobile_image_display_meta_box( $organization ) {
+	$post_type                      = 'organization';
+	$field_name                     = 'mobile_image';
+	$organization_mobile_image_name = "{$post_type}_{$field_name}";
 
-	wp_nonce_field( 'custom_organization_mobile_box', 'custom_organization_mobile_nonce' );
-	$organization_mobile_image = 'organization_mobile_image';
+	wp_nonce_field( "{$organization_mobile_image_name}_box", "{$organization_mobile_image_name}_nonce" );
 
-	echo custom_image_uploader( $organization_mobile_image, get_post_meta( $organization->ID, $organization_mobile_image, true ) );
+	echo custom_image_uploader( $organization_mobile_image_name, get_post_meta( $organization->ID, $organization_mobile_image_name, true ), 'medium' );
 }
  
-function custom_organization_mobile_image_block_save( $post_id ) {
-
-	if ( ! isset( $_POST['custom_organization_mobile_nonce'] ) ) {
-		return $post_id;
-	}
-
-	$nonce = $_POST['custom_organization_mobile_nonce'];
-
-	if ( ! wp_verify_nonce( $nonce, 'custom_organization_mobile_box' ) ) {
-		return $post_id;
-	}
-
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return $post_id;
-	}
-
-	if ( 'organization' === $_POST['post_type'] ) {
-		if ( ! current_user_can( 'edit_page', $post_id ) ) {
-			return $post_id;
-		}
-	}
-
-	$organization_mobile_image = 'organization_mobile_image';
-	update_post_meta( $post_id, $organization_mobile_image, sanitize_text_field( $_POST[ $organization_mobile_image ] ) );
-}
 add_action( 'save_post', 'custom_organization_mobile_image_block_save' );
+
+function custom_organization_mobile_image_block_save( $post_id ) {
+	custom_save_post_type_field( 'organization', 'mobile_image', $post_id );
+}
 
 /*  Upload Mobile image of organization single page - End  */
 

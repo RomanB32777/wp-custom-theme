@@ -87,7 +87,7 @@ function bonus_short_description_display_meta_box( $post ) {
 add_action( 'save_post', 'bonus_short_description_save_field', 10, 2 );
 
 function bonus_short_description_save_field( $post_id ) {
-	custom_save_text_field( 'bonus', 'short_desc', $post_id );
+	custom_save_post_type_field( 'bonus', 'short_desc', $post_id );
 }
 
 /*  Bonuses - Short Description End */
@@ -126,7 +126,7 @@ function bonus_breadcrumb_title_display_meta_box( $post ) {
 add_action( 'save_post', 'bonus_breadcrumb_title_save_field', 10, 2 );
 
 function bonus_breadcrumb_title_save_field( $post_id ) {
-	custom_save_text_field( 'bonus', 'breadcrumb_title', $post_id );
+	custom_save_post_type_field( 'bonus', 'breadcrumb_title', $post_id );
 }
 
 /*  Bonuses - Breadcrumb Title End */
@@ -169,7 +169,7 @@ function bonus_title_display_meta_box( $post ) {
 add_action( 'save_post', 'bonus_title_save_field', 10, 2 );
 
 function bonus_title_save_field( $post_id ) {
-	custom_save_text_field( 'bonus', 'bonus_title', $post_id );
+	custom_save_post_type_field( 'bonus', 'bonus_title', $post_id );
 }
 
 /*  Bonuses - Bonus Title End */
@@ -208,7 +208,7 @@ function bonus_value_display_meta_box( $post ) {
 add_action( 'save_post', 'bonus_value_save_field', 10, 2 );
 
 function bonus_value_save_field( $post_id ) {
-	custom_save_text_field( 'bonus', 'bonus_value', $post_id );
+	custom_save_post_type_field( 'bonus', 'bonus_value', $post_id );
 }
 
 /*  Bonuses - Bonus Value End */
@@ -247,7 +247,7 @@ function bonus_promotional_code_display_meta_box( $post ) {
 add_action( 'save_post', 'bonus_promotional_code_save_field', 10, 2 );
 
 function bonus_promotional_code_save_field( $post_id ) {
-	custom_save_text_field( 'bonus', 'promotional_code', $post_id );
+	custom_save_post_type_field( 'bonus', 'promotional_code', $post_id );
 }
 
 /*  Bonuses - Promotional Code End */
@@ -273,7 +273,7 @@ function bonus_rating_field() {
 add_action( 'save_post', 'bonus_rating_save_field', 10, 2 );
 
 function bonus_rating_save_field( $post_id ) {
-	custom_overall_rating_save_field( 'bonus', $post_id );
+	custom_save_post_type_field( 'bonus', 'overall_rating', $post_id );
 }
 
 /*  Bonuses - Rating End */

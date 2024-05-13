@@ -120,7 +120,7 @@
 				<a 
 					href="<?php echo esc_url( $external_link ); ?>" 
 					title="<?php echo esc_attr( $button_title ); ?>" 
-					class="main-button text-xl text-center py-4 px-10 no-underline" 
+					class="main-button text-center text-base font-bold rounded-lg py-4 px-10 no-underline xl:!text-sm"
 					rel="nofollow" 
 					target="_blank"
 				>
