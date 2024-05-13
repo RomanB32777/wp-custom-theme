@@ -302,3 +302,39 @@ function registration_additional_save_fields( $post_id ) {
 }
 
 /*  Registration - Additional Fields End */
+
+/*  Upload Background image of registration single page - Start  */
+
+add_action( 'admin_menu', 'registration_background_image_block' );
+
+function registration_background_image_block() {
+	$post_type  = 'registration';
+	$field_name = 'background_image';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Background Image', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'core'
+	);
+}
+
+function registration_background_image_display_meta_box( $registration ) {
+
+	$post_type                          = 'registration';
+	$field_name                         = 'background_image';
+	$registration_background_image_name = "{$post_type}_{$field_name}";
+
+	wp_nonce_field( "{$registration_background_image_name}_box", "{$registration_background_image_name}_nonce" );
+
+	echo custom_image_uploader( $registration_background_image_name, get_post_meta( $registration->ID, $registration_background_image_name, true ), 'full' );
+}
+ 
+function custom_registration_background_image_block_save( $post_id ) {
+	custom_save_text_field( 'registration', 'background_image', $post_id );
+}
+add_action( 'save_post', 'custom_registration_background_image_block_save' );
+
+/*  Upload Background image of registration single page - End  */

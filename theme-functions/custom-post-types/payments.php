@@ -339,6 +339,42 @@ function payment_additional_save_fields( $post_id ) {
 
 /*  Payments - Additional Fields End */
 
+/*  Upload Background image of payment single page - Start  */
+
+add_action( 'admin_menu', 'payment_background_image_block' );
+
+function payment_background_image_block() {
+	$post_type  = 'payment';
+	$field_name = 'background_image';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Background Image', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'core'
+	);
+}
+
+function payment_background_image_display_meta_box( $payment ) {
+
+	$post_type                     = 'payment';
+	$field_name                    = 'background_image';
+	$payment_background_image_name = "{$post_type}_{$field_name}";
+
+	wp_nonce_field( "{$payment_background_image_name}_box", "{$payment_background_image_name}_nonce" );
+
+	echo custom_image_uploader( $payment_background_image_name, get_post_meta( $payment->ID, $payment_background_image_name, true ), 'full' );
+}
+ 
+function custom_payment_background_image_block_save( $post_id ) {
+	custom_save_text_field( 'payment', 'background_image', $post_id );
+}
+add_action( 'save_post', 'custom_payment_background_image_block_save' );
+
+/*  Upload Background image of payment single page - End  */
+
 /*  Add Payment Systems Logo Start  */
 
 add_action( 'payment-system_add_form_fields', 'add_taxonomy_taxonomy_image', 10, 2 );

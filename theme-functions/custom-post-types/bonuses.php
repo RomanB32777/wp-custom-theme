@@ -302,3 +302,39 @@ function bonus_additional_save_fields( $post_id ) {
 }
 
 /*  Bonuses - Additional Fields End */
+
+/*  Upload Background image of bonus single page - Start  */
+
+add_action( 'admin_menu', 'bonus_background_image_block' );
+
+function bonus_background_image_block() {
+	$post_type  = 'bonus';
+	$field_name = 'background_image';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Background Image', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'core'
+	);
+}
+
+function bonus_background_image_display_meta_box( $bonus ) {
+
+	$post_type                   = 'bonus';
+	$field_name                  = 'background_image';
+	$bonus_background_image_name = "{$post_type}_{$field_name}";
+
+	wp_nonce_field( "{$bonus_background_image_name}_box", "{$bonus_background_image_name}_nonce" );
+
+	echo custom_image_uploader( $bonus_background_image_name, get_post_meta( $bonus->ID, $bonus_background_image_name, true ), 'full' );
+}
+ 
+function custom_bonus_background_image_block_save( $post_id ) {
+	custom_save_text_field( 'bonus', 'background_image', $post_id );
+}
+add_action( 'save_post', 'custom_bonus_background_image_block_save' );
+
+/*  Upload Background image of bonus single page - End  */

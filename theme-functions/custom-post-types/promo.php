@@ -302,3 +302,39 @@ function promo_additional_save_fields( $post_id ) {
 }
 
 /*  Promotional Codes - Additional Fields End */
+
+/*  Upload Background image of promo single page - Start  */
+
+add_action( 'admin_menu', 'promo_background_image_block' );
+
+function promo_background_image_block() {
+	$post_type  = 'promo';
+	$field_name = 'background_image';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Background Image', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'core'
+	);
+}
+
+function promo_background_image_display_meta_box( $promo ) {
+
+	$post_type                   = 'promo';
+	$field_name                  = 'background_image';
+	$promo_background_image_name = "{$post_type}_{$field_name}";
+
+	wp_nonce_field( "{$promo_background_image_name}_box", "{$promo_background_image_name}_nonce" );
+
+	echo custom_image_uploader( $promo_background_image_name, get_post_meta( $promo->ID, $promo_background_image_name, true ), 'full' );
+}
+ 
+function custom_promo_background_image_block_save( $post_id ) {
+	custom_save_text_field( 'promo', 'background_image', $post_id );
+}
+add_action( 'save_post', 'custom_promo_background_image_block_save' );
+
+/*  Upload Background image of promo single page - End  */

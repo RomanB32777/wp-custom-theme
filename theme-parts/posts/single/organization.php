@@ -119,28 +119,32 @@
 
 	<!-- Organization Header Start -->
 
-	<div class="relative pb-20 lg:!pb-40 lg:pt-20">
-		<div class="absolute inset-0 aspect-h-1 aspect-w-1 w-full h-full overflow-hidden bg-dark lg:aspect-none">
-			<?php if ( ! empty( $src_background_image ) ) { ?>
-				<img
-					class="h-full w-full object-cover object-right lg:!object-center"
-					src=<?php echo esc_url( $src_background_image[0] ); ?>
-					alt="<?php echo esc_attr( $post_title_attr ); ?>"
-					width="<?php echo esc_attr( $background_image_width ); ?>"
-					height="<?php echo esc_attr( $background_image_height ); ?>"
-				/>
-			<?php } ?>
-		</div>
-
-		<div class="relative flex flex-col gap-y-6 gap-x-10 mx-auto max-w-7xl px-4 sm:px-6 lg:!flex-row lg:px-8">
-			<div class="text-grizzly text-lg mb-14 lg:hidden">
+	<div class="relative bg-dark py-8">
+		<div class="relative flex flex-col gap-y-3 gap-x-10 mx-auto max-w-7xl px-4 sm:px-6 lg:!flex-row lg:px-8">
+			<div class="text-grizzly text-lg mb-7 lg:hidden">
 				<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
 			</div>
 
-			<div class="flex-1 order-2 lg:!order-1">
+			<div class="flex-1">
 				<div class="hidden mb-4 text-grizzly text-lg lg:!block">
 					<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
 				</div>
+
+				<?php if ( wp_get_attachment_image( get_post_thumbnail_id() ) ) { ?>
+					<div class="mb-3 lg:!mb-4">
+						<?php 
+							echo wp_get_attachment_image(
+								get_post_thumbnail_id(),
+								array( 512, 200 ),
+								'',
+								array(
+									'class' => 'h-full w-auto max-w-64 max-h-28 object-cover object-center lg:!max-w-none',
+									'alt'   => $post_title_attr,
+								) 
+							); 
+						?>
+					</div>
+				<?php } ?>
 				
 				<h1 class="font-semibold text-white text-3xl mb-3 lg:!text-5xl lg:!mb-4">
 					<?php the_title(); ?>
@@ -157,9 +161,11 @@
 								)
 							);
 						?>
-						<span class="text-base text-white font-medium lg:!text-xl">
-							<?php echo esc_html( number_format( round( $overall_rating, 1 ), 1, '.', ',' ) ); ?>
-						</span>
+						<?php if ( $overall_rating ) { ?>
+							<span class="text-base text-white font-medium lg:!text-xl">
+								<?php echo esc_html( number_format( round( $overall_rating, 1 ), 1, '.', ',' ) ); ?>
+							</span>
+						<?php } ?>
 					</div>
 				<?php } ?>
 	
@@ -270,22 +276,17 @@
 				<?php } ?>
 			</div>
 
-			<div class="order-1 lg:!order-2 lg:!flex-1">
+			<div class="hidden lg:!flex-1 lg:!block">
 				<div class="h-full flex items-center lg:!justify-center">
-					<?php
-			
-					if ( wp_get_attachment_image( get_post_thumbnail_id() ) ) {
-						echo wp_get_attachment_image(
-							get_post_thumbnail_id(),
-							array( 512, 200 ),
-							'',
-							array(
-								'class' => 'h-full w-auto max-w-28 max-h-48 object-cover object-center lg:!max-w-none',
-								'alt'   => $post_title_attr,
-							) 
-						);
-					} 
-					?>
+					<?php if ( ! empty( $src_background_image ) ) { ?>
+						<img
+							class="h-full w-full max-w-28 max-h-96 object-contain object-center lg:!max-w-none"
+							src=<?php echo esc_url( $src_background_image[0] ); ?>
+							alt="<?php echo esc_attr( $post_title_attr ); ?>"
+							width="<?php echo esc_attr( $background_image_width ); ?>"
+							height="<?php echo esc_attr( $background_image_height ); ?>"
+						/>
+					<?php } ?>
 				</div>
 			</div>
 		</div>

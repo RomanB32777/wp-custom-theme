@@ -393,6 +393,42 @@ function app_additional_save_fields( $post_id ) {
 
 /*  Apps - Additional Fields End */
 
+/*  Upload Background image of app single page - Start  */
+
+add_action( 'admin_menu', 'app_background_image_block' );
+
+function app_background_image_block() {
+	$post_type  = 'app';
+	$field_name = 'background_image';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Background Image', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'core'
+	);
+}
+
+function app_background_image_display_meta_box( $app ) {
+
+	$post_type                 = 'app';
+	$field_name                = 'background_image';
+	$app_background_image_name = "{$post_type}_{$field_name}";
+
+	wp_nonce_field( "{$app_background_image_name}_box", "{$app_background_image_name}_nonce" );
+
+	echo custom_image_uploader( $app_background_image_name, get_post_meta( $app->ID, $app_background_image_name, true ), 'full' );
+}
+ 
+function custom_app_background_image_block_save( $post_id ) {
+	custom_save_text_field( 'app', 'background_image', $post_id );
+}
+add_action( 'save_post', 'custom_app_background_image_block_save' );
+
+/*  Upload Background image of app single page - End  */
+
 /*  Add App Platforms Logo Start  */
 
 add_action( 'app-platform_add_form_fields', 'add_taxonomy_taxonomy_image', 10, 2 );
