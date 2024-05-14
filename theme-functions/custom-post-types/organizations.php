@@ -284,10 +284,14 @@ function organization_shortcode_content_display_meta_box( $post ) {
 		'shortcode_content',
 		$post,
 		array(
-			'tinymce'       => false,
-			'quicktags'     => false,
+			'tinymce'       => array(
+				'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
+			),
+			'quicktags'     => array(
+				'buttons' => 'em,strong,link,close',
+			),
 			'media_buttons' => false,
-			'textarea_rows' => 1,
+			'textarea_rows' => 8,
 		)
 	);
 }

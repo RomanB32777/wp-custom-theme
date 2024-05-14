@@ -252,6 +252,49 @@ function registration_promotional_code_save_field( $post_id ) {
 
 /*  Registration - Promotional Code End */
 
+/*  Registration - Shortcode Content Start */
+
+add_action( 'admin_init', 'registration_shortcode_content_field' );
+
+function registration_shortcode_content_field() {
+	$post_type  = 'registration';
+	$field_name = 'shortcode_content';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Shortcode Content', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function registration_shortcode_content_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'shortcode_content',
+		$post,
+		array(
+			'tinymce'       => array(
+				'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
+			),
+			'quicktags'     => array(
+				'buttons' => 'em,strong,link,close',
+			),
+			'media_buttons' => false,
+			'textarea_rows' => 8,
+		)
+	);
+}
+
+add_action( 'save_post', 'registration_shortcode_content_save_field', 10, 2 );
+
+function registration_shortcode_content_save_field( $post_id ) {
+	custom_save_post_type_field( 'registration', 'shortcode_content', $post_id );
+}
+
+/*  Registration - Shortcode Content End */
+
 /*  Registration - Rating Start */
 
 add_action( 'admin_init', 'registration_rating_field' );

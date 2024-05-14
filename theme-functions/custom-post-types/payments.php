@@ -288,6 +288,49 @@ function payment_promotional_code_save_field( $post_id ) {
 
 /*  Payments - Promotional Code End */
 
+/*  Payments - Shortcode Content Start */
+
+add_action( 'admin_init', 'payment_shortcode_content_field' );
+
+function payment_shortcode_content_field() {
+	$post_type  = 'payment';
+	$field_name = 'shortcode_content';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Shortcode Content', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function payment_shortcode_content_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'shortcode_content',
+		$post,
+		array(
+			'tinymce'       => array(
+				'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
+			),
+			'quicktags'     => array(
+				'buttons' => 'em,strong,link,close',
+			),
+			'media_buttons' => false,
+			'textarea_rows' => 8,
+		)
+	);
+}
+
+add_action( 'save_post', 'payment_shortcode_content_save_field', 10, 2 );
+
+function payment_shortcode_content_save_field( $post_id ) {
+	custom_save_post_type_field( 'payment', 'shortcode_content', $post_id );
+}
+
+/*  Payments - Shortcode Content End */
+
 /*  Payments - Rating Start */
 
 add_action( 'admin_init', 'payment_rating_field' );

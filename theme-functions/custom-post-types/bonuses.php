@@ -252,6 +252,49 @@ function bonus_promotional_code_save_field( $post_id ) {
 
 /*  Bonuses - Promotional Code End */
 
+/*  Bonuses - Shortcode Content Start */
+
+add_action( 'admin_init', 'bonus_shortcode_content_field' );
+
+function bonus_shortcode_content_field() {
+	$post_type  = 'bonus';
+	$field_name = 'shortcode_content';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Shortcode Content', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function bonus_shortcode_content_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'shortcode_content',
+		$post,
+		array(
+			'tinymce'       => array(
+				'toolbar1' => 'bold,italic,underline,link,unlink,undo,redo',
+			),
+			'quicktags'     => array(
+				'buttons' => 'em,strong,link,close',
+			),
+			'media_buttons' => false,
+			'textarea_rows' => 8,
+		)
+	);
+}
+
+add_action( 'save_post', 'bonus_shortcode_content_save_field', 10, 2 );
+
+function bonus_shortcode_content_save_field( $post_id ) {
+	custom_save_post_type_field( 'bonus', 'shortcode_content', $post_id );
+}
+
+/*  Bonuses - Shortcode Content End */
+
 /*  Bonuses - Rating Start */
 
 add_action( 'admin_init', 'bonus_rating_field' );
