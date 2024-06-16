@@ -113,7 +113,7 @@ main,
 	input[type="email"] {
 		border-radius: 16px 0 0 16px;
 
-		@apply py-3 px-6 border-none w-full h-full;
+		@apply py-3 px-6 border-none w-full h-full placeholder:text-grizzly text-dark;
 	}
 
 	input[type="submit"] {
