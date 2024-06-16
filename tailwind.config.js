@@ -1,5 +1,3 @@
-/** @type {import('tailwindcss').Config} */
-
 require("dotenv").config({ path: "./.env" });
 
 const {
@@ -19,12 +17,14 @@ const {
 	GRIZZLY_LIGHT_COLOR,
 	GRIZZLY_DARK_COLOR,
 	RED_COLOR,
+	BLUE_COLOR,
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
 } = process.env;
 
 const alternativeFonts = ["Arial", "sans-serif"];
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
 		"./theme-functions/**/*.php",
@@ -62,6 +62,9 @@ module.exports = {
 				},
 				red: {
 					DEFAULT: RED_COLOR || "#d63031",
+				},
+				blue: {
+					DEFAULT: BLUE_COLOR || "#09a8ed",
 				},
 				yellow: {
 					DEFAULT: YELLOW_COLOR || "#f9b002",

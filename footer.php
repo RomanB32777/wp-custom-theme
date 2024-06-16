@@ -127,6 +127,12 @@
 
 <!-- Back to Top End -->
 
+<!-- Subscribe Modal Start -->
+
+<?php get_template_part( '/theme-parts/banner-modal' ); ?>
+
+<!-- Subscribe Modal End -->
+
 <?php wp_footer(); ?>
 
 </body>

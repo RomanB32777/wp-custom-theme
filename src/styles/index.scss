@@ -104,3 +104,35 @@ main,
 .wp-block {
 	opacity: 1;
 }
+
+.form-row {
+	p {
+		display: flex;
+	}
+
+	input[type="email"] {
+		border-radius: 16px 0 0 16px;
+
+		@apply py-3 px-6 border-none w-full h-full;
+	}
+
+	input[type="submit"] {
+		border-radius: 0 16px 16px 0;
+		font-weight: 800;
+
+		@apply py-2 px-6 text-xl uppercase cursor-pointer;
+
+		@media (screen(sm)) {
+			@apply text-3xl;
+		}
+	}
+
+	.wpcf7-spinner,
+	.wpcf7-not-valid-tip {
+		display: none;
+	}
+}
+
+.wpcf7-response-output {
+	display: none;
+}

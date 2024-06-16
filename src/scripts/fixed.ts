@@ -1,19 +1,5 @@
+import { throttle } from "./throttle";
 import { baseBreakpoints } from "./constants";
-
-const throttle = (func: (...args: unknown[]) => void, timeout: number) => {
-	let ready: boolean = true;
-
-	return (...args: unknown[]) => {
-		if (!ready) {
-			return;
-		}
-
-		ready = false;
-		func(...args);
-
-		setTimeout(() => (ready = true), timeout);
-	};
-};
 
 const showOnPx = 100;
 const invisibleClasses = ["invisible", "opacity-0"];

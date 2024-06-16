@@ -505,27 +505,6 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	$wp_customize->add_setting(
-		'header_mobile_sub_menu_background_color',
-		array(
-			'default'           => $header_mobile_sub_menu_background_color,
-			'sanitize_callback' => 'sanitize_hex_color',
-			'capability'        => 'edit_theme_options',
-		) 
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'header_mobile_sub_menu_background_color',
-			array(
-				'label'    => esc_html__( 'Submenu mobile background color', 'custom-theme' ),
-				'section'  => 'theme_mobile_header_settings',
-				'settings' => 'header_mobile_sub_menu_background_color',
-			)
-		)
-	);
-
 	/*  --- Submenu link color ---  */
 
 	$wp_customize->add_setting(
@@ -894,7 +873,7 @@ function theme_customizer_setting( $wp_customize ) {
 	/*  --- Table settings ---  */
 
 	$wp_customize->add_section(
-		'theme_settings_table_settings',
+		'theme_settings_table',
 		array(
 			'title' => esc_html__( 'Table settings', 'custom-theme' ),
 			'panel' => 'theme_settings',
@@ -918,7 +897,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_odd_color',
 			array(
 				'label'    => esc_html__( 'Table background odd rows color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_odd_color',
 			)
 		)
@@ -939,7 +918,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_even_color',
 			array(
 				'label'    => esc_html__( 'Table background even rows color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_even_color',
 			)
 		)
@@ -960,7 +939,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_border_color',
 			array(
 				'label'    => esc_html__( 'Table border color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_border_color',
 			)
 		)
@@ -982,7 +961,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_th_color',
 			array(
 				'label'    => esc_html__( 'Table header background color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_th_color',
 			)
 		)
@@ -1003,7 +982,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_th_content_color',
 			array(
 				'label'    => esc_html__( 'Table header text color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_th_content_color',
 			)
 		)
@@ -1024,7 +1003,7 @@ function theme_customizer_setting( $wp_customize ) {
 			'table_content_color',
 			array(
 				'label'    => esc_html__( 'Table body text color', 'custom-theme' ),
-				'section'  => 'theme_settings_table_settings',
+				'section'  => 'theme_settings_table',
 				'settings' => 'table_content_color',
 			)
 		)
@@ -1050,7 +1029,148 @@ function theme_customizer_setting( $wp_customize ) {
 				'min'     => 0,
 				'max'     => 100,
 				'step'    => 1,
-				'section' => 'theme_settings_table_settings',
+				'section' => 'theme_settings_table',
+			) 
+		) 
+	);
+
+	/*  --- Banner modal settings ---  */
+
+	$wp_customize->add_section(
+		'theme_settings_banner_modal',
+		array(
+			'title' => esc_html__( 'Banner modal settings', 'custom-theme' ),
+			'panel' => 'theme_settings',
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'is_enabled_banner_modal',
+		array(
+			'default'   => '1',
+			'transport' => 'postMessage',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'is_enabled_banner_modal',
+		array(
+			'type'    => 'checkbox',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Enabled banner modal', 'custom-theme' ),
+		) 
+	);
+
+	/*  --- Banner image ---  */
+
+	$wp_customize->add_setting( 'banner_background_image', array() );
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'banner_background_image',
+			array(
+				'label'    => esc_html__( 'Banner image', 'custom-theme' ),
+				'section'  => 'theme_settings_banner_modal',
+				'priority' => 10,
+			) 
+		) 
+	);
+
+	/*  --- Banner form shortcode ---  */
+
+	$wp_customize->add_setting(
+		'banner_form_shortcode',
+		array(
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'banner_form_shortcode',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Banner form shortcode', 'custom-theme' ),
+		) 
+	);
+
+	/*  --- Banner title ---  */
+
+	$wp_customize->add_setting(
+		'banner_title',
+		array(
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'banner_title',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Banner title', 'custom-theme' ),
+		) 
+	);
+
+	/*  --- Banner subscribe ---  */
+
+	$wp_customize->add_setting(
+		'banner_subscribe_button_url',
+		array(
+			'capability'        => 'edit_theme_options',
+			'default'           => '',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'banner_subscribe_button_url',
+		array(
+			'type'    => 'url',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Subscribe Telegram url', 'custom-theme' ),
+		) 
+	);
+
+
+	$wp_customize->add_setting(
+		'banner_subscribe_description',
+		array(
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'banner_subscribe_description',
+		array(
+			'type'    => 'text',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Subscribe description', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'banner_visible_delay',
+		array(
+			'default'   => 7000,
+			'transport' => 'postMessage',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range(
+			$wp_customize,
+			'banner_visible_delay',
+			array(
+				'label'   => esc_html__( 'Banner visible delay', 'custom-theme' ),
+				'min'     => 1000,
+				'max'     => 30000,
+				'step'    => 500,
+				'section' => 'theme_settings_banner_modal',
 			) 
 		) 
 	);
