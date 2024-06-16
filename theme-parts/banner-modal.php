@@ -28,6 +28,8 @@ if ( ! empty( $form_shortcode ) && $is_enabled_banner ) {
 						class="absolute inset-0 -z-10 h-full w-full object-cover md:object-center"
 						src="<?php echo esc_url( $banner_background_image ); ?>"
 						alt="banner background"
+						width="768"
+						height="364"
 					/>
 				<?php } ?>
 				<div class="px-2 pt-2 pb-3 sm:!pt-4 sm:!px-4 sm:!pb-6">
