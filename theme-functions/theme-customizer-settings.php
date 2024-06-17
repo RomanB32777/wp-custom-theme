@@ -1109,7 +1109,7 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_control(
 		'banner_title',
 		array(
-			'type'    => 'text',
+			'type'    => 'textarea',
 			'section' => 'theme_settings_banner_modal',
 			'label'   => esc_html__( 'Banner title', 'custom-theme' ),
 		) 
@@ -1147,9 +1147,26 @@ function theme_customizer_setting( $wp_customize ) {
 	$wp_customize->add_control(
 		'banner_subscribe_description',
 		array(
-			'type'    => 'text',
+			'type'    => 'textarea',
 			'section' => 'theme_settings_banner_modal',
 			'label'   => esc_html__( 'Subscribe description', 'custom-theme' ),
+		) 
+	);
+
+	$wp_customize->add_setting(
+		'banner_success_text',
+		array(
+			'capability'        => 'edit_theme_options',
+			'sanitize_callback' => 'wp_kses_post',
+		) 
+	);
+	
+	$wp_customize->add_control(
+		'banner_success_text',
+		array(
+			'type'    => 'textarea',
+			'section' => 'theme_settings_banner_modal',
+			'label'   => esc_html__( 'Banner success text', 'custom-theme' ),
 		) 
 	);
 

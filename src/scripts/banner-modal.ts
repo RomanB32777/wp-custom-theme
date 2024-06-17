@@ -1,5 +1,8 @@
+import toastr from "toastr";
+
 const initBannerModal = () => {
 	const bannerModal = document.querySelector<HTMLDivElement>("#banner-banner-modal");
+
 	const storageHiddenModalKey = "hidden-banner-modal";
 	const storageHiddenModalValue = localStorage.getItem(storageHiddenModalKey);
 
@@ -13,6 +16,8 @@ const initBannerModal = () => {
 
 	const closeElements = bannerModal.querySelectorAll<HTMLElement>(".close-banner-modal");
 	const visibleDelay = Number(bannerModal.getAttribute("data-banner-visible-delay")) || 7000;
+	const successText =
+		bannerModal.getAttribute("data-banner-success-text") || "Your data has been sent successfully!";
 
 	const handleVisibleBannerModal = (isVisible: boolean) => {
 		if (isVisible) {
@@ -40,6 +45,7 @@ const initBannerModal = () => {
 		"wpcf7mailsent",
 		() => {
 			handleVisibleBannerModal(false);
+			toastr.success(successText, "", { progressBar: true });
 		},
 		false
 	);

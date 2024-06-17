@@ -7,6 +7,7 @@ $banner_title                 = get_theme_mod( 'banner_title' );
 $banner_subscribe_button_url  = get_theme_mod( 'banner_subscribe_button_url' );
 $banner_subscribe_description = get_theme_mod( 'banner_subscribe_description' );
 $banner_visible_delay         = ! empty( get_theme_mod( 'banner_visible_delay' ) ) ? get_theme_mod( 'banner_visible_delay' ) : 7000;
+$banner_success_text          = ! empty( get_theme_mod( 'banner_success_text' ) ) ? get_theme_mod( 'banner_success_text' ) : __( 'Your data has been sent successfully!', 'custom-theme' );
 
 if ( ! empty( $form_shortcode ) && $is_enabled_banner ) {
 
@@ -14,6 +15,7 @@ if ( ! empty( $form_shortcode ) && $is_enabled_banner ) {
 	<div 
 		id="banner-banner-modal" 
 		data-banner-visible-delay="<?php echo esc_attr( $banner_visible_delay ); ?>" 
+		data-banner-success-text="<?php echo esc_attr( $banner_success_text ); ?>" 
 		class="fixed inset-0 z-50 invisible opacity-0 transition-opacity ease-in duration-200" 
 		aria-labelledby="modal-title" 
 		role="dialog" 
