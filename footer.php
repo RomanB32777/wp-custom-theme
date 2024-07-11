@@ -2,20 +2,14 @@
 
 <footer class="main-border border-t">
 	<div class="py-10 mx-auto max-w-7xl px-4 sm:!px-6 lg:!px-8">
-		<div class="flex gap-4 justify-around items-center flex-wrap lg:!justify-between">
-			<p class="text-sm text-center">
-				<?php echo esc_html( gmdate( 'Y' ) ); ?> 
-				<?php esc_html_e( '&copy;' ); ?>
-				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
-			</p>
+		<div class="flex flex-col gap-8 items-center">
+			<?php get_template_part( 'theme-parts/logo' ); ?>
 
 			<?php 
 			if ( is_active_sidebar( 'footer-widgets' ) ) {
 				dynamic_sidebar( 'footer-widgets' ); 
 			} 
 			?>
-			
-			<?php get_template_part( 'theme-parts/logo' ); ?>
 
 			<?php
 				wp_nav_menu( 
@@ -29,6 +23,12 @@
 					) 
 				); 
 				?>
+
+			<p class="text-sm text-center">
+				<?php echo esc_html( gmdate( 'Y' ) ); ?> 
+				<?php esc_html_e( '&copy;' ); ?>
+				<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
+			</p>
 		</div>
 	</div>
 </footer>
