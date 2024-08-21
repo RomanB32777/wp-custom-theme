@@ -1,5 +1,5 @@
 import "./header";
-import "./feedback";
-import "./fixed";
-import "./init-sliders";
-import "./copy";
+import "./init-services";
+import "./init-documents";
+import "./init-form";
+import "./autocomplete";

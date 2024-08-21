@@ -15,9 +15,8 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$indent        = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 			$display_depth = ( $depth + 1 ); // because it counts the first submenu as 0
 			$classes       = array(
-				'dropdown-menu mt-2 space-y-2 duration-200 ring-gray-900/5 rounded-lg pl-6 xl:!px-4 xl:!mt-0 xl:!space-y-0 xl:w-max xl:max-w-md xl:overflow-hidden',
-				( $depth >= 1 ? 'sub-sub-menu' : '' ),
-				( $depth > 0 ? 'xl:group-hover/sub:opacity-100 xl:group-hover/sub:visible' : 'hidden xl:py-2 xl:shadow-lg xl:ring-1 xl:opacity-0 xl:!block xl:invisible xl:group-hover/main:opacity-100 xl:group-hover/main:visible xl:absolute xl:-left-2 xl:top-full xl:z-10' ),
+				'dropdown-menu space-y-4 mt-4 ring-gray-900/5 xl:!mt-0',
+				( $depth >= 1 ? 'sub-menu pl-8' : 'hidden rounded-b-xl xl:!block xl:!space-y-0 xl:absolute xl:left-0 xl:top-full xl:z-10 xl:overflow-hidden xl:group-hover/main:visible xl:invisible xl:shadow-lg xl:w-80' ),
 				'menu-depth-' . $display_depth,
 			);
 			$class_names   = implode( ' ', $classes );
@@ -37,20 +36,19 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes (<li>)
 			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item pt-2 xl:!m-0 xl:!py-1' : 'sub-menu-item relative text-sm font-semibold xl:!font-bold' ),
-				( $depth >= 1 ? 'sub-sub-menu-item' : '' ),
+				( $depth === 0 ? 'main-menu-item text-2xl xl:flex xl:items-center xl:!m-0 xl:!text-xl xl:hover:bg-primary-hover xl:!px-8 xl:!text-white transition border-primary-brightest [&.current-menu-item]:border-b-4 [&.current-menu-parent]:border-b-4' : '' ),
+				( $depth >= 1 ? 'sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
 			$depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
 
 			$is_dropdown_item = isset( $args->has_children ) && $args->has_children;
 
-			$dropdown_classes = array( 'font-semibold pt-2 text-base xl:!py-1 xl:!m-0 xl:!text-sm xl:!font-bold' );
+			$dropdown_classes = array();
 
 			if ( $is_dropdown_item ) {
-
 				// with child elements - dropdown item
-				$dropdown_classes[] = 'dropdown relative';
+				$dropdown_classes[] = 'dropdown relative [&:last-child>ul]:left-auto [&:last-child>ul]:right-0';
 				$dropdown_classes[] = $depth > 0 ? 'group/sub' : 'group/main';
 			}
 
@@ -64,9 +62,8 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			// build html
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
-
 			$link_classes = array(
-				$depth > 0 ? 'sub-menu-link block no-underline rounded-lg py-2 pl-6 pr-3 w-full duration-200 xl:!py-1 xl:!px-0' : 'main-menu-link no-underline block px-3 py-2 rounded-lg duration-200 xl:!rounded-none xl:!px-0',
+				$depth > 0 ? 'sub-menu-link block text-xl no-underline transition xl:!px-8 xl:!py-4 xl:hover:bg-primary-hover xl:hover:text-white' : 'main-menu-link no-underline',
 			);
 
 			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 ) {
@@ -75,7 +72,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 					$link_classes[] = 'dropdown-toggle';
 				}
 
-				$link_classes[] = 'w-full !flex items-center gap-x-1 text-base font-semibold duration-200 pl-3 pr-3.5 xl:!font-bold xl:!text-sm xl:!pl-0 xl:!pr-0 xl:!w-auto';
+				$link_classes[] = 'w-full flex items-center gap-x-2 xl:w-auto xl:!text-white';
 			}
 
 			$link_class_names = implode( ' ', $link_classes );
@@ -88,18 +85,19 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$attributes .= ' class="menu-link ' . $link_class_names . '"';
 
 			// dropdown arrow
-			$dropdown_group_selector = $depth > 0 ? 'xl:group-hover/sub:rotate-180' : 'xl:group-hover/main:rotate-180';
-			$dropdown_arrow_html     = '
+			$dropdown_arrow_html = '
 				<svg
-					class="dropdown-arrow h-5 w-5 flex-none duration-200 ' . $dropdown_group_selector . '"
-					viewbox="0 0 20 20"
-					fill="currentColor"
-					aria-hidden="true"
+					class="dropdown-arrow xl:hidden"
+					xmlns="http://www.w3.org/2000/svg"
+					width="28"
+					height="18"
+					viewBox="0 0 28 18"
+					fill="none"
 				>
 					<path
-						fill-rule="evenodd"
-						d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-						clip-rule="evenodd"
+						d="M0 9H26M26 9L18.3607 1M26 9L18.3607 17"
+						stroke-width="2"
+						stroke="currentColor"
 					></path>
 				</svg>';
 
@@ -110,7 +108,6 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 				$args->link_before,
 				apply_filters( 'the_title', $item->title, $item->ID ),
 				$args->link_after,
-				// TODO сделать дропдаун и для дочерних элементов
 				( $is_dropdown_item && 0 === $depth ? $dropdown_arrow_html : '' ),
 				$args->after
 			);

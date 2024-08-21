@@ -16,5 +16,6 @@
 	"emmet.includeLanguages": {
 		"javascript": "javascriptreact"
 	},
-	"phpcs.executablePath": "./vendor/squizlabs/php_codesniffer/bin/phpcs"
+	"phpcs.executablePath": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
+	"phpcs.autoConfigSearch": true
 }

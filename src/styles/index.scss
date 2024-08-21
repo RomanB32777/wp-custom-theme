@@ -1,4 +1,5 @@
 // tailwind
+@import "toastr";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,141 +19,98 @@ main,
 	h5 a,
 	h6 a {
 		-webkit-backface-visibility: hidden;
-		font-family: "Inter", "Arial", sans-serif;
-		font-weight: 700;
+
+		@apply font-bold font-roboto;
 	}
 
 	h1,
 	h1 a {
-		font-size: 3rem; /* 48px */
-		line-height: 1;
+		@apply text-3xl;
+
+		@media (screen(lg)) {
+			@apply text-5xl;
+		}
 	}
 
 	h2,
 	h2 a {
-		font-size: 2.25rem; /* 36px */
-		line-height: 2.5rem; /* 40px */
+		@apply text-2xl;
+
+		@media (screen(lg)) {
+			@apply text-4xl;
+		}
 	}
 
 	h3,
 	h3 a {
-		font-size: 1.777em;
-		line-height: 1.2em;
+		@apply text-xl;
+
+		@media (screen(lg)) {
+			@apply text-3xl;
+		}
 	}
 
 	h4,
 	h4 a {
-		font-size: 1.333em;
-		line-height: 1.2em;
+		@apply text-lg;
+
+		@media (screen(lg)) {
+			@apply text-2xl;
+		}
 	}
 
 	h5,
 	h5 a {
-		font-size: 1em;
-		line-height: 1.2em;
+		@apply text-xl;
 	}
 
 	h6,
 	h6 a {
-		font-size: 0.75em;
-		line-height: 1.2em;
-	}
+		@apply text-base;
 
-	a {
-		text-decoration: underline;
-		transition-duration: 0.2s;
+		@media (screen(lg)) {
+			@apply text-lg;
+		}
 	}
 }
 
-.main-blocks {
-	h2 {
-		position: relative;
-		z-index: 1;
+.wpcf7-form {
+	// .wpcf7-not-valid-tip
+	.wpcf7-spinner {
+		display: none;
+	}
 
-		&::before {
-			position: absolute;
-			z-index: -10;
-			width: 180px;
-			height: 60px;
-			border-radius: 50px 4px;
-			margin: auto;
-			content: "";
-			inset: 0;
-			transform: skewY(-6deg);
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"] {
+		@apply block w-full rounded-xl border-2 px-5 py-6 text-xl outline-none focus:outline-none;
+
+		@media (screen(lg)) {
+			@apply px-8;
 		}
 	}
 
-	.wp-block-table thead {
-		border-bottom: none;
+	input[type="submit"] {
+		@apply cursor-pointer flex text-xl font-medium rounded-xl min-w-52 disabled:opacity-75 w-full lg:w-auto lg:px-16 py-4 text-center;
 	}
 
-	div#ez-toc-container {
-		padding: 16px 24px;
-		border: none;
-		border-radius: 12px;
+	input[type="radio"],
+	input[type="checkbox"] {
+		@apply h-6 w-6 focus:ring-primary;
 	}
-}
 
-.wp-block-post-content,
-.main-blocks {
-	ul,
-	ol {
-		padding-left: 32px;
+	span.wpcf7-list-item,
+	span.wpcf7-list-item label {
+		@apply flex items-center gap-x-3 m-0 text-lg leading-6 cursor-pointer;
 
-		li {
-			position: relative;
-			margin-bottom: 10px;
+		@media (screen(lg)) {
+			@apply text-xl;
 		}
 	}
-
-	ol {
-		list-style: decimal;
-	}
 }
 
-.main-blocks ul:not([class*="ez-toc-list"]) li,
-.wp-block-post-content ul li {
-	padding-left: 12px;
-}
-
-.main-blocks ul:not([class*="ez-toc-list"]) li::before,
-.wp-block-post-content ul li::before {
-	position: absolute;
-	left: 0;
-	display: block;
-	width: 8px;
-	min-width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	margin-top: 8px;
-	margin-right: 8px;
-	content: "";
-}
-
-.bonus-border {
-	background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='white' stroke-width='1' stroke-dasharray='10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-}
-
-@media (width <= 768px) {
-	main,
-	.wp-block-post-content {
-		h1,
-		h1 a,
-		h2,
-		h2 a {
-			font-size: 1.5rem; /* 24px */
-			line-height: 2rem; /* 32px */
-		}
-
-		h2 {
-			margin-top: 3.5rem !important; /* 56px */
-			margin-bottom: 3.5rem !important; /* 56px */
-		}
-
-		div#ez-toc-container {
-			width: 100%;
-		}
-	}
+.wpcf7-response-output {
+	display: none;
 }
 
 // We need to have a .editor-style-wrapper or .wp-block selector inside the css file so

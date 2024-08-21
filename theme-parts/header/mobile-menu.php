@@ -1,67 +1,61 @@
-<div class="mobile-menu hidden absolute xl:!hidden" id="mobile-menu" role="dialog" aria-modal="true">
-	<div class="close-menu fixed inset-0 z-10 bg-dark-opacity"></div>
+<?php 
+
+$main_email = get_option( 'main_email' );
+$main_phone = get_option( 'main_phone' );
+
+
+?>
+
+<div class="mobile-menu hidden xl:!hidden" id="mobile-menu" role="dialog" aria-modal="true">
+	<div class="handle-visible-menu fixed inset-0 z-10 bg-black opacity-70"></div>
 	<div
-		class="fixed mobile-menu-wrapper inset-y-0 right-0 z-10 flex flex-col w-full overflow-y-auto px-4 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+		class="mobile-menu-wrapper fixed inset-y-0 left-0 z-10 flex flex-col w-full overflow-y-auto px-4 pt-28 pb-8 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 	>
-		<div class="flex items-center justify-between">
-			<div class="sm:hidden">
-				<?php get_template_part( 'theme-parts/logo' ); ?>
-			</div>
-			<div class="lang-switcher relative group py-1">
-				<a
-					class="main-menu-link dropdown-toggle mobile-exclude flex items-center gap-x-1 text-sm font-bold duration-200"
-					href="#"
-					aria-expanded="false"
-				>
-					<svg
-						class="dropdown-arrow h-5 w-5 flex-none duration-200 group-hover:rotate-180"
-						viewbox="0 0 20 20"
-						fill="currentColor"
-						aria-hidden="true"
-					>
-						<path
-							fill-rule="evenodd"
-							d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-							clip-rule="evenodd"
-						></path>
-					</svg>
-				</a>
-				<ul
-					class="dropdown-menu dropdown-menu-lang mobile-exclude absolute -left-2 top-full z-10 mt-0 w-max max-w-md overflow-hidden rounded-lg shadow-lg ring-1 p-2 invisible ring-gray-900/5 duration-200 opacity-0 group-hover:opacity-100 group-hover:visible"
-				></ul>
-			</div>
-			<button class="close-menu rounded-md text-white -m-2.5 p-2.5" type="button">
-				<span class="sr-only">Close menu</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewbox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M6 18L18 6M6 6l12 12"
-					></path>
-				</svg>
-			</button>
-		</div>
 		<div class="flow-root grow">
-			<div class="flex flex-col h-full justify-between divide-y divide-dark-grizzly">
-				<div class="flex flex-col h-full justify-between pb-6">
+			<div class="flex flex-col h-full gap-y-16">
+				<div>
 					<?php
 						wp_nav_menu( 
 							array( 
 								'theme_location' => 'header',
 								'depth'          => 5,
 								'container'      => null,
-								'menu_class'     => 'space-y-2 py-6 divide-y divide-dark-grizzly',
+								'menu_class'     => 'space-y-4 mb-8',
 								'walker'         => new Header_Walker_Nav_Menu(),
 							) 
 						); 
 						?>
+					<div>
+						<button 
+							id="special-mobile-button"
+							class="search-button px-3 py-5 rounded-xl" 
+							type="button" 
+							aria-expanded="false"
+						>
+							<span class="sr-only">Icon</span>
+							<img 
+								class="icon-button" 
+								src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/eye-light.svg" 
+								alt="<?php esc_attr_e( 'search icon', 'custom-theme' ); ?>"
+								width="35" 
+								height="20"
+							>
+						</button>
+					</div>
+				</div>
+
+				<div class="flex flex-col gap-y-4">
+					<?php if ( ! empty( $main_phone ) ) { ?>
+						<a class="text-3xl" href="tel:<?php echo esc_attr( $main_phone ); ?>">
+							<?php echo esc_html( $main_phone ); ?>
+						</a>	
+					<?php } ?>
+
+					<?php if ( ! empty( $main_email ) ) { ?>
+						<a class="mobile-email text-2xl" href="mailto:<?php echo esc_attr( $main_email ); ?>">
+							<?php echo esc_html( $main_email ); ?>
+						</a>
+					<?php } ?>
 
 					<?php if ( is_active_sidebar( 'social-widgets' ) ) { ?>
 						<div>
@@ -70,11 +64,15 @@
 					<?php } ?>
 				</div>
 
-				<p class="text-sm text-grizzly pt-6">
-					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
-					<?php esc_html_e( '&copy;' ); ?> 
-					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | <?php esc_html_e( 'All Rights Reserved', 'custom-theme' ); ?> 
-				</p>
+				<div>
+					<button
+						class="main-button handle-form-modal flex text-xl font-medium rounded-xl min-w-52 w-full"
+						type="button"
+						aria-expanded="false"
+					>
+						<span class="py-4 mx-auto">Оставить заявку</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

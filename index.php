@@ -1,43 +1,44 @@
 <?php get_header(); ?>
 
-<main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
-		<?php 
-		if ( have_posts() ) :
-			while ( have_posts() ) :
-				the_post();
-				the_content();
-			endwhile;
-		endif; 
-		?>
-	</div>
+<main class="pt-36 pb-16 overflow-hidden lg:!pt-60 lg:!pb-32">
+	<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+		<div class="main-blocks [&>*]:my-4 [&>*]:md:!my-8">
+			<?php 
+			if ( have_posts() ) :
+				while ( have_posts() ) :
+					the_post();
+					the_content();
+				endwhile;
+			endif; 
+			?>
+		</div>
+	
+		<div class="[&>*]:my-16 [&>*]:md:!my-32">
+	
+			<!-- News Start -->
+	
+			<?php get_template_part( '/theme-parts/blocks/news' ); ?>
+	
+			<!-- News End -->
+	
+			<!-- Lecturers Start -->
+	
+			<?php get_template_part( '/theme-parts/blocks/lecturers' ); ?>
+	
+			<!-- Lecturers End -->
+	
+			<!-- Registration Form Start -->
+	
+			<?php get_template_part( '/theme-parts/blocks/registration' ); ?>
+	
+			<!-- Registration Form End -->
 
-	<div class="[&>*]:my-7 [&>*]:md:!my-14">
-
-		<!-- Recent Pages Start -->
-
-		<?php get_template_part( '/theme-parts/pages/recent-pages' ); ?>
-
-		<!-- Recent Pages End -->
-
-		<!-- Author Info Start -->
-
-		<?php
-			get_template_part( '/theme-parts/author-info' );
-			get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40 );
-		?>
-
-		<!-- Author Info End -->
-
-		<!-- Comments Start -->
-
-		<?php
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-		?>
-
-		<!-- Comments End -->
+			<!-- Contacts Start -->
+	
+			<?php get_template_part( '/theme-parts/blocks/contacts' ); ?>
+	
+			<!-- Contacts End -->			
+		</div>
 	</div>
 </main>
 

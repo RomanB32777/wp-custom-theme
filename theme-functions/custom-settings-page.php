@@ -31,71 +31,20 @@ function theme_options_page_html() {
 
 	settings_errors( 'custom_messages' );
 
-	if ( isset( $_GET['tab'] ) ) {  
-		$active_tab = $_GET['tab'];  
-	} else {
-		$active_tab = 'organizations_tab';
-	}
-
-	$organizations_tab_name = esc_html__( 'Organizations', 'custom-theme' );
-	if ( get_option( 'organizations_section_name' ) ) {
-		$organizations_tab_name = get_option( 'organizations_section_name' );
-	}
-
-	$apps_tab_name = esc_html__( 'Apps', 'custom-theme' );
-	if ( get_option( 'apps_section_name' ) ) {
-		$apps_tab_name = get_option( 'apps_section_name' );
-	}
-
-	$payments_tab_name = esc_html__( 'Payments', 'custom-theme' );
-	if ( get_option( 'payments_section_name' ) ) {
-		$payments_tab_name = get_option( 'payments_section_name' );
-	}
-
-	$registration_tab_name = esc_html__( 'Registration', 'custom-theme' );
-	if ( get_option( 'registration_section_name' ) ) {
-		$registration_tab_name = get_option( 'registration_section_name' );
-	}
-
-	$bonuses_tab_name = esc_html__( 'Bonuses', 'custom-theme' );
-	if ( get_option( 'bonuses_section_name' ) ) {
-		$bonuses_tab_name = get_option( 'bonuses_section_name' );
-	}
-
-	$promo_tab_name = esc_html__( 'Promo', 'custom-theme' );
-	if ( get_option( 'promo_section_name' ) ) {
-		$promo_tab_name = get_option( 'promo_section_name' );
-	}
+	$active_tab = 'main_tab';
 
 	?>
 
 <div class="wrap">
 	<style type="text/css">
-		#custom_organizations_tab_rating_titles,
-		#custom_organizations_tab_other_settings {
-			border-top: 1px solid #ccc;
-			padding-top: 5px;
-		}
-		
 		form h2 {
 			color: #e74c3c;
 		}
 	</style>
 	<h1 class="wp-heading-inline"><?php echo esc_html( get_admin_page_title() ); ?><span class="title-count theme-count"><?php echo esc_html( $GLOBALS['custom_theme_version'] ); ?></span></h1>
 	
-	<h2 class="nav-tab-wrapper">
-		<a href="?page=custom-settings&tab=organizations_tab" class="nav-tab <?php echo 'organizations_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Organizations', 'custom-theme' ); ?> (<?php echo esc_html( $organizations_tab_name ); ?>)</a>
-		<a href="?page=custom-settings&tab=apps_tab" class="nav-tab <?php echo 'apps_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Apps', 'custom-theme' ); ?> (<?php echo esc_html( $apps_tab_name ); ?>)</a>
-		<a href="?page=custom-settings&tab=payments_tab" class="nav-tab <?php echo 'payments_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Payments', 'custom-theme' ); ?> (<?php echo esc_html( $payments_tab_name ); ?>)</a>
-		<a href="?page=custom-settings&tab=registration_tab" class="nav-tab <?php echo 'registration_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Registration', 'custom-theme' ); ?> (<?php echo esc_html( $registration_tab_name ); ?>)</a>
-		<a href="?page=custom-settings&tab=bonuses_tab" class="nav-tab <?php echo 'bonuses_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Bonuses', 'custom-theme' ); ?> (<?php echo esc_html( $bonuses_tab_name ); ?>)</a>
-		<a href="?page=custom-settings&tab=promo_tab" class="nav-tab <?php echo 'promo_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Promotional Codes', 'custom-theme' ); ?> (<?php echo esc_html( $promo_tab_name ); ?>)</a>
-	</h2> 
-
 	<form method="post" action="options.php">
 		<?php
-
-		submit_button( esc_html__( 'Save Settings', 'custom-theme' ) );
 
 		settings_fields( $active_tab );
 		do_settings_sections( $active_tab );
@@ -129,22 +78,6 @@ function custom_tab_titles_callback( $args ) {
 		<?php
 }
 
-function custom_tab_slugs_callback( $args ) {
-	?>
-	<p id="<?php echo esc_attr( $args['id'] ); ?>">
-		<?php esc_html_e( 'Here you can change the default slugs.', 'custom-theme' ); ?>
-	</p>
-	<div class="card">
-		<p>
-			<strong><?php echo esc_html( 'WARNING:', 'custom-theme' ); ?></strong><br>
-			<?php echo esc_html( 'Slugs at custom post types (e.g. Organizations, Apps) cannot be the same.', 'custom-theme' ); ?>
-			<hr>
-			<em><?php esc_html_e( 'After saving these settings, please, go to &quot;Settings&quot; - &quot;', 'custom-theme' ); ?><strong><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>" title="<?php esc_attr_e( 'Permalinks', 'custom-theme' ); ?>"><?php esc_html_e( 'Permalinks', 'custom-theme' ); ?></a></strong><?php esc_html_e( '&quot; and click the &quot;Save Changes&quot; button.', 'custom-theme' ); ?> <strong><?php esc_html_e( 'Only after this action, new slugs will work.', 'custom-theme' ); ?></strong></em>
-		</p>
-	</div>
-	<?php
-}
-
 function custom_textfield_button_title_callback( $args ) {
 	$option      = esc_attr( get_option( $args['option_name'] ) );
 	$id          = $args['id'];
@@ -163,38 +96,77 @@ function custom_textfield_permalink_button_title_callback( $args ) {
 		<?php
 }
 
-/** Custom Settings Organizations - Start  */
+/*  Main settings - Start  */
 
-require_once __DIR__ . '/custom-settings/organizations.php';
+function main_settings_init() {
 
-/**  Custom Settings Organizations - End  */
+	/*  Main settings tab - Start  */
 
-/** Custom Settings Apps - Start  */
+	/*  --- The setting sections ---  */
 
-require_once __DIR__ . '/custom-settings/apps.php';
+	add_settings_section(
+		'main_tab_info',
+		esc_html__( 'Info settings', 'custom-theme' ),
+		'custom_tab_titles_callback',
+		'main_tab'
+	);
 
-/**  Custom Settings Apps - End  */
+	/*
+	----------------
+	Title setting fields
+	----------------  */
 
-/** Custom Settings Payments - Start  */
+	add_settings_field(
+		'main_phone',
+		esc_html__( 'Main phone', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'main_tab',
+		'main_tab_info',
+		array(
+			'id'          => 'main_phone', 
+			'option_name' => 'main_phone',
+		)  
+	);
+	register_setting( 'main_tab', 'main_phone', 'esc_attr' );
 
-require_once __DIR__ . '/custom-settings/payments.php';
+	add_settings_field(
+		'main_email',
+		esc_html__( 'Main email', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'main_tab',
+		'main_tab_info',
+		array(
+			'id'          => 'main_email', 
+			'option_name' => 'main_email',
+		)  
+	);
+	register_setting( 'main_tab', 'main_email', 'esc_attr' );
 
-/**  Custom Settings Payments - End  */
+	add_settings_field(
+		'main_address',
+		esc_html__( 'Main address', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'main_tab',
+		'main_tab_info',
+		array(
+			'id'          => 'main_address', 
+			'option_name' => 'main_address',
+		)  
+	);
+	register_setting( 'main_tab', 'main_address', 'esc_attr' );
 
-/** Custom Settings Registration - Start  */
+	add_settings_field(
+		'main_description',
+		esc_html__( 'Main description', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'main_tab',
+		'main_tab_info',
+		array(
+			'id'          => 'main_description', 
+			'option_name' => 'main_description',
+		)  
+	);
+	register_setting( 'main_tab', 'main_description', 'esc_attr' );
+}
 
-require_once __DIR__ . '/custom-settings/registration.php';
-
-/**  Custom Settings Registration - End  */
-
-/** Custom Settings Bonuses - Start  */
-
-require_once __DIR__ . '/custom-settings/bonuses.php';
-
-/**  Custom Settings Bonuses - End  */
-
-/** Custom Settings Promo - Start  */
-
-require_once __DIR__ . '/custom-settings/promo.php';
-
-/**  Custom Settings Promo - End  */
+add_action( 'admin_init', 'main_settings_init' );

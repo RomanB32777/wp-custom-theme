@@ -1,0 +1,368 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Custom Theme\n"
+"POT-Creation-Date: 2024-08-21 19:48+0300\n"
+"PO-Revision-Date: 2024-08-21 19:51+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: documents.php\n"
+"X-Poedit-SearchPath-1: footer.php\n"
+"X-Poedit-SearchPath-2: functions.php\n"
+"X-Poedit-SearchPath-3: header.php\n"
+"X-Poedit-SearchPath-4: index.php\n"
+"X-Poedit-SearchPath-5: search.php\n"
+"X-Poedit-SearchPath-6: searchform.php\n"
+"X-Poedit-SearchPath-7: services.php\n"
+"X-Poedit-SearchPath-8: single.php\n"
+"X-Poedit-SearchPath-9: theme-functions\n"
+"X-Poedit-SearchPath-10: theme-parts\n"
+
+#: functions.php:21
+msgid "Header Menu"
+msgstr "Меню в шапке"
+
+#: functions.php:171
+msgid "Social widgets"
+msgstr "Виджеты соцсетей"
+
+#: functions.php:173
+msgid "Social widgets here."
+msgstr "Виджеты соцсетей."
+
+#: functions.php:183
+msgid "Contacts widgets"
+msgstr "Виджеты контактов"
+
+#: functions.php:185
+msgid "Contacts widgets here."
+msgstr "Виджеты контактов."
+
+#: search.php:26
+msgid "Sorry, nothing found for your request"
+msgstr "Извините, ничего не найдено по вашему запросу"
+
+#: services.php:59 theme-parts/header/header.php:62
+#: theme-parts/header/header.php:124 theme-parts/header/mobile-menu.php:39
+msgid "search icon"
+msgstr "иконка соцсети"
+
+#: theme-functions/custom-post-types/documents.php:9
+msgid "Documents"
+msgstr "Документы"
+
+#: theme-functions/custom-post-types/documents.php:14
+#: theme-functions/custom-post-types/documents.php:16
+#: theme-functions/custom-post-types/lecturers.php:14
+#: theme-functions/custom-post-types/lecturers.php:16
+#: theme-functions/custom-post-types/services.php:14
+#: theme-functions/custom-post-types/services.php:16
+msgid "Add New"
+msgstr "Добавить новый"
+
+#: theme-functions/custom-post-types/documents.php:15
+#: theme-functions/custom-post-types/lecturers.php:15
+#: theme-functions/custom-post-types/services.php:15
+msgid "Edit Item"
+msgstr "Изменить"
+
+#: theme-functions/custom-post-types/documents.php:17
+#: theme-functions/custom-post-types/lecturers.php:17
+#: theme-functions/custom-post-types/services.php:17
+msgid "View Item"
+msgstr "Просмотреть элемент"
+
+#: theme-functions/custom-post-types/documents.php:19
+msgid "document"
+msgstr "документ"
+
+#: theme-functions/custom-post-types/documents.php:46
+msgid "Document category"
+msgstr "Категории документов"
+
+#: theme-functions/custom-post-types/documents.php:51
+#: theme-functions/custom-post-types/services.php:51
+msgid "Find Taxonomy"
+msgstr "Найти таксономию"
+
+#: theme-functions/custom-post-types/documents.php:52
+#: theme-functions/custom-post-types/services.php:52
+msgid "All "
+msgstr "Все "
+
+#: theme-functions/custom-post-types/documents.php:53
+#: theme-functions/custom-post-types/services.php:53
+msgid "Parent Taxonomy"
+msgstr "Родительская таксономия"
+
+#: theme-functions/custom-post-types/documents.php:54
+#: theme-functions/custom-post-types/services.php:54
+msgid "Parent Taxonomy:"
+msgstr "Родительская таксономия:"
+
+#: theme-functions/custom-post-types/documents.php:55
+#: theme-functions/custom-post-types/services.php:55
+msgid "Edit Taxonomy"
+msgstr "Редактировать таксономию"
+
+#: theme-functions/custom-post-types/documents.php:56
+#: theme-functions/custom-post-types/services.php:56
+msgid "View Taxonomy"
+msgstr "Просмотреть таксономию"
+
+#: theme-functions/custom-post-types/documents.php:57
+#: theme-functions/custom-post-types/services.php:57
+msgid "Update Taxonomy"
+msgstr "Обновить таксономию"
+
+#: theme-functions/custom-post-types/documents.php:58
+#: theme-functions/custom-post-types/services.php:58
+msgid "Add New Taxonomy"
+msgstr "Добавить новую таксономию"
+
+#: theme-functions/custom-post-types/documents.php:59
+#: theme-functions/custom-post-types/services.php:59
+msgid "Taxonomy"
+msgstr "Таксономия"
+
+#: theme-functions/custom-post-types/lecturers.php:9
+msgid "Lecturers"
+msgstr "Преподаватели"
+
+#: theme-functions/custom-post-types/lecturers.php:19
+msgid "lecturer"
+msgstr "преподаватель"
+
+#: theme-functions/custom-post-types/lecturers.php:57
+msgid "Position"
+msgstr "Должность"
+
+#: theme-functions/custom-post-types/services.php:9
+msgid "Services"
+msgstr "Услуги"
+
+#: theme-functions/custom-post-types/services.php:19
+msgid "service"
+msgstr "услуга"
+
+#: theme-functions/custom-post-types/services.php:46
+msgid "Services category"
+msgstr "Категории услуг"
+
+#: theme-functions/custom-settings-page.php:7
+#: theme-functions/custom-settings-page.php:8
+msgid "Custom settings"
+msgstr "Настройки темы"
+
+#: theme-functions/custom-settings-page.php:29
+msgid "Settings Saved"
+msgstr "Настройки сохранены"
+
+#: theme-functions/custom-settings-page.php:52
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: theme-functions/custom-settings-page.php:76
+msgid "Here you can change the default titles."
+msgstr "Здесь вы можешь изменить настройки."
+
+#: theme-functions/custom-settings-page.php:109
+msgid "Info settings"
+msgstr "Настройки важной информации"
+
+#: theme-functions/custom-settings-page.php:121
+msgid "Main phone"
+msgstr "Главный телефон"
+
+#: theme-functions/custom-settings-page.php:134
+msgid "Main email"
+msgstr "Главная почта"
+
+#: theme-functions/custom-settings-page.php:147
+msgid "Main address"
+msgstr "Главный адрес"
+
+#: theme-functions/custom-settings-page.php:160
+msgid "Main description"
+msgstr "Главное описание"
+
+#: theme-functions/theme-customizer-settings.php:52
+msgid "Primary color"
+msgstr "Основной цвет"
+
+#: theme-functions/theme-customizer-settings.php:75
+msgid "Secondary color"
+msgstr "Вторичный цвет"
+
+#: theme-functions/theme-customizer-settings.php:98
+msgid "Border color"
+msgstr "Цвет рамки"
+
+#: theme-functions/theme-customizer-settings.php:121
+msgid "Buttons content color"
+msgstr "Цвет контента в кнопках"
+
+#: theme-functions/theme-customizer-settings.php:144
+msgid "Body color"
+msgstr "Цвет заднего фона сайта"
+
+#: theme-functions/theme-customizer-settings.php:165
+msgid "Body content color"
+msgstr "Цвет основного контента"
+
+#: theme-functions/theme-customizer-settings.php:179
+msgid "Header"
+msgstr "Шапка сайта"
+
+#: theme-functions/theme-customizer-settings.php:186
+msgid "Header colors"
+msgstr "Цвета шапки сайта"
+
+#: theme-functions/theme-customizer-settings.php:194
+msgid "Mobile header colors"
+msgstr "Цвета мобильного меню"
+
+#: theme-functions/theme-customizer-settings.php:215
+msgid "Header color"
+msgstr "Цвет шапки сайта"
+
+#: theme-functions/theme-customizer-settings.php:238
+msgid "Main menu link color"
+msgstr "Цвет ссылок главного меню"
+
+#: theme-functions/theme-customizer-settings.php:261
+msgid "Header mobile color"
+msgstr "Цвет мобильного меню"
+
+#: theme-functions/theme-customizer-settings.php:282
+msgid "Main menu mobile link color"
+msgstr "Цвет ссылок мобильного меню"
+
+#: theme-functions/theme-customizer-settings.php:305
+msgid "Submenu background color"
+msgstr "Цвет подменю"
+
+#: theme-functions/theme-customizer-settings.php:328
+msgid "Submenu link color"
+msgstr "Цвет ссылки в подменю"
+
+#: theme-functions/theme-customizer-settings.php:349
+msgid "Submenu mobile link color"
+msgstr "Цвет ссылки в подменю в моб. версии"
+
+#: theme-functions/theme-customizer-settings.php:372
+msgid "Submenu link hover color"
+msgstr "Цвет ссылки в подменю при наведении мыши"
+
+#: theme-functions/theme-customizer-settings.php:384
+msgid "Footer"
+msgstr "Подвал сайта"
+
+#: theme-functions/theme-customizer-settings.php:405
+msgid "Footer color"
+msgstr "Цвет подвала сайта"
+
+#: theme-functions/theme-customizer-settings.php:426
+msgid "Footer content color"
+msgstr "Цвет контента подвала сайта"
+
+#: theme-functions/theme-customizer-settings.php:447
+msgid "Footer menu link color"
+msgstr "Цвет ссылок подвала сайта"
+
+#: theme-functions/theme-customizer-settings.php:468
+msgid "Footer menu link hover color"
+msgstr "Цвет ссылок подвала сайта при наведении мыши"
+
+#: theme-functions/theme-customizer-settings.php:482
+msgid "Theme settings"
+msgstr "Настройки темы"
+
+#: theme-functions/theme-customizer-settings.php:491
+msgid "Table settings"
+msgstr "Настройки таблицы"
+
+#: theme-functions/theme-customizer-settings.php:512
+msgid "Table background odd rows color"
+msgstr "Цвет фона таблицы нечетных строк"
+
+#: theme-functions/theme-customizer-settings.php:533
+msgid "Table background even rows color"
+msgstr "Цвет фона таблицы для четных строк"
+
+#: theme-functions/theme-customizer-settings.php:554
+msgid "Table border color"
+msgstr "Цвет рамки таблицы"
+
+#: theme-functions/theme-customizer-settings.php:576
+msgid "Table header background color"
+msgstr "Цвет фона заголовка таблицы"
+
+#: theme-functions/theme-customizer-settings.php:597
+msgid "Table header text color"
+msgstr "Цвет текста заголовка таблицы"
+
+#: theme-functions/theme-customizer-settings.php:618
+msgid "Table body text color"
+msgstr "Цвет текста тела таблицы"
+
+#: theme-functions/theme-customizer-settings.php:640
+msgid "Table border radius"
+msgstr "Закругление таблицы"
+
+#: theme-functions/theme-customizer-settings.php:654
+msgid "Form modal settings"
+msgstr "Настройки формы регистрации"
+
+#: theme-functions/theme-customizer-settings.php:674
+msgid "Modal form shortcode"
+msgstr "Шорткоды для формы регистрации"
+
+#: theme-functions/theme-customizer-settings.php:693
+msgid "Modal title"
+msgstr "Заголовок модального окна"
+
+#: theme-functions/theme-customizer-settings.php:711
+msgid "Modal success text"
+msgstr "Текст для успешной отправки формы"
+
+#: theme-functions/wp-search-services-ajax.php:37
+msgid "Nothing was found for your query"
+msgstr "Ничего не найдено для данного запроса"
+
+#: theme-parts/blocks/registration.php:4
+msgid "Background image"
+msgstr "Изображение для заднего фона"
+
+#: theme-parts/cards/document.php:11
+msgid "document icon"
+msgstr "иконка документа"
+
+#: theme-parts/form-modal.php:5
+msgid "Your data has been sent successfully!"
+msgstr "Ваши данные были успешно отправлены!"
+
+#: theme-parts/form-modal.php:37 theme-parts/header/header.php:101
+#: theme-parts/header/header.php:158
+msgid "close icon"
+msgstr "иконка закрытия"
+
+#: theme-parts/header/header.php:26
+msgid "phone icon"
+msgstr "иконка телефона"
+
+#: theme-parts/header/header.php:94
+msgid "hamburger icon"
+msgstr "иконка гамбургера"
+
+#: theme-parts/header/header.php:141
+msgid "eye icon"
+msgstr "иконка глаза"

@@ -1,6 +1,5 @@
 export interface IEntryPaths {
 	main: string;
-	imageUploader: string;
 	blocks?: string;
 	shortcodes?: string;
 }

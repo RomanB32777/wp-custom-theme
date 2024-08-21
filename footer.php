@@ -1,32 +1,29 @@
 <!-- Start footer-->
 
+<?php 
+
+$posts_per_page   = 4;
+$posts_query      = new WP_Query( "posts_per_page=$posts_per_page&orderby=date&order=DESC" );
+$main_description = get_option( 'main_description' );
+$main_address     = get_option( 'main_address' );
+$main_email       = get_option( 'main_email' );
+$main_phone       = get_option( 'main_phone' );
+
+?>
+
 <footer>
-	<div class="mx-auto max-w-7xl p-4 sm:!p-6 lg:!p-8">
-		<div class="divide-y divide-dark-grizzly [&>*]:py-6">
-			<div class="flex flex-col md:!flex-row gap-8">
-				<div class="w-full basis-full md:!basis-3/12">
-					<p class="text-base font-semibold mb-3">
-						<?php esc_html_e( 'Menu', 'custom-theme' ); ?>
-					</p>
-					<?php
-						wp_nav_menu( 
-							array( 
-								'theme_location' => 'footer',
-								'depth'          => 1,
-								'container'      => null,
-								'menu_class'     => 'flex flex-col flex-1 gap-3 justify-between',
-								'walker'         => new Footer_Walker_Nav_Menu(),
-							) 
-						); 
-						?>
+	<div class="pt-10 pb-16 lg:!pb-20 mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col gap-x-20 gap-y-16 lg:!grid lg:!grid-cols-4">
+			<div class="block">
+				<div class="mb-5">
+					<?php get_template_part( 'theme-parts/logo' ); ?>
 				</div>
-			</div>
-			<div class="flex flex-col items-start justify-between gap-6 sm:!flex-row sm:!items-center ">
-				<p class="text-sm">
-					<?php echo esc_html( gmdate( 'Y' ) ); ?> 
-					<?php esc_html_e( '&copy;' ); ?> 
-					<?php echo esc_html( get_bloginfo( 'name' ) ); ?> | <?php esc_html_e( 'All Rights Reserved', 'custom-theme' ); ?>
-				</p>
+				
+				<?php if ( ! empty( $main_description ) ) { ?>
+					<p class="text-xl leading-6 mb-8">
+						<?php echo esc_html( $main_description ); ?>
+					</p>
+				<?php } ?>
 
 				<?php if ( is_active_sidebar( 'social-widgets' ) ) { ?>
 					<div>
@@ -34,29 +31,74 @@
 					</div>
 				<?php } ?>
 			</div>
+			<div>
+				<button
+					class="main-button handle-form-modal flex text-xl font-medium rounded-xl min-w-52 w-full mb-6"
+					type="button"
+					aria-expanded="false"
+				>
+					<span class="py-4 mx-auto">Оставить заявку</span>
+				</button>
+
+				<?php if ( ! empty( $main_phone ) ) { ?>
+					<a class="inline-block font-bold text-2xl mb-4" href="tel:<?php echo esc_attr( $main_phone ); ?>">
+						<?php echo esc_html( $main_phone ); ?>
+					</a>	
+				<?php } ?>
+
+				<div class="text-xl">
+					<?php if ( ! empty( $main_address ) ) { ?>
+						<p>
+							<?php echo esc_html( $main_address ); ?>
+						</p>
+					<?php } ?>
+
+					<?php if ( ! empty( $main_email ) ) { ?>
+						<p>
+							e-mail: 
+							<a href="mailto:<?php echo esc_attr( $main_email ); ?>">
+								<?php echo esc_html( $main_email ); ?>
+							</a>
+						</p>
+					<?php } ?>
+				</div>
+			</div>
+			<?php if ( $posts_query->have_posts() ) { ?>
+				<div class="col-span-2">
+					<p class="font-bold text-2xl mb-8 lg:!mb-14">Новости и события</p>
+
+					<div class="grid gap-y-6 gap-x-20 lg:grid-cols-2">
+						<?php 
+						while ( $posts_query->have_posts() ) :
+							
+							$posts_query->the_post(); 
+							?>
+							
+						<div>
+							<p class="text-xl mb-1">
+								<?php the_time( get_option( 'date_format' ) ); ?>
+							</p>
+							<a class="font-bold text-xl underline" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+								<?php the_title(); ?>
+							</a>
+						</div>
+						
+						<?php endwhile; ?>
+					</div>
+				</div>
+			<?php } ?>
+			<?php wp_reset_postdata(); ?>
 		</div>
 	</div>
 </footer>
 
 <!-- End footer-->
 
-<!-- Back to Top Start -->
+<!-- Form Modal Start -->
 
-<button class="fixed-button fixed z-10 right-4 sm:right-6 lg:right-8 w-20 h-20 p-7 border-none rounded-xl duration-200 invisible opacity-0" id="back-to-top">
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		viewBox="0 0 18 11"
-		stroke="currentColor"
-	>
-	<path
-		d="M9 3.99949L1.99969 11L-8.74115e-08 9.00026L9 -3.93402e-07L18 9.00026L16.0003 11L9 3.99949Z"
-		fill="currentColor"
-	/>
-	</svg>
-</button>
+<?php get_template_part( '/theme-parts/form-modal' ); ?>
 
-<!-- Back to Top End -->
+<!-- Form Modal End -->
 
 <?php wp_footer(); ?>
 

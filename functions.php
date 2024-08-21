@@ -19,7 +19,6 @@ function register_custom_menus() {
 	register_nav_menus(
 		array(
 			'header' => _( 'Header Menu' ),
-			'footer' => _( 'Footer Menu' ),
 		)
 	);
 }
@@ -39,7 +38,6 @@ function custom_theme_setup() {
 	load_theme_textdomain( 'custom-theme', get_template_directory() . '/languages' );
 
 	require_once get_template_directory() . '/theme-functions/header-walker-nav-menu.php';
-	require_once get_template_directory() . '/theme-functions/footer-walker-nav-menu.php';
 }
 add_action( 'after_setup_theme', 'custom_theme_setup' );
 
@@ -63,7 +61,7 @@ function enqueue_time_versioned_style( $handle, $src = '', $deps = array(), $med
 }
 
 function fonts_theme() {
-	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap', array(), null );
+	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap', array(), null );
 }
 add_action( 'wp_enqueue_scripts', 'fonts_theme' );
 add_action( 'enqueue_block_editor_assets', 'fonts_theme' );
@@ -110,43 +108,30 @@ function enqueue_theme_versioned_script( $handle, $path = '', $deps = array() ) 
 }
 
 function scripts_theme() {
-	wp_enqueue_script( 'jquery' );  
-
-	enqueue_theme_versioned_script( 'theme-swiper-script', '/dist/js/swiper.js' );
-	enqueue_theme_versioned_script( 'wp_custom_main_script', '/dist/js/main.js', array( 'jquery', 'theme-swiper-script' ) );
+	wp_enqueue_script( 'jquery' );
+	
+	enqueue_theme_versioned_script( 'wp_custom_main_script', '/dist/js/main.js', array( 'jquery' ) );
 	wp_localize_script( 'wp_custom_main_script', 'ajax_data', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
+	wp_enqueue_script( 'uhpv', 'https://lidrekon.ru/slep/js/uhpv-full.min.js', array( 'jquery' ), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'scripts_theme' );
 
-/*  Image Uploader Start  */
-
-function custom_taxonomy_image_uploader() {
-	global $typenow;
-	
-	if ( in_array( $typenow, array( 'organization', 'app', 'payment' ) ) ) {
-
-		if ( ! did_action( 'wp_enqueue_media' ) ) {
-			wp_enqueue_media();
-		}
-
-		enqueue_theme_versioned_script( 'custom-taxonomy-image-uploader', '/dist/js/imageUploader.js', array( 'jquery' ) );
+// Alter search posts per page
+function change_wp_search_size( $query ) {
+	if ( isset( $_REQUEST['s'] ) ) { 
+		$query['posts_per_page'] = -1; 
 	}
-}
-add_action( 'admin_enqueue_scripts', 'custom_taxonomy_image_uploader' );
 
-/*  Image Uploader End  */
+	return $query; 
+}
+add_filter( 'request', 'change_wp_search_size' ); 
 
 /**  Custom Settings Page - Start  */
 
 require_once __DIR__ . '/theme-functions/custom-settings-page.php';
 
 /**  Custom Settings Page - End  */
-
-/**  Custom Star Rating - Start  */
-
-require_once __DIR__ . '/theme-functions/custom-star-rating.php';
-
-/**  Custom Star Rating - End  */
 
 /** Custom Post Type - Start  */
 
@@ -168,175 +153,14 @@ require_once __DIR__ . '/theme-functions/theme-customizer-settings.php';
 
 // logo
 function change_logo_class( $html ) {
-	$html = str_replace( 'custom-logo-link', '[&>img]:max-w-32', $html );
+	$html = str_replace( 'custom-logo-link', '[&>img]:h-12 xl:[&>img]:!h-20 [&>img]:w-auto', $html );
 	
 	return $html;
 }
 add_filter( 'get_custom_logo', 'change_logo_class' );
 
-// comments
-function theme_comments_reply() {
-	if ( comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'theme_comments_reply' );
-
-add_filter( 'comment_form_default_fields', 'comment_remove_url_field', 25 );
-function comment_remove_url_field( $fields ) {
-	unset( $fields['url'] );
-	return $fields;
-}
-
-// Display all comment form fields when user is logged in
-add_filter( 'comment_form_fields', 'show_all_comment_fields' );
-function show_all_comment_fields( $fields ) {
-	unset( $fields['cookies'] );
-
-	if ( is_user_logged_in() ) {
-		$comment_field_keys = array_diff( array_keys( $fields ), array( 'comment' ) );
-
-		$first_field = reset( $comment_field_keys );
-		$last_field  = end( $comment_field_keys );
-
-		foreach ( $fields as $name => $field ) {
-			if ( 'comment' === $name ) {
-				echo apply_filters( 'comment_form_field_comment', $field );
-			} else {
-				if ( $first_field === $name ) {
-					do_action( 'comment_form_before_fields' );
-				}
-
-				echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
-				if ( $last_field === $name ) {
-					do_action( 'comment_form_after_fields' );
-				}
-			}
-		}
-
-		return array();
-	}
-
-	unset( $fields['is-get-auth-data'] );
-
-	return $fields;
-}
-
-// Save rating number
-add_action( 'comment_post', 'save_comment_additional_field' );
-function save_comment_additional_field( $comment_id ) {
-	if ( isset( $_POST['rating'] ) ) {
-		$rating = intval( $_POST['rating'] );
-		add_comment_meta( $comment_id, 'rating', $rating );
-	}
-
-	if ( isset( $_POST['is-get-auth-data'] ) ) {
-		$is_save_user_data = filter_var( $_POST['is-get-auth-data'], FILTER_VALIDATE_BOOLEAN );
-		add_comment_meta( $comment_id, 'is-get-auth-data', $is_save_user_data );
-	}
-}
-
-function print_review_rating( $id ) {
-	$val   = get_comment_meta( $id, 'rating', true );
-	$title = $val ? '<strong class="review-rating">' . $val . '</strong>' : '';
-	return $title;
-}
-
-add_filter( 'manage_edit-comments_columns', 'my_add_comments_columns' );
-function my_add_comments_columns( $my_cols ) {
-	$temp_columns = array(
-		'rating' => 'Rating',
-	);
-	$my_cols      = array_slice( $my_cols, 0, 3, true ) + $temp_columns + array_slice( $my_cols, 3, null, true );
-
-	return $my_cols;
-}
-
-add_action( 'manage_comments_custom_column', 'my_add_comment_columns_content', 10, 2 );
-function my_add_comment_columns_content( $column, $comment_id ) {
-	global $comment;
-	switch ( $column ) :
-
-		case 'rating': {
-			echo get_comment_meta( $comment_id, 'rating', true );
-			break;
-		}
-	endswitch;
-}
-
-add_action( 'add_meta_boxes_comment', 'comment_add_meta_box' );
-function comment_add_meta_box() {
-	add_meta_box( 'my-comment-title', __( 'Rating' ), 'comment_meta_box_age', 'comment', 'normal', 'high' );
-}
-
-function comment_meta_box_age( $comment ) {
-	$title = get_comment_meta( $comment->comment_ID, 'rating', true );
-
-	?>
-	<p>
-		<label for="rating"><?php _e( 'Rating' ); ?></label>
-		<input type="text" name="rating" value="<?php echo esc_attr( $title ); ?>" class="widefat" />
-	</p>
-	<?php
-}
-
-add_filter( 'comment_form_defaults', 'add_comment_field' );
-function add_comment_field( $comment_fields ) {
-
-	$comment_fields['fields']['rating'] = '<p class="comment-form-rating"><label for="rating">rating</label><input id="rating" name="rating" size="30" type="text" /></p>';
-
-	$comment_fields['fields']['is-get-auth-data'] = '<p class="comment-form-is-get-auth-data"><label for="is-get-auth-data">is-get-auth-data</label><input id="is-get-auth-data" name="is-get-auth-data" size="30" type="text" /></p>';
-
-	return $comment_fields;
-}
-
-require_once __DIR__ . '/theme-functions/custom-comment-items.php';
-
-// ajax comment
-require_once __DIR__ . '/theme-functions/wp-handle-comment-ajax.php';
-require_once __DIR__ . '/theme-functions/wp-pagination-comment-ajax.php';
-
-add_action( 'wp_ajax_sendcomment', 'ajax_send_comment' );
-add_action( 'wp_ajax_nopriv_sendcomment', 'ajax_send_comment' );
-function ajax_send_comment() {
-	$comment = wp_handle_comment_ajax( wp_unslash( $_POST ) );
-
-	if ( is_wp_error( $comment ) ) {
-		$data = (int) $comment->get_error_data();
-
-		if ( ! empty( $data ) ) {
-			wp_die(
-				'<p>' . $comment->get_error_message() . '</p>',
-				__( 'Comment Submission Failure', 'custom-theme' ),
-				array(
-					'response'  => $data,
-					'back_link' => true,
-				)
-			);
-		} else {
-			exit;
-		}
-	}
-
-	$user            = wp_get_current_user();
-	$cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
-
-	do_action( 'set_comment_cookies', $comment, $user, $cookies_consent );
-
-	wp_list_comments(
-		array(
-			'avatar_size' => 0,
-			'style'       => 'ul',
-			'short_ping'  => true,
-			'callback'    => 'comment_custom',
-			'reply_text'  => esc_html__( 'Reply', 'custom-theme' ),
-		),
-		array( $comment )
-	);
-
-	die;
-}
-
+// ajax search
+require_once __DIR__ . '/theme-functions/wp-search-services-ajax.php';
 
 /*  Widgets Setup Start  */
 
@@ -346,155 +170,23 @@ function theme_widgets_init() {
 		array(
 			'name'          => esc_html__( 'Social widgets', 'custom-theme' ),
 			'id'            => 'social-widgets',
-			'description'   => esc_html__( 'For text and images only.', 'custom-theme' ),
+			'description'   => esc_html__( 'Social widgets here.', 'custom-theme' ),
 			'before_widget' => '<div id="%1$s" class="%2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
 		)
 	);
-}
 
-add_action( 'init', 'create_approver_taxonomy' );
-function create_approver_taxonomy() {
-	register_taxonomy(
-		'approver',
-		array( 'post', 'page' ),
+	register_sidebar(
 		array(
-			'label'              => 'approver',
-			'show_ui'            => false,
-			'public'             => true,
-			'publicly_queryable' => null,
-			'hierarchical'       => false,
-			'rewrite'            => true,
+			'name'          => esc_html__( 'Contacts widgets', 'custom-theme' ),
+			'id'            => 'contacts-widgets',
+			'description'   => esc_html__( 'Contacts widgets here.', 'custom-theme' ),
+			'before_widget' => '<div id="%1$s" class="%2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '',
+			'after_title'   => '',
 		)
 	);
-}
-
-add_action( 'transition_post_status', 'set_approver_on_transition_only', 10, 3 );
-function set_approver_on_transition_only( $new_status, $old_status, $post ) {
-	if ( $old_status === $new_status || 'pending' !== $old_status || 'publish' !== $new_status ) {
-		return;
-	}
-
-	$user = wp_get_current_user();
-
-	wp_set_post_terms( $post->ID, $user->ID, 'approver' );
-}
-
-
-function add_user_custom_contact_method( $method ) {
-	$custom_contact = array(
-		'facebook' => __( 'Facebook' ),
-		'linkedin' => __( 'LinkedIn' ),
-	);
-
-	$method = array_merge( $method, $custom_contact );
-
-	return $method;
-}
-	
-add_filter( 'user_contactmethods', 'add_user_custom_contact_method' );
-
-function custom_user_profile_form( WP_User $user ) {
-	if ( get_option( 'custom_rating_stars_number' ) ) {
-		$rating_stars_number_value = get_option( 'custom_rating_stars_number' );
-	} else {
-		$rating_stars_number_value = '5';
-	}
-
-	$user_position = get_user_meta( $user->ID, 'position', true );
-	$user_rating   = get_user_meta( $user->ID, 'rating', true );
- 
-	?>
-		<style type="text/css">			
-			.rating-wrap label {
-				padding-right: 12px;
-			}
-
-			.rating-wrap label:last-child {
-				padding-right: 0;
-			}
-
-			.rating-wrap label input[type=radio] {
-				margin-right: 0 !important;
-			}
-		</style>
-
-		<h2><?php esc_html_e( 'Custom settings', 'custom-theme' ); ?></h2>
-		<table class="form-table">
-			<tbody>
-				<tr class="acf-field acf-field-text" data-name="position" data-type="text">
-					<td class="acf-label">
-						<label for="user_position">
-							<?php esc_html_e( 'Position', 'custom-theme' ); ?>
-						</label>
-					</td>
-					<td class="acf-input">
-						<div class="acf-input-wrap">
-							<input
-								type="text"
-								value="<?php echo esc_attr( $user_position ); ?>"
-								name="user_position"
-								id="user_position"
-							>
-						</div>			
-					</td>
-				</tr>
-				<tr class="acf-field acf-field-text" data-name="rating" data-type="text">
-					<td class="acf-label">
-						<label for="user_rating">
-							<?php esc_html_e( 'User rating', 'custom-theme' ); ?>
-						</label>
-					</td>
-					<td class="acf-input">
-						<div class="rating-wrap">
-							<?php for ( $i = 0; $i <= $rating_stars_number_value; $i++ ) { ?>
-								<label>
-									<input type="radio" name="user_rating" value="<?php esc_attr_e( $i ); ?>" <?php checked( $user_rating, $i ); ?>>
-									<?php esc_attr_e( $i ); ?>
-								</label>
-							<?php } ?>
-						</div>			
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	<?php
-}
-add_action( 'show_user_profile', 'custom_user_profile_form' ); 
-add_action( 'edit_user_profile', 'custom_user_profile_form' ); 
-	
-function custom_user_profile_save( $user_id ) {
-	if ( ! current_user_can( 'edit_user', $user_id ) ) {
-		return;
-	}
-	
-	update_user_meta( $user_id, 'position', $_REQUEST['user_position'] );
-	update_user_meta( $user_id, 'rating', $_REQUEST['user_rating'] );
-}
-add_action( 'personal_options_update', 'custom_user_profile_save' );
-add_action( 'edit_user_profile_update', 'custom_user_profile_save' );
-
-add_filter( 'bcn_breadcrumb_title', 'custom_breadcrumb_title', 3, 10 );
-function custom_breadcrumb_title( $title, $type, $id ) {
-	$custom_post_types = array( 'organization', 'app', 'payment', 'promo', 'registration', 'bonus' );
-	
-	foreach ( $custom_post_types as $post_type ) {
-		if ( in_array( "post-$post_type", $type ) ) {
-			$post_breadcrumb_title = get_post_meta( $id, $post_type . '_breadcrumb_title', true );
-	
-			if ( ! empty( $post_breadcrumb_title ) ) {
-				return wp_kses( $post_breadcrumb_title, array() );
-			}
-		}
-	}
-
-	$page_breadcrumb_title = get_field( 'custom_breadcrumb_title', $id );
-
-	if ( in_array( 'post-page', $type ) && ! empty( $page_breadcrumb_title ) ) {
-		$title = wp_kses( $page_breadcrumb_title, array() );
-	}
-
-	return $title;
 }

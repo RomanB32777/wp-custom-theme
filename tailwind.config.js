@@ -7,6 +7,7 @@ const {
 	PRIMARY_GRIZZLY_COLOR,
 	PRIMARY_LIGHT_COLOR,
 	PRIMARY_BRIGHTEST_COLOR,
+	PRIMARY_TEXT_COLOR,
 	SECONDARY_COLOR,
 	SECONDARY_LIGHT_COLOR,
 	DARK_COLOR,
@@ -36,14 +37,18 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: {
-					DEFAULT: PRIMARY_COLOR || "#17946d",
+					DEFAULT: PRIMARY_COLOR || "#1fb1c1",
 					grizzly: PRIMARY_GRIZZLY_COLOR || "#a5d6c6",
-					light: PRIMARY_LIGHT_COLOR || "#ceede3",
-					brightest: PRIMARY_BRIGHTEST_COLOR || "#f1fbf8",
+					light: PRIMARY_LIGHT_COLOR || "#e6f4f1",
+					brightest: PRIMARY_BRIGHTEST_COLOR || "#f3eff9",
+					dark: "#106c77",
+					text: PRIMARY_TEXT_COLOR || "#324b4f",
+					hover: "#1ca5b4",
 				},
 				secondary: {
-					DEFAULT: SECONDARY_COLOR || "#f9b002",
+					DEFAULT: SECONDARY_COLOR || "#ff8d3f",
 					light: SECONDARY_LIGHT_COLOR || "#e3ae6f",
+					opacity: "#f9c199",
 				},
 				dark: {
 					DEFAULT: DARK_COLOR || "#121212",
@@ -56,15 +61,15 @@ module.exports = {
 					opacity: WHITE_OPACITY_COLOR || "#f2eff833",
 				},
 				grizzly: {
-					DEFAULT: GRIZZLY_COLOR || "#4e4e4e",
+					DEFAULT: GRIZZLY_COLOR || "#909090",
 					light: GRIZZLY_LIGHT_COLOR || "#7f8c8d",
-					dark: GRIZZLY_DARK_COLOR || "#353535",
+					dark: GRIZZLY_DARK_COLOR || "#9797b2",
 				},
 				red: {
 					DEFAULT: RED_COLOR || "#d63031",
 				},
 				yellow: {
-					DEFAULT: YELLOW_COLOR || "#f9b002",
+					DEFAULT: YELLOW_COLOR || "#fdb913",
 					light: YELLOW_LIGHT_COLOR || "#e3ae6f",
 				},
 			},
