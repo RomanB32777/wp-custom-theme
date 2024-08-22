@@ -36,7 +36,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes (<li>)
 			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item text-2xl xl:flex xl:items-center xl:!m-0 xl:!text-xl xl:hover:bg-primary-hover transition border-primary-brightest [&.current-menu-item]:border-b-4 [&.current-menu-parent]:border-b-4' : '' ),
+				( $depth === 0 ? 'main-menu-item text-2xl xl:flex xl:items-center xl:!m-0 xl:!text-xl transition border-primary-brightest [&.current-menu-item]:border-b-4 [&.current-menu-parent]:border-b-4' : '' ),
 				( $depth >= 1 ? 'sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
