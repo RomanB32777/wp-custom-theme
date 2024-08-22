@@ -13,11 +13,12 @@ function theme_customizer_setting( $wp_customize ) {
 	$body_color         = ! empty( $_ENV['BODY_COLOR'] ) ? $_ENV['BODY_COLOR'] : '#fff';
 	$body_content_color = ! empty( $_ENV['BODY_CONTENT_COLOR'] ) ? $_ENV['BODY_CONTENT_COLOR'] : '#000';
 	
-	$header_color                     = ! empty( $_ENV['HEADER_COLOR'] ) ? $_ENV['HEADER_COLOR'] : '#1fb1c1';
-	$header_menu_color                = ! empty( $_ENV['HEADER_MENU_LINK_COLOR'] ) ? $_ENV['HEADER_MENU_LINK_COLOR'] : '#fff';
-	$header_sub_menu_background_color = ! empty( $_ENV['HEADER_SUBMENU_COLOR'] ) ? $_ENV['HEADER_SUBMENU_COLOR'] : '#e6f4f1';
-	$header_sub_menu_color            = ! empty( $_ENV['HEADER_SUBMENU_LINK_COLOR'] ) ? $_ENV['HEADER_SUBMENU_LINK_COLOR'] : '#121212';
-	$header_hover_sub_menu_color      = ! empty( $_ENV['HEADER_SUBMENU_LINK_HOVER_COLOR'] ) ? $_ENV['HEADER_SUBMENU_LINK_HOVER_COLOR'] : '#fff';
+	$header_color                           = ! empty( $_ENV['HEADER_COLOR'] ) ? $_ENV['HEADER_COLOR'] : '#1fb1c1';
+	$header_menu_color                      = ! empty( $_ENV['HEADER_MENU_LINK_COLOR'] ) ? $_ENV['HEADER_MENU_LINK_COLOR'] : '#fff';
+	$header_sub_menu_background_color       = ! empty( $_ENV['HEADER_SUBMENU_COLOR'] ) ? $_ENV['HEADER_SUBMENU_COLOR'] : '#e6f4f1';
+	$header_hover_sub_menu_background_color = ! empty( $_ENV['HEADER_SUBMENU_HOVER_COLOR'] ) ? $_ENV['HEADER_SUBMENU_HOVER_COLOR'] : '#1ca5b4';
+	$header_sub_menu_color                  = ! empty( $_ENV['HEADER_SUBMENU_LINK_COLOR'] ) ? $_ENV['HEADER_SUBMENU_LINK_COLOR'] : '#121212';
+	$header_hover_sub_menu_color            = ! empty( $_ENV['HEADER_SUBMENU_LINK_HOVER_COLOR'] ) ? $_ENV['HEADER_SUBMENU_LINK_HOVER_COLOR'] : '#fff';
 
 	$header_mobile_color          = ! empty( $_ENV['HEADER_MOBILE_COLOR'] ) ? $_ENV['HEADER_MOBILE_COLOR'] : '#fff';
 	$header_mobile_menu_color     = ! empty( $_ENV['HEADER_MOBILE_MENU_LINK_COLOR'] ) ? $_ENV['HEADER_MOBILE_MENU_LINK_COLOR'] : '#1fb1c1';
@@ -376,7 +377,28 @@ function theme_customizer_setting( $wp_customize ) {
 		)
 	);
 
-	/*  --- Submenu link hover color ---  */
+	/*  --- Submenu hover colors ---  */
+
+	$wp_customize->add_setting(
+		'header_hover_sub_menu_background_color',
+		array(
+			'default'           => $header_hover_sub_menu_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		) 
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'header_hover_sub_menu_background_color',
+			array(
+				'label'    => esc_html__( 'Submenu hover background color', 'custom-theme' ),
+				'section'  => 'theme_header_settings',
+				'settings' => 'header_hover_sub_menu_background_color',
+			)
+		)
+	);
 
 	$wp_customize->add_setting(
 		'header_hover_sub_menu_color',
@@ -804,6 +826,12 @@ function theme_customizer_style_settings() {
 		$header_custom_sub_menu_background_color = get_theme_mod( 'header_sub_menu_background_color' );
 	}
 
+	if ( ! $header_custom_hover_sub_menu_background_color = get_theme_mod( 'header_hover_sub_menu_background_color' ) ) {
+		$header_custom_hover_sub_menu_background_color = '#1ca5b4';
+	} else {
+		$header_custom_hover_sub_menu_background_color = get_theme_mod( 'header_hover_sub_menu_background_color' );
+	}
+
 	if ( ! $header_custom_sub_menu_color = get_theme_mod( 'header_sub_menu_color' ) ) {
 		$header_custom_sub_menu_color = '#121212';
 	} else {
@@ -916,20 +944,8 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $header_custom_mobile_menu_color ) . ';
 		}
 
-		.dropdown-menu.mobile-exclude {
-			background-color: ' . esc_attr( $header_custom_sub_menu_background_color ) . ';
-		}
-
-		.sub-menu-link:not(.mobile-exclude) {
+		.sub-menu-link {
 			color: ' . esc_attr( $header_custom_mobile_sub_menu_color ) . ';
-		}
-
-		.sub-menu-link.mobile-exclude {
-			color: ' . esc_attr( $header_custom_sub_menu_color ) . ';
-		}
-
-		.sub-menu-link.mobile-exclude:hover {
-			color: ' . esc_attr( $header_custom_hover_sub_menu_color ) . ';
 		}
 
 		.mobile-menu-wrapper {
@@ -976,11 +992,11 @@ function theme_customizer_style_settings() {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
-		.search-button,
 		.news-block:hover,
 		.search-card:hover,
 		.services-wrapper,
-		.lecturer-card {
+		.lecturer-card,
+		.accessibility-button {
 			background-color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
@@ -1101,6 +1117,7 @@ function theme_customizer_style_settings() {
 
 			.sub-menu-link:hover {
 				color: ' . esc_attr( $header_custom_hover_sub_menu_color ) . ' !important;
+				background-color: ' . esc_attr( $header_custom_hover_sub_menu_background_color ) . ' !important;
 			}
 		}
 	';

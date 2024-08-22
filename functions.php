@@ -18,7 +18,7 @@ add_theme_support( 'title-tag' );
 function register_custom_menus() {
 	register_nav_menus(
 		array(
-			'header' => _( 'Header Menu' ),
+			'header-menu' => esc_html__( 'Header Menu', 'custom-theme' ),
 		)
 	);
 }

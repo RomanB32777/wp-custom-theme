@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme\n"
-"POT-Creation-Date: 2024-08-21 19:48+0300\n"
-"PO-Revision-Date: 2024-08-21 19:51+0300\n"
+"POT-Creation-Date: 2024-08-22 10:27+0300\n"
+"PO-Revision-Date: 2024-08-22 10:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -51,7 +51,7 @@ msgid "Sorry, nothing found for your request"
 msgstr "Извините, ничего не найдено по вашему запросу"
 
 #: services.php:59 theme-parts/header/header.php:62
-#: theme-parts/header/header.php:124 theme-parts/header/mobile-menu.php:39
+#: theme-parts/header/header.php:124
 msgid "search icon"
 msgstr "иконка соцсети"
 
@@ -194,143 +194,151 @@ msgstr "Главный адрес"
 msgid "Main description"
 msgstr "Главное описание"
 
-#: theme-functions/theme-customizer-settings.php:52
+#: theme-functions/theme-customizer-settings.php:55
 msgid "Primary color"
 msgstr "Основной цвет"
 
-#: theme-functions/theme-customizer-settings.php:75
+#: theme-functions/theme-customizer-settings.php:78
 msgid "Secondary color"
 msgstr "Вторичный цвет"
 
-#: theme-functions/theme-customizer-settings.php:98
+#: theme-functions/theme-customizer-settings.php:99
+msgid "Primary text color"
+msgstr "Основной цвет текстовых элементов"
+
+#: theme-functions/theme-customizer-settings.php:122
 msgid "Border color"
 msgstr "Цвет рамки"
 
-#: theme-functions/theme-customizer-settings.php:121
+#: theme-functions/theme-customizer-settings.php:145
 msgid "Buttons content color"
 msgstr "Цвет контента в кнопках"
 
-#: theme-functions/theme-customizer-settings.php:144
+#: theme-functions/theme-customizer-settings.php:168
 msgid "Body color"
 msgstr "Цвет заднего фона сайта"
 
-#: theme-functions/theme-customizer-settings.php:165
+#: theme-functions/theme-customizer-settings.php:189
 msgid "Body content color"
 msgstr "Цвет основного контента"
 
-#: theme-functions/theme-customizer-settings.php:179
+#: theme-functions/theme-customizer-settings.php:203
 msgid "Header"
 msgstr "Шапка сайта"
 
-#: theme-functions/theme-customizer-settings.php:186
+#: theme-functions/theme-customizer-settings.php:210
 msgid "Header colors"
 msgstr "Цвета шапки сайта"
 
-#: theme-functions/theme-customizer-settings.php:194
+#: theme-functions/theme-customizer-settings.php:218
 msgid "Mobile header colors"
 msgstr "Цвета мобильного меню"
 
-#: theme-functions/theme-customizer-settings.php:215
+#: theme-functions/theme-customizer-settings.php:239
 msgid "Header color"
 msgstr "Цвет шапки сайта"
 
-#: theme-functions/theme-customizer-settings.php:238
+#: theme-functions/theme-customizer-settings.php:262
 msgid "Main menu link color"
 msgstr "Цвет ссылок главного меню"
 
-#: theme-functions/theme-customizer-settings.php:261
+#: theme-functions/theme-customizer-settings.php:285
 msgid "Header mobile color"
 msgstr "Цвет мобильного меню"
 
-#: theme-functions/theme-customizer-settings.php:282
+#: theme-functions/theme-customizer-settings.php:306
 msgid "Main menu mobile link color"
 msgstr "Цвет ссылок мобильного меню"
 
-#: theme-functions/theme-customizer-settings.php:305
+#: theme-functions/theme-customizer-settings.php:329
 msgid "Submenu background color"
 msgstr "Цвет подменю"
 
-#: theme-functions/theme-customizer-settings.php:328
+#: theme-functions/theme-customizer-settings.php:352
 msgid "Submenu link color"
 msgstr "Цвет ссылки в подменю"
 
-#: theme-functions/theme-customizer-settings.php:349
+#: theme-functions/theme-customizer-settings.php:373
 msgid "Submenu mobile link color"
 msgstr "Цвет ссылки в подменю в моб. версии"
 
-#: theme-functions/theme-customizer-settings.php:372
+#: theme-functions/theme-customizer-settings.php:396
+msgid "Submenu hover background color"
+msgstr "Цвет подменю при наведении мыши"
+
+#: theme-functions/theme-customizer-settings.php:417
 msgid "Submenu link hover color"
 msgstr "Цвет ссылки в подменю при наведении мыши"
 
-#: theme-functions/theme-customizer-settings.php:384
+#: theme-functions/theme-customizer-settings.php:429
 msgid "Footer"
 msgstr "Подвал сайта"
 
-#: theme-functions/theme-customizer-settings.php:405
+#: theme-functions/theme-customizer-settings.php:450
 msgid "Footer color"
 msgstr "Цвет подвала сайта"
 
-#: theme-functions/theme-customizer-settings.php:426
+#: theme-functions/theme-customizer-settings.php:471
 msgid "Footer content color"
 msgstr "Цвет контента подвала сайта"
 
-#: theme-functions/theme-customizer-settings.php:447
+#: theme-functions/theme-customizer-settings.php:492
 msgid "Footer menu link color"
 msgstr "Цвет ссылок подвала сайта"
 
-#: theme-functions/theme-customizer-settings.php:468
+#: theme-functions/theme-customizer-settings.php:513
 msgid "Footer menu link hover color"
 msgstr "Цвет ссылок подвала сайта при наведении мыши"
 
-#: theme-functions/theme-customizer-settings.php:482
+#: theme-functions/theme-customizer-settings.php:527
 msgid "Theme settings"
 msgstr "Настройки темы"
 
-#: theme-functions/theme-customizer-settings.php:491
+#: theme-functions/theme-customizer-settings.php:536
 msgid "Table settings"
 msgstr "Настройки таблицы"
 
-#: theme-functions/theme-customizer-settings.php:512
+#: theme-functions/theme-customizer-settings.php:557
 msgid "Table background odd rows color"
 msgstr "Цвет фона таблицы нечетных строк"
 
-#: theme-functions/theme-customizer-settings.php:533
+#: theme-functions/theme-customizer-settings.php:578
 msgid "Table background even rows color"
 msgstr "Цвет фона таблицы для четных строк"
 
-#: theme-functions/theme-customizer-settings.php:554
+#: theme-functions/theme-customizer-settings.php:599
 msgid "Table border color"
 msgstr "Цвет рамки таблицы"
 
-#: theme-functions/theme-customizer-settings.php:576
+#: theme-functions/theme-customizer-settings.php:621
 msgid "Table header background color"
 msgstr "Цвет фона заголовка таблицы"
 
-#: theme-functions/theme-customizer-settings.php:597
+#: theme-functions/theme-customizer-settings.php:642
 msgid "Table header text color"
 msgstr "Цвет текста заголовка таблицы"
 
-#: theme-functions/theme-customizer-settings.php:618
+#: theme-functions/theme-customizer-settings.php:663
 msgid "Table body text color"
 msgstr "Цвет текста тела таблицы"
 
-#: theme-functions/theme-customizer-settings.php:640
+#: theme-functions/theme-customizer-settings.php:685
 msgid "Table border radius"
 msgstr "Закругление таблицы"
 
-#: theme-functions/theme-customizer-settings.php:654
+#: theme-functions/theme-customizer-settings.php:699
 msgid "Form modal settings"
 msgstr "Настройки формы регистрации"
 
-#: theme-functions/theme-customizer-settings.php:674
+#: theme-functions/theme-customizer-settings.php:719
 msgid "Modal form shortcode"
 msgstr "Шорткоды для формы регистрации"
 
-#: theme-functions/theme-customizer-settings.php:693
+#: theme-functions/theme-customizer-settings.php:738
 msgid "Modal title"
 msgstr "Заголовок модального окна"
 
-#: theme-functions/theme-customizer-settings.php:711
+#: theme-functions/theme-customizer-settings.php:756
 msgid "Modal success text"
 msgstr "Текст для успешной отправки формы"
 
@@ -363,6 +371,6 @@ msgstr "иконка телефона"
 msgid "hamburger icon"
 msgstr "иконка гамбургера"
 
-#: theme-parts/header/header.php:141
+#: theme-parts/header/header.php:141 theme-parts/header/mobile-menu.php:39
 msgid "eye icon"
 msgstr "иконка глаза"

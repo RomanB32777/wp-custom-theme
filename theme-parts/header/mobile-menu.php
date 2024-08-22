@@ -28,7 +28,7 @@ $main_phone = get_option( 'main_phone' );
 					<div>
 						<button 
 							id="special-mobile-button"
-							class="search-button px-3 py-5 rounded-xl" 
+							class="accessibility-button px-3 py-5 rounded-xl" 
 							type="button" 
 							aria-expanded="false"
 						>
@@ -36,7 +36,7 @@ $main_phone = get_option( 'main_phone' );
 							<img 
 								class="icon-button" 
 								src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/eye-light.svg" 
-								alt="<?php esc_attr_e( 'search icon', 'custom-theme' ); ?>"
+								alt="<?php esc_attr_e( 'eye icon', 'custom-theme' ); ?>"
 								width="35" 
 								height="20"
 							>
