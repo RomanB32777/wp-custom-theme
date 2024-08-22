@@ -72,7 +72,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 					$link_classes[] = 'dropdown-toggle cursor-pointer';
 				}
 
-				$link_classes[] = 'w-full flex items-center gap-x-2 xl:w-auto xl:!text-white';
+				$link_classes[] = 'w-full flex items-center gap-x-2 xl:w-auto';
 			}
 
 			$link_class_names = implode( ' ', $link_classes );
