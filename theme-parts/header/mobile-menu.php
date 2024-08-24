@@ -70,7 +70,9 @@ $main_phone = get_option( 'main_phone' );
 						type="button"
 						aria-expanded="false"
 					>
-						<span class="py-4 mx-auto">Оставить заявку</span>
+						<span class="py-4 mx-auto">
+							<?php echo esc_html__( 'Submit your application', 'custom-theme' ); ?>	
+						</span>
 					</button>
 				</div>
 			</div>

@@ -6,9 +6,14 @@
 			type="text"
 			value="<?php echo get_search_query(); ?>" 
 			class="search-input block w-full bg-primary-light outline-none focus:outline-none xl:!bg-white"
-			placeholder="Введите текст для поиска"
+			placeholder="<?php echo esc_attr__( 'Enter the text to search for', 'custom-theme' ); ?>"
 		/>
 		<input type="hidden" name="post_type" value="services" />
-		<input class="search-submit font-bold cursor-pointer hidden xl:!block" type="submit" id="searchsubmit" value="Искать" />
+		<input 
+			class="search-submit font-bold cursor-pointer hidden xl:!block" 
+			type="submit" 
+			id="searchsubmit" 
+			value="<?php echo esc_attr__( 'Search', 'custom-theme' ); ?>" 
+		/>
 	</div>
 </form>

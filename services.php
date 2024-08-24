@@ -13,7 +13,7 @@
 			<?php echo esc_html( get_the_title() ); ?>
 		</h1>
 
-		<div class="main-blocks [&>*]:my-4">
+		<div class="main-blocks [&>*]:my-8 [&>*]:md:!my-16">
 			<?php 
 			if ( have_posts() ) :
 				while ( have_posts() ) :

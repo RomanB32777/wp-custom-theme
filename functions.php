@@ -139,6 +139,12 @@ require_once __DIR__ . '/theme-functions/custom-post-types.php';
 
 /**  Custom Post Type - End  */
 
+/** Custom Theme Shortcodes - Start  */
+
+require_once __DIR__ . '/theme-functions/theme-shortcodes.php';
+
+/**  Custom Theme Shortcodes - End  */
+
 /** Theme Customizer Range - Start  */
 
 require_once __DIR__ . '/theme-functions/class-wp-customize-range.php';

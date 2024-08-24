@@ -31,7 +31,10 @@ if ( ! empty( $form_shortcode ) ) {
 					</div>
 				</div>
 				<button class="absolute top-0 right-1.5 rounded-md text-white p-2.5 handle-form-modal" type="button">
-					<span class="sr-only">Close modal</span>
+					<span class="sr-only">
+						<?php echo esc_html__( 'Close modal', 'custom-theme' ); ?>
+					</span>
+					
 					<img
 						src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/close-primary.svg"
 						alt="<?php esc_attr_e( 'close icon', 'custom-theme' ); ?>"

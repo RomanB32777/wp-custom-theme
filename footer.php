@@ -37,7 +37,9 @@ $main_phone       = get_option( 'main_phone' );
 					type="button"
 					aria-expanded="false"
 				>
-					<span class="py-4 mx-auto">Оставить заявку</span>
+					<span class="py-4 mx-auto">
+						<?php echo esc_html__( 'Submit your application', 'custom-theme' ); ?>	
+					</span>
 				</button>
 
 				<?php if ( ! empty( $main_phone ) ) { ?>
@@ -65,7 +67,9 @@ $main_phone       = get_option( 'main_phone' );
 			</div>
 			<?php if ( $posts_query->have_posts() ) { ?>
 				<div class="col-span-2">
-					<p class="font-bold text-2xl mb-8 lg:!mb-14">Новости и события</p>
+					<p class="font-bold text-2xl mb-8 lg:!mb-14">
+						<?php echo esc_html__( 'News and Events', 'custom-theme' ); ?>	
+					</p>
 
 					<div class="grid gap-y-6 gap-x-20 lg:grid-cols-2">
 						<?php 

@@ -5,7 +5,8 @@
 @tailwind utilities;
 
 main,
-.wp-block-post-content {
+.wp-block-post-content,
+.theme-contacts {
 	h1,
 	h2,
 	h3,
@@ -91,7 +92,7 @@ main,
 	}
 
 	input[type="submit"] {
-		@apply cursor-pointer flex text-xl font-medium rounded-xl min-w-52 disabled:opacity-75 w-full lg:w-auto lg:px-16 py-4 text-center;
+		@apply cursor-pointer flex justify-center items-center text-xl font-medium rounded-xl min-w-52 disabled:opacity-75 w-full py-4 lg:w-auto lg:px-16;
 	}
 
 	input[type="radio"],

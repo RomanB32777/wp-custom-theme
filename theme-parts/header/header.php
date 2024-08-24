@@ -47,7 +47,9 @@ $main_phone       = get_option( 'main_phone' );
 								type="button"
 								aria-expanded="false"
 							>
-								<span class="py-4 mx-auto px-8">Оставить заявку</span>
+								<span class="py-4 mx-auto px-8">
+									<?php echo esc_html__( 'Submit your application', 'custom-theme' ); ?>	
+								</span>
 							</button>
 							
 							<button
@@ -55,7 +57,9 @@ $main_phone       = get_option( 'main_phone' );
 								type="button"
 								aria-expanded="false"
 							>
-								<span class="sr-only">Icon</span>
+								<span class="sr-only">
+									<?php echo esc_html__( 'Icon', 'custom-theme' ); ?>
+								</span>
 								<img
 									class="mx-3 my-2"
 									src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/search.svg" 

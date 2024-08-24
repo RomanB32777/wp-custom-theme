@@ -5,7 +5,7 @@ $document_url = get_field( 'file', get_the_ID() );
 ?>
 
 <div class="flex justify-between flex-col gap-y-4 border-2 main-border rounded-xl text-xl px-5 py-3 md:!px-8 md:!flex-row md:!items-center">
-	<div class="flex items-center gap-x-8 md:w-[70%]">
+	<div class="flex items-center gap-x-4 md:!gap-x-8 md:w-[70%]">
 		<img
 			src="<?php bloginfo( 'template_directory' ); ?>/src/assets/icons/document.svg" 
 			alt="<?php esc_attr_e( 'document icon', 'custom-theme' ); ?>"

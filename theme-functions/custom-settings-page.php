@@ -167,6 +167,19 @@ function main_settings_init() {
 		)  
 	);
 	register_setting( 'main_tab', 'main_description', 'esc_attr' );
+
+	add_settings_field(
+		'card_link',
+		esc_html__( 'Card link', 'custom-theme' ),
+		'custom_textfield_name_callback',
+		'main_tab',
+		'main_tab_info',
+		array(
+			'id'          => 'card_link', 
+			'option_name' => 'card_link',
+		)  
+	);
+	register_setting( 'main_tab', 'card_link', 'esc_attr' );
 }
 
 add_action( 'admin_init', 'main_settings_init' );

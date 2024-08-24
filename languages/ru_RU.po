@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme\n"
-"POT-Creation-Date: 2024-08-22 11:10+0300\n"
-"PO-Revision-Date: 2024-08-22 11:10+0300\n"
+"POT-Creation-Date: 2024-08-24 13:26+0300\n"
+"PO-Revision-Date: 2024-08-24 13:26+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -26,23 +26,32 @@ msgstr ""
 "X-Poedit-SearchPath-9: theme-functions\n"
 "X-Poedit-SearchPath-10: theme-parts\n"
 
+#: footer.php:51 theme-parts/blocks/contacts.php:26
+#: theme-parts/header/header.php:51 theme-parts/header/mobile-menu.php:74
+msgid "Submit your application"
+msgstr "Оставить заявку"
+
+#: footer.php:81 theme-functions/theme-shortcodes.php:10
+msgid "News and Events"
+msgstr "Новости и события"
+
 #: functions.php:21
 msgid "Header Menu"
 msgstr "Меню в шапке"
 
-#: functions.php:171
+#: functions.php:177
 msgid "Social widgets"
 msgstr "Виджеты соцсетей"
 
-#: functions.php:173
+#: functions.php:179
 msgid "Social widgets here."
 msgstr "Виджеты соцсетей."
 
-#: functions.php:183
+#: functions.php:189
 msgid "Contacts widgets"
 msgstr "Виджеты контактов"
 
-#: functions.php:185
+#: functions.php:191
 msgid "Contacts widgets here."
 msgstr "Виджеты контактов."
 
@@ -50,8 +59,16 @@ msgstr "Виджеты контактов."
 msgid "Sorry, nothing found for your request"
 msgstr "Извините, ничего не найдено по вашему запросу"
 
-#: services.php:59 theme-parts/header/header.php:62
-#: theme-parts/header/header.php:124
+#: searchform.php:9
+msgid "Enter the text to search for"
+msgstr "Введите текст для поиска"
+
+#: searchform.php:16
+msgid "Search"
+msgstr "Искать"
+
+#: services.php:59 theme-parts/header/header.php:66
+#: theme-parts/header/header.php:128
 msgid "search icon"
 msgstr "иконка соцсети"
 
@@ -193,6 +210,10 @@ msgstr "Главный адрес"
 #: theme-functions/custom-settings-page.php:160
 msgid "Main description"
 msgstr "Главное описание"
+
+#: theme-functions/custom-settings-page.php:173
+msgid "Card link"
+msgstr "Ссылка на карту"
 
 #: theme-functions/theme-customizer-settings.php:55
 msgid "Primary color"
@@ -342,13 +363,33 @@ msgstr "Заголовок модального окна"
 msgid "Modal success text"
 msgstr "Текст для успешной отправки формы"
 
+#: theme-functions/theme-shortcodes.php:71
+msgid "Our lecturers"
+msgstr "Наши преподаватели"
+
+#: theme-functions/theme-shortcodes.php:132
+msgid "Sign up for training"
+msgstr "Записаться на обучение"
+
+#: theme-functions/theme-shortcodes.php:140
+msgid "Background image"
+msgstr "Изображение для заднего фона"
+
+#: theme-functions/theme-shortcodes.php:174
+msgid "Fill out the form and submit an application for training"
+msgstr "Заполните форму и отправьте заявку на обучение"
+
+#: theme-functions/theme-shortcodes.php:177
+msgid "Or call us by phone"
+msgstr "Или позвоните нам по телефону"
+
 #: theme-functions/wp-search-services-ajax.php:37
 msgid "Nothing was found for your query"
 msgstr "Ничего не найдено для данного запроса"
 
-#: theme-parts/blocks/registration.php:4
-msgid "Background image"
-msgstr "Изображение для заднего фона"
+#: theme-parts/blocks/contacts.php:9
+msgid "Contacts"
+msgstr "Контакты"
 
 #: theme-parts/cards/document.php:11
 msgid "document icon"
@@ -358,8 +399,12 @@ msgstr "иконка документа"
 msgid "Your data has been sent successfully!"
 msgstr "Ваши данные были успешно отправлены!"
 
-#: theme-parts/form-modal.php:37 theme-parts/header/header.php:101
-#: theme-parts/header/header.php:158
+#: theme-parts/form-modal.php:35
+msgid "Close modal"
+msgstr "Закрыть модальное окно"
+
+#: theme-parts/form-modal.php:40 theme-parts/header/header.php:105
+#: theme-parts/header/header.php:162
 msgid "close icon"
 msgstr "иконка закрытия"
 
@@ -367,10 +412,14 @@ msgstr "иконка закрытия"
 msgid "phone icon"
 msgstr "иконка телефона"
 
-#: theme-parts/header/header.php:94
+#: theme-parts/header/header.php:61
+msgid "Icon"
+msgstr "Иконка"
+
+#: theme-parts/header/header.php:98
 msgid "hamburger icon"
 msgstr "иконка гамбургера"
 
-#: theme-parts/header/header.php:141 theme-parts/header/mobile-menu.php:39
+#: theme-parts/header/header.php:145 theme-parts/header/mobile-menu.php:39
 msgid "eye icon"
 msgstr "иконка глаза"
