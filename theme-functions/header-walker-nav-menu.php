@@ -63,7 +63,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
 			$link_classes = array(
-				$depth > 0 ? 'sub-menu-link block text-xl no-underline transition xl:px-8 xl:py-4' : 'main-menu-link no-underline xl:h-full xl:content-center xl:px-8',
+				$depth > 0 ? 'sub-menu-link block text-xl no-underline transition xl:px-8 xl:py-4' : 'main-menu-link no-underline xl:flex xl:items-center xl:h-full xl:px-8',
 			);
 
 			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 ) {
