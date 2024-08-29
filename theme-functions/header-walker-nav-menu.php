@@ -36,7 +36,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 
 			// depth dependent classes (<li>)
 			$depth_classes     = array(
-				( $depth === 0 ? 'main-menu-item text-2xl xl:flex xl:items-center xl:!m-0 xl:!text-xl transition border-primary-brightest [&.current-menu-item]:border-b-4 [&.current-menu-parent]:border-b-4' : '' ),
+				( $depth === 0 ? 'main-menu-item text-2xl xl:flex xl:items-center xl:!m-0 xl:!text-lg transition border-primary-brightest [&.current-menu-item]:border-b-4 [&.current-menu-parent]:border-b-4' : '' ),
 				( $depth >= 1 ? 'sub-menu-item' : '' ),
 				'menu-item-depth-' . $depth,
 			);
@@ -63,7 +63,7 @@ if ( ! class_exists( 'Header_Walker_Nav_Menu' ) ) {
 			$output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $dropdown_class_names . '  ' . $class_names . '">';
 
 			$link_classes = array(
-				$depth > 0 ? 'sub-menu-link block text-xl no-underline transition xl:px-8 xl:py-4' : 'main-menu-link no-underline xl:flex xl:items-center xl:h-full xl:px-8',
+				$depth > 0 ? 'sub-menu-link block text-lg no-underline transition xl:px-8 xl:py-4' : 'main-menu-link no-underline xl:flex xl:items-center xl:h-full xl:px-8',
 			);
 
 			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 ) {

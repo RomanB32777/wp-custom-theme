@@ -153,7 +153,7 @@ function registration_theme_shortcode( $atts ) {
 			width="1920"
 			height="520"
 		/>
-		<div class="flex flex-col mx-auto max-w-screen-2xl lg:!flex-row lg:px-8">
+		<div class="flex flex-col mx-auto max-w-screen-xl lg:!flex-row lg:px-8">
 			<div class="relative flex-1 py-16 px-4 sm:!px-10 lg:!px-0 lg:flex lg:items-center">
 				<img 
 					class="absolute inset-0 -z-10 h-full object-center lg:hidden"
@@ -164,7 +164,7 @@ function registration_theme_shortcode( $atts ) {
 				>
 				<div class="text-white">
 					<?php if ( ! empty( $title ) ) { ?>
-						<h5 class="mb-6 text-3xl font-bold tracking-tight lg:!text-5xl text-white">
+						<h5 class="mb-6 text-3xl font-bold tracking-tight lg:!text-4xl text-white">
 							<?php echo esc_html( $title ); ?>
 						</h5>
 					<?php } ?>
@@ -178,7 +178,7 @@ function registration_theme_shortcode( $atts ) {
 						</p>
 					</div>
 					<?php if ( ! empty( $main_phone ) ) { ?>
-						<a class="text-3xl font-medium lg:!text-5xl" href="tel:<?php echo esc_attr( $main_phone ); ?>">
+						<a class="text-3xl font-medium lg:!text-4xl" href="tel:<?php echo esc_attr( $main_phone ); ?>">
 							<?php echo esc_html( $main_phone ); ?>
 						</a>	
 					<?php } ?>

@@ -1,4 +1,4 @@
-<nav class="relative h-20 hidden xl:!flex">
+<nav class="relative h-16 hidden xl:!flex">
 	<?php
 		wp_nav_menu( 
 			array( 

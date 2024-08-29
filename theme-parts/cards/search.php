@@ -7,7 +7,7 @@
 		<div
 			class="flex flex-col flex-1 justify-between gap-y-4 card-color transition group-hover:text-white"
 		>
-			<h4 class="relative font-bold text-xl underline md:!text-2xl card-color group-hover:text-white">
+			<h4 class="relative font-bold text-lg underline md:!text-xl card-color group-hover:text-white">
 				<?php the_title(); ?>
 			</h4>
 

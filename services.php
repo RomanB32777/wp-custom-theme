@@ -6,24 +6,25 @@
 
 <?php get_header(); ?>
 
-<main class="pt-36 pb-16 overflow-hidden lg:!pt-60 lg:!pb-0">
-	<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+<main class="pt-20 pb-16 overflow-hidden xl:!pt-40 lg:!pb-0">
+	<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 
-		<h1 class="mb-8 lg:!mb-16">
-			<?php echo esc_html( get_the_title() ); ?>
-		</h1>
-
-		<div class="main-blocks [&>*]:my-8 [&>*]:md:!my-16">
-			<?php 
-			if ( have_posts() ) :
-				while ( have_posts() ) :
-					the_post();
-					the_content();
-				endwhile;
-			endif; 
-			?>
+		<div class="py-4 md:!py-8">
+			<h1 class="mb-8 lg:!mb-16">
+				<?php echo esc_html( get_the_title() ); ?>
+			</h1>
+			
+			<div class="main-blocks [&>*]:my-4 [&>*]:md:!my-8">
+				<?php 
+				if ( have_posts() ) :
+					while ( have_posts() ) :
+						the_post();
+						the_content();
+					endwhile;
+				endif; 
+				?>
+			</div>
 		</div>
-		
 	</div>
 
 	<!-- Services Start -->
@@ -39,12 +40,12 @@
 
 	?>
 
-	<div class="services-wrapper pt-12 pb-16 lg:!pb-32">
-		<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+	<div class="services-wrapper pt-12 pb-16 xl:!pb-32">
+		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="services max-w-screen-lg mx-auto">
 				<div class="mb-16">
 					<div class="autocomplete-block relative">
-						<div class="flex justify-between gap-x-4 px-5 py-6 lg:!px-8 rounded-xl border-2 bg-white main-border">
+						<div class="flex justify-between gap-x-4 px-5 py-6 lg:!px-6 rounded-xl border-2 bg-white main-border">
 							<input
 								class="search-input block w-full outline-none focus:outline-none text-xl"
 								type="text"
@@ -90,11 +91,11 @@
 
 							?>
 							<div
-								class="service group px-5 py-3 bg-white rounded-xl duration-200 md:!px-8 md:!py-5"
+								class="service group px-4 py-3 bg-white rounded-xl duration-200 md:!px-6 md:!py-4"
 								data-service="<?php echo esc_attr( $index ); ?>"
 							>
 								<div class="title-block cursor-pointer flex items-center justify-between">
-									<h5 class="service-title text-xl font-bold basis-5/6 md:!text-2xl">
+									<h5 class="service-title text-xl font-bold basis-5/6">
 										<?php echo esc_html( $category->name ); ?>
 									</h5>
 									<div class="flex justify-end basis-1/6">

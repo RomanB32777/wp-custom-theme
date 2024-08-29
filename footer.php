@@ -12,15 +12,15 @@ $main_phone       = get_option( 'main_phone' );
 ?>
 
 <footer>
-	<div class="pt-10 pb-16 lg:!pb-20 mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-		<div class="flex flex-col gap-x-20 gap-y-16 lg:!grid lg:!grid-cols-4">
+	<div class="pt-10 pb-16 lg:!pb-20 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col gap-16 lg:!grid lg:!grid-cols-4">
 			<div class="block">
 				<div class="mb-5">
 					<?php get_template_part( 'theme-parts/logo' ); ?>
 				</div>
 				
 				<?php if ( ! empty( $main_description ) ) { ?>
-					<p class="text-xl leading-6 mb-8">
+					<p class="text-lg leading-4 mb-6">
 						<?php echo esc_html( $main_description ); ?>
 					</p>
 				<?php } ?>
@@ -33,11 +33,11 @@ $main_phone       = get_option( 'main_phone' );
 			</div>
 			<div>
 				<button
-					class="main-button handle-form-modal flex text-xl font-medium rounded-xl min-w-52 w-full mb-6"
+					class="main-button handle-form-modal flex text-lg font-medium rounded-xl min-w-52 w-full mb-6"
 					type="button"
 					aria-expanded="false"
 				>
-					<span class="py-4 mx-auto">
+					<span class="py-2 mx-auto px-4">
 						<?php echo esc_html__( 'Submit your application', 'custom-theme' ); ?>	
 					</span>
 				</button>
@@ -48,7 +48,7 @@ $main_phone       = get_option( 'main_phone' );
 					</a>	
 				<?php } ?>
 
-				<div class="text-xl">
+				<div class="text-lg">
 					<?php if ( ! empty( $main_address ) ) { ?>
 						<p>
 							<?php echo esc_html( $main_address ); ?>
@@ -67,7 +67,7 @@ $main_phone       = get_option( 'main_phone' );
 			</div>
 			<?php if ( $posts_query->have_posts() ) { ?>
 				<div class="col-span-2">
-					<p class="font-bold text-2xl mb-8 lg:!mb-14">
+					<p class="font-bold text-xl mb-8 lg:!mb-14">
 						<?php echo esc_html__( 'News and Events', 'custom-theme' ); ?>	
 					</p>
 
@@ -78,11 +78,11 @@ $main_phone       = get_option( 'main_phone' );
 							$posts_query->the_post(); 
 							?>
 							
-						<div>
-							<p class="text-xl mb-1">
+						<div class="text-xl">
+							<p class="mb-1">
 								<?php the_time( get_option( 'date_format' ) ); ?>
 							</p>
-							<a class="font-bold text-xl underline" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+							<a class="font-bold underline" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 								<?php the_title(); ?>
 							</a>
 						</div>

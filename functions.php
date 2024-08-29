@@ -159,7 +159,7 @@ require_once __DIR__ . '/theme-functions/theme-customizer-settings.php';
 
 // logo
 function change_logo_class( $html ) {
-	$html = str_replace( 'custom-logo-link', '[&>img]:h-12 xl:[&>img]:!h-20 [&>img]:w-auto', $html );
+	$html = str_replace( 'custom-logo-link', '[&>img]:h-12 xl:[&>img]:!h-16 [&>img]:w-auto', $html );
 	
 	return $html;
 }

@@ -21,7 +21,7 @@ if ( ! empty( $form_shortcode ) ) {
 			<div class="relative rounded-xl transform overflow-hidden bg-white text-left shadow-xl transition-all ease-in duration-200 sm:my-8 sm:w-full sm:max-w-screen-md">
 				<div class="p-6 md:!p-10">
 					<?php if ( ! empty( $modal_title ) ) { ?>
-						<h3 class="modal-title font-bold mb-6 text-xl sm:!text-3xl sm:!mb-5">
+						<h3 class="modal-title font-bold mb-6 text-xl sm:!text-2xl sm:!mb-5">
 							<?php echo esc_html( $modal_title ); ?>		
 						</h3>
 					<?php } ?>

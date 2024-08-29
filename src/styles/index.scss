@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	scroll-behavior: smooth;
+}
+
 main,
 .wp-block-post-content {
 	h1,
@@ -28,7 +32,7 @@ main,
 		@apply text-3xl;
 
 		@media (screen(lg)) {
-			@apply text-5xl;
+			@apply text-4xl;
 		}
 	}
 
@@ -37,7 +41,7 @@ main,
 		@apply text-2xl;
 
 		@media (screen(lg)) {
-			@apply text-4xl;
+			@apply text-3xl;
 		}
 	}
 
@@ -46,7 +50,7 @@ main,
 		@apply text-xl;
 
 		@media (screen(lg)) {
-			@apply text-3xl;
+			@apply text-2xl;
 		}
 	}
 
@@ -55,13 +59,13 @@ main,
 		@apply text-lg;
 
 		@media (screen(lg)) {
-			@apply text-2xl;
+			@apply text-xl;
 		}
 	}
 
 	h5,
 	h5 a {
-		@apply text-xl;
+		@apply text-lg;
 	}
 
 	h6,
@@ -83,15 +87,15 @@ main,
 	input[type="text"],
 	input[type="email"],
 	input[type="tel"] {
-		@apply block w-full rounded-xl border-2 px-5 py-6 text-xl outline-none focus:outline-none;
+		@apply block w-full rounded-xl border-2 px-4 py-5 text-lg outline-none focus:outline-none;
 
 		@media (screen(lg)) {
-			@apply px-8;
+			@apply px-6;
 		}
 	}
 
 	input[type="submit"] {
-		@apply cursor-pointer flex justify-center items-center text-xl font-medium rounded-xl min-w-52 disabled:opacity-75 w-full py-4 lg:w-auto lg:px-16;
+		@apply cursor-pointer flex justify-center items-center text-lg font-medium rounded-xl min-w-52 disabled:opacity-75 w-full py-4 lg:w-auto lg:px-16;
 	}
 
 	input[type="radio"],
@@ -102,10 +106,6 @@ main,
 	span.wpcf7-list-item,
 	span.wpcf7-list-item label {
 		@apply flex items-center gap-x-3 m-0 text-lg leading-6 cursor-pointer;
-
-		@media (screen(lg)) {
-			@apply text-xl;
-		}
 	}
 }
 

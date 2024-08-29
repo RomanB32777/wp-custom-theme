@@ -1,5 +1,5 @@
 <form class="bg-primary-light w-full xl:!bg-white" role="search" method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-	<div class="flex text-xl gap-4 xl:!text-2xl">
+	<div class="flex text-xl gap-4">
 		<input
 			id="s"
 			name="s" 

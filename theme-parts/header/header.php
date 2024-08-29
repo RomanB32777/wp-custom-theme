@@ -8,9 +8,9 @@ $main_phone       = get_option( 'main_phone' );
 ?>
 
 <header class="fixed z-50 inset-x-0 shadow">
-	<div class="header-base relative z-20 mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+	<div class="header-base relative z-20 mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 		<div class="relative w-screen isolate overflow-hidden bg-white hidden left-1/2 -translate-x-2/4 xl:!block">
-			<div class="flex justify-end mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+			<div class="flex justify-end mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 				<div class="flex items-center justify-between py-3 w-5/6">
 					<?php if ( ! empty( $main_description ) ) { ?>
 						<p class="text-base text-grizzly leading-4 max-w-72">
@@ -29,7 +29,7 @@ $main_phone       = get_option( 'main_phone' );
 							>
 							
 							<?php if ( ! empty( $main_phone ) ) { ?>
-								<a class="text-xl" href="tel:<?php echo esc_attr( $main_phone ); ?>">
+								<a class="text-lg" href="tel:<?php echo esc_attr( $main_phone ); ?>">
 									<?php echo esc_html( $main_phone ); ?>
 								</a>	
 							<?php } ?>
@@ -43,17 +43,17 @@ $main_phone       = get_option( 'main_phone' );
 
 						<div class="flex items-center gap-4">
 							<button
-								class="main-button handle-form-modal flex text-xl font-medium rounded-xl min-w-52"
+								class="main-button handle-form-modal flex text-lg font-medium rounded-xl min-w-52"
 								type="button"
 								aria-expanded="false"
 							>
-								<span class="py-4 mx-auto px-8">
+								<span class="py-2 mx-auto px-4">
 									<?php echo esc_html__( 'Submit your application', 'custom-theme' ); ?>	
 								</span>
 							</button>
 							
 							<button
-								class="search-button search-open !bg-primary-dark flex text-xl font-medium rounded-xl py-3 px-2"
+								class="search-button search-open !bg-primary-dark flex text-lg font-medium rounded-xl px-0 py-1"
 								type="button"
 								aria-expanded="false"
 							>
@@ -154,7 +154,7 @@ $main_phone       = get_option( 'main_phone' );
 	</div>
 
 	<div class="search-block relative bg-primary-light z-30 py-6 overflow-hidden hidden invisible opacity-0 transition-opacity ease-in duration-200 xl:!block xl:!py-7 xl:!absolute xl:inset-0 xl:!bg-white">
-		<div class="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+		<div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 			<div class="flex flex-row-reverse justify-between gap-x-2 xl:!flex-col">
 				<img
 					class="search-button cursor-pointer xl:ml-auto xl:mb-10"
