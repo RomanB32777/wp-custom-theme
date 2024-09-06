@@ -78,8 +78,27 @@ main,
 	}
 }
 
+.wp-block-column > * {
+	@apply my-4;
+
+	@media (screen(md)) {
+		@apply my-8;
+	}
+
+	&:first-child {
+		@apply mt-0;
+	}
+
+	&:last-child {
+		@apply mb-0;
+	}
+}
+
+div.wp-block-columns.is-layout-flex {
+	@apply gap-4;
+}
+
 .wpcf7-form {
-	// .wpcf7-not-valid-tip
 	.wpcf7-spinner {
 		display: none;
 	}
