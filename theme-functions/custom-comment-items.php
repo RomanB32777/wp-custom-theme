@@ -73,7 +73,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 					<?php } ?>
 				</div>
 
-				<p class="text-grizzly-light font-medium text-sm">
+				<p class="font-medium text-sm">
 					<?php echo esc_html( get_comment_date( get_option( 'date_format' ), $comment_id ) ); ?>
 				</p>
 			</div>

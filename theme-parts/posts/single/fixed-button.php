@@ -63,7 +63,7 @@ if ( empty( $organization_button_title ) ) {
 								</svg>
 							</div>
 
-							<span class="text-base text-grizzly-light">
+							<span class="text-base">
 								<?php echo esc_html( number_format( (float) $organization_overall_rating, 1, '.', ',' ) ); ?>/<?php echo esc_html( $rating_stars_number ); ?>
 							</span>
 						</div>

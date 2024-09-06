@@ -168,7 +168,7 @@
 			
 					<!-- Short Description of the organization Start -->
 			
-					<div class="font-lineSeedJp text-base text-grizzly-light mt-4">
+					<div class="font-lineSeedJp text-base mt-4">
 						<?php echo wp_kses( $short_desc, $organization_single_allowed_html ); ?>
 					</div>
 			

@@ -106,7 +106,7 @@
 		
 				<!-- Short Description of the post Start -->
 		
-				<div class="text-base text-grizzly-light mt-4">
+				<div class="text-base mt-4">
 					<?php echo wp_kses( $short_desc, $default_single_allowed_html ); ?>
 				</div>
 		
