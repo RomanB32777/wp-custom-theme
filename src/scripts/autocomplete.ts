@@ -43,7 +43,10 @@ jQuery(document).ready(function ($) {
 		const autocompleteResults = block.querySelector<HTMLDivElement>(".autocomplete-results");
 
 		autocompleteInput?.addEventListener("focusout", () => {
-			handleVisibleEl(autocompleteResults, { isVisible: false });
+			const timeOut = setTimeout(() => {
+				handleVisibleEl(autocompleteResults, { isVisible: false });
+				clearTimeout(timeOut);
+			}, 300);
 		});
 
 		autocompleteInput?.addEventListener("focus", (e) => {
@@ -52,8 +55,6 @@ jQuery(document).ready(function ($) {
 			if (value) {
 				handleSearch(value, autocompleteResults);
 			}
-
-			// handleVisibleEl(autocompleteResults);
 		});
 
 		autocompleteInput?.addEventListener("input", (e) => {
