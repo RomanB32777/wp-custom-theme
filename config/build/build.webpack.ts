@@ -38,18 +38,15 @@ export function buildWebpack(options: IBuildOptions): Configuration {
 	const isExistBlocksStyles = fs.existsSync(blocks);
 	const isExistShortcodeStyles = fs.existsSync(shortcodes);
 
-	if (isExistBlocksStyles && typeof config.entry === "object") {
+	if (isExistBlocksStyles) {
 		entry.blocks = blocks;
-
-		config.entry = {
-			...config.entry,
-			...entry,
-		};
 	}
 
-	if (isExistShortcodeStyles && typeof config.entry === "object") {
+	if (isExistShortcodeStyles) {
 		entry.shortcodes = shortcodes;
+	}
 
+	if (typeof config.entry === "object") {
 		config.entry = {
 			...config.entry,
 			...entry,
