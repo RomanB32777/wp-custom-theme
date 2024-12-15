@@ -8,6 +8,7 @@ function theme_customizer_setting( $wp_customize ) {
 	
 	$links_color       = ! empty( $_ENV['LINKS_COLOR'] ) ? $_ENV['LINKS_COLOR'] : '#d63031';
 	$links_hover_color = ! empty( $_ENV['LINKS_HOVER_COLOR'] ) ? $_ENV['LINKS_HOVER_COLOR'] : '#d63031';
+	$title_links_color = ! empty( $_ENV['TITLE_LINKS_HOVER_COLOR'] ) ? $_ENV['TITLE_LINKS_HOVER_COLOR'] : '#4e4e4e';
 
 	$buttons_content_color                = ! empty( $_ENV['BUTTONS_CONTENT_COLOR'] ) ? $_ENV['BUTTONS_CONTENT_COLOR'] : '#fff';
 	$author_social_icons_background_color = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
@@ -139,6 +140,27 @@ function theme_customizer_setting( $wp_customize ) {
 				'label'    => esc_html__( 'Links color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'links_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'title_links_color',
+		array(
+			'default'           => $title_links_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'title_links_color',
+			array(
+				'label'    => esc_html__( 'Title links color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'title_links_color',
 			)
 		)
 	);
@@ -1276,6 +1298,12 @@ function theme_customizer_style_settings() {
 		$links_custom_color = get_theme_mod( 'links_color' );
 	}
 
+	if ( ! $title_links_custom_color = get_theme_mod( 'title_links_color' ) ) {
+		$title_links_custom_color = '#4e4e4e';
+	} else {
+		$title_links_custom_color = get_theme_mod( 'title_links_color' );
+	}
+
 	if ( ! $links_custom_hover_color = get_theme_mod( 'links_hover_color' ) ) {
 		$links_custom_hover_color = '#d63031';
 	} else {
@@ -1583,6 +1611,10 @@ function theme_customizer_style_settings() {
 
 		.main-link {
 			color: ' . esc_attr( $primary_custom_color ) . ';
+		}
+
+		a.title-link {
+			color: ' . esc_attr( $title_links_custom_color ) . ' !important;
 		}
 
 		a.shortcode-link:hover,

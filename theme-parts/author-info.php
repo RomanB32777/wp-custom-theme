@@ -151,7 +151,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 											)
 										);
 									?>
-									<span class="text-base font-medium md:!text-xl">
+									<span class="text-grizzly text-base font-medium md:!text-xl">
 										<?php echo esc_html( number_format( round( (float) $author_rating, 1 ), 1, '.', ',' ) ); ?>
 									</span>
 								</div>
