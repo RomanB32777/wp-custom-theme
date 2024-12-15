@@ -490,11 +490,22 @@ function custom_breadcrumb_title( $title, $type, $id ) {
 		}
 	}
 
-	$page_breadcrumb_title = get_field( 'custom_breadcrumb_title', $id );
+	return $title;
+}
 
-	if ( in_array( 'post-page', $type ) && ! empty( $page_breadcrumb_title ) ) {
-		$title = wp_kses( $page_breadcrumb_title, array() );
+add_filter( 'language_attributes', 'custom_language_attributes' );
+function custom_language_attributes( $lang ) {
+	global $post;
+
+	$hreflang_mapping = array(
+		'page-post-name' => 'locale (e.g. nl/sv/de)',
+	);
+
+	$current_slug = get_post_field( 'post_name', $post );
+
+	if ( isset( $hreflang_mapping[ $current_slug ] ) ) {
+		return 'lang=' . $hreflang_mapping[ $current_slug ];
 	}
 
-	return $title;
+	return $lang;
 }
