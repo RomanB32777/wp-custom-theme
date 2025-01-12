@@ -1717,11 +1717,19 @@ function theme_customizer_style_settings() {
 		}
 
 		.star {
-			color: ' . esc_attr( $stars_custom_inactive_color ) . ';
+			fill: ' . esc_attr( $stars_custom_inactive_color ) . ';
+		}
+
+		stop.star {
+			stop-color: ' . esc_attr( $stars_custom_inactive_color ) . ';
 		}
 
 		.star.active {
-			color: ' . esc_attr( $stars_custom_active_color ) . ';
+			fill: ' . esc_attr( $stars_custom_active_color ) . ';
+		}
+
+		stop.star.active {
+			stop-color: ' . esc_attr( $stars_custom_active_color ) . ';
 		}
 
 		.rating-block .rating-line {
