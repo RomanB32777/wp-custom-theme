@@ -1718,6 +1718,7 @@ function theme_customizer_style_settings() {
 
 		.star {
 			fill: ' . esc_attr( $stars_custom_inactive_color ) . ';
+			color: ' . esc_attr( $stars_custom_inactive_color ) . ';
 		}
 
 		stop.star {
@@ -1726,6 +1727,7 @@ function theme_customizer_style_settings() {
 
 		.star.active {
 			fill: ' . esc_attr( $stars_custom_active_color ) . ';
+			color: ' . esc_attr( $stars_custom_active_color ) . ';
 		}
 
 		stop.star.active {
