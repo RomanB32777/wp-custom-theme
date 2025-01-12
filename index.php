@@ -2,9 +2,7 @@
 
 <main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 	<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
-		<div class="text-grizzly text-lg">
-			<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
-		</div>
+		<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
 
 		<?php 
 		if ( have_posts() ) :
