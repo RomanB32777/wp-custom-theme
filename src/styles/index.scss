@@ -95,7 +95,7 @@ main,
 
 .wp-block-post-content,
 .main-blocks {
-	ul,
+	ul:not(.errors-list),
 	ol {
 		padding-left: 32px;
 
@@ -111,12 +111,12 @@ main,
 }
 
 .main-blocks ul:not([class*="ez-toc-list"]) li,
-.wp-block-post-content ul li {
+.wp-block-post-content ul:not(.errors-list) li {
 	padding-left: 12px;
 }
 
 .main-blocks ul:not([class*="ez-toc-list"]) li::before,
-.wp-block-post-content ul li::before {
+.wp-block-post-content ul:not(.errors-list) li::before {
 	position: absolute;
 	left: 0;
 	display: block;
