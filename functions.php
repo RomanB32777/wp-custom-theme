@@ -70,7 +70,7 @@ add_action( 'enqueue_block_editor_assets', 'fonts_theme' );
 
 function style_theme() {
 	wp_enqueue_style( 'theme-style', get_stylesheet_uri() );
-	enqueue_time_versioned_style( 'wp_custom_main_style', 'dist/css/styles.css' );
+	enqueue_time_versioned_style( 'wp_custom_main_style', '/dist/css/styles.css' );
 }
 add_action( 'wp_enqueue_scripts', 'style_theme' );
 add_action( 'enqueue_block_editor_assets', 'style_theme' );
@@ -94,13 +94,14 @@ function style_loader_tag_filter_preload( $tag, $handle, $href ) {
 add_filter( 'style_loader_tag', 'style_loader_tag_filter_preload', 10, 4 );
 
 function enqueue_theme_versioned_script( $handle, $path = '', $deps = array() ) {
-	$main_path = get_theme_file_uri( $path );
+	$main_path      = get_theme_file_uri( $path );
+	$directory_path = get_template_directory() . $path;
 
 	wp_register_script(
 		$handle,
 		$main_path,
 		$deps,
-		@filemtime( $main_path ),
+		@filemtime( $directory_path ),
 		array(
 			'in_footer' => true,
 			'strategy'  => 'async',
