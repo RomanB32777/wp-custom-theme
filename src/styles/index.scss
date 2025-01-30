@@ -110,13 +110,13 @@ main,
 	}
 }
 
-.main-blocks ul:not([class*="ez-toc-list"]) li,
-.wp-block-post-content ul:not(.errors-list) li {
+.main-blocks ul:not([class*="ez-toc-list"], .errors-list) li,
+.wp-block-post-content ul li {
 	padding-left: 12px;
 }
 
-.main-blocks ul:not([class*="ez-toc-list"]) li::before,
-.wp-block-post-content ul:not(.errors-list) li::before {
+.main-blocks ul:not([class*="ez-toc-list"], .errors-list) li::before,
+.wp-block-post-content ul li::before {
 	position: absolute;
 	left: 0;
 	display: block;
