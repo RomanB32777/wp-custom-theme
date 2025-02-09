@@ -102,7 +102,7 @@
 				</h1>
 	
 				<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
-					<div class="flex items-center gap-x-2 mb-8 lg:!mb-6">
+					<div class="flex relative items-center gap-x-2 mb-8 lg:!mb-6">
 						<?php
 							custom_star_rating(
 								array(
@@ -247,8 +247,8 @@
 
 	<!-- Post Header End -->
 
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
+	<div class="mx-auto max-w-7xl mt-14 px-4 sm:px-6 md:!mt-24 lg:px-8">
+		<div class="main-blocks flex flex-col gap-y-14 md:!gap-y-24">
 			<?php 
 			if ( have_posts() ) :
 				while ( have_posts() ) :

@@ -58,7 +58,7 @@ if ( empty( $organization_button_title ) ) {
 					</p>
 						
 					<?php if ( $organization_overall_rating ) { ?>
-						<div class="flex items-center gap-2">
+						<div class="flex relative items-center gap-2">
 							<?php 
 							if ( function_exists( 'custom_star_rating' ) ) {
 								custom_star_rating(

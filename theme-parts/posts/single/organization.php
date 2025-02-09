@@ -53,6 +53,30 @@
 
 	$post_title_attr = the_title_attribute( 'echo=0' );
 
+	if ( function_exists( 'get_field' ) ) {
+		$current_referral_link = array();
+		
+		$referral_links = get_field( 'referral_links' );
+
+		foreach ( $referral_links as $referral_link ) {
+			$curr_custom_pages = $referral_link['custom_page'];
+
+			if ( is_array( $curr_custom_pages ) ) {
+				$founded_id = array_filter( $curr_custom_pages, fn( $item ) => $post->ID === $item );
+				
+				if ( $founded_id ) {
+					$current_referral_link = $referral_link;
+				}
+			} elseif ( $page_id === $curr_custom_page ) {
+				$current_referral_link = $referral_link;
+			}          
+		}
+
+		if ( $current_referral_link ) {
+			$external_link = $current_referral_link['referral_link'];
+		}
+	}
+
 	if ( empty( $button_title ) ) {
 		if ( get_option( 'organizations_play_now_title' ) ) {
 			$button_title = esc_html( get_option( 'organizations_play_now_title' ) );
@@ -151,7 +175,7 @@
 				</h1>
 	
 				<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
-					<div class="flex items-center gap-x-2 mb-8 lg:!mb-6">
+					<div class="flex relative items-center gap-x-2 mb-8 lg:!mb-6">
 						<?php
 							custom_star_rating(
 								array(
@@ -294,8 +318,9 @@
 
 	<!-- Organization Header End -->
 
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
+	<div class="mx-auto max-w-7xl mt-14 px-4 sm:px-6 md:!mt-24 lg:px-8">
+		<div class="main-blocks flex flex-col gap-y-14 md:!gap-y-24">
+			
 			<!-- Ratings Block Start -->
 		
 			<div class="bg-white rounded-xl px-4 md:!px-8 md:!rounded-3xl">

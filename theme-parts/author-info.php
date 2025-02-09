@@ -140,7 +140,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 
 						<div class="flex items-center justify-between">
 							<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
-								<div class="flex items-center gap-x-2">
+								<div class="flex relative items-center gap-x-2">
 									<?php
 										custom_star_rating(
 											array(

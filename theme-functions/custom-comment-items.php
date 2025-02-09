@@ -59,7 +59,7 @@ function comment_custom_template( $comment, $comment_class = '', $depth = 1, $ar
 					<?php echo esc_html( get_comment_author( $comment_id ) ); ?>
 				</p>
 
-				<div class="flex items-center justify-between gap-x-2 md:!gap-x-4 md:!justify-start">
+				<div class="flex relative items-center justify-between gap-x-2 md:!gap-x-4 md:!justify-start">
 					<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
 						<?php
 							custom_star_rating(
