@@ -318,8 +318,8 @@
 
 	<!-- Organization Header End -->
 
-	<div class="mx-auto max-w-7xl mt-14 px-4 sm:px-6 md:!mt-24 lg:px-8">
-		<div class="main-blocks flex flex-col gap-y-14 md:!gap-y-24">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 md:!mt-24 lg:px-8">
+		<div class="main-blocks [&>*]:my-14 [&>*]:md:!my-24">
 			
 			<!-- Ratings Block Start -->
 		

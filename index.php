@@ -2,11 +2,14 @@
 
 <main class="pt-20 pb-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 	<div class="main-blocks">
-		<div class="my-8 md:!my-12">
-			<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
-		</div>
+
+		<?php if ( ! is_front_page() ) { ?>
+			<div class="my-8 md:!my-12">
+				<?php get_template_part( '/theme-parts/breadcrumbs' ); ?>
+			</div>
+		<?php } ?>
 	
-		<div class="flex flex-col gap-y-14 md:!gap-y-24">
+		<div class="[&>*]:my-14 [&>*]:first:!mt-0 [&>*]:md:!my-24">
 	
 			<?php 
 			if ( have_posts() ) :
