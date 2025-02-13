@@ -3,8 +3,8 @@
 <footer>
 	<div class="mx-auto max-w-7xl p-4 sm:!p-6 lg:!p-8">
 		<div class="divide-y divide-dark-grizzly [&>*]:py-6">
-			<div class="flex flex-col md:!flex-row gap-8">
-				<div class="w-full basis-full md:!basis-3/12">
+			<div class="flex md:!flex-row gap-8">
+				<div class="basis-full md:!basis-3/12">
 					<p class="text-base font-semibold mb-3">
 						<?php esc_html_e( 'Menu', 'custom-theme' ); ?>
 					</p>
@@ -12,6 +12,22 @@
 						wp_nav_menu( 
 							array( 
 								'theme_location' => 'footer',
+								'depth'          => 1,
+								'container'      => null,
+								'menu_class'     => 'flex flex-col flex-1 gap-3 justify-between',
+								'walker'         => new Footer_Walker_Nav_Menu(),
+							) 
+						); 
+						?>
+				</div>
+				<div class="basis-full md:!basis-3/12">
+					<p class="text-base font-semibold mb-3">
+						<?php esc_html_e( 'Special Pages', 'custom-theme' ); ?>
+					</p>
+					<?php
+						wp_nav_menu( 
+							array( 
+								'theme_location' => 'footer-specials',
 								'depth'          => 1,
 								'container'      => null,
 								'menu_class'     => 'flex flex-col flex-1 gap-3 justify-between',
