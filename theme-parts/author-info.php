@@ -23,9 +23,7 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 	$author_facebook_url = get_the_author_meta( 'facebook', $user_id );
 	$author_linkedin_url = get_the_author_meta( 'linkedin', $user_id );
 	
-	$author_avatar_width  = 208;
-	$author_avatar_height = 240;
-	$author_avatar_url    = get_avatar_url( $user_id, array( 'size' => array( $author_avatar_width, $author_avatar_height ) ) );
+	$author_avatar_url = get_avatar_url( $user_id, array( 'size' => 200 ) );
 
 	function render_author_socials( $args = array() ) {
 		$defaults = array(
@@ -105,15 +103,15 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 
 	?>
 	<div class="author-info bg-white rounded-xl md:!rounded-3xl">
-		<div class="p-4 !pb-0 md:!px-8 md:!pt-8">
-			<div class="flex gap-2 flex-col-reverse md:!flex-row md:!gap-10">
+		<div class="p-4 md:!px-8 md:!py-8">
+			<div class="flex gap-4 flex-col-reverse md:!flex-row md:!gap-10">
 				<div>
-					<div class="w-52 h-60">
+					<div class="w-52 h-60 mx-auto md:!mx-0">
 						<a href="<?php echo esc_url( $author_posts_url ); ?>" title="<?php echo esc_attr( $author_name ); ?>" rel="author">
 							<img 
+								width="208" 
+								height="240" 
 								src="<?php echo esc_url( $author_avatar_url ); ?>" 
-								width="<?php echo esc_attr( $author_avatar_width ); ?>" 
-								height="<?php echo esc_attr( $author_avatar_height ); ?>" 
 								alt="<?php echo esc_attr( $author_name ); ?>" 
 								class="avatar h-full w-full max-w-52 max-h-60 object-cover object-center"
 							>
@@ -121,85 +119,81 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 					</div>
 				</div>
 
-				<div class="flex flex-1 flex-col justify-end">
-					<div class="pb-4 md:!pb-8">
-						<div class="mb-1">
-							<a 
-								class="title-link font-bold text-xl duration-200 hover:text-secondary no-underline md:!text-3xl" 
-								href="<?php echo esc_url( $author_posts_url ); ?>"
-								title="<?php echo esc_attr( $author_name ); ?>" 
-								rel="author"
-							>
-								<?php echo esc_html( $author_name ); ?>
-							</a>
-						</div>
+				<div class="flex flex-1 flex-col items-center md:!items-start">
+					<div class="mb-1">
+						<a 
+							class="title-link font-bold text-xl duration-200 hover:text-secondary no-underline md:!text-3xl" 
+							href="<?php echo esc_url( $author_posts_url ); ?>"
+							title="<?php echo esc_attr( $author_name ); ?>" 
+							rel="author"
+						>
+							<?php echo esc_html( $author_name ); ?>
+						</a>
+					</div>
 
-						<p class="text-grizzly text-sm mb-2 md:!mb-4 md:!text-xl ">
-							<?php echo esc_html( $author_position ); ?>
-						</p>
+					<p class="text-grizzly text-sm mb-2 md:!mb-4 md:!text-xl ">
+						<?php echo esc_html( $author_position ); ?>
+					</p>
 
-						<div class="flex items-center justify-between">
-							<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
-								<div class="flex relative items-center gap-x-2">
-									<?php
-										custom_star_rating(
-											array(
-												'rating' => $author_rating,
-												'rating_stars_number' => 5,
-												'wrapper_classes' => 'gap-x-2',
-												'star_classes' => 'w-6 h-6',
-											)
-										);
-									?>
-									<span class="text-grizzly text-base font-medium md:!text-xl">
-										<?php echo esc_html( number_format( round( (float) $author_rating, 1 ), 1, '.', ',' ) ); ?>
-									</span>
-								</div>
-							<?php } ?>
-								
-							<div class="hidden md:!block">
-								<?php 
-									render_author_socials(
+					<div class="flex items-center justify-between md:w-full">
+						<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
+							<div class="flex relative items-center gap-x-2">
+								<?php
+									custom_star_rating(
 										array(
-											'facebook' => $author_facebook_url,
-											'linkedin' => $author_linkedin_url,
+											'rating'       => $author_rating,
+											'rating_stars_number' => 5,
+											'wrapper_classes' => 'gap-x-2',
+											'star_classes' => 'w-6 h-6',
 										)
-									); 
+									);
 								?>
+								<span class="text-grizzly text-base font-medium md:!text-xl">
+									<?php echo esc_html( number_format( round( (float) $author_rating, 1 ), 1, '.', ',' ) ); ?>
+								</span>
 							</div>
+						<?php } ?>
+							
+						<div class="hidden md:!block">
+							<?php 
+								render_author_socials(
+									array(
+										'facebook' => $author_facebook_url,
+										'linkedin' => $author_linkedin_url,
+									)
+								); 
+							?>
 						</div>
 					</div>
+
+					<p class="text-grizzly text-xl pt-4 md:!pt-8">
+						<?php
+						
+						$more_link = '...
+							<a 
+								class="main-link duration-200 underline" 
+								href="' . esc_url( $author_posts_url ) . '"
+								title="' . esc_attr( $author_name ) . '" 
+							>
+								' . esc_html__( 'More', 'custom-theme' ) . '
+							</a>';
+						?>
+						<?php echo wp_kses( wp_trim_words( get_the_author_meta( 'description', $user_id ), $description_size, $more_link ), $allowed_author_html ); ?>
+					</p>
 				</div>
 			</div>
 		</div>
 
-		<div class="p-4 md:!p-8 shadow-[0_0_50px_0_rgba(0,0,0,0.05)]">
-			<php class="text-grizzly text-xl">
-				<?php
-				
-				$more_link = '...
-					<a 
-						class="main-link duration-200 underline" 
-						href="' . esc_url( $author_posts_url ) . '"
-						title="' . esc_attr( $author_name ) . '" 
-					>
-						' . esc_html__( 'More', 'custom-theme' ) . '
-					</a>';
-				?>
-				<?php echo wp_kses( wp_trim_words( get_the_author_meta( 'description', $user_id ), $description_size, $more_link ), $allowed_author_html ); ?>
-			</p>
-
-			<div class="md:hidden mt-8">
-				<?php 
-					render_author_socials(
-						array(
-							'facebook'     => $author_facebook_url,
-							'linkedin'     => $author_linkedin_url,
-							'item_classes' => 'flex-1',
-						)
-					); 
-				?>
-			</div>
+		<div class="p-4 pt-0 md:hidden">
+			<?php 
+				render_author_socials(
+					array(
+						'facebook'     => $author_facebook_url,
+						'linkedin'     => $author_linkedin_url,
+						'item_classes' => 'flex-1',
+					)
+				); 
+			?>
 		</div>
 	</div>
 
