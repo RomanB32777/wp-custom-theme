@@ -1599,7 +1599,12 @@ function theme_customizer_style_settings() {
 		}
 
 		.main-border,
-		.divide-primary>:not([hidden])~:not([hidden]) {
+		.divide-primary>:not([hidden])~:not([hidden]),
+		.wpcf7-form input[type="text"],
+		.wpcf7-form input[type="email"],
+		.wpcf7-form input[type="tel"],
+		.wpcf7-form input[type="radio"],
+	    .wpcf7-form input[type="checkbox"] {
 			border-color: ' . esc_attr( $border_custom_color ) . ' !important;
 		}
 
@@ -1609,7 +1614,9 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $secondary_custom_color ) . ' !important;
 		}
 
-		.main-link {
+		.main-link,
+		.wpcf7-form input[type="radio"],
+	    .wpcf7-form input[type="checkbox"] {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 
