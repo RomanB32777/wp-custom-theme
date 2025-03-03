@@ -29,6 +29,7 @@
 		'li'     => array(),
 	);
 	
+	$custom_title     = get_post_meta( get_the_ID(), 'organization_custom_title', true );
 	$short_desc       = get_post_meta( get_the_ID(), 'organization_short_desc', true );
 	$external_link    = esc_url( get_post_meta( get_the_ID(), 'organization_external_link', true ) );
 	$button_title     = esc_html( get_post_meta( get_the_ID(), 'organization_button_title', true ) );
@@ -171,7 +172,13 @@
 				<?php } ?>
 				
 				<h1 class="font-semibold text-white text-3xl mb-3 lg:!text-5xl lg:!mb-4">
-					<?php the_title(); ?>
+					<?php 
+					if ( $custom_title ) {
+						echo esc_html( $custom_title );
+					} else {
+						the_title();
+					} 
+					?>
 				</h1>
 	
 				<?php if ( function_exists( 'custom_star_rating' ) ) { ?>

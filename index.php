@@ -9,7 +9,7 @@
 			</div>
 		<?php } ?>
 	
-		<div class="[&>*]:my-14 [&>*]:first:!mt-0 [&>*]:md:!my-24">
+		<div class="[&>*]:my-14 [&>*]:md:!my-24">
 	
 			<?php 
 			if ( have_posts() ) :

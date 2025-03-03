@@ -49,6 +49,45 @@ function init_custom_registration() {
 	
 /*  Registration - Post Type End */
 
+/*  Registration - Custom Title Start */
+
+add_action( 'admin_init', 'registration_custom_title_field' );
+
+function registration_custom_title_field() {
+	$post_type  = 'registration';
+	$field_name = 'custom_title';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Custom Title', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function registration_custom_title_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'custom_title',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'registration_custom_title_save_field', 10, 2 );
+
+function registration_custom_title_save_field( $post_id ) {
+	custom_save_post_type_field( 'registration', 'custom_title', $post_id );
+}
+
+/*  Registration - Custom Title End */
+
 /*  Registration - Short Description Start */
 
 add_action( 'admin_init', 'registration_short_description_field' );

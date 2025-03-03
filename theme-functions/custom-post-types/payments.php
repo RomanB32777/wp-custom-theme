@@ -85,6 +85,45 @@ function init_custom_payments() {
 
 /*  Payments - Post Type End */
 
+/*  Payments - Custom Title Start */
+
+add_action( 'admin_init', 'payment_custom_title_field' );
+
+function payment_custom_title_field() {
+	$post_type  = 'payment';
+	$field_name = 'custom_title';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Custom Title', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function payment_custom_title_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'custom_title',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'payment_custom_title_save_field', 10, 2 );
+
+function payment_custom_title_save_field( $post_id ) {
+	custom_save_post_type_field( 'payment', 'custom_title', $post_id );
+}
+
+/*  Payments - Custom Title End */
+
 /*  Payments - Short Description Start */
 
 add_action( 'admin_init', 'payment_short_description_field' );

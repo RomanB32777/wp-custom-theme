@@ -30,6 +30,7 @@
 	$custom_post_type = get_post_type();
 	$parent           = get_post( $post->post_parent );
 
+	$custom_title     = get_post_meta( get_the_ID(), "{$custom_post_type}_custom_title", true );
 	$short_desc       = get_post_meta( get_the_ID(), "{$custom_post_type}_short_desc", true );
 	$overall_rating   = esc_html( get_post_meta( get_the_ID(), "{$custom_post_type}_overall_rating", true ) );
 	$external_link    = esc_url( get_post_meta( get_the_ID(), "{$custom_post_type}_external_link", true ) );
@@ -96,9 +97,15 @@
 						?>
 					</div>
 				<?php } ?>
-				
+
 				<h1 class="font-semibold text-white text-3xl mb-3 lg:!text-5xl lg:!mb-4">
-					<?php the_title(); ?>
+					<?php 
+					if ( $custom_title ) {
+						echo esc_html( $custom_title );
+					} else {
+						the_title();
+					} 
+					?>
 				</h1>
 	
 				<?php if ( function_exists( 'custom_star_rating' ) ) { ?>

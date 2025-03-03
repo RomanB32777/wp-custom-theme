@@ -58,6 +58,45 @@ function init_custom_organizations() {
 
 /*  Organizations - Post Type End */
 
+/*  Organizations - Custom Title Start */
+
+add_action( 'admin_init', 'organization_custom_title_field' );
+
+function organization_custom_title_field() {
+	$post_type  = 'organization';
+	$field_name = 'custom_title';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Custom Title', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function organization_custom_title_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'custom_title',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'organization_custom_title_save_field', 10, 2 );
+
+function organization_custom_title_save_field( $post_id ) {
+	custom_save_post_type_field( 'organization', 'custom_title', $post_id );
+}
+
+/*  Organizations - Custom Title End */
+
 /*  Organizations - Short Description Start */
 
 add_action( 'admin_init', 'organization_short_description_field' );
@@ -221,6 +260,45 @@ function organization_bonus_value_save_field( $post_id ) {
 }
 
 /*  Organizations - Bonus Value End */
+
+/*  Organizations - Bonus Currency Value Start */
+
+add_action( 'admin_init', 'organization_bonus_currency_value_field' );
+
+function organization_bonus_currency_value_field() {
+	$post_type  = 'organization';
+	$field_name = 'bonus_currency_value';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Bonus in the currency', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function organization_bonus_currency_value_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'bonus_currency_value',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'organization_bonus_currency_value_save_field', 10, 2 );
+
+function organization_bonus_currency_value_save_field( $post_id ) {
+	custom_save_post_type_field( 'organization', 'bonus_currency_value', $post_id );
+}
+
+/*  Organizations - Bonus Currency Value End */
 
 /*  Organizations - Promotional Code Start */
 

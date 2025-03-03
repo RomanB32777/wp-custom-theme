@@ -73,6 +73,7 @@ if ( $recent_query->have_posts() ) {
 						$post_thumbnail_width  = 380;
 						$post_thumbnail_height = 224;
 						$post_thumbnail_url    = get_the_post_thumbnail_url( get_the_ID(), array( $post_thumbnail_width, $post_thumbnail_height ) );
+						$seo_description       = get_post_meta( get_the_ID(), 'rank_math_description', true );
 
 						?>
 							<div class="swiper-slide flex flex-col !h-auto rounded-xl bg-white md:!rounded-3xl">
@@ -104,7 +105,15 @@ if ( $recent_query->have_posts() ) {
 									</a>
 
 									<p class="font-base text-grizzly-dark">
-										<?php echo esc_html( wp_trim_words( get_the_excerpt(), 48, ' ...' ) ); ?>
+										<?php
+										if ( $seo_description ) {
+											$without_emoji = preg_replace( '/([\x{0001F000}-\x{0001FAFF}])/mu', '', $seo_description );
+											
+											echo esc_html( $without_emoji );
+										} else {
+											echo esc_html( wp_trim_words( get_the_excerpt(), 48, ' ...' ) );
+										}
+										?>
 									</p>
 								</div>
 								

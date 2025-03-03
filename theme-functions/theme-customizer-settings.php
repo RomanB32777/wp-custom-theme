@@ -1732,7 +1732,8 @@ function theme_customizer_style_settings() {
 			stop-color: ' . esc_attr( $stars_custom_inactive_color ) . ';
 		}
 
-		.star.active {
+		.star.active,
+		.bonus-currency-value {
 			fill: ' . esc_attr( $stars_custom_active_color ) . ';
 			color: ' . esc_attr( $stars_custom_active_color ) . ';
 		}
