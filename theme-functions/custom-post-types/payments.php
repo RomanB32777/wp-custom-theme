@@ -95,7 +95,7 @@ function payment_custom_title_field() {
 
 	add_meta_box(
 		"{$post_type}_{$field_name}_meta_box",
-		esc_html__( 'Custom Title', 'custom-theme' ),
+		esc_html__( 'Custom H1', 'custom-theme' ),
 		"{$post_type}_{$field_name}_display_meta_box",
 		$post_type,
 		'normal',

@@ -18,8 +18,8 @@ add_theme_support( 'title-tag' );
 function register_custom_menus() {
 	register_nav_menus(
 		array(
-			'header'         => __( 'Header Menu', 'custom-theme' ),
-			'footer'         => __( 'Footer Menu', 'custom-theme' ),
+			'header'          => __( 'Header Menu', 'custom-theme' ),
+			'footer'          => __( 'Footer Menu', 'custom-theme' ),
 			'footer-specials' => __( 'Special Pages Menu', 'custom-theme' ),
 		)
 	);
