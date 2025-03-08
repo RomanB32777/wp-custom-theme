@@ -252,6 +252,45 @@ function registration_bonus_value_save_field( $post_id ) {
 
 /*  Registration - Bonus Value End */
 
+/*  Registration - Bonus Currency Value Start */
+
+add_action( 'admin_init', 'registration_bonus_currency_value_field' );
+
+function registration_bonus_currency_value_field() {
+	$post_type  = 'registration';
+	$field_name = 'bonus_currency_value';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Bonus in the currency', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function registration_bonus_currency_value_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'bonus_currency_value',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'registration_bonus_currency_value_save_field', 10, 2 );
+
+function registration_bonus_currency_value_save_field( $post_id ) {
+	custom_save_post_type_field( 'registration', 'bonus_currency_value', $post_id );
+}
+
+/*  Registration - Bonus Currency Value End */
+
 /*  Registration - Promotional Code Start */
 
 add_action( 'admin_init', 'registration_promotional_code_field' );
