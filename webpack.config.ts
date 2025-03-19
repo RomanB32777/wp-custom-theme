@@ -17,6 +17,7 @@ export default (env: TEnvVariables) => {
 			entry: {
 				main: path.resolve(srcPath, "index.ts"),
 				imageUploader: path.resolve(srcPath, "scripts", "image-uploader.ts"),
+				acfSelectButtons: path.resolve(srcPath, "scripts", "acf-select-buttons.ts"),
 				blocks: path.resolve(__dirname, "..", "wp-blocks", "build", "style.css"),
 				shortcodes: path.resolve(__dirname, "..", "wp-shortcodes", "dist", "css", "main.css"),
 			},

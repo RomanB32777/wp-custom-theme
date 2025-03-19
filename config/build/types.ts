@@ -1,6 +1,7 @@
 export interface IEntryPaths {
 	main: string;
 	imageUploader: string;
+	acfSelectButtons: string;
 	blocks?: string;
 	shortcodes?: string;
 }

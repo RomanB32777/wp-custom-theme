@@ -49,6 +49,9 @@ function theme_customizer_setting( $wp_customize ) {
 	$buttons_fixed_background_color      = ! empty( $_ENV['DARK_COLOR'] ) ? $_ENV['DARK_COLOR'] : '#1b1d21';
 	$button_fixed_bonus_background_color = ! empty( $_ENV['RED_COLOR'] ) ? $_ENV['RED_COLOR'] : '#d63031';
 
+	$page_header_color            = ! empty( $_ENV['BODY_CONTENT_COLOR'] ) ? $_ENV['BODY_CONTENT_COLOR'] : '#fff';
+	$page_header_background_color = ! empty( $_ENV['HEADER_COLOR'] ) ? $_ENV['HEADER_COLOR'] : '#17946d';
+
 	$slider_navigation_background_color = ! empty( $_ENV['PRIMARY_COLOR'] ) ? $_ENV['PRIMARY_COLOR'] : '#17946d';
 	$slider_navigation_icon_color       = ! empty( $_ENV['GRIZZLY_COLOR'] ) ? $_ENV['GRIZZLY_COLOR'] : '#4e4e53';
 
@@ -378,6 +381,48 @@ function theme_customizer_setting( $wp_customize ) {
 				'label'    => esc_html__( 'Fixed button bonus background color', 'custom-theme' ),
 				'section'  => 'colors',
 				'settings' => 'button_fixed_bonus_background_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'page_header_color',
+		array(
+			'default'           => $page_header_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'page_header_color',
+			array(
+				'label'    => esc_html__( 'Page header color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'page_header_color',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'page_header_background_color',
+		array(
+			'default'           => $page_header_background_color,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'page_header_background_color',
+			array(
+				'label'    => esc_html__( 'Page header background color', 'custom-theme' ),
+				'section'  => 'colors',
+				'settings' => 'page_header_background_color',
 			)
 		)
 	);
@@ -1364,6 +1409,18 @@ function theme_customizer_style_settings() {
 		$button_custom_fixed_bonus_background_color = get_theme_mod( 'button_fixed_bonus_background_color' );
 	}
 
+	if ( ! $page_custom_header_color = get_theme_mod( 'page_header_color' ) ) {
+		$page_custom_header_color = '#fff';
+	} else {
+		$page_custom_header_color = get_theme_mod( 'page_header_color' );
+	}
+
+	if ( ! $page_custom_header_background_color = get_theme_mod( 'page_header_background_color' ) ) {
+		$page_custom_header_background_color = '#d63031';
+	} else {
+		$page_custom_header_background_color = get_theme_mod( 'page_header_background_color' );
+	}
+
 	if ( ! $header_custom_color = get_theme_mod( 'header_color' ) ) {
 		$header_custom_color = '#17946d';
 	} else {
@@ -1633,8 +1690,14 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $buttons_custom_fixed_background_color ) . ' !important;
 		}
 
-		.fixed-button .fixed-bonus .background-bonus {
+		.fixed-button .fixed-bonus .background-bonus,
+		.page-header .customer-support {
 			background-color: ' . esc_attr( $button_custom_fixed_bonus_background_color ) . ' !important;
+		}
+
+		.page-header {
+			color: ' . esc_attr( $page_custom_header_color ) . ';
+			background-color: ' . esc_attr( $page_custom_header_background_color ) . ';
 		}
 
 		.main-blocks a:not(.ez-toc-link, .shortcode-link),

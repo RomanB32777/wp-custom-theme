@@ -80,7 +80,7 @@ function edit_taxonomy_image_upload( $term, $taxonomy ) {
 
 /* --- Save the edited value of the custom taxonomy field --- */
 
-function update_taxonomy_system_image_upload( $term_id, $tt_id ) {
+function update_taxonomy_image_upload( $term_id, $tt_id ) {
 	if ( isset( $_POST['taxonomy-image-id'] ) && '' !== $_POST['taxonomy-image-id'] ) {
 		$image = esc_attr( $_POST['taxonomy-image-id'] );
 		update_term_meta( $term_id, 'taxonomy-image-id', $image );

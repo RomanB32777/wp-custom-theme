@@ -13,7 +13,7 @@ const throttle = (func: (...args: unknown[]) => void, timeout: number) => {
 	};
 };
 
-const showOnPx = 100;
+const showOnPx = 400;
 const invisibleClasses = ["invisible", "opacity-0"];
 const sessionHiddenButtonKey = "hidden-fixed-button";
 

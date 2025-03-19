@@ -138,6 +138,17 @@ add_action( 'admin_enqueue_scripts', 'custom_taxonomy_image_uploader' );
 
 /*  Image Uploader End  */
 
+/*  Taxonomy Select Buttons Start  */
+
+function custom_taxonomy_select_buttons() {
+	if ( is_admin() ) {
+		enqueue_theme_versioned_script( 'custom-taxonomy-select-buttons', '/dist/js/acfSelectButtons.js', array( 'jquery' ) );
+	}
+}
+add_action( 'admin_enqueue_scripts', 'custom_taxonomy_select_buttons' );
+
+/*  Taxonomy Select Buttons End  */
+
 /**  Custom Settings Page - Start  */
 
 require_once __DIR__ . '/theme-functions/custom-settings-page.php';

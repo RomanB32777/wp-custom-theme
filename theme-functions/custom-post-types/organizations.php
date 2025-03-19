@@ -97,49 +97,6 @@ function organization_custom_title_save_field( $post_id ) {
 
 /*  Organizations - Custom Title End */
 
-/*  Organizations - Short Description Start */
-
-add_action( 'admin_init', 'organization_short_description_field' );
-
-function organization_short_description_field() {
-	$post_type  = 'organization';
-	$field_name = 'short_description';
-
-	add_meta_box(
-		"{$post_type}_{$field_name}_meta_box",
-		esc_html__( 'Short Description', 'custom-theme' ),
-		"{$post_type}_{$field_name}_display_meta_box",
-		$post_type,
-		'normal',
-		'high'
-	);
-}
-
-function organization_short_description_display_meta_box( $post ) {
-	custom_text_field_display_meta_box(
-		'short_desc',
-		$post,
-		array(
-			'tinymce'       => array(
-				'toolbar1' => 'bold,italic,underline,bullist,numlist,link,unlink,undo,redo',
-			),
-			'quicktags'     => array(
-				'buttons' => 'em,strong,link,ul,li,ol,close',
-			),
-			'media_buttons' => false,
-			'textarea_rows' => 4,
-		)
-	);
-}
-
-add_action( 'save_post', 'organization_short_description_save_field', 10, 2 );
-
-function organization_short_description_save_field( $post_id ) {
-	custom_save_post_type_field( 'organization', 'short_desc', $post_id );
-}
-
-/*  Organizations - Short Description End */
-
 /*  Organizations - Breadcrumb Title Start */
 
 add_action( 'admin_init', 'organization_breadcrumb_title_field' );
@@ -338,6 +295,45 @@ function organization_promotional_code_save_field( $post_id ) {
 }
 
 /*  Organizations - Promotional Code End */
+
+/*  Organizations - Funds Withdrawal Start */
+
+add_action( 'admin_init', 'organization_funds_withdrawal_field' );
+
+function organization_funds_withdrawal_field() {
+	$post_type  = 'organization';
+	$field_name = 'funds_withdrawal';
+
+	add_meta_box(
+		"{$post_type}_{$field_name}_meta_box",
+		esc_html__( 'Funds withdrawal', 'custom-theme' ),
+		"{$post_type}_{$field_name}_display_meta_box",
+		$post_type,
+		'normal',
+		'high'
+	);
+}
+
+function organization_funds_withdrawal_display_meta_box( $post ) {
+	custom_text_field_display_meta_box(
+		'funds_withdrawal',
+		$post,
+		array(
+			'tinymce'       => false,
+			'quicktags'     => false,
+			'media_buttons' => false,
+			'textarea_rows' => 1,
+		)
+	);
+}
+
+add_action( 'save_post', 'organization_funds_withdrawal_save_field', 10, 2 );
+
+function organization_funds_withdrawal_save_field( $post_id ) {
+	custom_save_post_type_field( 'organization', 'funds_withdrawal', $post_id );
+}
+
+/*  Organizations - Funds Withdrawal End */
 
 /*  Organizations - Shortcode Content Start */
 
@@ -734,42 +730,6 @@ function custom_organization_mobile_image_block_save( $post_id ) {
 
 /*  Upload Mobile image of organization single page - End  */
 
-/*  Upload Background image of organization single page - Start  */
-
-add_action( 'admin_menu', 'organization_background_image_block' );
-
-function organization_background_image_block() {
-	$post_type  = 'organization';
-	$field_name = 'background_image';
-
-	add_meta_box(
-		"{$post_type}_{$field_name}_meta_box",
-		esc_html__( 'Background Image', 'custom-theme' ),
-		"{$post_type}_{$field_name}_display_meta_box",
-		$post_type,
-		'normal',
-		'core'
-	);
-}
-
-function organization_background_image_display_meta_box( $organization ) {
-
-	$post_type                          = 'organization';
-	$field_name                         = 'background_image';
-	$organization_background_image_name = "{$post_type}_{$field_name}";
-
-	wp_nonce_field( "{$organization_background_image_name}_box", "{$organization_background_image_name}_nonce" );
-
-	echo custom_image_uploader( $organization_background_image_name, get_post_meta( $organization->ID, $organization_background_image_name, true ), 'full' );
-}
- 
-function custom_organization_background_image_block_save( $post_id ) {
-	custom_save_post_type_field( 'organization', 'background_image', $post_id );
-}
-add_action( 'save_post', 'custom_organization_background_image_block_save' );
-
-/*  Upload Background image of organization single page - End  */
-
 /*  Display the Relationship of the Organization and Child Post Types Start  */
 
 add_action( 'admin_init', 'custom_organization_post_types_list' );
@@ -921,3 +881,140 @@ function custom_organization_display_promo_list_meta_box( $post ) {
 /*  Display the Relationship of the Organization and Promo End  */
 
 /*  Display the Relationship of the Organization and Child Post Types End  */
+
+
+/*  ACF Field Registration Start  */
+
+add_action( 'acf/init', 'acf_register_fields' );
+
+function acf_register_fields() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	acf_add_local_field_group(
+		array(
+			'key'                   => 'group_67a0bd8c2d736',
+			'title'                 => 'Organization fields',
+			'fields'                => array(
+				array(
+					'key'               => 'field_67a0bd92fec61',
+					'label'             => 'Referral links',
+					'name'              => 'referral_links',
+					'aria-label'        => '',
+					'type'              => 'repeater',
+					'instructions'      => '',
+					'required'          => 0,
+					'conditional_logic' => 0,
+					'wrapper'           => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'collapsed'         => '',
+					'min'               => 0,
+					'max'               => 0,
+					'layout'            => 'table',
+					'button_label'      => 'Add Row',
+					'sub_fields'        => array(
+						array(
+							'key'                  => 'field_67a0bda5fec62',
+							'label'                => 'Custom page',
+							'name'                 => 'custom_page',
+							'aria-label'           => '',
+							'type'                 => 'post_object',
+							'instructions'         => '',
+							'required'             => 0,
+							'conditional_logic'    => 0,
+							'wrapper'              => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'post_type'            => array(
+								0 => 'organization',
+								1 => 'page',
+							),
+							'post_status'          => '',
+							'taxonomy'             => '',
+							'return_format'        => 'id',
+							'multiple'             => 1,
+							'allow_null'           => 0,
+							'allow_in_bindings'    => 1,
+							'bidirectional'        => 0,
+							'ui'                   => 1,
+							'bidirectional_target' => array(),
+							'parent_repeater'      => 'field_67a0bd92fec61',
+						),
+						array(
+							'key'               => 'field_67a0bdc5fec63',
+							'label'             => 'Referral link',
+							'name'              => 'referral_link',
+							'aria-label'        => '',
+							'type'              => 'url',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'placeholder'       => '',
+							'parent_repeater'   => 'field_67a0bd92fec61',
+						),
+					),
+					'rows_per_page'     => 20,
+				),
+				array(
+					'key'                  => 'field_67d749523d766',
+					'label'                => 'Payment systems of the organization',
+					'name'                 => 'organization_payment_systems',
+					'aria-label'           => '',
+					'type'                 => 'taxonomy',
+					'instructions'         => '',
+					'required'             => 0,
+					'conditional_logic'    => 0,
+					'wrapper'              => array(
+						'width' => '',
+						'class' => '',
+						'id'    => '',
+					),
+					'taxonomy'             => 'payment-system',
+					'add_term'             => 1,
+					'save_terms'           => 0,
+					'load_terms'           => 0,
+					'return_format'        => 'id',
+					'field_type'           => 'checkbox',
+					'allow_in_bindings'    => 1,
+					'bidirectional'        => 0,
+					'multiple'             => 0,
+					'allow_null'           => 0,
+					'bidirectional_target' => array(),
+		
+				),
+			),
+			'location'              => array(
+				array(
+					array(
+						'param'    => 'post_type',
+						'operator' => '==',
+						'value'    => 'organization',
+					),
+				),
+			),
+			'menu_order'            => 0,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen'        => '',
+			'active'                => true,
+			'description'           => '',
+			'show_in_rest'          => 0,
+		) 
+	);
+}
+
+/*  ACF Field Registration End  */
