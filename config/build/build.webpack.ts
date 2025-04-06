@@ -57,6 +57,11 @@ export function buildWebpack(options: IBuildOptions): Configuration {
 		config.optimization = {
 			splitChunks: {
 				cacheGroups: {
+					swiper: {
+						chunks: "all",
+						test: /[\\/]node_modules[\\/]swiper[\\/]/,
+						name: "swiper",
+					},
 					styles: {
 						name: "styles",
 						type: "css/mini-extract",
