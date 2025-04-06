@@ -79,37 +79,37 @@ $is_exist_post_attachment_image = ! empty( wp_get_attachment_image( get_post_thu
 function render_support_funds_blocks( $funds_withdrawal_value ) {
 	?>
 
-	<div class="flex flex-col-reverse gap-4 mb-3 md:!flex-row lg:!mb-4">
-		<div class="customer-support text-white rounded-xl px-4 py-2 h-fit">
-			<p class="font-semibold text-base mb-1">
+	<div class="flex flex-col-reverse gap-4 md:!flex-row">
+		<div class="customer-support bg-white text-dark flex flex-col justify-between rounded-xl px-4 py-2">
+			<p class="font-semibold text-xl mb-2 lg:!leading-5 lg:!text-base lg:!mb-1">
 				<?php esc_html_e( 'Customer Support', 'custom-theme' ); ?>
 			</p>
 
 			<div class="flex items-center gap-4 md:!justify-between">
-				<div class="flex items-center gap-2 text-base font-semibold">
-					<span>📞</span>
-
-					<p>
+				<div class="flex items-center gap-1">
+					<svg fill="currentColor" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.748 5.773S11.418 5 10.914 5c-.496 0-.754.229-.926.387S6.938 7.91 6.938 7.91s-.837.731-.773 2.106c.054 1.375.323 3.332 1.719 6.058 1.386 2.72 4.855 6.876 7.047 8.337 0 0 2.031 1.558 3.921 2.191.549.173 1.647.398 1.903.398.26 0 .719 0 1.246-.385.536-.389 3.543-2.807 3.543-2.807s.736-.665-.119-1.438c-.859-.773-3.467-2.492-4.025-2.944-.559-.459-1.355-.257-1.699.054-.343.313-.956.828-1.031.893-.112.086-.419.365-.763.226-.438-.173-2.234-1.148-3.899-3.426-1.655-2.276-1.837-3.02-2.084-3.824a.56.56 0 0 1 .225-.657c.248-.172 1.161-.933 1.161-.933s.591-.583.344-1.27-1.906-4.716-1.906-4.716z"></path></g></svg>
+					
+					<p class="text-xl font-semibold lg:!text-lg">
 						<?php esc_html_e( 'Yes', 'custom-theme' ); ?>
 					</p>
 				</div>
 
-				<p class="text-lg font-semibold">24/7</p>
+				<p class="text-xl font-semibold lg:!text-lg">24/7</p>
 			</div>
 		</div>
 
 		<?php if ( $funds_withdrawal_value ) { ?>
-			<div class="bg-white text-dark rounded-xl px-4 py-2 h-fit">
-				<p class="font-semibold text-base mb-1">
+			<div class="bg-white text-dark flex flex-col justify-between rounded-xl px-4 py-2">
+				<p class="font-semibold text-xl mb-2 lg:!leading-5 lg:!text-base lg:!mb-1">
 					<?php esc_html_e( 'Funds withdrawal', 'custom-theme' ); ?>
 				</p>
 
 				<div class="flex items-center gap-4 md:!justify-between">
-					<div class="main-button flex justify-center items-center w-8 h-8 rounded-full">
+					<div class="main-button flex justify-center items-center min-w-8 w-8 h-8 rounded-full">
 						<span class="text-xl">$</span>
 					</div>
 
-					<p class="text-lg font-semibold">
+					<p class="text-xl font-semibold lg:!leading-5 lg:!text-lg">
 						<?php echo esc_html( $funds_withdrawal_value ); ?>
 					</p>
 				</div>
@@ -190,7 +190,7 @@ $max_visible_payments_count = 11;
 		$content_column_classes = implode(
 			' ', 
 			array(
-				'col-span-5',
+				'col-span-5 flex flex-col gap-4',
 				( $is_exist_post_attachment_image ? 'md:col-start-2' : '' ),
 			)
 		);
@@ -202,7 +202,7 @@ $max_visible_payments_count = 11;
 		</div>
 
 		<?php if ( $organization_payment_systems ) { ?>
-			<div class="bg-white text-dark rounded-xl p-4 flex-1 mb-3 lg:!mb-4">
+			<div class="bg-white text-dark rounded-xl p-4 flex-1">
 				<p class="font-semibold text-xl mb-2">
 					<?php esc_html_e( 'Payments methods:', 'custom-theme' ); ?>
 				</p>
@@ -285,86 +285,93 @@ $max_visible_payments_count = 11;
 		<?php } ?>
 
 		<?php if ( $bonus_value || $promotional_code ) { ?>
-			<div class="flex flex-col items-center gap-y-4 gap-x-5 mb-8 lg:!flex-row">
+			<div class="flex flex-col gap-4 lg:!flex-row">
 				<?php if ( $promotional_code ) { ?>
 					<div 
-						class="bonus-border copy-button group duration-200 self-stretch bg-white text-dark flex flex-1 items-center justify-between gap-3 p-4 rounded-xl cursor-pointer lg:!p-5"
+						class="bonus-border copy-button group duration-200 bg-white text-dark flex flex-col justify-between flex-1 p-4 rounded-xl cursor-pointer lg:!p-5"
 						data-copy-text="<?php echo esc_attr( $promotional_code ); ?>"
 					>
-						<div class="flex items-center gap-3 md:!gap-5">
-							<div class="bg-white rounded-full w-11 h-11 min-w-11 flex items-center justify-center">
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-									<mask 
-										id="mask0_44_14348" 
-										style="mask-type:luminance"
-										maskUnits="userSpaceOnUse" 
-										x="6" 
-										y="6" 
-										width="18" 
-										height="18"
-									>
-										<path 
-											fill-rule="evenodd" 
-											clip-rule="evenodd"
-											d="M22 6H8C6.9 6 6 6.9 6 8V22C6 23.1 6.9 24 8 24H22C23.1 24 24 23.1 24 22V8C24 6.9 23.1 6 22 6ZM10.5 21C9.67 21 9 20.33 9 19.5C9 18.67 9.67 18 10.5 18C11.33 18 12 18.67 12 19.5C12 20.33 11.33 21 10.5 21ZM10.5 12C9.67 12 9 11.33 9 10.5C9 9.67 9.67 9 10.5 9C11.33 9 12 9.67 12 10.5C12 11.33 11.33 12 10.5 12ZM15 16.5C14.17 16.5 13.5 15.83 13.5 15C13.5 14.17 14.17 13.5 15 13.5C15.83 13.5 16.5 14.17 16.5 15C16.5 15.83 15.83 16.5 15 16.5ZM19.5 21C18.67 21 18 20.33 18 19.5C18 18.67 18.67 18 19.5 18C20.33 18 21 18.67 21 19.5C21 20.33 20.33 21 19.5 21ZM19.5 12C18.67 12 18 11.33 18 10.5C18 9.67 18.67 9 19.5 9C20.33 9 21 9.67 21 10.5C21 11.33 20.33 12 19.5 12Z" 
-											fill="white"
-										/>
-									</mask>
-									<g mask="url(#mask0_44_14348)">
-										<rect x="2" y="2" width="26" height="26" fill="black"/>
-									</g>
-								</svg>
-							</div>
+						<p class="text-base text-center text-dark font-semibold uppercase">
+							<?php esc_html_e( 'promo code', 'custom-theme' ); ?>
+						</p>
 
-							<span class="font-semibold text-xl lg:!text-2xl">
-								<?php echo esc_html( $promotional_code ); ?>
-							</span>
-						</div>
-
-						<div class="main-link flex-none text-lg font-medium uppercase relative">
-							<div class="flex items-center gap-2 duration-200 group-[.active]:!hidden">
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-									<path 
-										d="M5.83366 5.83334V2.50001C5.83366 2.27899 5.92146 2.06703 6.07774 1.91075C6.23402 1.75447 6.44598 1.66667 6.66699 1.66667H17.5003C17.7213 1.66667 17.9333 1.75447 18.0896 1.91075C18.2459 2.06703 18.3337 2.27899 18.3337 2.50001V13.3333C18.3337 13.5544 18.2459 13.7663 18.0896 13.9226C17.9333 14.0789 17.7213 14.1667 17.5003 14.1667H14.167V17.4942C14.167 17.9575 13.7928 18.3333 13.3278 18.3333H2.50616C2.39593 18.3334 2.28676 18.3118 2.18489 18.2697C2.08303 18.2276 1.99048 18.1657 1.91253 18.0878C1.83459 18.0099 1.77278 17.9173 1.73065 17.8154C1.68851 17.7136 1.66688 17.6044 1.66699 17.4942L1.66949 6.67251C1.66949 6.20917 2.04366 5.83334 2.50866 5.83334H5.83366ZM7.50033 5.83334H13.3278C13.7912 5.83334 14.167 6.20751 14.167 6.67251V12.5H16.667V3.33334H7.50033V5.83334ZM3.33616 7.50001L3.33366 16.6667H12.5003V7.50001H3.33616Z" 
-										fill="currentColor"
-									/>
-								</svg>
-
-								<span>
-									<?php esc_html_e( 'copy', 'custom-theme' ); ?>
+						<div class="flex items-center justify-between gap-3">
+							<div class="flex items-center gap-1">
+								<div class="bg-white rounded-full w-10 h-10 min-w-10 flex items-center justify-center">
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+										<mask 
+											id="mask0_44_14348" 
+											style="mask-type:luminance"
+											maskUnits="userSpaceOnUse" 
+											x="6" 
+											y="6" 
+											width="18" 
+											height="18"
+										>
+											<path 
+												fill-rule="evenodd" 
+												clip-rule="evenodd"
+												d="M22 6H8C6.9 6 6 6.9 6 8V22C6 23.1 6.9 24 8 24H22C23.1 24 24 23.1 24 22V8C24 6.9 23.1 6 22 6ZM10.5 21C9.67 21 9 20.33 9 19.5C9 18.67 9.67 18 10.5 18C11.33 18 12 18.67 12 19.5C12 20.33 11.33 21 10.5 21ZM10.5 12C9.67 12 9 11.33 9 10.5C9 9.67 9.67 9 10.5 9C11.33 9 12 9.67 12 10.5C12 11.33 11.33 12 10.5 12ZM15 16.5C14.17 16.5 13.5 15.83 13.5 15C13.5 14.17 14.17 13.5 15 13.5C15.83 13.5 16.5 14.17 16.5 15C16.5 15.83 15.83 16.5 15 16.5ZM19.5 21C18.67 21 18 20.33 18 19.5C18 18.67 18.67 18 19.5 18C20.33 18 21 18.67 21 19.5C21 20.33 20.33 21 19.5 21ZM19.5 12C18.67 12 18 11.33 18 10.5C18 9.67 18.67 9 19.5 9C20.33 9 21 9.67 21 10.5C21 11.33 20.33 12 19.5 12Z" 
+												fill="white"
+											/>
+										</mask>
+										<g mask="url(#mask0_44_14348)">
+											<rect x="2" y="2" width="26" height="26" fill="black"/>
+										</g>
+									</svg>
+								</div>
+	
+								<span class="font-semibold text-2xl">
+									<?php echo esc_html( $promotional_code ); ?>
 								</span>
 							</div>
-
-							<?php if ( $external_link ) { ?>
-								<a 
-									href="<?php echo esc_url( $external_link ); ?>" 
-									title="<?php echo esc_attr( $button_title ); ?>" 
-									class="hidden no-underline items-center gap-2 duration-200 group-[.active]:flex" 
-									rel="nofollow" 
-									target="_blank"
-								>
-									<span>
-										<?php esc_html_e( 'visit site', 'custom-theme' ); ?>
-									</span>
-
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+	
+							<div class="main-link flex-none text-lg font-medium uppercase relative">
+								<div class="flex items-center gap-2 duration-200 group-[.active]:!hidden">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 										<path 
-											d="M10 16L20 8L10 0V5C4.477 5 0 9.477 0 15C0 15.273 0.0100002 15.543 0.0319996 15.81C1.54 12.95 4.542 11 8 11H10V16Z" 
+											d="M5.83366 5.83334V2.50001C5.83366 2.27899 5.92146 2.06703 6.07774 1.91075C6.23402 1.75447 6.44598 1.66667 6.66699 1.66667H17.5003C17.7213 1.66667 17.9333 1.75447 18.0896 1.91075C18.2459 2.06703 18.3337 2.27899 18.3337 2.50001V13.3333C18.3337 13.5544 18.2459 13.7663 18.0896 13.9226C17.9333 14.0789 17.7213 14.1667 17.5003 14.1667H14.167V17.4942C14.167 17.9575 13.7928 18.3333 13.3278 18.3333H2.50616C2.39593 18.3334 2.28676 18.3118 2.18489 18.2697C2.08303 18.2276 1.99048 18.1657 1.91253 18.0878C1.83459 18.0099 1.77278 17.9173 1.73065 17.8154C1.68851 17.7136 1.66688 17.6044 1.66699 17.4942L1.66949 6.67251C1.66949 6.20917 2.04366 5.83334 2.50866 5.83334H5.83366ZM7.50033 5.83334H13.3278C13.7912 5.83334 14.167 6.20751 14.167 6.67251V12.5H16.667V3.33334H7.50033V5.83334ZM3.33616 7.50001L3.33366 16.6667H12.5003V7.50001H3.33616Z" 
 											fill="currentColor"
 										/>
 									</svg>
-								</a>
-							<?php } ?>
+	
+									<span>
+										<?php esc_html_e( 'copy', 'custom-theme' ); ?>
+									</span>
+								</div>
+	
+								<?php if ( $external_link ) { ?>
+									<a 
+										href="<?php echo esc_url( $external_link ); ?>" 
+										title="<?php echo esc_attr( $button_title ); ?>" 
+										class="hidden no-underline items-center gap-2 duration-200 group-[.active]:flex" 
+										rel="nofollow" 
+										target="_blank"
+									>
+										<span>
+											<?php esc_html_e( 'visit site', 'custom-theme' ); ?>
+										</span>
+	
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+											<path 
+												d="M10 16L20 8L10 0V5C4.477 5 0 9.477 0 15C0 15.273 0.0100002 15.543 0.0319996 15.81C1.54 12.95 4.542 11 8 11H10V16Z" 
+												fill="currentColor"
+											/>
+										</svg>
+									</a>
+								<?php } ?>
+							</div>
 						</div>
 					</div>
 				<?php } ?>
 
 				<?php if ( $bonus_value ) { ?>
-					<div class="bonus-border flex flex-col flex-1 items-center self-stretch bg-white p-4 rounded-xl lg:!p-5">
+					<div class="bonus-border flex flex-col justify-between flex-1 text-center bg-white p-4 rounded-xl lg:!p-5">
 						<p class="text-base text-dark font-semibold uppercase">
 							<?php esc_html_e( 'bonus', 'custom-theme' ); ?>
 						</p>
-						<p class="text-2xl text-yellow text-center">
+
+						<p class="text-2xl font-semibold line-clamp-2 text-yellow lg:!text-xl">
 							<?php echo esc_html( $bonus_value ); ?>
 						</p>
 					</div>

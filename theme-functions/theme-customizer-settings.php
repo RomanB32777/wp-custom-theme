@@ -1690,9 +1690,12 @@ function theme_customizer_style_settings() {
 			background-color: ' . esc_attr( $buttons_custom_fixed_background_color ) . ' !important;
 		}
 
-		.fixed-button .fixed-bonus .background-bonus,
-		.page-header .customer-support {
+		.fixed-button .fixed-bonus .background-bonus {
 			background-color: ' . esc_attr( $button_custom_fixed_bonus_background_color ) . ' !important;
+		}
+
+		.page-header .customer-support svg path {
+			fill: ' . esc_attr( $button_custom_fixed_bonus_background_color ) . ' !important;
 		}
 
 		.page-header {
