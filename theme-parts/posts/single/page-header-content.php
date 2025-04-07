@@ -17,7 +17,11 @@ $funds_withdrawal = esc_html( get_post_meta( $is_organization_post_type ? get_th
 
 $rating_stars_number_value = 5;
 
-if ( get_option( "{$current_post_type}_rating_stars_number" ) ) {
+if ( 'organization' === $current_post_type ) {
+	if ( get_option( 'custom_rating_stars_number' ) ) {
+		$rating_stars_number_value = get_option( 'custom_rating_stars_number' );
+	}
+} elseif ( get_option( "{$current_post_type}_rating_stars_number" ) ) {
 	$rating_stars_number_value = get_option( "{$current_post_type}_rating_stars_number" );
 }
 
@@ -163,11 +167,18 @@ $max_visible_payments_count = 11;
 			<?php if ( function_exists( 'custom_star_rating' ) ) { ?>
 				<div class="flex relative items-center gap-x-2">
 					<?php
+						$rating_wrapper_classes = array(
+							' gap-x-2',
+							( intval( $rating_stars_number_value ) > 5 ? 'justify-center flex-wrap' : '' ),
+						);
+
+						$rating_wrapper_classnames = implode( ' ', $rating_wrapper_classes );
+
 						custom_star_rating(
 							array(
 								'rating'              => $overall_rating,
 								'rating_stars_number' => $rating_stars_number_value,
-								'wrapper_classes'     => 'gap-x-2',
+								'wrapper_classes'     => $rating_wrapper_classnames,
 								'star_classes'        => 'w-6 h-6',
 							)
 						);

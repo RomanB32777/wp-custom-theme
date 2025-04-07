@@ -121,24 +121,15 @@ function registration_settings_init() {
 	add_settings_field(
 		'registration_rating_stars_number',
 		esc_html__( 'The number of stars', 'custom-theme' ),
-		'registration_rating_stars_number_callback',
+		'custom_rating_stars_number_callback',
 		'registration_tab',
-		'registration_tab_other_settings' 
+		'registration_tab_other_settings',
+		array(
+			'id'          => 'registration_rating_stars_number', 
+			'option_name' => 'registration_rating_stars_number',
+		)
 	);
 	register_setting( 'registration_tab', 'registration_rating_stars_number', 'esc_attr' );
-
-	function registration_rating_stars_number_callback() {
- 
-		$options       = get_option( 'registration_rating_stars_number' );
-		$number_values = array( '5', '6', '7', '8', '9', '10' );
-		?>
-		<select id="registration_rating_stars_number" name="registration_rating_stars_number">
-			<?php foreach ( $number_values as $number_value ) { ?>
-				<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $options, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
-			<?php } ?>
-		</select>
-		<?php
-	}
 }
 
 add_action( 'admin_init', 'registration_settings_init' );

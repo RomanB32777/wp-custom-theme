@@ -64,7 +64,7 @@ $src_background_image    = wp_get_attachment_image_src( $background_image_id, 'f
 	
 			<?php
 				get_template_part( '/theme-parts/author-info' );
-				get_author_info( get_the_author_meta( 'ID' ), esc_html__( 'Author', 'custom-theme' ), 40, false );
+				get_author_info( esc_html__( 'Author', 'custom-theme' ), 40 );
 			?>
 	
 			<!-- Author Info End -->

@@ -121,24 +121,15 @@ function apps_settings_init() {
 	add_settings_field(
 		'app_rating_stars_number',
 		esc_html__( 'The number of stars', 'custom-theme' ),
-		'app_rating_stars_number_callback',
+		'custom_rating_stars_number_callback',
 		'apps_tab',
-		'apps_tab_other_settings' 
+		'apps_tab_other_settings',
+		array(
+			'id'          => 'app_rating_stars_number', 
+			'option_name' => 'app_rating_stars_number',
+		)
 	);
 	register_setting( 'apps_tab', 'app_rating_stars_number', 'esc_attr' );
-
-	function app_rating_stars_number_callback() {
- 
-		$options       = get_option( 'app_rating_stars_number' );
-		$number_values = array( '5', '6', '7', '8', '9', '10' );
-		?>
-		<select id="app_rating_stars_number" name="app_rating_stars_number">
-			<?php foreach ( $number_values as $number_value ) { ?>
-				<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $options, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
-			<?php } ?>
-		</select>
-		<?php
-	}
 }
 
 add_action( 'admin_init', 'apps_settings_init' );

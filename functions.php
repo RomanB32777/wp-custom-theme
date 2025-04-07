@@ -309,6 +309,10 @@ require_once __DIR__ . '/theme-functions/custom-comment-items.php';
 require_once __DIR__ . '/theme-functions/wp-handle-comment-ajax.php';
 require_once __DIR__ . '/theme-functions/wp-pagination-comment-ajax.php';
 
+// ajax load more
+require_once __DIR__ . '/theme-parts/posts/author/author_post_cards.php';
+require_once __DIR__ . '/theme-functions/wp-load-more-ajax.php';
+
 add_action( 'wp_ajax_sendcomment', 'ajax_send_comment' );
 add_action( 'wp_ajax_nopriv_sendcomment', 'ajax_send_comment' );
 function ajax_send_comment() {

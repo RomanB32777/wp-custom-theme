@@ -34,7 +34,7 @@ function theme_options_page_html() {
 	if ( isset( $_GET['tab'] ) ) {  
 		$active_tab = $_GET['tab'];  
 	} else {
-		$active_tab = 'organizations_tab';
+		$active_tab = 'general_tab';
 	}
 
 	$organizations_tab_name = esc_html__( 'Organizations', 'custom-theme' );
@@ -84,6 +84,7 @@ function theme_options_page_html() {
 	<h1 class="wp-heading-inline"><?php echo esc_html( get_admin_page_title() ); ?><span class="title-count theme-count"><?php echo esc_html( $GLOBALS['custom_theme_version'] ); ?></span></h1>
 	
 	<h2 class="nav-tab-wrapper">
+		<a href="?page=custom-settings&tab=general_tab" class="nav-tab <?php echo 'general_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'General settings', 'custom-theme' ); ?></a>
 		<a href="?page=custom-settings&tab=organizations_tab" class="nav-tab <?php echo 'organizations_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Organizations', 'custom-theme' ); ?> (<?php echo esc_html( $organizations_tab_name ); ?>)</a>
 		<a href="?page=custom-settings&tab=apps_tab" class="nav-tab <?php echo 'apps_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Apps', 'custom-theme' ); ?> (<?php echo esc_html( $apps_tab_name ); ?>)</a>
 		<a href="?page=custom-settings&tab=payments_tab" class="nav-tab <?php echo 'payments_tab' === $active_tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Payments', 'custom-theme' ); ?> (<?php echo esc_html( $payments_tab_name ); ?>)</a>
@@ -112,9 +113,9 @@ function theme_options_page_html() {
 /*  Custom Options Page End */
 
 function custom_textfield_name_callback( $args ) {
-	$option      = esc_attr( get_option( $args['option_name'] ) );
 	$id          = $args['id'];
 	$option_name = $args['option_name'];
+	$option      = esc_attr( get_option( $option_name ) );
 
 	?>
 	<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" class="regular-text" />
@@ -146,22 +147,44 @@ function custom_tab_slugs_callback( $args ) {
 }
 
 function custom_textfield_button_title_callback( $args ) {
-	$option      = esc_attr( get_option( $args['option_name'] ) );
 	$id          = $args['id'];
 	$option_name = $args['option_name'];
+	$option      = esc_attr( get_option( $option_name ) );
 	?>
 	<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default &quot;Follow&quot;' ); ?>" class="regular-text" />
 		<?php
 }
 
 function custom_textfield_permalink_button_title_callback( $args ) {
-	$option      = esc_attr( get_option( $args['option_name'] ) );
 	$id          = $args['id'];
 	$option_name = $args['option_name'];
+	$option      = esc_attr( get_option( $option_name ) );
 	?>
 	<input type="text" id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option ); ?>" placeholder="<?php echo esc_attr( 'Default &quot;Read&quot;' ); ?>" class="regular-text" />
 		<?php
 }
+
+function custom_rating_stars_number_callback( $args ) {
+	$id          = $args['id'];
+	$option_name = $args['option_name'];
+	$option      = esc_attr( get_option( $option_name ) );
+
+	$number_values = array( '5', '6', '7', '8', '9', '10' );
+	?>
+
+	<select id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $option_name ); ?>">
+		<?php foreach ( $number_values as $number_value ) { ?>
+			<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $option, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
+		<?php } ?>
+	</select>
+	<?php
+}
+
+/** General Settings - Start  */
+
+require_once __DIR__ . '/custom-settings/general.php';
+
+/**  General Settings - End  */
 
 /** Custom Settings Organizations - Start  */
 

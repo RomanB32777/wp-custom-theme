@@ -1661,7 +1661,8 @@ function theme_customizer_style_settings() {
 		.wpcf7-form input[type="email"],
 		.wpcf7-form input[type="tel"],
 		.wpcf7-form input[type="radio"],
-	    .wpcf7-form input[type="checkbox"] {
+	    .wpcf7-form input[type="checkbox"],
+		.custom-tabs .tab-button.active {
 			border-color: ' . esc_attr( $border_custom_color ) . ' !important;
 		}
 
@@ -1673,7 +1674,8 @@ function theme_customizer_style_settings() {
 
 		.main-link,
 		.wpcf7-form input[type="radio"],
-	    .wpcf7-form input[type="checkbox"] {
+	    .wpcf7-form input[type="checkbox"],
+		.custom-tabs .tab-button.active {
 			color: ' . esc_attr( $primary_custom_color ) . ';
 		}
 

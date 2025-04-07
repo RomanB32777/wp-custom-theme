@@ -220,22 +220,13 @@ function organizations_settings_init() {
 		esc_html__( 'The number of stars', 'custom-theme' ),
 		'custom_rating_stars_number_callback',
 		'organizations_tab',
-		'organizations_tab_rating_titles' 
+		'organizations_tab_rating_titles',
+		array(
+			'id'          => 'custom_rating_stars_number', 
+			'option_name' => 'custom_rating_stars_number',
+		)  
 	);
 	register_setting( 'organizations_tab', 'custom_rating_stars_number', 'esc_attr' );
-
-	function custom_rating_stars_number_callback() {
- 
-		$options       = get_option( 'custom_rating_stars_number' );
-		$number_values = array( '5', '6', '7', '8', '9', '10' );
-		?>
-		<select id="custom_rating_stars_number" name="custom_rating_stars_number">
-			<?php foreach ( $number_values as $number_value ) { ?>
-				<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $options, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
-			<?php } ?>
-		</select>
-			<?php
-	}
 
 	/*
 	----------------

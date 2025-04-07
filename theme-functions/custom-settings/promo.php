@@ -121,24 +121,15 @@ function promo_settings_init() {
 	add_settings_field(
 		'promo_rating_stars_number',
 		esc_html__( 'The number of stars', 'custom-theme' ),
-		'promo_rating_stars_number_callback',
+		'custom_rating_stars_number_callback',
 		'promo_tab',
-		'promo_tab_other_settings' 
+		'promo_tab_other_settings',
+		array(
+			'id'          => 'promo_rating_stars_number', 
+			'option_name' => 'promo_rating_stars_number',
+		) 
 	);
 	register_setting( 'promo_tab', 'promo_rating_stars_number', 'esc_attr' );
-
-	function promo_rating_stars_number_callback() {
- 
-		$options       = get_option( 'promo_rating_stars_number' );
-		$number_values = array( '5', '6', '7', '8', '9', '10' );
-		?>
-		<select id="promo_rating_stars_number" name="promo_rating_stars_number">
-			<?php foreach ( $number_values as $number_value ) { ?>
-				<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $options, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
-			<?php } ?>
-		</select>
-		<?php
-	}
 }
 
 add_action( 'admin_init', 'promo_settings_init' );

@@ -121,24 +121,15 @@ function bonuses_settings_init() {
 	add_settings_field(
 		'bonus_rating_stars_number',
 		esc_html__( 'The number of stars', 'custom-theme' ),
-		'bonus_rating_stars_number_callback',
+		'custom_rating_stars_number_callback',
 		'bonuses_tab',
-		'bonuses_tab_other_settings' 
+		'bonuses_tab_other_settings',
+		array(
+			'id'          => 'bonus_rating_stars_number', 
+			'option_name' => 'bonus_rating_stars_number',
+		)
 	);
 	register_setting( 'bonuses_tab', 'bonus_rating_stars_number', 'esc_attr' );
-
-	function bonus_rating_stars_number_callback() {
- 
-		$options       = get_option( 'bonus_rating_stars_number' );
-		$number_values = array( '5', '6', '7', '8', '9', '10' );
-		?>
-		<select id="bonus_rating_stars_number" name="bonus_rating_stars_number">
-			<?php foreach ( $number_values as $number_value ) { ?>
-				<option value="<?php echo esc_attr( $number_value ); ?>" <?php selected( $options, $number_value ); ?>><?php echo esc_html( $number_value ); ?></option>
-			<?php } ?>
-		</select>
-		<?php
-	}
 }
 
 add_action( 'admin_init', 'bonuses_settings_init' );

@@ -1,6 +1,6 @@
 <?php
 
-function get_author_info( $user_id, $block_title = '', $description_size = 15 ) {
+function get_author_info( $block_title = '', $description_size = 0 ) {
 
 	$allowed_author_html = array(
 		'a'      => array(
@@ -16,14 +16,16 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 		'p'      => array(),
 	);
 
-	$author_posts_url    = get_author_posts_url( $user_id );
-	$author_name         = get_the_author_meta( 'display_name', $user_id );
-	$author_position     = get_the_author_meta( 'position', $user_id );
-	$author_rating       = get_the_author_meta( 'rating', $user_id );
-	$author_facebook_url = get_the_author_meta( 'facebook', $user_id );
-	$author_linkedin_url = get_the_author_meta( 'linkedin', $user_id );
+	$author_id           = get_the_author_meta( 'ID' );
+	$author_posts_url    = get_author_posts_url( $author_id );
+	$author_name         = get_the_author_meta( 'display_name', $author_id );
+	$author_position     = get_the_author_meta( 'position', $author_id );
+	$author_rating       = get_the_author_meta( 'rating', $author_id );
+	$author_facebook_url = get_the_author_meta( 'facebook', $author_id );
+	$author_linkedin_url = get_the_author_meta( 'linkedin', $author_id );
+	$author_description  = get_the_author_meta( 'description', $author_id );
 	
-	$author_avatar_url = get_avatar_url( $user_id, array( 'size' => 200 ) );
+	$author_avatar_url = get_avatar_url( $author_id, array( 'size' => 200 ) );
 
 	function render_author_socials( $args = array() ) {
 		$defaults = array(
@@ -178,7 +180,8 @@ function get_author_info( $user_id, $block_title = '', $description_size = 15 ) 
 								' . esc_html__( 'More', 'custom-theme' ) . '
 							</a>';
 						?>
-						<?php echo wp_kses( wp_trim_words( get_the_author_meta( 'description', $user_id ), $description_size, $more_link ), $allowed_author_html ); ?>
+
+						<?php echo wp_kses( $description_size ? wp_trim_words( $author_description, $description_size, $more_link ) : $author_description, $allowed_author_html ); ?>
 					</p>
 				</div>
 			</div>
