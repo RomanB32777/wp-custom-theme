@@ -1,6 +1,5 @@
 <?php
 
-
 function ajax_load_more_custom_posts() {
 	$items_number = 5;
 	$post_type    = 'page';
