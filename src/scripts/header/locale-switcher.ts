@@ -71,7 +71,7 @@ const initLocales = async () => {
 
 		const localeUpper = locale.toUpperCase();
 
-		if (currentUrl.includes(localeLink)) {
+		if (localeLink === currentUrl) {
 			switchers.forEach((el) => {
 				const dropdownToggle = el.querySelector("a.dropdown-toggle");
 

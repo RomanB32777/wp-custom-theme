@@ -37,7 +37,7 @@
 					) 
 				); 
 				?>
-			<div class="dropdown group relative -mx-3 pt-2 lang-switcher xl:m-0 xl:py-1">
+			<div class="dropdown group relative -mx-3 pt-2 flex items-center lang-switcher xl:m-0 xl:py-1">
 				<a 
 					class="main-menu-link dropdown-toggle flex justify-between items-center gap-x-1 duration-200 font-bold text-sm w-auto uppercase hover:bg-transparent hover:text-grizzly" 
 					href="#" 

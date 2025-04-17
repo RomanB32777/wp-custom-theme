@@ -49,13 +49,36 @@ $author_tabs = array(
 	),
 );
 
-$all_count_posts_query = new WP_Query(
-	array(
-		'author' => $author_id,
-	)
-);
+$all_post_types        = array();
+$all_count_found_posts = 0;
 
-$all_count_found_posts = $all_count_posts_query->found_posts;
+foreach ( $author_tabs as $author_tab ) {
+	$curr_tab_id     = $author_tab['tab_id'];
+	$curr_post_types = $author_tab['post_type'];
+	$curr_tab_title  = $author_tab['title']; 
+
+	$curr_posts_query = new WP_Query(
+		array(
+			'author'         => $author_id,
+			'post_type'      => $curr_post_types,
+			'posts_per_page' => $default_author_posts_number,
+		)
+	);
+
+	$curr_found_posts = $curr_posts_query->found_posts;
+
+	$all_post_types[] = array(
+		'tab_id'            => $curr_tab_id,
+		'post_type'         => $curr_post_types,
+		'title'             => $curr_tab_title,
+		'posts_query'       => $curr_posts_query,
+		'posts_count'       => $curr_posts_query->post_count,
+		'found_posts_count' => $curr_found_posts,
+		
+	);
+
+	$all_count_found_posts += $curr_found_posts; 
+}
 
 ?>
 
@@ -80,19 +103,10 @@ $all_count_found_posts = $all_count_posts_query->found_posts;
 					<ul class="flex w-max -mb-px">
 						<?php
 						
-						foreach ( $author_tabs as $author_tab ) {
-							$curr_tab_id     = $author_tab['tab_id'];
-							$curr_post_types = $author_tab['post_type'];
-							$curr_tab_title  = $author_tab['title']; 
-
-							$count_posts_query = new WP_Query(
-								array(
-									'post_type' => $curr_post_types,
-									'author'    => $author_id,
-								)
-							);
-
-							$curr_found_posts = $count_posts_query->found_posts;
+						foreach ( $all_post_types as $author_tab ) {
+							$curr_tab_id      = $author_tab['tab_id'];
+							$curr_tab_title   = $author_tab['title']; 
+							$curr_found_posts = $author_tab['found_posts_count'];
 
 							if ( $curr_found_posts > 0 ) {
 								?>
@@ -114,19 +128,15 @@ $all_count_found_posts = $all_count_posts_query->found_posts;
 				<div class="tabs-content">
 					<?php
 
-					foreach ( $author_tabs as $author_tab ) {
-						$curr_tab_id     = $author_tab['tab_id'];
-						$curr_post_types = $author_tab['post_type'];
+					foreach ( $all_post_types as $author_tab ) {
+						$curr_tab_id      = $author_tab['tab_id'];
+						$curr_tab_title   = $author_tab['title']; 
+						$curr_post_types  = $author_tab['post_type'];
+						$curr_posts_query = $author_tab['posts_query'];
+						$curr_posts_count = $author_tab['posts_count'];
+						$curr_found_posts = $author_tab['found_posts_count'];
 
-						$curr_posts_query = new WP_Query(
-							array(
-								'author'         => $author_id,
-								'post_type'      => $curr_post_types,
-								'posts_per_page' => $default_author_posts_number,
-							)
-						);
-						
-						$is_visible_more_btn = $curr_posts_query->post_count < $curr_posts_query->found_posts;
+						$is_visible_more_btn = $curr_posts_count < $curr_found_posts;
 
 						?>
 

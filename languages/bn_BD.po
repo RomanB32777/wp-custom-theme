@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Custom Theme\n"
-"POT-Creation-Date: 2024-03-12 20:24+0300\n"
-"PO-Revision-Date: 2024-03-12 20:24+0300\n"
+"POT-Creation-Date: 2025-04-17 21:53+0300\n"
+"PO-Revision-Date: 2025-04-17 21:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: bn\n"
@@ -23,11 +23,31 @@ msgstr ""
 "X-Poedit-SearchPath-6: theme-functions\n"
 "X-Poedit-SearchPath-7: theme-parts\n"
 
-#: author.php:70
+#: author.php:8
+msgid "Reviews"
+msgstr ""
+
+#: author.php:9
+msgid "Articles"
+msgstr ""
+
+#: author.php:10
+msgid "Other Articles"
+msgstr ""
+
+#: author.php:11 comments.php:183
+msgid "Show more"
+msgstr ""
+
+#: author.php:12
+msgid "Show less"
+msgstr ""
+
+#: author.php:181
 msgid "Posts not found"
 msgstr "পোস্ট পাওয়া যায়নি"
 
-#: author.php:72
+#: author.php:184
 msgid "No posts has been found. Please return to the homepage."
 msgstr "কোন পোস্ট পাওয়া যায়নি. হোমপেজে ফিরে করুন"
 
@@ -39,314 +59,979 @@ msgstr "লেখা শুরু করুন"
 msgid "Save current username and email?"
 msgstr "বর্তমান ব্যবহারকারীর নাম এবং ইমেল সংরক্ষণ করবেন?"
 
-#: comments.php:43
+#: comments.php:44
 msgid "Enter your name"
 msgstr "আপনার নাম প্রবেশ করুন"
 
-#: comments.php:57
+#: comments.php:58
 msgid "Enter your email"
 msgstr "তুমার ইমেইল প্রবেশ করাও"
 
-#: comments.php:122
+#: comments.php:120
 msgid "Leave a feedback"
 msgstr "প্রতিক্রিয়া"
 
-#: comments.php:123
+#: comments.php:121
 #, php-format
 msgid "Leave a Reply to %s"
 msgstr ""
 
-#: comments.php:126
+#: comments.php:124
 msgid "Send"
 msgstr "মন্তব্য প্রকাশ করুন"
 
-#: comments.php:129
+#: comments.php:127
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: comments.php:152 functions.php:280
+#: comments.php:145
+msgid "0 comments"
+msgstr ""
+
+#: comments.php:146
+msgid "1 comment"
+msgstr ""
+
+#: comments.php:147
+#, no-php-format
+msgid "% comments"
+msgstr ""
+
+#: comments.php:161 functions.php:349
+#: theme-functions/wp-pagination-comment-ajax.php:45
 msgid "Reply"
 msgstr "উত্তর দিন"
 
-#: footer.php:2
-msgid "Explore Now"
-msgstr ""
-
-#: footer.php:5
-msgid "Have Fun Now"
-msgstr ""
-
-#: footer.php:23
-msgid "support icon"
-msgstr ""
+#: footer.php:9
+msgid "Menu"
+msgstr "মেনু"
 
 #: footer.php:25
-msgid "Customer Support"
-msgstr ""
+msgid "Special Pages"
+msgstr "বিশেষ পৃষ্ঠাগুলি"
 
-#: footer.php:26
-msgid "Avallable 24/7 to assist you"
-msgstr ""
-
-#: footer.php:30
-msgid "guide icon"
-msgstr ""
-
-#: footer.php:32
-msgid "New Member Guide"
-msgstr ""
-
-#: footer.php:33
-msgid "Check out FAQ and guides"
-msgstr ""
-
-#: footer.php:43
-msgid "brand icon"
-msgstr ""
-
-#: footer.php:45
-msgid "Brand Ambassador"
-msgstr ""
-
-#: footer.php:46
-msgid "Play with celebrity"
-msgstr ""
-
-#: footer.php:59
-msgid "Menu"
-msgstr ""
-
-#: footer.php:76
-msgid "Payments"
-msgstr ""
-
-#: footer.php:115
+#: footer.php:43 theme-parts/header/mobile-menu.php:75
 msgid "&copy;"
 msgstr ""
 
-#: footer.php:116
+#: footer.php:44 theme-parts/header/mobile-menu.php:76
 msgid "All Rights Reserved"
-msgstr ""
+msgstr "সর্বস্বত্ব সংরক্ষিত"
 
-#: footer.php:116
-msgid "Powered by"
-msgstr ""
-
-#: functions.php:18
+#: functions.php:21
 msgid "Header Menu"
 msgstr ""
 
-#: functions.php:19
+#: functions.php:22
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:20
-msgid "Payments Links Menu"
+#: functions.php:23
+msgid "Special Pages Menu"
 msgstr ""
 
-#: functions.php:218 functions.php:226
+#: functions.php:282 functions.php:290
 msgid "Rating"
 msgstr ""
 
-#: functions.php:258
+#: functions.php:327
 msgid "Comment Submission Failure"
 msgstr ""
 
-#: index.php:21
+#: functions.php:364
+msgid "Social widgets"
+msgstr ""
+
+#: functions.php:366
+msgid "For text and images only."
+msgstr ""
+
+#: functions.php:405
+msgid "Facebook"
+msgstr ""
+
+#: functions.php:406
+msgid "LinkedIn"
+msgstr ""
+
+#: functions.php:441 theme-functions/custom-settings-page.php:7
+#: theme-functions/custom-settings-page.php:8
+msgid "Custom settings"
+msgstr ""
+
+#: functions.php:447
+msgid "Position"
+msgstr ""
+
+#: functions.php:464
+msgid "User rating"
+msgstr ""
+
+#: index.php:37 theme-parts/posts/single/default.php:67
+#: theme-parts/posts/single/organization.php:206
 msgid "Author"
 msgstr "লেখক"
 
-#: theme-functions/custom-comment-items.php:150
+#: theme-functions/custom-comment-items.php:99
 msgid "Edit"
 msgstr "সম্পাদনা"
 
-#: theme-functions/theme-customizer-settings.php:59
+#: theme-functions/custom-post-types.php:6
+msgid "Upload image"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:18
+msgid "Remove image"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:33
+#: theme-functions/custom-post-types.php:61
+msgid "Logo"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:38
+#: theme-functions/custom-post-types.php:73
+msgid "Add Logo"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:39
+#: theme-functions/custom-post-types.php:74
+msgid "Remove Logo"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:238
+#: theme-functions/custom-post-types/apps.php:471
+msgid "External URL for the"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:238
+#: theme-functions/custom-post-types.php:245
+msgid "Follow Link"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:238
+#: theme-functions/custom-post-types.php:245
+#: theme-functions/custom-post-types.php:252
+msgid "button"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:245
+#: theme-functions/custom-post-types.php:252
+msgid "Custom title for the"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:252
+#, fuzzy
+#| msgid "Read more"
+msgid "Read"
+msgstr "আরও পড়ুন"
+
+#: theme-functions/custom-post-types.php:336
+#: theme-functions/custom-post-types/organizations.php:9
+#: theme-functions/custom-settings-page.php:40
+#: theme-functions/custom-settings-page.php:88
+msgid "Organizations"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:379
+msgid "Without parent"
+msgstr ""
+
+#: theme-functions/custom-post-types.php:394
+#: theme-functions/custom-post-types/organizations.php:839
+msgid "No items"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:9
+#: theme-functions/custom-post-types/organizations.php:739
+#: theme-functions/custom-settings-page.php:45
+#: theme-functions/custom-settings-page.php:89
+msgid "Apps"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:18
+#: theme-functions/custom-post-types/apps.php:20
+#: theme-functions/custom-post-types/bonuses.php:18
+#: theme-functions/custom-post-types/bonuses.php:20
+#: theme-functions/custom-post-types/organizations.php:24
+#: theme-functions/custom-post-types/organizations.php:26
+#: theme-functions/custom-post-types/payments.php:18
+#: theme-functions/custom-post-types/payments.php:20
+#: theme-functions/custom-post-types/promo.php:18
+#: theme-functions/custom-post-types/promo.php:20
+#: theme-functions/custom-post-types/registration.php:18
+#: theme-functions/custom-post-types/registration.php:20
+msgid "Add New"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:19
+#: theme-functions/custom-post-types/bonuses.php:19
+#: theme-functions/custom-post-types/organizations.php:25
+#: theme-functions/custom-post-types/payments.php:19
+#: theme-functions/custom-post-types/promo.php:19
+#: theme-functions/custom-post-types/registration.php:19
+#, fuzzy
+#| msgid "Edit"
+msgid "Edit Item"
+msgstr "সম্পাদনা"
+
+#: theme-functions/custom-post-types/apps.php:21
+#: theme-functions/custom-post-types/bonuses.php:21
+#: theme-functions/custom-post-types/organizations.php:27
+#: theme-functions/custom-post-types/payments.php:21
+#: theme-functions/custom-post-types/promo.php:21
+#: theme-functions/custom-post-types/registration.php:21
+msgid "View Item"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:23
+msgid "app"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:51
+msgid "App platforms"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:56
+#: theme-functions/custom-post-types/payments.php:56
+msgid "Find Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:57
+#: theme-functions/custom-post-types/payments.php:57
+msgid "All "
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:58
+#: theme-functions/custom-post-types/payments.php:58
+msgid "Parent Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:59
+#: theme-functions/custom-post-types/payments.php:59
+msgid "Parent Taxonomy:"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:60
+#: theme-functions/custom-post-types/payments.php:60
+msgid "Edit Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:61
+#: theme-functions/custom-post-types/payments.php:61
+msgid "View Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:62
+#: theme-functions/custom-post-types/payments.php:62
+msgid "Update Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:63
+#: theme-functions/custom-post-types/payments.php:63
+msgid "Add New Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:64
+#: theme-functions/custom-post-types/payments.php:64
+msgid "Taxonomy"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:98
+#: theme-functions/custom-post-types/bonuses.php:62
+#: theme-functions/custom-post-types/organizations.php:71
+#: theme-functions/custom-post-types/payments.php:98
+#: theme-functions/custom-post-types/promo.php:62
+#: theme-functions/custom-post-types/registration.php:62
+msgid "Custom H1"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:137
+#: theme-functions/custom-post-types/bonuses.php:101
+#: theme-functions/custom-post-types/payments.php:137
+#: theme-functions/custom-post-types/promo.php:101
+#: theme-functions/custom-post-types/registration.php:101
+msgid "Short Description"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:180
+#: theme-functions/custom-post-types/bonuses.php:144
+#: theme-functions/custom-post-types/organizations.php:110
+#: theme-functions/custom-post-types/payments.php:180
+#: theme-functions/custom-post-types/promo.php:144
+#: theme-functions/custom-post-types/registration.php:144
+msgid "Breadcrumb Title"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:219
+#: theme-functions/custom-post-types/bonuses.php:183
+#: theme-functions/custom-post-types/organizations.php:149
+#: theme-functions/custom-post-types/payments.php:219
+#: theme-functions/custom-post-types/promo.php:183
+#: theme-functions/custom-post-types/registration.php:183
+msgid "Bonus title"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:262
+#: theme-functions/custom-post-types/bonuses.php:226
+#: theme-functions/custom-post-types/organizations.php:192
+#: theme-functions/custom-post-types/payments.php:262
+#: theme-functions/custom-post-types/promo.php:226
+#: theme-functions/custom-post-types/registration.php:226
+msgid "Bonus value"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:301
+#: theme-functions/custom-post-types/bonuses.php:265
+#: theme-functions/custom-post-types/organizations.php:231
+#: theme-functions/custom-post-types/payments.php:301
+#: theme-functions/custom-post-types/promo.php:265
+#: theme-functions/custom-post-types/registration.php:265
+msgid "Bonus in the currency"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:340
+#: theme-functions/custom-post-types/bonuses.php:304
+#: theme-functions/custom-post-types/organizations.php:270
+#: theme-functions/custom-post-types/payments.php:340
+#: theme-functions/custom-post-types/promo.php:304
+#: theme-functions/custom-post-types/registration.php:304
+msgid "Promotional code"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:379
+#: theme-functions/custom-post-types/bonuses.php:343
+#: theme-functions/custom-post-types/organizations.php:348
+#: theme-functions/custom-post-types/payments.php:379
+#: theme-functions/custom-post-types/promo.php:343
+#: theme-functions/custom-post-types/registration.php:343
+msgid "Shortcode Content"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:422
+msgid "App Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:447
+msgid "Platform links"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:471
+msgid "platform"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:501
+#: theme-functions/custom-post-types/bonuses.php:411
+#: theme-functions/custom-post-types/organizations.php:681
+#: theme-functions/custom-post-types/payments.php:447
+#: theme-functions/custom-post-types/promo.php:411
+#: theme-functions/custom-post-types/registration.php:411
+msgid "Additional information"
+msgstr ""
+
+#: theme-functions/custom-post-types/apps.php:527
+#: theme-functions/custom-post-types/bonuses.php:437
+#: theme-functions/custom-post-types/payments.php:473
+#: theme-functions/custom-post-types/promo.php:437
+#: theme-functions/custom-post-types/registration.php:437
+msgid "Background Image"
+msgstr ""
+
+#: theme-functions/custom-post-types/bonuses.php:9
+#: theme-functions/custom-post-types/organizations.php:785
+#: theme-functions/custom-settings-page.php:60
+#: theme-functions/custom-settings-page.php:92
+msgid "Bonuses"
+msgstr ""
+
+#: theme-functions/custom-post-types/bonuses.php:23
+#: theme-parts/posts/single/page-header-content.php:382
+msgid "bonus"
+msgstr ""
+
+#: theme-functions/custom-post-types/bonuses.php:386
+msgid "Bonus Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:29
+msgid "organization"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:309
+#: theme-parts/posts/single/page-header-content.php:108
+msgid "Funds withdrawal"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:390
+msgid "Item Ratings"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:496
+#: theme-functions/custom-settings/organizations.php:69
+msgid "Trust & Fairness"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:505
+#: theme-functions/custom-settings/organizations.php:83
+msgid "Games & Software"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:514
+#: theme-functions/custom-settings/organizations.php:97
+msgid "Bonuses & Promotions"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:523
+#: theme-functions/custom-settings/organizations.php:111
+#: theme-parts/posts/single/page-header-content.php:89
+msgid "Customer Support"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:532
+msgid "In the pre"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:541
+#: theme-functions/custom-settings/organizations.php:139
+msgid "Live"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:550
+#: theme-functions/custom-settings/organizations.php:153
+msgid "Coefficients"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:559
+#: theme-functions/custom-settings/organizations.php:167
+msgid "Convenience of payments"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:568
+#: theme-functions/custom-settings/organizations.php:181
+msgid "Interface/Features"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:707
+msgid "Mobile Image"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:755
+#: theme-functions/custom-post-types/payments.php:9
+#: theme-functions/custom-settings-page.php:50
+#: theme-functions/custom-settings-page.php:90
+msgid "Payments"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:770
+#: theme-functions/custom-post-types/registration.php:9
+#: theme-functions/custom-settings-page.php:55
+#: theme-functions/custom-settings-page.php:91
+msgid "Registration"
+msgstr ""
+
+#: theme-functions/custom-post-types/organizations.php:800
+#: theme-functions/custom-post-types/promo.php:9
+msgid "Promotional codes"
+msgstr ""
+
+#: theme-functions/custom-post-types/payments.php:23
+msgid "payment"
+msgstr ""
+
+#: theme-functions/custom-post-types/payments.php:51
+msgid "Payment systems"
+msgstr ""
+
+#: theme-functions/custom-post-types/payments.php:422
+msgid "Payment Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-post-types/promo.php:23
+msgid "promo"
+msgstr ""
+
+#: theme-functions/custom-post-types/promo.php:386
+msgid "Promotional Code Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-post-types/registration.php:23
+msgid "registration"
+msgstr ""
+
+#: theme-functions/custom-post-types/registration.php:386
+msgid "Registration Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:29
+msgid "Settings Saved"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:65
+msgid "Promo"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:87
+msgid "General settings"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:93
+msgid "Promotional Codes"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:99
+#: theme-functions/custom-settings-page.php:104
+msgid "Save Settings"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:128
+msgid "Here you can change the default titles."
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:136
+msgid "Here you can change the default slugs."
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:143
+msgid ""
+"After saving these settings, please, go to &quot;Settings&quot; - &quot;"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:143
+msgid "Permalinks"
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:143
+msgid "&quot; and click the &quot;Save Changes&quot; button."
+msgstr ""
+
+#: theme-functions/custom-settings-page.php:143
+msgid "Only after this action, new slugs will work."
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:13
+#: theme-functions/custom-settings/bonuses.php:13
+#: theme-functions/custom-settings/organizations.php:20
+#: theme-functions/custom-settings/payments.php:13
+#: theme-functions/custom-settings/promo.php:13
+#: theme-functions/custom-settings/registration.php:13
+msgid "Titles"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:20
+#: theme-functions/custom-settings/bonuses.php:20
+#: theme-functions/custom-settings/organizations.php:27
+#: theme-functions/custom-settings/payments.php:20
+#: theme-functions/custom-settings/promo.php:20
+#: theme-functions/custom-settings/registration.php:20
+msgid "Slugs"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:27
+#: theme-functions/custom-settings/bonuses.php:27
+#: theme-functions/custom-settings/organizations.php:34
+#: theme-functions/custom-settings/payments.php:27
+#: theme-functions/custom-settings/promo.php:27
+#: theme-functions/custom-settings/registration.php:27
+msgid "Other settings"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:37
+msgid "Other settings for apps."
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:51
+msgid "The title of the &quot;Apps&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:71
+msgid "The slug of the &quot;Apps&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:93
+#: theme-functions/custom-settings/bonuses.php:93
+#: theme-functions/custom-settings/payments.php:93
+#: theme-functions/custom-settings/promo.php:93
+#: theme-functions/custom-settings/registration.php:93
+msgid "The global title of the &quot;Follow&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:108
+#: theme-functions/custom-settings/bonuses.php:108
+#: theme-functions/custom-settings/payments.php:108
+#: theme-functions/custom-settings/promo.php:108
+#: theme-functions/custom-settings/registration.php:108
+msgid "The global title of the &quot;Permalink&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/apps.php:123
+#: theme-functions/custom-settings/bonuses.php:123
+#: theme-functions/custom-settings/organizations.php:220
+#: theme-functions/custom-settings/payments.php:123
+#: theme-functions/custom-settings/promo.php:123
+#: theme-functions/custom-settings/registration.php:123
+msgid "The number of stars"
+msgstr ""
+
+#: theme-functions/custom-settings/bonuses.php:37
+msgid "Other settings for bonuses."
+msgstr ""
+
+#: theme-functions/custom-settings/bonuses.php:51
+msgid "The title of the &quot;Bonuses&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/bonuses.php:71
+msgid "The slug of the &quot;Bonuses&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:13
+#, fuzzy
+#| msgid "Author"
+msgid "Author page"
+msgstr "লেখক"
+
+#: theme-functions/custom-settings/general.php:21
+msgid "General author page settings."
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:30
+msgid "The title of the &quot;Organizations&quot; tab"
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:43
+msgid "The title of the &quot;Custom Articles&quot; tab"
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:56
+msgid "The title of the &quot;Other Articles&quot; tab"
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:71
+msgid "The title of the &quot;Show more&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/general.php:84
+msgid "The title of the &quot;Show less&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:13
+msgid "Rating titles"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:45
+msgid "Here you can change the default titles of the ratings."
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:53
+msgid "Other settings for organizations."
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:125
+msgid "Pre"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:195
+msgid "Overall Rating"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:240
+msgid "The title of the &quot;Organizations&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:260
+msgid "The slug of the &quot;Organizations&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:282
+msgid "The global title of the &quot;Play Now&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/organizations.php:306
+msgid "The global title of the &quot;Read Review&quot; button"
+msgstr ""
+
+#: theme-functions/custom-settings/payments.php:37
+msgid "Other settings for payments."
+msgstr ""
+
+#: theme-functions/custom-settings/payments.php:51
+msgid "The title of the &quot;Payments&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/payments.php:71
+msgid "The slug of the &quot;Payments&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/promo.php:37
+msgid "Other settings for promotional code."
+msgstr ""
+
+#: theme-functions/custom-settings/promo.php:51
+msgid "The title of the &quot;Promotional Codes&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/promo.php:71
+msgid "The slug of the &quot;Promotional Codes&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/registration.php:37
+msgid "Other settings for registration."
+msgstr ""
+
+#: theme-functions/custom-settings/registration.php:51
+msgid "The title of the &quot;Registration&quot; custom post type"
+msgstr ""
+
+#: theme-functions/custom-settings/registration.php:71
+msgid "The slug of the &quot;Registration&quot; custom post type"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:74
 msgid "Primary color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:82
+#: theme-functions/theme-customizer-settings.php:97
 msgid "Secondary color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:105
+#: theme-functions/theme-customizer-settings.php:120
+msgid "Border color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:143
 msgid "Links color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:128
+#: theme-functions/theme-customizer-settings.php:164
+msgid "Title links color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:187
 msgid "Links hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:151
+#: theme-functions/theme-customizer-settings.php:210
 msgid "Buttons content color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:174
+#: theme-functions/theme-customizer-settings.php:231
+msgid "Author social icons background color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:253
+msgid "Author social icons color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:276
 msgid "Body color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:195
+#: theme-functions/theme-customizer-settings.php:297
 msgid "Body content color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:216
-#: theme-functions/theme-customizer-settings.php:237
+#: theme-functions/theme-customizer-settings.php:318
 msgid "Stars active color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:251
+#: theme-functions/theme-customizer-settings.php:339
+msgid "Stars inactive color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:360
+msgid "Fixed button background color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:381
+msgid "Fixed button bonus background color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:402
+msgid "Page header color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:423
+msgid "Page header background color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:437
 msgid "Header"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:258
+#: theme-functions/theme-customizer-settings.php:444
 msgid "Header colors"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:266
+#: theme-functions/theme-customizer-settings.php:452
 msgid "Mobile header colors"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:274
-msgid "Header authorization buttons"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:295
+#: theme-functions/theme-customizer-settings.php:473
 msgid "Header color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:318
+#: theme-functions/theme-customizer-settings.php:496
 msgid "Main menu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:341
+#: theme-functions/theme-customizer-settings.php:519
 msgid "Header mobile color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:362
+#: theme-functions/theme-customizer-settings.php:540
 msgid "Main menu mobile link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:385
+#: theme-functions/theme-customizer-settings.php:563
 msgid "Main menu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:406
+#: theme-functions/theme-customizer-settings.php:584
 msgid "Main menu mobile link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:429
+#: theme-functions/theme-customizer-settings.php:607
 msgid "Main menu mobile link hover background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:452
+#: theme-functions/theme-customizer-settings.php:630
 msgid "Submenu background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:473
-msgid "Submenu mobile background color"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:496
+#: theme-functions/theme-customizer-settings.php:653
 msgid "Submenu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:517
+#: theme-functions/theme-customizer-settings.php:674
 msgid "Submenu mobile link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:540
+#: theme-functions/theme-customizer-settings.php:697
 msgid "Submenu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:561
+#: theme-functions/theme-customizer-settings.php:718
 msgid "Submenu mobile link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:584
-msgid "Header login button text"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:602
-msgid "Header login button link"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:620
-msgid "Header sign button text"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:638
-msgid "Header sign button link"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:647
+#: theme-functions/theme-customizer-settings.php:730
 msgid "Footer"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:668
+#: theme-functions/theme-customizer-settings.php:751
 msgid "Footer color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:689
+#: theme-functions/theme-customizer-settings.php:772
 msgid "Footer content color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:710
+#: theme-functions/theme-customizer-settings.php:793
 msgid "Footer menu link color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:731
+#: theme-functions/theme-customizer-settings.php:814
 msgid "Footer menu link hover color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:754
-msgid "Footer Description"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:755
-msgid "Add your description to the footer."
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:775
-msgid "Footer new member guide text"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:793
-msgid "Footer new member guide link"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:811
-msgid "Footer brand ambassador text"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:830
-msgid "Footer brand ambassador link"
-msgstr ""
-
-#: theme-functions/theme-customizer-settings.php:841
+#: theme-functions/theme-customizer-settings.php:828
 msgid "Theme settings"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:850
-msgid "Table colors"
+#: theme-functions/theme-customizer-settings.php:837
+msgid "Table settings"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:871
-msgid "Table background color"
+#: theme-functions/theme-customizer-settings.php:858
+msgid "Table background odd rows color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:892
+#: theme-functions/theme-customizer-settings.php:879
+msgid "Table background even rows color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:900
 msgid "Table border color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:914
+#: theme-functions/theme-customizer-settings.php:922
 msgid "Table header background color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:935
+#: theme-functions/theme-customizer-settings.php:943
 msgid "Table header text color"
 msgstr ""
 
-#: theme-functions/theme-customizer-settings.php:956
+#: theme-functions/theme-customizer-settings.php:964
 msgid "Table body text color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:986
+msgid "Table border radius"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1000
+msgid "Slider settings"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1020
+msgid "Slider loop"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1037
+msgid "Disable slider navigation"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1054
+msgid "Disable slider pagination"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1071
+msgid "Disable slider autoplay"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1088
+msgid "Slider autoplay delay"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1112
+msgid "Mobile slides per view"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1134
+msgid "Tablet slides per view"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1156
+msgid "Laptop slides per view"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1178
+msgid "Desktop slides per view"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1202
+msgid "Mobile space between slides"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1224
+msgid "Tablet space between slides"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1246
+msgid "Laptop space between slides"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1268
+msgid "Desktop space between slides"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1291
+msgid "Slider navigation background color"
+msgstr ""
+
+#: theme-functions/theme-customizer-settings.php:1312
+msgid "Slider navigation icon color"
 msgstr ""
 
 #: theme-functions/wp-handle-comment-ajax.php:49
@@ -388,14 +1073,39 @@ msgstr ""
 msgid "The comment could not be saved. Please try again later."
 msgstr ""
 
-#: theme-parts/author-info.php:40
-msgid "Read more"
-msgstr "আরও পড়ুন"
-
-#: theme-parts/header/auth-buttons.php:2
-msgid "Log In"
+#: theme-parts/author-info.php:180
+msgid "More"
 msgstr ""
 
-#: theme-parts/header/auth-buttons.php:5
-msgid "Sign Up"
+#: theme-parts/posts/single/fixed-button.php:15
+#: theme-parts/posts/single/page-header-content.php:77
+msgid "Play Now"
+msgstr ""
+
+#: theme-parts/posts/single/organization.php:91
+msgid "Specifications:"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:77
+msgid "Follow"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:97
+msgid "Yes"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:218
+msgid "Payments methods:"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:306
+msgid "promo code"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:350
+msgid "copy"
+msgstr ""
+
+#: theme-parts/posts/single/page-header-content.php:363
+msgid "visit site"
 msgstr ""
